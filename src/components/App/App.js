@@ -5,15 +5,27 @@ import Logo from "../../assets/img/duck-128.png";
 import Doacao from "../Front/Main/Doacao/Doacao";
 import TopLegendas from "../Front/Main/TopLegendas/TopLegendas";
 import Parceiros from "../Front/Main/Parceiros/Parceiros";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router";
 
 class App extends Component {
+
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  };
+
   render() {
     var estilo = {
       paddingTop: "7rem"
     };
-
+    
+    const {location} = this.props;
+    
     return (
       <div className="App">
+        <div>localizacao: {location.pathname}</div>
         <Header title="Legendas" logo={Logo} />
         <div style={estilo} className="container">
           <div className="alert alert-success">
@@ -36,5 +48,5 @@ class App extends Component {
     );
   }
 }
+export default App = withRouter(App);
 
-export default App;
