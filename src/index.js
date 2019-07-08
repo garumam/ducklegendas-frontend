@@ -11,6 +11,7 @@ import Contato from "./components/Front/Contato/Contato";
 import Post from "./components/Front/Main/Post/Post";
 import Error404 from "./components/Front/Main/Error404/Error404";
 import ScrollToTop from "./components/App/ScrollToTop";
+import Login from "./components/Front/Login/Login";
 
 ReactDOM.render(
   <Router>
@@ -22,7 +23,7 @@ ReactDOM.render(
         <Route path="/filmes" component={() => <Legendas title="Filmes" />} />
         <Route path="/chat" component={() => <Chat title="Chat" />} />
         <Route path="/contato" component={() => <Contato title="Contato" />} />
-        <Route path="/painel" component={() => <Legendas title="Painel" />} />
+        <Route path="/painel" component={() => <Login title="Login" />} />
         <Route path="/post" component={() => <Post title="Single Post" />} />
         <Route path="*" component={Error404} />
       </Switch>

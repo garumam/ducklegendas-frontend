@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 
 class App extends Component {
-
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -20,33 +19,40 @@ class App extends Component {
     var estilo = {
       paddingTop: "7rem"
     };
-    
-    const {location} = this.props;
-    
+
+    const { location } = this.props;
+    const isPainel = location.pathname === "/painel" ? false : true;
     return (
       <div className="App">
-        <div>localizacao: {location.pathname}</div>
         <Header title="Legendas" logo={Logo} />
-        <div style={estilo} className="container">
-          <div className="alert alert-success">
-            Quer ajudar a postar legendas no site ? entre em contato e peça seu
-            login !!!
+
+        {isPainel ? (
+          <div style={estilo} className="container">
+            <div className="alert alert-success">
+              Quer ajudar a postar legendas no site ? entre em contato e peça
+              seu login !!!
+            </div>
+            <div className="row">
+              <div className="col-sm-12 col-md-12 col-lg-8">
+                {this.props.children}
+                <Parceiros title="Parceiros" />
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-4">
+                <Doacao title="Doação" />
+                <TopLegendas title="Legendas" />
+              </div>
+            </div>
           </div>
-          <div className="row">
-            <div className="col-sm-12 col-md-12 col-lg-8">
+        ) : (
+          <div style={estilo} className="container flex-center">
+            
               {this.props.children}
-              <Parceiros title="Parceiros" />
-            </div>
-            <div className="col-sm-12 col-md-12 col-lg-4">
-              <Doacao title="Doação" />
-              <TopLegendas title="Legendas" />
-            </div>
+            
           </div>
-        </div>
+        )}
         <Footer title="Duck Legendas" logo={Logo} />
       </div>
     );
   }
 }
-export default App = withRouter(App);
-
+export default (App = withRouter(App));
