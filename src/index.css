@@ -1,0 +1,147 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: 0rem;
+  vertical-align: middle;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: white;
+  background-color: #eff3f6;
+  letter-spacing: .30px;
+  -ms-overflow-style: scrollbar;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke: 1px transparent;
+  -moz-text-stroke: 1px transparent;
+  -ms-text-stroke: 1px transparent;
+  -moz-text-shadow: 0 0 1px rgba(0, 0, 0, 0.01);
+  -ms-text-shadow: 0 0 1px rgba(0, 0, 0, 0.01);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.01);
+}
+
+img {
+  max-width: 100%;
+  border-style: none;
+  border: 0;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a img {
+  border: 0;
+}
+
+.card {
+  width: 100%;
+  background:#fff;
+  border-radius: 4px;
+  border: 0 !important;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.card-shadow {
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
+}
+
+.header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 60px;
+}
+
+.header-card h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--textcolor);
+}
+
+.card-border {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  /* border-top: 1px solid rgba(82, 109, 249, 0.102); */
+  border-top: 1px solid var(--corborda);
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
