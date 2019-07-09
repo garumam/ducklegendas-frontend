@@ -12,22 +12,37 @@ import Post from "./components/Front/Main/Post/Post";
 import Error404 from "./components/Front/Main/Error404/Error404";
 import ScrollToTop from "./components/App/ScrollToTop";
 import Login from "./components/Front/Login/Login";
+import HomeDashboard from "./components/Dashboard/Home/Home";
+import Header from "./components/Front/Header/Header";
+import Footer from "./components/Front/Footer/Footer";
+import Logo from "./assets/img/duck-128.png";
+import Dashboard from "./components/Dashboard/Dashboard";
 
+const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
+  <Route {...rest} render={props => (
+    <Layout>
+      <Component {...props} />
+    </Layout>
+  )} />
+);
 ReactDOM.render(
   <Router>
     <ScrollToTop>
-    <App>
+    <React.Fragment>
+      {/* <App> */}
       <Switch>
-        <Route exact path="/" component={() => <Legendas title="Ultimas" />} />
-        <Route path="/series" component={() => <Legendas title="Series" />} />
-        <Route path="/filmes" component={() => <Legendas title="Filmes" />} />
-        <Route path="/chat" component={() => <Chat title="Chat" />} />
-        <Route path="/contato" component={() => <Contato title="Contato" />} />
-        <Route path="/painel" component={() => <Login title="Login" />} />
-        <Route path="/post" component={() => <Post title="Single Post" />} />
-        <Route path="*" component={Error404} />
+          <AppRoute exact path="/" layout={App} component={() => <Legendas title="Ultimas" />} />
+          <AppRoute path="/series" layout={App} component={() => <Legendas title="Series" />} />
+          <AppRoute path="/filmes" layout={App} component={() => <Legendas title="Filmes" />} />
+          <AppRoute path="/chat" layout={App} component={() => <Chat title="Chat" />} />
+          <AppRoute path="/contato" layout={App} component={() => <Contato title="Contato" />} />
+          <AppRoute path="/post" layout={App} component={() => <Post title="Single Post" />} />
+          <AppRoute path="/painel" layout={App} component={() => <Login title="Login" />} />
+          <AppRoute path="/dashboard" layout={Dashboard} component={() => <HomeDashboard title="Single Post" />} />
+          <AppRoute path="*" layout={App} component={Error404} />
       </Switch>
-    </App>
+      {/* </App> */}
+    </React.Fragment>
     </ScrollToTop>
     
   </Router>,
@@ -38,3 +53,5 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+

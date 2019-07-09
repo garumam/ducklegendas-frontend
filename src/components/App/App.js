@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import Header from "../Front/Header/Header";
 import Footer from "../Front/Footer/Footer";
 import Logo from "../../assets/img/duck-128.png";
-import Dashboard from "../Dashboard/Dashboard";
 import Front from "../Front/Front";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
+
+var estilo = {
+  paddingTop: "6.38rem"
+};
 
 class App extends Component {
   static propTypes = {
@@ -16,7 +19,7 @@ class App extends Component {
 
   render() {
     const { location } = this.props;
-    const isPainel = location.pathname === "/painel" ? <Dashboard login={this.props.children} /> : <Front children={this.props.children} />;
+    const isPainel = location.pathname === "/painel" ?  <div style={estilo} className="container flex-center">{this.props.children}</div> : <Front children={this.props.children} />;
     return (
       <div className="App">
         <Header title="Legendas" logo={Logo} />
