@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import Doacao from "../Front/Main/Doacao/Doacao";
-import TopLegendas from "../Front/Main/TopLegendas/TopLegendas";
-import Parceiros from "../Front/Main/Parceiros/Parceiros";
+import Doacao from "./Doacao";
+import TopLegendas from "./TopLegendas";
+import Parceiros from "./Parceiros";
 
 var estilo = {
   paddingTop: "7rem"
