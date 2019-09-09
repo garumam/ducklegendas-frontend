@@ -23,7 +23,7 @@ const formikConfig = withFormik({
 });
 
 export default formikConfig(() => ( 
-
+    <div className="card card-shadow">
         <CustomForm className="formulario"> 
             <InputPersonalizado labelText="E-mail" name="email" type="email" />
             <InputPersonalizado labelText="Senha" name="password" type="password" />
@@ -31,6 +31,6 @@ export default formikConfig(() => (
             <InputPersonalizado labelText="Mensagem" name="mensagem" type="text" />
             <InputPersonalizado type="submit" value="Enviar" />
         </CustomForm>
-
+        </div>
     )
 );

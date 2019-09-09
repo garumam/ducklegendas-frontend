@@ -11,7 +11,7 @@ export const Header = styled.header`
     position:relative;
     color:white;
     text-align:center;
-    padding:1rem;
+    padding:1rem 0 ;
     img {
         width:40px;
         height:40px;
@@ -32,7 +32,7 @@ export const ContainerDashboard = styled.div`
     display:flex;
     width:100%;
     height:calc(100vh - 65px);
-    padding-top:64;
+    padding:24px;
 `;
 
 export const Nav = styled.nav `
@@ -55,10 +55,9 @@ const sharedStyleA = css `
     justify-content: center;
     align-items: center;
     color: white !important;
-    font-size: .94rem;
+    font-size: .9rem;
     height: var(--hmenu);
     padding: 1rem;
-    letter-spacing: 1px;
     text-transform: uppercase;
     text-decoration: none;
 `;
@@ -66,9 +65,12 @@ const sharedStyleA = css `
 export const NavLinks = styled.ul `
     display: flex;
     flex-direction: column;
-    align-itens: center;
+    align-items: center;
     margin: 0;
     width: 100%;
+    li{
+        width:100%;
+    }
     a{
         ${sharedStyleA}
     }

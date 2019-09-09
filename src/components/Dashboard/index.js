@@ -37,7 +37,7 @@ export default (props) => {
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to={`${dashboardPath}/top-legendas`} alt="Índice">
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/toplegendas`} alt="Índice">
                 Top legendas
               </NavLink>
             </li>

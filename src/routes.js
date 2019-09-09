@@ -99,9 +99,9 @@ export default () =>(
             component={() => <div>Dashboard Categorias</div>}
           />
           <AppRoute
-            path={`${dashboardPath}/top-legendas`}
-            layout={(props) => <Dashboard title="Top legendas" {...props} />}
-            component={() => <div>Dashboard Top legendas</div>}
+            path={`${dashboardPath}/toplegendas`}
+            layout={(props) => <Dashboard title="Top Legendas" {...props} />}
+            component={() => <div>Dashboard Top Legendas</div>}
           />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>

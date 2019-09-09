@@ -128,7 +128,6 @@ body {
     justify-content: flex-start;
     flex-wrap: wrap;
     color: var(--textcolor);
-    flex: 1 1 50%;
 }
 .formulario label {
   padding-right: 1rem;

@@ -10,4 +10,5 @@ export const Col = styled.div`
     flex-direction: column;
     width: 50%;
     height: 100px;
+    padding-right:1rem;
 `;
