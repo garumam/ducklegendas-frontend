@@ -3,6 +3,9 @@ import { Form } from 'formik'
 
 export const CustomForm = styled(Form)`
     justify-content: space-between;
+    input {
+        margin: 0px !important;
+    }
 `;
 
 export const Col = styled.div`
