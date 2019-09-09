@@ -18,6 +18,21 @@ export const Header = styled.header`
     }
 `;
 
+
+export const HeaderCard = styled.div`
+    display:flex;
+    width:100%;
+    align-items:center;
+    min-height:60px;
+    padding:0 1rem;
+    h2{
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin: 0;
+        color: var(--textcolor);
+    }
+`;
+
 export const HeaderDashboard = styled(SimpleTopAppBar)`
     position: relative;
     height:65px;
