@@ -8,10 +8,10 @@ import Contato from "./components/Front/Contato";
 import Post from "./components/Front/Post/";
 import Error404 from "./components/Front/Error404";
 import Login from "./components/Front/Login";
-import HomeDashboard from "./components/Dashboard/index";
 import Header from "./components/Front/Header";
 import Dashboard from "./components/Dashboard";
 import Indice from "./components/Front/Indice";
+import Form from "./components/Dashboard/Menu/Form";
 import Logo from "./assets/img/duck-128.png";
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
@@ -24,6 +24,8 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
       )}
     />
   );
+
+const dashboardPath = '/dashboard';
 
 export default () =>(
     <Router>
@@ -76,9 +78,30 @@ export default () =>(
             )}
           />
           <AppRoute
-            path="/dashboard"
-            layout={Dashboard}
-            component={() => <HomeDashboard title="Single Post" />}
+            exact
+            path={dashboardPath}
+            layout={(props) => <Dashboard title="Dashboard" {...props} />}
+            component={() => <div>Dashboard Home</div>}
+          />
+          <AppRoute
+            path={`${dashboardPath}/usuarios`}
+            layout={(props) => <Dashboard title="Usuários" {...props} />}
+            component={() => <Form />}
+          />
+          <AppRoute
+            path={`${dashboardPath}/legendas`}
+            layout={(props) => <Dashboard title="Legendas" {...props} />}
+            component={() => <div>Dashboard Legendas</div>}
+          />
+          <AppRoute
+            path={`${dashboardPath}/categorias`}
+            layout={(props) => <Dashboard title="Categorias" {...props} />}
+            component={() => <div>Dashboard Categorias</div>}
+          />
+          <AppRoute
+            path={`${dashboardPath}/top-legendas`}
+            layout={(props) => <Dashboard title="Top legendas" {...props} />}
+            component={() => <div>Dashboard Top legendas</div>}
           />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>

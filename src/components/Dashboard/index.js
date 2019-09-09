@@ -1,14 +1,53 @@
 import React from "react";
-import { Header,HeaderDashboard,Container,ContainerDashboard } from "./styles";
+import { Header,HeaderDashboard,Container,ContainerDashboard,NavLinks,Logo,Nav } from "./styles";
+import { NavLink } from "react-router-dom";
+import logo from "../../assets/img/duck-128.png";
 
-export default () => {
+const dashboardPath = '/dashboard';
+
+export default (props) => {
   // const [open, setOpen] = React.useState(false);
   return (
     <Container>
-      <Header />
+      <Header>
+        <Nav>
+          <Logo>
+            <img alt="img logo" src={logo} />
+          </Logo>
+
+          <NavLinks>
+            <li>
+              <NavLink activeClassName="is-active" exact to={dashboardPath} alt="Home">
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/usuarios`} alt="Series">
+                Usuários
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/legendas`} alt="Filmes">
+                Legendas
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/categorias`} alt="Índice">
+                Categorias
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/top-legendas`} alt="Índice">
+                Top legendas
+              </NavLink>
+            </li>
+          </NavLinks>
+        </Nav>
+      </Header>
+
       <Container style={{height:'100%',flexWrap:'wrap'}}>
       <HeaderDashboard 
-        title="test"
+        title={props.title}
         navigationIcon={{ onClick: () => console.log("Navigate") }}
         actionItems={[
           {
@@ -21,7 +60,9 @@ export default () => {
       />
      
       <ContainerDashboard>
-       <div style={{background:'#dedede'}}>dksaodkasokdsa</div>
+       
+        {props.children}
+      
       </ContainerDashboard>
      
 

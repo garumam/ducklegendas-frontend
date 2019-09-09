@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import styled, {
+    css
+} from "styled-components";
 import { SimpleTopAppBar } from "@rmwc/top-app-bar";
 
 export const Header = styled.header`
@@ -31,5 +33,48 @@ export const ContainerDashboard = styled.div`
     width:100%;
     height:calc(100vh - 65px);
     padding-top:64;
+`;
+
+export const Nav = styled.nav `
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export const Logo = styled.div `
+    height: 48px;
+    img {
+        width: auto;
+        max-height: 72px;
+    }
+`;
+
+const sharedStyleA = css `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white !important;
+    font-size: .94rem;
+    height: var(--hmenu);
+    padding: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+`;
+
+export const NavLinks = styled.ul `
+    display: flex;
+    flex-direction: column;
+    align-itens: center;
+    margin: 0;
+    width: 100%;
+    a{
+        ${sharedStyleA}
+    }
+    a:hover, .is-active {
+        background-color: rgba(240, 248, 255, 0.10);
+        cursor: pointer;
+    }
 `;
 
