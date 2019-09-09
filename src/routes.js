@@ -11,6 +11,7 @@ import Login from "./components/Front/Login";
 import HomeDashboard from "./components/Dashboard/index";
 import Header from "./components/Front/Header";
 import Dashboard from "./components/Dashboard";
+import Indice from "./components/Front/Indice";
 import Logo from "./assets/img/duck-128.png";
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
@@ -49,6 +50,11 @@ export default () =>(
             path="/chat"
             layout={App}
             component={() => <Chat title="Chat" />}
+          />
+           <AppRoute
+            path="/indice"
+            layout={App}
+            component={() => <Indice title="Índice" />}
           />
           <AppRoute
             path="/contato"

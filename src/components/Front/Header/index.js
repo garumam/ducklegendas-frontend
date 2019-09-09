@@ -24,29 +24,6 @@ export default props => {
           <CHK type="checkbox" id="chk" />
 
           <NavLinks>
-          <li>
-              <Dropdown>
-                <InputDropdownMenu id="check01" type="checkbox" name="menu"/>
-                <label htmlFor="check01"><span>dsadasdsa</span></label>
-                <DropdownMenu>
-                  <a href="{null1}" alt="home">
-                    Home
-                  </a>
-                  <a href="{null2}" alt="home">
-                    Home
-                  </a>
-                  <a href="{null3}" alt="home">
-                    Home
-                  </a>
-                  <a href="{null4}" alt="home">
-                    Home
-                  </a>
-                  <a href="{null5}" alt="home">
-                    Home
-                  </a>
-                </DropdownMenu>
-              </Dropdown>
-            </li>
             <li>
               <NavLink activeClassName="is-active" exact to="/" alt="Home">
               {/* onClick={()=>  window.scrollTo(0,0)} */}
@@ -61,6 +38,11 @@ export default props => {
             <li>
               <NavLink activeClassName="is-active" to="/filmes" alt="Filmes">
                 Filmes
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName="is-active" to="/indice" alt="Índice">
+                Índice
               </NavLink>
             </li>
             <li>
