@@ -8,7 +8,7 @@ import Contato from "./components/Front/Contato";
 import Post from "./components/Front/Post/";
 import Error404 from "./components/Front/Error404";
 import Login from "./components/Front/Login";
-import HomeDashboard from "./components/Dashboard/Home";
+import HomeDashboard from "./components/Dashboard/index";
 import Header from "./components/Front/Header";
 import Dashboard from "./components/Dashboard";
 import Logo from "./assets/img/duck-128.png";

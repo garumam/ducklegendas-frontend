@@ -121,6 +121,7 @@ body {
   user-select:none;
 }
 
+
 .formulario {
    display: flex;
     padding: 1rem;
