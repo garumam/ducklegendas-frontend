@@ -6,10 +6,21 @@ import logo from "../../assets/img/duck-128.png";
 const dashboardPath = '/dashboard';
 
 export default (props) => {
-  // const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
+  const refMenu = React.useRef(null);
+
+ function handlerMenuLateral(){
+    setOpen(!open); 
+
+    if(open)
+      refMenu.current.style = 'display:none';
+    else 
+      refMenu.current.style = 'display:block';
+
+  }
   return (
     <Container>
-      <Header>
+      <Header ref={refMenu}>
         <Nav>
           <Logo>
             <img alt="img logo" src={logo} />
@@ -48,7 +59,7 @@ export default (props) => {
       <Container style={{height:'100%',flexWrap:'wrap'}}>
       <HeaderDashboard 
         title={props.title}
-        navigationIcon={{ onClick: () => console.log("Navigate") }}
+        navigationIcon={{ onClick: () => handlerMenuLateral() }}
         actionItems={[
           {
             icon: "file_download",
