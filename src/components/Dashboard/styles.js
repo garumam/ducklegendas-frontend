@@ -11,7 +11,7 @@ export const Header = styled.header`
     position:relative;
     color:white;
     text-align:center;
-    padding:1rem 0 ;
+    padding-top:1.5rem;
     img {
         width:40px;
         height:40px;
@@ -40,13 +40,15 @@ export const ContainerDashboard = styled.div`
 
 export const Nav = styled.nav `
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content:space-between;
 `;
 
 export const Logo = styled.div `
-    height: 48px;
+    height: 80px;
     img {
         width: auto;
         max-height: 72px;
@@ -59,10 +61,19 @@ const sharedStyleA = css `
     align-items: center;
     color: white !important;
     font-size: .9rem;
-    height: var(--hmenu);
+    height: 50px;
     padding: 1rem;
     text-transform: uppercase;
     text-decoration: none;
+`;
+
+export const MenuLogout = styled.div`
+    width:100%;
+    ${sharedStyleA}
+    :hover {
+        background-color: rgba(240, 248, 255, 0.10);
+        cursor: pointer;
+    }
 `;
 
 export const NavLinks = styled.ul `

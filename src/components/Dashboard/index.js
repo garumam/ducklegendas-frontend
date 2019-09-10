@@ -1,5 +1,5 @@
 import React from "react";
-import { Header,HeaderDashboard,Container,ContainerDashboard,NavLinks,Logo,Nav } from "./styles";
+import { Header,HeaderDashboard,Container,ContainerDashboard,NavLinks,Logo,Nav,MenuLogout } from "./styles";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/img/duck-128.png";
 
@@ -22,11 +22,10 @@ export default (props) => {
     <Container>
       <Header ref={refMenu}>
         <Nav>
+          <NavLinks>
           <Logo>
             <img alt="img logo" src={logo} />
           </Logo>
-
-          <NavLinks>
             <li>
               <NavLink activeClassName="is-active" exact to={dashboardPath} alt="Home">
                 Home
@@ -53,6 +52,7 @@ export default (props) => {
               </NavLink>
             </li>
           </NavLinks>
+          <MenuLogout>Sair</MenuLogout>
         </Nav>
       </Header>
 
