@@ -69,6 +69,7 @@ const sharedStyleA = css `
 
 export const MenuLogout = styled.div`
     width:100%;
+    border-top: 1px solid rgba(255,255,255,0.2);
     ${sharedStyleA}
     :hover {
         background-color: rgba(240, 248, 255, 0.10);
