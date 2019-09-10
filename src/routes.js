@@ -86,7 +86,7 @@ export default () =>(
           <AppRoute
             path={`${dashboardPath}/usuarios`}
             layout={(props) => <Dashboard title="Usuários" {...props} />}
-            component={() => <Form />}
+            component={() => <Form title="Usuários" />}
           />
           <AppRoute
             path={`${dashboardPath}/legendas`}

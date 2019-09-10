@@ -236,4 +236,19 @@ p {
   border-top: 1px solid var(--corborda);
 }
 
+.mdc-text-field:not(.mdc-text-field--disabled)
+:not(.mdc-text-field--outlined)
+:not(.mdc-text-field--textarea) 
+.mdc-text-field__input {
+  border-bottom-color:var(--corborda);
+}
+.mdc-text-field:not(.mdc-text-field--disabled)
+:not(.mdc-text-field--outlined)
+:not(.mdc-text-field--textarea) 
+.mdc-text-field__input:hover {
+  border-bottom-color:var(--corborda);
+}
+.nopadding{
+  padding:0 !important;
+}
 `;

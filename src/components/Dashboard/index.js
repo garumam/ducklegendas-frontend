@@ -1,5 +1,5 @@
 import React from "react";
-import { Header,HeaderDashboard,Container,ContainerDashboard,NavLinks,Logo,Nav,HeaderCard } from "./styles";
+import { Header,HeaderDashboard,Container,ContainerDashboard,NavLinks,Logo,Nav } from "./styles";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/img/duck-128.png";
 
@@ -61,12 +61,8 @@ export default (props) => {
      
       <ContainerDashboard>
         <div className="card card-shadow">
-          <HeaderCard>
-              <h2>{props.title}</h2>
-          </HeaderCard>
-          <div className="card-border"/>
             {props.children}
-          </div>
+        </div>
        
        
       
