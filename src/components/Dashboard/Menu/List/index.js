@@ -9,8 +9,8 @@ import {
     DataTableBody,
     Fab
 } from 'rmwc';
-import { Link } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
+import {withRouter} from 'react-router-dom';
 
 import './styles.css';
 import {HeaderCard} from '../Form/styles';
@@ -136,7 +136,7 @@ const Paginator = (items, page, per_page) => {
     };
 }
 
-export default (props) => {
+const List = (props) => {
     const [dataPaginada, setDataPaginada] = React.useState(Paginator(dataTotal));
 
     const handlePageClick = data => {
@@ -152,7 +152,7 @@ export default (props) => {
         <>
         <HeaderCard>
             <h2>{props.title}</h2>
-            <Link to="usuarios/form"><Fab icon="add" type="button" /></Link>
+            <Fab icon="add" type="button" on onClick={()=>{props.history.push('usuarios/form')}} />
         </HeaderCard>
         <div className="card-border"/>
         <DataTable style={{border:'none'}}>
@@ -192,3 +192,5 @@ export default (props) => {
         </>
     )
 };
+
+export default withRouter(List);
