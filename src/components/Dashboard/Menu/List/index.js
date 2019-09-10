@@ -155,7 +155,7 @@ export default (props) => {
             <Link to="usuarios/form"><Fab icon="add" type="button" /></Link>
         </HeaderCard>
         <div className="card-border"/>
-        <DataTable>
+        <DataTable style={{border:'none'}}>
         <DataTableContent style={{width: '100%'}}>
             <DataTableHead>
             <DataTableRow>
