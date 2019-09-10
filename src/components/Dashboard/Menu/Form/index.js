@@ -2,9 +2,10 @@ import React from 'react';
 import { Formik } from 'formik';
 import {Fab} from '@rmwc/fab';
 import {CustomForm,InputText,HeaderCard} from './styles';
+import {withRouter} from 'react-router-dom';
 
 
-export default (props) => ( 
+ const Form = (props) => ( 
     <Formik
     initialValues={{  
         email: '',
@@ -26,7 +27,11 @@ export default (props) => (
           <>
     <HeaderCard>
         <h2>{props.title}</h2>
-        <Fab icon="add" type="button" onClick={handleSubmit} />
+        <div>
+        <Fab icon="keyboard_arrow_left" style={{marginRight:'12px'}} type="button" onClick={()=>{props.history.goBack()}} />
+        <Fab icon="save" type="button" onClick={handleSubmit} />
+        </div>
+        
     </HeaderCard>
     <div className="card-border"/>
         <CustomForm onSubmit={handleSubmit} className="formulario">
@@ -66,3 +71,5 @@ export default (props) => (
     />
         
 );
+
+export default withRouter(Form);

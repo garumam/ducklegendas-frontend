@@ -24,6 +24,12 @@ export const Header = styled.header`
 export const HeaderDashboard = styled(SimpleTopAppBar)`
     position: relative;
     height:65px;
+    .mdc-top-app-bar__title{
+        font-size:1.2rem;
+        font-weight:600;
+        font-family:'Montserrat',sans-serif;
+
+    }
 `;
 
 export const Container = styled.div`
