@@ -12,6 +12,7 @@ import Header from "./components/Front/Header";
 import Dashboard from "./components/Dashboard";
 import Indice from "./components/Front/Indice";
 import Form from "./components/Dashboard/Menu/Form";
+import List from "./components/Dashboard/Menu/List";
 import Logo from "./assets/img/duck-128.png";
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
@@ -84,7 +85,13 @@ export default () =>(
             component={() => <div>Dashboard Home</div>}
           />
           <AppRoute
+            exact
             path={`${dashboardPath}/usuarios`}
+            layout={(props) => <Dashboard title="Usuários" {...props} />}
+            component={() => <List title="Usuários" />}
+          />
+          <AppRoute
+            path={`${dashboardPath}/usuarios/form`}
             layout={(props) => <Dashboard title="Usuários" {...props} />}
             component={() => <Form title="Usuários" />}
           />

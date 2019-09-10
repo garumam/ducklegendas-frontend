@@ -10,13 +10,6 @@ export const CustomForm = styled(Form)`
     }
 `;
 
-export const Col = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    height: 100px;
-    padding-right:1rem;
-`;
 export const InputText = styled(TextField)`
     width: 49%;
     margin-bottom: 1rem;
