@@ -20,6 +20,9 @@ export const Col = styled.div`
 export const InputText = styled(TextField)`
     width: 49%;
     margin-bottom: 1rem;
+    label:not(:disabled){
+        color:rgba(0,0,0,.6) !important;
+    }
 `;
 
 export const HeaderCard = styled.div`
@@ -38,6 +41,6 @@ export const HeaderCard = styled.div`
     button{
         width:45px;
         height:45px;
-        background: #00B8FF;
+        background: #6610f2;
     }
 `;
