@@ -61,12 +61,7 @@ export default (props) => {
         title={props.title}
         navigationIcon={{ onClick: () => handlerMenuLateral() }}
         actionItems={[
-          {
-            icon: "file_download",
-            onClick: () => console.log("Do Something")
-          },
-          { icon: "print", onClick: () => console.log("Do Something") },
-          { icon: "bookmark", onClick: () => console.log("Do Something") }
+          { icon: "notifications", onClick: () => console.log("Do Something") }
         ]}
       />
      

@@ -184,9 +184,9 @@ const List = (props) => {
             <DataTableHead>
             <DataTableRow>
                 { tableParams.headCells.map((cell, index) => (
-                    <DataTableHeadCell key={index}>{cell}</DataTableHeadCell>
+                    <DataTableHeadCell style={{fontSize:'0.8rem',lineHeight:'1.8rem'}} key={index}>{cell}</DataTableHeadCell>
                 ))}
-                <DataTableHeadCell>Ação</DataTableHeadCell>
+                <DataTableHeadCell style={{fontSize:'0.8rem',lineHeight:'1.8rem'}}>Ação</DataTableHeadCell>
             </DataTableRow>
             </DataTableHead>
             <DataTableBody>
