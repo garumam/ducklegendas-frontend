@@ -11,7 +11,7 @@ export const Header = styled.header`
     position:relative;
     color:white;
     text-align:center;
-    border-right:1px solid rgba(255,255,255,0.2);
+    border-right:1px solid rgba(255,255,255,0.1);
     img {
         width:40px;
         height:40px;
@@ -43,7 +43,7 @@ export const Container = styled.div`
 export const ContainerDashboard = styled.div`
     display:flex;
     width:100%;
-    height:calc(100vh - 65px);
+    height:calc(100vh - 70px);
     padding:24px;
 `;
 
@@ -62,7 +62,7 @@ export const Logo = styled.div `
     display:flex;
     justify-content:center;
     align-items:center;
-    border-bottom:1px solid rgba(255,255,255,0.2);
+    border-bottom:1px solid rgba(255,255,255,0.1);
     img {
         width: auto;
         max-height: 72px;
@@ -84,7 +84,7 @@ const sharedStyleA = css `
 
 export const MenuLogout = styled.div`
     width:100%;
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255,255,255,0.1);
     ${sharedStyleA}
     :hover {
         background-color: rgba(240, 248, 255, 0.10);
