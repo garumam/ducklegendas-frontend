@@ -82,6 +82,8 @@ table {
   --textcolor: #313450;
   --corborda: rgba(82, 109, 249, 0.15);
   --marginbottom: 24px;
+  --edit-button: #fbc02d;
+  --delete-button: #d32f2f;
 }
 
 * {

@@ -138,42 +138,83 @@ const Paginator = (items, page, per_page) => {
 
 const List = (props) => {
     const [dataPaginada, setDataPaginada] = React.useState(Paginator(dataTotal));
+    const [allData, setAllData] = React.useState(dataTotal);
+    const tableParams = {
+        headCells: [],
+        formPath: '/form'
+    };
+
+    switch(props.table){
+        case 1: //usuários
+            tableParams.headCells.push('Usuário','Senha','E-mail');
+            tableParams.formPath = 'usuarios'+tableParams.formPath;
+            break;
+        case 2: //legendas
+            tableParams.headCells.push('Série','Autor','Número');
+            tableParams.formPath = 'legendas'+tableParams.formPath;
+            break;
+        case 3: //categorias
+            tableParams.headCells.push('Categoria','Classificação','Qtd');
+            tableParams.formPath = 'categorias'+tableParams.formPath;
+            break;
+        case 4: //toplegendas
+            tableParams.headCells.push('Legenda','Autor','Série');
+            tableParams.formPath = 'toplegendas'+tableParams.formPath;
+            break;
+        default:  
+    }
 
     const handlePageClick = data => {
         let selected = data.selected;
         console.log('pagina selecionada: ', selected);
-        let dados = Paginator(dataTotal, selected);
+        let dados = Paginator(allData, selected);
         console.log(dados);
         setDataPaginada(dados);
-        
     };
 
     return(
         <>
         <HeaderCard>
             <h2>{props.title}</h2>
-            <Fab icon="add" type="button" onClick={()=>{props.history.push('usuarios/form')}} />
+            <Fab icon="add" type="button" onClick={()=>{props.history.push(tableParams.formPath)}} />
         </HeaderCard>
         <div className="card-border"/>
         <DataTable style={{border:'none'}}>
         <DataTableContent style={{width: '100%'}}>
             <DataTableHead>
             <DataTableRow>
-                <DataTableHeadCell>Item</DataTableHeadCell>
-                <DataTableHeadCell>Quantity</DataTableHeadCell>
-                <DataTableHeadCell>Unit price</DataTableHeadCell>
+                { tableParams.headCells.map((cell, index) => (
+                    <DataTableHeadCell key={index}>{cell}</DataTableHeadCell>
+                ))}
+                <DataTableHeadCell>Ação</DataTableHeadCell>
             </DataTableRow>
             </DataTableHead>
             <DataTableBody>
-                { dataPaginada.data.map((obj, index) => (
+                { 
+                dataPaginada.data.map((obj, index) => (
                 <DataTableRow key={index}>
-                    <DataTableCell>{obj.cell1}</DataTableCell>
-                    <DataTableCell>{obj.cell2}</DataTableCell>
-                    <DataTableCell>{obj.cell3}</DataTableCell>
+                    {
+                    Object.keys(obj).map((item, i) => (
+                        <DataTableCell key={i}>{obj[item]}</DataTableCell>
+                    ))
+                    }
+                    <DataTableCell>
+                        <Fab 
+                        style={{marginRight: '5px', backgroundColor: 'var(--edit-button)'}}
+                        mini 
+                        icon="create" 
+                        type="button" 
+                        onClick={()=>{console.log('EDITANDO');}} />
+                        <Fab 
+                        style={{backgroundColor: 'var(--delete-button)'}} 
+                        mini 
+                        icon="delete" 
+                        type="button" 
+                        onClick={()=>{console.log('DELETANDO');}} />
+                    </DataTableCell>
                 </DataTableRow>
                 ))
                 }
-            
             </DataTableBody>
         </DataTableContent>
         </DataTable>

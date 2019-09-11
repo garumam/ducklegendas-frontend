@@ -88,27 +88,45 @@ export default () =>(
             exact
             path={`${dashboardPath}/usuarios`}
             layout={(props) => <Dashboard title="Usuários" {...props} />}
-            component={() => <List title="Usuários" />}
+            component={() => <List title="Usuários" table={1} />}
           />
           <AppRoute
             path={`${dashboardPath}/usuarios/form`}
             layout={(props) => <Dashboard title="Usuários" {...props} />}
-            component={() => <Form title="Usuários" />}
+            component={() => <Form title="Usuários" form={1} />}
           />
           <AppRoute
+            exact
             path={`${dashboardPath}/legendas`}
             layout={(props) => <Dashboard title="Legendas" {...props} />}
-            component={() => <div>Dashboard Legendas</div>}
+            component={() => <List title="Legendas" table={2} />}
           />
           <AppRoute
+            path={`${dashboardPath}/legendas/form`}
+            layout={(props) => <Dashboard title="Legendas" {...props} />}
+            component={() => <Form title="Legendas" form={2} />}
+          />
+          <AppRoute
+            exact
             path={`${dashboardPath}/categorias`}
             layout={(props) => <Dashboard title="Categorias" {...props} />}
-            component={() => <div>Dashboard Categorias</div>}
+            component={() => <List title="Categorias" table={3} />}
           />
           <AppRoute
+            path={`${dashboardPath}/categorias/form`}
+            layout={(props) => <Dashboard title="Categorias" {...props} />}
+            component={() => <Form title="Categorias" form={3} />}
+          />
+          <AppRoute
+            exact
             path={`${dashboardPath}/toplegendas`}
             layout={(props) => <Dashboard title="Top Legendas" {...props} />}
-            component={() => <div>Dashboard Top Legendas</div>}
+            component={() => <List title="Top Legendas" table={4} />}
+          />
+          <AppRoute
+            path={`${dashboardPath}/toplegendas/form`}
+            layout={(props) => <Dashboard title="Top Legendas" {...props} />}
+            component={() => <Form title="Top Legendas" form={4} />}
           />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>
