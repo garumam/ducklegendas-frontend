@@ -34,6 +34,6 @@ export const HeaderCard = styled.div`
     button{
         width:45px;
         height:45px;
-        background: #6610f2;
+        background: var(--mdc-theme-primary);
     }
 `;

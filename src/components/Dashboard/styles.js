@@ -5,13 +5,13 @@ import { SimpleTopAppBar } from "@rmwc/top-app-bar";
 
 export const Header = styled.header`
     /* background:#6357ff; */
-    background:#00b8ff;
+    background:#6759FF;
     width:220px;
     height:100vh;
     position:relative;
     color:white;
     text-align:center;
-    padding-top:1.5rem;
+    border-right:1px solid rgba(255,255,255,0.2);
     img {
         width:40px;
         height:40px;
@@ -23,7 +23,10 @@ export const Header = styled.header`
 
 export const HeaderDashboard = styled(SimpleTopAppBar)`
     position: relative;
-    height:65px;
+    height:70px;
+    div{
+        height:inherit;
+    }
     .mdc-top-app-bar__title{
         font-size:1.2rem;
         font-weight:600;
@@ -54,7 +57,12 @@ export const Nav = styled.nav `
 `;
 
 export const Logo = styled.div `
-    height: 80px;
+    width:100%;
+    height: 70px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,0.2);
     img {
         width: auto;
         max-height: 72px;
@@ -63,12 +71,13 @@ export const Logo = styled.div `
 
 const sharedStyleA = css `
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     color: white !important;
-    font-size: .9rem;
+    font-size: .8rem;
     height: 50px;
     padding: 1rem;
+    padding-left:1.4rem;
     text-transform: uppercase;
     text-decoration: none;
 `;
@@ -91,6 +100,7 @@ export const NavLinks = styled.ul `
     width: 100%;
     li{
         width:100%;
+        align-self:flex-start;
     }
     a{
         ${sharedStyleA}

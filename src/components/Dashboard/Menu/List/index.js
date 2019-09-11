@@ -152,7 +152,7 @@ const List = (props) => {
         <>
         <HeaderCard>
             <h2>{props.title}</h2>
-            <Fab icon="add" type="button" on onClick={()=>{props.history.push('usuarios/form')}} />
+            <Fab icon="add" type="button" onClick={()=>{props.history.push('usuarios/form')}} />
         </HeaderCard>
         <div className="card-border"/>
         <DataTable style={{border:'none'}}>

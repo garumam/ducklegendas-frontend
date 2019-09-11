@@ -74,8 +74,8 @@ table {
 }
 
 :root {
-  --mdc-theme-primary: #6610f2;
-  --mdc-theme-secondary: #6610f2;
+  --mdc-theme-primary: #6759FF;
+  --mdc-theme-secondary: #6759FF;
   --hmenu: 80px;
   --bgazul: linear-gradient(90deg, rgba(0, 212, 255, 1) 0%, rgba(0, 145, 255, 1) 100%);
   --bgazulreverse: linear-gradient(90deg, rgba(0, 145, 255, 1) 0%, rgba(0, 212, 255, 1) 100%);
