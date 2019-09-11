@@ -15,6 +15,8 @@ export const InputText = styled(TextField)`
     margin-bottom: 1rem;
     label:not(:disabled){
         color:rgba(0,0,0,.6) !important;
+        font-family: 'Montserrat', sans-serif;
+        font-size:.8rem;
     }
 `;
 
