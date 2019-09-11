@@ -1,7 +1,10 @@
 import React from "react";
 import { Header,HeaderDashboard,Container,ContainerDashboard,NavLinks,Logo,Nav,MenuLogout } from "./styles";
+import {Avatar} from '@rmwc/avatar';
+import {Ripple} from '@rmwc/ripple';
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/img/duck-128.png";
+import '@rmwc/avatar/avatar.css';
 
 const dashboardPath = '/dashboard';
 
@@ -63,6 +66,30 @@ export default (props) => {
         actionItems={[
           { icon: "notifications", onClick: () => console.log("Do Something") }
         ]}
+        endContent={
+          <Ripple>
+          <div style={{
+            display:'flex',
+            justifyContent:'space-between',
+            alignItems:'center',
+            width:'160px',
+            height:'100%',
+            cursor:'pointer',
+            marginLeft:'.8rem',
+            borderLeft:'1px solid rgba(255,255,255,0.1)',
+            padding:'0 1.3rem'}}>
+            <span style={{fontSize:'.9rem'}}>Admin</span>
+            <Avatar
+              src="images/avatars/ironman.png"
+              size="xlarge"
+              name="Tony Stark"
+            />
+            
+          </div>
+          </Ripple>
+        }
+        
+        
       />
      
       <ContainerDashboard>

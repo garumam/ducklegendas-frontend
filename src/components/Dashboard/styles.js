@@ -27,11 +27,18 @@ export const HeaderDashboard = styled(SimpleTopAppBar)`
     div{
         height:inherit;
     }
+    section{
+        padding-top:0;
+        padding-bottom:0;
+        padding-right:0;
+    }
     .mdc-top-app-bar__title{
         font-size:1.2rem;
         font-weight:600;
         font-family:'Montserrat',sans-serif;
-
+    }
+    .mdc-top-app-bar__section--align-end :nth-child(1){
+        order:2;
     }
 `;
 
