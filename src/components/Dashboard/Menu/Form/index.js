@@ -38,6 +38,11 @@ import {withRouter} from 'react-router-dom';
             types.push('text','text');
             names.push('nome','descricao');
             break;
+            case 6: //ranking
+            labels.push('Nome','Descrição');
+            types.push('text','text');
+            names.push('nome','descricao');
+            break;
         default:  
     }
 

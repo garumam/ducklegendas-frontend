@@ -139,6 +139,17 @@ export default () =>(
             layout={(props) => <Dashboard title="Permissões" {...props} />}
             component={() => <Form title="Permissões" form={5} />}
           />
+           <AppRoute
+            exact
+            path={`${dashboardPath}/ranking`}
+            layout={(props) => <Dashboard title="Ranking" {...props} />}
+            component={() => <List title="Ranking" table={5} />}
+          />
+          <AppRoute
+            path={`${dashboardPath}/ranking/form`}
+            layout={(props) => <Dashboard title="Ranking" {...props} />}
+            component={() => <Form title="Ranking" form={5} />}
+          />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>
       </>

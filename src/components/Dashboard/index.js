@@ -34,27 +34,32 @@ export default (props) => {
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to={`${dashboardPath}/usuarios`} alt="Series">
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/ranking`} alt="Ranking">
+                Ranking
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/usuarios`} alt="Usuarios">
                 Usuários
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to={`${dashboardPath}/legendas`} alt="Filmes">
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/legendas`} alt="Legendas">
                 Legendas
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to={`${dashboardPath}/categorias`} alt="Índice">
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/categorias`} alt="Categorias">
                 Categorias
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to={`${dashboardPath}/toplegendas`} alt="Índice">
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/toplegendas`} alt="Top Legendas">
                 Top legendas
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to={`${dashboardPath}/permissoes`} alt="Índice">
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/permissoes`} alt="Permissões">
                 Permissões
               </NavLink>
             </li>
