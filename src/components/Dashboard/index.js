@@ -3,6 +3,7 @@ import { Header,HeaderDashboard,Container,ContainerDashboard,NavLinks,Logo,Nav,M
 import {Avatar} from '@rmwc/avatar';
 import {Ripple} from '@rmwc/ripple';
 import { NavLink } from "react-router-dom";
+import { Drawer, DrawerHeader, DrawerContent, List, ListItem, DrawerAppContent} from 'rmwc';
 import logo from "../../assets/img/duck-128.png";
 import '@rmwc/avatar/avatar.css';
 
@@ -15,15 +16,15 @@ export default (props) => {
  function handlerMenuLateral(){
     setOpen(!open); 
 
-    if(open)
-      refMenu.current.style = 'display:none';
-    else 
-      refMenu.current.style = 'display:block';
+    // if(open)
+    //   refMenu.current.style = 'display:none';
+    // else 
+    //   refMenu.current.style = 'display:block';
 
   }
   return (
     <Container>
-      <Header ref={refMenu}>
+      {/* <Header ref={refMenu}>
         <Nav>
           <NavLinks>
           <Logo>
@@ -57,52 +58,73 @@ export default (props) => {
           </NavLinks>
           <MenuLogout>Sair</MenuLogout>
         </Nav>
-      </Header>
+      </Header> */}
 
-      <Container style={{height:'100%',flexWrap:'wrap'}}>
-      <HeaderDashboard 
-        title={props.title}
-        navigationIcon={{ onClick: () => handlerMenuLateral() }}
-        actionItems={[
-          { icon: "notifications", onClick: () => console.log("Do Something") }
-        ]}
-        endContent={
-          <Ripple>
-          <div style={{
-            display:'flex',
-            justifyContent:'space-between',
-            alignItems:'center',
-            width:'160px',
-            height:'100%',
-            cursor:'pointer',
-            marginLeft:'.8rem',
-            borderLeft:'1px solid rgba(255,255,255,0.1)',
-            padding:'0 1.3rem'}}>
-            <span style={{fontSize:'.9rem'}}>Admin</span>
-            <Avatar
-              src="images/avatars/ironman.png"
-              size="xlarge"
-              name="Tony Stark"
-            />
+      <Drawer dismissible open={open} style={{ background:'#6759FF' }}>
+        <DrawerHeader>
+          <Logo>
+            <img alt="img logo" src={logo} />
+          </Logo>
+        </DrawerHeader>
+        <DrawerContent>
+          <List>
+            <ListItem>
+              <NavLink activeClassName="is-active" exact to={dashboardPath} alt="Home">
+                Home
+              </NavLink>
+            </ListItem>
+            <ListItem>Pizza</ListItem>
+            <ListItem>Icecream</ListItem>
+          </List>
+        </DrawerContent>
+      </Drawer>
+      <DrawerAppContent style={{ width:'100%' }}>
+        <Container style={{height:'100%',flexWrap:'wrap'}}>
+          <HeaderDashboard 
+            title={props.title}
+            navigationIcon={{ onClick: () => handlerMenuLateral() }}
+            actionItems={[
+              { icon: "notifications", onClick: () => console.log("Do Something") }
+            ]}
+            endContent={
+              <Ripple>
+              <div style={{
+                display:'flex',
+                justifyContent:'space-between',
+                alignItems:'center',
+                width:'160px',
+                height:'100%',
+                cursor:'pointer',
+                marginLeft:'.8rem',
+                borderLeft:'1px solid rgba(255,255,255,0.1)',
+                padding:'0 1.3rem'}}>
+                <span style={{fontSize:'.9rem'}}>Admin</span>
+                <Avatar
+                  src="images/avatars/ironman.png"
+                  size="xlarge"
+                  name="Tony Stark"
+                />
+                
+              </div>
+              </Ripple>
+            }
             
-          </div>
-          </Ripple>
-        }
+            
+          />
         
-        
-      />
-     
-      <ContainerDashboard>
-        <div className="card card-shadow">
-            {props.children}
-        </div>
-       
-       
+          <ContainerDashboard>
+            <div className="card card-shadow">
+                {props.children}
+            </div>
+          
+          
+          
+          </ContainerDashboard>
       
-      </ContainerDashboard>
-     
 
-      </Container>
+        </Container>
+      </DrawerAppContent>
+      
     </Container>
   );
 };
