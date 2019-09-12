@@ -11,11 +11,13 @@ export const Header = styled.header`
     position:relative;
     color:white;
     text-align:center;
+    transition: margin .5s;
     border-right:1px solid rgba(255,255,255,0.1);
     img {
         width:40px;
         height:40px;
     }
+    
 `;
 
 

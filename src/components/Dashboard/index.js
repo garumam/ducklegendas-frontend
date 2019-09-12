@@ -16,10 +16,9 @@ export default (props) => {
     setOpen(!open); 
 
     if(open)
-      refMenu.current.style = 'display:none';
+      refMenu.current.style = 'margin-left: -220px';
     else 
-      refMenu.current.style = 'display:block';
-
+      refMenu.current.style = 'margin-left: 0';
   }
   return (
     <Container>
