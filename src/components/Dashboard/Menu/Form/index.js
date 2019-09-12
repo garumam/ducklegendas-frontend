@@ -33,6 +33,11 @@ import {withRouter} from 'react-router-dom';
             types.push('text','text','text','text');
             names.push('legenda','autor','serie','mensagem');
             break;
+        case 5: //permissoes
+            labels.push('Nome','Descrição');
+            types.push('text','text');
+            names.push('nome','descricao');
+            break;
         default:  
     }
 

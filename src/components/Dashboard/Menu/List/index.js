@@ -161,6 +161,10 @@ const List = (props) => {
             tableParams.headCells.push('Legenda','Autor','Série');
             tableParams.formPath = 'toplegendas'+tableParams.formPath;
             break;
+        case 5: //permissoes
+            tableParams.headCells.push('Nome','Descrição','N° de usuários');
+            tableParams.formPath = 'permissoes'+tableParams.formPath;
+            break;
         default:  
     }
 

@@ -53,6 +53,11 @@ export default (props) => {
                 Top legendas
               </NavLink>
             </li>
+            <li>
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/permissoes`} alt="Índice">
+                Permissões
+              </NavLink>
+            </li>
           </NavLinks>
           <MenuLogout>Sair</MenuLogout>
         </Nav>

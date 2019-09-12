@@ -128,6 +128,17 @@ export default () =>(
             layout={(props) => <Dashboard title="Top Legendas" {...props} />}
             component={() => <Form title="Top Legendas" form={4} />}
           />
+          <AppRoute
+            exact
+            path={`${dashboardPath}/permissoes`}
+            layout={(props) => <Dashboard title="Permissões" {...props} />}
+            component={() => <List title="Permissões" table={5} />}
+          />
+          <AppRoute
+            path={`${dashboardPath}/permissoes/form`}
+            layout={(props) => <Dashboard title="Permissões" {...props} />}
+            component={() => <Form title="Permissões" form={5} />}
+          />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>
       </>
