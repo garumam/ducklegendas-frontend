@@ -1,9 +1,8 @@
 import React from 'react';
 import { Formik } from 'formik';
 import {Fab} from '@rmwc/fab';
-import {CustomForm,InputText,HeaderCard} from './styles';
+import {CustomForm,InputText,HeaderCard,SelectCustom} from './styles';
 import {withRouter} from 'react-router-dom';
-
 
  const Form = (props) => {
      const inputParams = [], 
@@ -11,12 +10,12 @@ import {withRouter} from 'react-router-dom';
            types = [],
            names = [],
            initialValues = {};
-     
+  
      switch(props.form){
         case 1: //usuários
-            labels.push('E-mail','Senha','Nome','Mensagem');
-            types.push('email','password','text','text');
-            names.push('email','password','nome','mensagem');
+            labels.push('Nome','E-mail','Senha', 'Permissão', 'Imagem');
+            types.push('text','email','password', 'select', 'file');
+            names.push('nome','email','password', 'permissao', 'img');
             break;
         case 2: //legendas
             labels.push('Série','Autor','Número','Mensagem');
@@ -38,7 +37,7 @@ import {withRouter} from 'react-router-dom';
             types.push('text','text');
             names.push('nome','descricao');
             break;
-            case 6: //ranking
+        case 6: //ranking
             labels.push('Nome','Descrição');
             types.push('text','text');
             names.push('nome','descricao');
@@ -69,7 +68,8 @@ import {withRouter} from 'react-router-dom';
             values,
             handleChange,
             handleBlur,
-            handleSubmit
+            handleSubmit,
+            setFieldValue
         }) => (
             <>
         <HeaderCard>
@@ -83,15 +83,51 @@ import {withRouter} from 'react-router-dom';
         <div className="card-border"/>
             <CustomForm onSubmit={handleSubmit} className="formulario">
                 {
-                    inputParams.map((input, index) => (
-                        <InputText 
-                        key={index} 
-                        label={input.label}
-                        onChange={(e) => {e.persist(); handleChange(e);}}
-                        onBlur={(e) => {e.persist(); handleBlur(e);}}
-                        type={input.type}
-                        name={input.name} />
-                    ))
+                    inputParams.map((input, index) => {
+                        if(input.type === 'select'){
+                            return(
+                                <SelectCustom
+                                options={['admin', 'legender']} 
+                                key={index} 
+                                label={input.label}
+                                name={input.name}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values[input.name]}
+                                />
+                            )
+                        }
+                        if(input.type === 'file'){
+                            return(
+                                <div key={index} style={{width: '49%'}}>
+                                    <input 
+                                    id="file" 
+                                    name={input.name}
+                                    type={input.type} 
+                                    onChange={(event) => {
+                                        setFieldValue(input.name, event.currentTarget.files[0]);
+                                    }} 
+                                    />
+                                    <img 
+                                    style={{ width: '150px' }} 
+                                    src={(values[input.name] !== ''? 
+                                            URL.createObjectURL(values[input.name]) : '')} 
+                                    alt='' 
+                                    />
+                                </div>
+                            )
+                        }
+                        return(
+                            <InputText 
+                            key={index} 
+                            label={input.label}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            type={input.type}
+                            name={input.name}
+                            />
+                        )
+                    })
                 }
             </CustomForm>
             </>

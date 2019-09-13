@@ -91,7 +91,7 @@ export default () =>(
             component={() => <List title="Usuários" table={1} />}
           />
           <AppRoute
-            path={`${dashboardPath}/usuarios/form`}
+            path={`${dashboardPath}/usuarios/form/:id?`}
             layout={(props) => <Dashboard title="Usuários" {...props} />}
             component={() => <Form title="Usuários" form={1} />}
           />
@@ -102,7 +102,7 @@ export default () =>(
             component={() => <List title="Legendas" table={2} />}
           />
           <AppRoute
-            path={`${dashboardPath}/legendas/form`}
+            path={`${dashboardPath}/legendas/form/:id?`}
             layout={(props) => <Dashboard title="Legendas" {...props} />}
             component={() => <Form title="Legendas" form={2} />}
           />
@@ -113,7 +113,7 @@ export default () =>(
             component={() => <List title="Categorias" table={3} />}
           />
           <AppRoute
-            path={`${dashboardPath}/categorias/form`}
+            path={`${dashboardPath}/categorias/form/:id?`}
             layout={(props) => <Dashboard title="Categorias" {...props} />}
             component={() => <Form title="Categorias" form={3} />}
           />
@@ -124,7 +124,7 @@ export default () =>(
             component={() => <List title="Top Legendas" table={4} />}
           />
           <AppRoute
-            path={`${dashboardPath}/toplegendas/form`}
+            path={`${dashboardPath}/toplegendas/form/:id?`}
             layout={(props) => <Dashboard title="Top Legendas" {...props} />}
             component={() => <Form title="Top Legendas" form={4} />}
           />
@@ -135,7 +135,7 @@ export default () =>(
             component={() => <List title="Permissões" table={5} />}
           />
           <AppRoute
-            path={`${dashboardPath}/permissoes/form`}
+            path={`${dashboardPath}/permissoes/form/:id?`}
             layout={(props) => <Dashboard title="Permissões" {...props} />}
             component={() => <Form title="Permissões" form={5} />}
           />
@@ -143,12 +143,12 @@ export default () =>(
             exact
             path={`${dashboardPath}/ranking`}
             layout={(props) => <Dashboard title="Ranking" {...props} />}
-            component={() => <List title="Ranking" table={5} />}
+            component={() => <List title="Ranking" table={6} />}
           />
           <AppRoute
-            path={`${dashboardPath}/ranking/form`}
+            path={`${dashboardPath}/ranking/form/:id?`}
             layout={(props) => <Dashboard title="Ranking" {...props} />}
-            component={() => <Form title="Ranking" form={5} />}
+            component={() => <Form title="Ranking" form={6} />}
           />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>

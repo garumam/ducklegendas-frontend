@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Form } from 'formik';
-import {TextField} from '@rmwc/textfield';
+import {TextField, Select} from 'rmwc';
 
 export const CustomForm = styled(Form)`
     justify-content: space-between;
@@ -11,6 +11,16 @@ export const CustomForm = styled(Form)`
 `;
 
 export const InputText = styled(TextField)`
+    width: 49%;
+    margin-bottom: 1rem;
+    label:not(:disabled){
+        color:rgba(0,0,0,.6) !important;
+        font-family: 'Montserrat', sans-serif;
+        font-size:.8rem;
+    }
+`;
+
+export const SelectCustom = styled(Select)`
     width: 49%;
     margin-bottom: 1rem;
     label:not(:disabled){

@@ -16,107 +16,37 @@ import './styles.css';
 import {HeaderCard} from '../Form/styles';
 import '@rmwc/data-table/data-table.css';
 
-const dataTotal = [
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cake', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cake', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cake', cell2: 25, cell3: '$3.90'},
-    {cell1: 'Cake', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Teste', cell2: 25, cell3: '$3.90'},
-    {cell1: 'Teste', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Teste', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Teste', cell2: 25, cell3: '$3.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Chicken', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Chicken', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Chicken', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Chicken', cell2: 25, cell3: '$3.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$3.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Egg', cell2: 5, cell3: '$2.90'},
-    {cell1: 'Egg', cell2: 5, cell3: '$3.90'},
-    {cell1: 'Egg', cell2: 5, cell3: '$2.90'},
-    {cell1: 'Egg', cell2: 5, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$3.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'kies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'kies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'kies', cell2: 25, cell3: '$3.90'},
-    {cell1: 'kies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$3.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Coos', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Coos', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Coos', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Coos', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Coies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Coies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Coies', cell2: 25, cell3: '$3.90'},
-    {cell1: 'Coies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$3.90'},
-    {cell1: 'Ckie', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Ckie', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Ckie', cell2: 25, cell3: '$3.90'},
-    {cell1: 'Ckie', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'ookes', cell2: 25, cell3: '$3.90'},
-    {cell1: 'ookes', cell2: 25, cell3: '$2.90'},
-    {cell1: 'ookes', cell2: 25, cell3: '$2.90'},
-    {cell1: 'ookes', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
-    {cell1: 'okis', cell2: 25, cell3: '$3.90'},
-    {cell1: 'okis', cell2: 25, cell3: '$2.90'},
-    {cell1: 'okis', cell2: 25, cell3: '$2.90'},
-    {cell1: 'okis', cell2: 25, cell3: '$3.90'}
+export const dataTotal = [
+    {id:1,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:2,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:3,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:4,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:5,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:6,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:7,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:8,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:9,cell1: 'Cake', cell2: 25, cell3: '$2.90'},
+    {id:10,cell1: 'Cake', cell2: 25, cell3: '$2.90'},
+    {id:11,cell1: 'Cake', cell2: 25, cell3: '$3.90'},
+    {id:12,cell1: 'Cake', cell2: 25, cell3: '$2.90'},
+    {id:13,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:14,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:15,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:16,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:17,cell1: 'Teste', cell2: 25, cell3: '$3.90'},
+    {id:18,cell1: 'Teste', cell2: 25, cell3: '$2.90'},
+    {id:19,cell1: 'Teste', cell2: 25, cell3: '$2.90'},
+    {id:20,cell1: 'Teste', cell2: 25, cell3: '$3.90'},
+    {id:21,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:22,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:23,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:24,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:25,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:26,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:27,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
+    {id:28,cell1: 'Chicken', cell2: 25, cell3: '$2.90'},
+    {id:29,cell1: 'Chicken', cell2: 25, cell3: '$2.90'},
+    {id:30,cell1: 'Chicken', cell2: 25, cell3: '$2.90'}
 ];
 
 const Paginator = (items, page, per_page) => {
@@ -139,6 +69,7 @@ const Paginator = (items, page, per_page) => {
 const List = (props) => {
     const [dataPaginada, setDataPaginada] = React.useState(Paginator(dataTotal));
     const [allData, setAllData] = React.useState(dataTotal);
+
     const tableParams = {
         headCells: [],
         formPath: '/form'
@@ -146,31 +77,34 @@ const List = (props) => {
 
     switch(props.table){
         case 1: //usuários
-            tableParams.headCells.push('Usuário','Senha','E-mail');
+            tableParams.headCells.push('id','Usuário','Senha','E-mail');
             tableParams.formPath = 'usuarios'+tableParams.formPath;
             break;
         case 2: //legendas
-            tableParams.headCells.push('Série','Autor','Número');
+            tableParams.headCells.push('id','Série','Autor','Número');
             tableParams.formPath = 'legendas'+tableParams.formPath;
             break;
         case 3: //categorias
-            tableParams.headCells.push('Categoria','Classificação','Qtd');
+            tableParams.headCells.push('id','Categoria','Classificação','Qtd');
             tableParams.formPath = 'categorias'+tableParams.formPath;
             break;
         case 4: //toplegendas
-            tableParams.headCells.push('Legenda','Autor','Série');
+            tableParams.headCells.push('id','Legenda','Autor','Série');
             tableParams.formPath = 'toplegendas'+tableParams.formPath;
             break;
         case 5: //permissoes
-            tableParams.headCells.push('Nome','Descrição','N° de usuários');
+            tableParams.headCells.push('id','Nome','Descrição','N° de usuários');
             tableParams.formPath = 'permissoes'+tableParams.formPath;
+            break;
+        case 6: //ranking
+            tableParams.headCells.push('id','Nome','Descrição');
+            tableParams.formPath = 'ranking'+tableParams.formPath;
             break;
         default:  
     }
 
     const handlePageClick = data => {
         let selected = data.selected;
-        console.log('pagina selecionada: ', selected);
         let dados = Paginator(allData, selected);
         console.log(dados);
         setDataPaginada(dados);
@@ -208,7 +142,7 @@ const List = (props) => {
                         mini 
                         icon="create" 
                         type="button" 
-                        onClick={()=>{console.log('EDITANDO');}} />
+                        onClick={()=>{props.history.push(`${tableParams.formPath}/${obj.id}`);}} />
                         <Fab 
                         style={{backgroundColor: 'var(--delete-button)'}} 
                         mini 
