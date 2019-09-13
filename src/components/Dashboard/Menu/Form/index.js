@@ -112,8 +112,7 @@ import image from '../../../../assets/img/man.png';
                                     name={input.name}
                                     type={input.type}
                                     onChange={(event) => {
-                                        if(event.currentTarget.files[0] !== undefined)
-                                            setFieldValue(input.name, event.currentTarget.files[0]);
+                                        setFieldValue(input.name, event.currentTarget.files[0]);
                                     }}
                                     />
                                 </div>
