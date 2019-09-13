@@ -100,19 +100,20 @@ import {withRouter} from 'react-router-dom';
                         if(input.type === 'file'){
                             return(
                                 <div key={index} style={{width: '49%'}}>
+                                    <img 
+                                    style={{ width: '150px' }} 
+                                    src={(values[input.name] instanceof File ? 
+                                            URL.createObjectURL(values[input.name]) : '')} 
+                                    alt='' 
+                                    />
                                     <input 
                                     id="file" 
                                     name={input.name}
-                                    type={input.type} 
+                                    type={input.type}
                                     onChange={(event) => {
-                                        setFieldValue(input.name, event.currentTarget.files[0]);
-                                    }} 
-                                    />
-                                    <img 
-                                    style={{ width: '150px' }} 
-                                    src={(values[input.name] !== ''? 
-                                            URL.createObjectURL(values[input.name]) : '')} 
-                                    alt='' 
+                                        if(event.currentTarget.files[0] !== undefined)
+                                            setFieldValue(input.name, event.currentTarget.files[0]);
+                                    }}
                                     />
                                 </div>
                             )
