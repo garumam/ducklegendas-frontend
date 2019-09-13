@@ -101,7 +101,6 @@ import image from '../../../../assets/img/man.png';
                         if(input.type === 'file'){
                             return(
                                 <div key={index} style={{width: '49%'}}>
-                                    {console.log(values)}
                                     <img 
                                     style={{ width: '150px' }} 
                                     src={values[input.name] instanceof File ? 
