@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import {Fab} from '@rmwc/fab';
 import {CustomForm,InputText,HeaderCard,SelectCustom} from './styles';
 import {withRouter} from 'react-router-dom';
+import image from '../../../../assets/img/man.png';
 
  const Form = (props) => {
      const inputParams = [], 
@@ -100,10 +101,11 @@ import {withRouter} from 'react-router-dom';
                         if(input.type === 'file'){
                             return(
                                 <div key={index} style={{width: '49%'}}>
+                                    {console.log(values)}
                                     <img 
                                     style={{ width: '150px' }} 
-                                    src={(values[input.name] instanceof File ? 
-                                            URL.createObjectURL(values[input.name]) : '')} 
+                                    src={values[input.name] instanceof File ? 
+                                            URL.createObjectURL(values[input.name]) : values['img'] = image} 
                                     alt='' 
                                     />
                                     <input 
