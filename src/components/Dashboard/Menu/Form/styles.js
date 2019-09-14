@@ -22,11 +22,18 @@ export const InputText = styled(TextField)`
 
 export const SelectCustom = styled(Select)`
     width: 49%;
+   
     margin-bottom: 1rem;
     label:not(:disabled){
         color:rgba(0,0,0,.6) !important;
         font-family: 'Montserrat', sans-serif;
         font-size:.8rem;
+    }
+    option{
+        font-weight:600;
+    }
+    .mdc-select__native-control{
+        font-weight:600 !important;
     }
 `;
 
