@@ -30,6 +30,13 @@ export const SelectCustom = styled(Select)`
     }
 `;
 
+export const DivCustom = styled.div`
+    input{
+        padding: 10px 16px !important;
+        font-size:.8rem;
+    } 
+`;
+
 export const HeaderCard = styled.div`
     display:flex;
     width:100%;

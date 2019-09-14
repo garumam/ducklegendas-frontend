@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import {Fab} from '@rmwc/fab';
-import {CustomForm,InputText,HeaderCard,SelectCustom} from './styles';
+import {CustomForm,InputText,HeaderCard,SelectCustom, DivCustom} from './styles';
 import {withRouter} from 'react-router-dom';
 import image from '../../../../assets/img/man.png';
 
@@ -100,14 +100,14 @@ import image from '../../../../assets/img/man.png';
                         }
                         if(input.type === 'file'){
                             return(
-                                <div key={index} style={{width: '49%'}}>
+                                <DivCustom key={index} style={{width: '49%'}}>
                                     <img 
-                                    style={{ width: '150px' }} 
+                                    style={{ width: '150px', padding:'1rem 1rem 1rem 0'}} 
                                     src={values[input.name] instanceof File ? 
-                                            URL.createObjectURL(values[input.name]) : values['img'] = image} 
+                                            URL.createObjectURL(values[input.name]) : image} 
                                     alt='' 
                                     />
-                                    <input 
+                                    <input
                                     id="file" 
                                     name={input.name}
                                     type={input.type}
@@ -115,7 +115,7 @@ import image from '../../../../assets/img/man.png';
                                         setFieldValue(input.name, event.currentTarget.files[0]);
                                     }}
                                     />
-                                </div>
+                                </DivCustom>
                             )
                         }
                         return(
