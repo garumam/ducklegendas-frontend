@@ -49,6 +49,11 @@ const Form = props => {
       types.push("text", "text");
       names.push("nome", "descricao");
       break;
+      case 7: //galeria
+      labels.push("Nome", "Descrição");
+      types.push("text", "text");
+      names.push("nome", "descricao");
+      break;
     default:
   }
 
@@ -195,6 +200,8 @@ const Form = props => {
                 case 5: //permissoes
                   break;
                 case 6: //ranking
+                  break;
+                case 7: //ranking
                   break;
                 default:
               }

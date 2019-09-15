@@ -154,7 +154,7 @@ export default () =>(
             exact
             path={`${dashboardPath}/gallery`}
             layout={(props) => <Dashboard title="Gallery" {...props} />}
-            component={() => <List title="Gallery" table={6} />}
+            component={() => <List title="Gallery" table={7} />}
           />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>

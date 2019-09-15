@@ -97,11 +97,11 @@ const List = (props) => {
             tableParams.formPath = 'permissions'+tableParams.formPath;
             break;
         case 6: //ranking
-            tableParams.headCells.push('id','Nome','Descrição');
+            tableParams.headCells.push('ID','Nome','Descrição','Descrição2');
             tableParams.formPath = 'ranking'+tableParams.formPath;
             break;
         case 7: //ranking
-            tableParams.headCells.push('id','Nome','Descrição');
+            tableParams.headCells.push('ID','Nome','Descrição','Descrição2');
             tableParams.formPath = 'gallery'+tableParams.formPath;
             break;
         default:  
