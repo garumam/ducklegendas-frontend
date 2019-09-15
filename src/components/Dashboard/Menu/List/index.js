@@ -78,27 +78,31 @@ const List = (props) => {
     switch(props.table){
         case 1: //usuários
             tableParams.headCells.push('ID','Usuário','Senha','E-mail');
-            tableParams.formPath = 'usuarios'+tableParams.formPath;
+            tableParams.formPath = 'users'+tableParams.formPath;
             break;
         case 2: //legendas
             tableParams.headCells.push('ID','Nome','Categoria','Autor');
-            tableParams.formPath = 'legendas'+tableParams.formPath;
+            tableParams.formPath = 'subtitles'+tableParams.formPath;
             break;
         case 3: //categorias
             tableParams.headCells.push('ID','Categoria','Classificação','Qtd');
-            tableParams.formPath = 'categorias'+tableParams.formPath;
+            tableParams.formPath = 'categories'+tableParams.formPath;
             break;
         case 4: //toplegendas
             tableParams.headCells.push('ID','Legenda','Autor','Série');
-            tableParams.formPath = 'toplegendas'+tableParams.formPath;
+            tableParams.formPath = 'topsubtitles'+tableParams.formPath;
             break;
         case 5: //permissoes
             tableParams.headCells.push('ID','Nome','Descrição','N° de usuários');
-            tableParams.formPath = 'permissoes'+tableParams.formPath;
+            tableParams.formPath = 'permissions'+tableParams.formPath;
             break;
         case 6: //ranking
             tableParams.headCells.push('id','Nome','Descrição');
             tableParams.formPath = 'ranking'+tableParams.formPath;
+            break;
+        case 7: //ranking
+            tableParams.headCells.push('id','Nome','Descrição');
+            tableParams.formPath = 'gallery'+tableParams.formPath;
             break;
         default:  
     }

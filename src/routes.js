@@ -86,56 +86,56 @@ export default () =>(
           />
           <AppRoute
             exact
-            path={`${dashboardPath}/usuarios`}
+            path={`${dashboardPath}/users`}
             layout={(props) => <Dashboard title="Usuários" {...props} />}
             component={() => <List title="Usuários" table={1} />}
           />
           <AppRoute
-            path={`${dashboardPath}/usuarios/form/:id?`}
+            path={`${dashboardPath}/users/form/:id?`}
             layout={(props) => <Dashboard title="Usuários" {...props} />}
             component={() => <Form title="Usuários" form={1} />}
           />
           <AppRoute
             exact
-            path={`${dashboardPath}/legendas`}
+            path={`${dashboardPath}/subtitles`}
             layout={(props) => <Dashboard title="Legendas" {...props} />}
             component={() => <List title="Legendas" table={2} />}
           />
           <AppRoute
-            path={`${dashboardPath}/legendas/form/:id?`}
+            path={`${dashboardPath}/subtitles/form/:id?`}
             layout={(props) => <Dashboard title="Legendas" {...props} />}
             component={() => <Form title="Legendas" form={2} />}
           />
           <AppRoute
             exact
-            path={`${dashboardPath}/categorias`}
+            path={`${dashboardPath}/categories`}
             layout={(props) => <Dashboard title="Categorias" {...props} />}
             component={() => <List title="Categorias" table={3} />}
           />
           <AppRoute
-            path={`${dashboardPath}/categorias/form/:id?`}
+            path={`${dashboardPath}/categories/form/:id?`}
             layout={(props) => <Dashboard title="Categorias" {...props} />}
             component={() => <Form title="Categorias" form={3} />}
           />
           <AppRoute
             exact
-            path={`${dashboardPath}/toplegendas`}
+            path={`${dashboardPath}/topsubtitles`}
             layout={(props) => <Dashboard title="Top Legendas" {...props} />}
             component={() => <List title="Top Legendas" table={4} />}
           />
           <AppRoute
-            path={`${dashboardPath}/toplegendas/form/:id?`}
+            path={`${dashboardPath}/topsubtitles/form/:id?`}
             layout={(props) => <Dashboard title="Top Legendas" {...props} />}
             component={() => <Form title="Top Legendas" form={4} />}
           />
           <AppRoute
             exact
-            path={`${dashboardPath}/permissoes`}
+            path={`${dashboardPath}/permissions`}
             layout={(props) => <Dashboard title="Permissões" {...props} />}
             component={() => <List title="Permissões" table={5} />}
           />
           <AppRoute
-            path={`${dashboardPath}/permissoes/form/:id?`}
+            path={`${dashboardPath}/permissions/form/:id?`}
             layout={(props) => <Dashboard title="Permissões" {...props} />}
             component={() => <Form title="Permissões" form={5} />}
           />
@@ -149,6 +149,12 @@ export default () =>(
             path={`${dashboardPath}/ranking/form/:id?`}
             layout={(props) => <Dashboard title="Ranking" {...props} />}
             component={() => <Form title="Ranking" form={6} />}
+          />
+           <AppRoute
+            exact
+            path={`${dashboardPath}/gallery`}
+            layout={(props) => <Dashboard title="Gallery" {...props} />}
+            component={() => <List title="Gallery" table={6} />}
           />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>
