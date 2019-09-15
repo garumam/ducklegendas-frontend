@@ -85,7 +85,7 @@ const List = (props) => {
             tableParams.formPath = 'subtitles'+tableParams.formPath;
             break;
         case 3: //categorias
-            tableParams.headCells.push('ID','Categoria','Classificação','Qtd');
+            tableParams.headCells.push('ID','Nome','Descrição','Classificação');
             tableParams.formPath = 'categories'+tableParams.formPath;
             break;
         case 4: //toplegendas

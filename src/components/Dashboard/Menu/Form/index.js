@@ -30,9 +30,9 @@ const Form = props => {
       names.push("nome", "categoria","ano","img","url","autor");
       break;
     case 3: //categorias
-      labels.push("Categoria", "Classificação", "Qtd", "Mensagem");
-      types.push("text", "text", "text", "text");
-      names.push("categoria", "classificacao", "qtd", "mensagem");
+      labels.push("Nome", "Classificação");
+      types.push("text", "text");
+      names.push("categoria", "classificacao");
       break;
     case 4: //toplegendas
       labels.push("Legenda", "Autor", "Série", "Mensagem");
