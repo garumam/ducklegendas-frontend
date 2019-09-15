@@ -39,8 +39,9 @@ export const SelectCustom = styled(Select)`
 
 export const DivCustom = styled.div`
     input{
-        padding: 10px 16px !important;
+        padding: 1rem !important;
         font-size:.8rem;
+        height:56px;
     } 
 `;
 
