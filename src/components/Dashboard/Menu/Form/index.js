@@ -44,12 +44,7 @@ const Form = props => {
       types.push("text", "text");
       names.push("nome", "descricao");
       break;
-    case 6: //ranking
-      labels.push("Nome", "Descrição");
-      types.push("text", "text");
-      names.push("nome", "descricao");
-      break;
-      case 7: //galeria
+    case 7: //galeria
       labels.push("Nome", "Descrição");
       types.push("text", "text");
       names.push("nome", "descricao");

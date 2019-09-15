@@ -97,10 +97,10 @@ const List = (props) => {
             tableParams.formPath = 'permissions'+tableParams.formPath;
             break;
         case 6: //ranking
-            tableParams.headCells.push('ID','Nome','Descrição','Descrição2');
+            tableParams.headCells.push('Posição','Usuario','Qtd de Legendas','Descrição');
             tableParams.formPath = 'ranking'+tableParams.formPath;
             break;
-        case 7: //ranking
+        case 7: //galeria
             tableParams.headCells.push('ID','Nome','Descrição','Descrição2');
             tableParams.formPath = 'gallery'+tableParams.formPath;
             break;
@@ -118,7 +118,9 @@ const List = (props) => {
         <>
         <HeaderCard>
             <h2>{props.title}</h2>
-            <Fab icon="add" type="button" onClick={()=>{props.history.push(tableParams.formPath)}} />
+            { props.title !== 'Ranking' &&
+                <Fab icon="add" type="button" onClick={()=>{props.history.push(tableParams.formPath)}} />
+             }
         </HeaderCard>
         <div className="card-border"/>
         <DataTable style={{border:'none'}}>

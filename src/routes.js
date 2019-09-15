@@ -145,11 +145,6 @@ export default () =>(
             layout={(props) => <Dashboard title="Ranking" {...props} />}
             component={() => <List title="Ranking" table={6} />}
           />
-          <AppRoute
-            path={`${dashboardPath}/ranking/form/:id?`}
-            layout={(props) => <Dashboard title="Ranking" {...props} />}
-            component={() => <Form title="Ranking" form={6} />}
-          />
            <AppRoute
             exact
             path={`${dashboardPath}/gallery`}
