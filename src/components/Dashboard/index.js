@@ -54,13 +54,13 @@ export default (props) => {
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to={`${dashboardPath}/topsubtitles`} alt="Top Legendas">
-                Top legendas
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/permissions`} alt="Permissões">
+                Permissões
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to={`${dashboardPath}/permissions`} alt="Permissões">
-                Permissões
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/topsubtitles`} alt="Top Legendas">
+                Top legendas
               </NavLink>
             </li>
             <li>
