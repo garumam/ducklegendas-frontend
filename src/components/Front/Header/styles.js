@@ -39,7 +39,7 @@ export const Logo = styled.div `
 
     img {
         width: auto;
-        max-height: 72px;
+        max-height: 52px;
     }
 `;
 
