@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./components/App/ScrollToTop";
 import App from "./components/App/App.js";
 import Legendas from "./components/Front/Legendas";
-import Chat from "./components/Front/Chat";
+import Ranking from "./components/Front/Ranking";
 import Contato from "./components/Front/Contato";
 import Post from "./components/Front/Post/";
 import Error404 from "./components/Front/Error404";
@@ -50,9 +50,9 @@ export default () =>(
             component={() => <Legendas title="Filmes" />}
           />
           <AppRoute
-            path="/chat"
+            path="/ranking"
             layout={App}
-            component={() => <Chat title="Chat" />}
+            component={() => <Ranking title="Ranking" />}
           />
            <AppRoute
             path="/indice"

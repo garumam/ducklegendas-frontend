@@ -46,8 +46,8 @@ export default props => {
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to="/chat" alt="Chat">
-                Chat
+              <NavLink activeClassName="is-active" to="/ranking" alt="Ranking">
+                Ranking
               </NavLink>
             </li>
             <li>
