@@ -25,9 +25,9 @@ const Form = props => {
       names.push("nome", "email", "password", "permissao", "img");
       break;
     case 2: //legendas
-      labels.push("Nome", "Categoria","Ano","Imagem","URL", "Autor");
-      types.push("text", "select", "number", "file","text","disabled");
-      names.push("nome", "categoria","ano","img","url","autor");
+      labels.push("Nome", "Categoria", "Ano", "Imagem", "URL", "Autor");
+      types.push("text", "select", "number", "file", "text", "disabled");
+      names.push("nome", "categoria", "ano", "img", "url", "autor");
       break;
     case 3: //categorias
       labels.push("Nome", "Classificação");
@@ -35,9 +35,33 @@ const Form = props => {
       names.push("categoria", "classificacao");
       break;
     case 4: //toplegendas
-      labels.push("Nome", "Categoria","Ano","Imagem","URL","Porcentagem", "Autor"); 
-      types.push("text", "select", "number", "file","text","number","disabled");
-      names.push("nome", "categoria","ano","img","url","porcentagem","autor");
+      labels.push(
+        "Nome",
+        "Categoria",
+        "Ano",
+        "Imagem",
+        "URL",
+        "Porcentagem",
+        "Autor"
+      );
+      types.push(
+        "text",
+        "select",
+        "number",
+        "file",
+        "text",
+        "number",
+        "disabled"
+      );
+      names.push(
+        "nome",
+        "categoria",
+        "ano",
+        "img",
+        "url",
+        "porcentagem",
+        "autor"
+      );
       break;
     case 5: //permissoes
       labels.push("Nome", "Descrição");
@@ -159,7 +183,6 @@ const Form = props => {
                   if (input.type === "file") {
                     return (
                       <DivCustom key={index} style={{ width: "49%" }}>
-                      
                         <input
                           id="file"
                           name={input.name}
@@ -174,23 +197,67 @@ const Form = props => {
                       </DivCustom>
                     );
                   }
-                  if(input.type === "disabled"){
-                      return (
-                            <InputText
-                            disabled
-                            key={index}
-                            label={input.label}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            type="text"
-                            name={input.name}
-                        />
-                      )
+                  if (input.type === "disabled") {
+                    return (
+                      <InputText
+                        disabled
+                        key={index}
+                        label={input.label}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        type="text"
+                        name={input.name}
+                      />
+                    );
                   }
                   break;
                 case 3: //categorias
                   break;
                 case 4: //toplegendas
+                  if (input.type === "select") {
+                    return (
+                      <SelectCustom
+                        options={["admin", "legender"]}
+                        key={index}
+                        label={input.label}
+                        name={input.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values[input.name]}
+                      />
+                    );
+                  }
+
+                  if (input.type === "file") {
+                    return (
+                      <DivCustom key={index} style={{ width: "49%" }}>
+                        <input
+                          id="file"
+                          name={input.name}
+                          type={input.type}
+                          onChange={event => {
+                            setFieldValue(
+                              input.name,
+                              event.currentTarget.files[0]
+                            );
+                          }}
+                        />
+                      </DivCustom>
+                    );
+                  }
+                  if (input.type === "disabled") {
+                    return (
+                      <InputText
+                        disabled
+                        key={index}
+                        label={input.label}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        type="text"
+                        name={input.name}
+                      />
+                    );
+                  }
                   break;
                 case 5: //permissoes
                   break;
