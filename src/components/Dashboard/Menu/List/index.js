@@ -88,8 +88,8 @@ const List = (props) => {
             tableParams.headCells.push('ID','Nome','Descrição','Classificação');
             tableParams.formPath = 'categories'+tableParams.formPath;
             break;
-        case 4: //toplegendas
-            tableParams.headCells.push('ID','Legenda','Autor','Série');
+        case 4: //legendas em andamento
+            tableParams.headCells.push('ID','Legenda','%','Categoria');
             tableParams.formPath = 'progress'+tableParams.formPath;
             break;
         case 5: //permissoes
