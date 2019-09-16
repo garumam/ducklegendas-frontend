@@ -59,8 +59,8 @@ export default (props) => {
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to={`${dashboardPath}/topsubtitles`} alt="Top Legendas">
-                Top legendas
+              <NavLink activeClassName="is-active" to={`${dashboardPath}/progress`} alt="Legendas em andamento">
+                Em andamento
               </NavLink>
             </li>
             <li>

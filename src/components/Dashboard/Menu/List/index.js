@@ -90,7 +90,7 @@ const List = (props) => {
             break;
         case 4: //toplegendas
             tableParams.headCells.push('ID','Legenda','Autor','Série');
-            tableParams.formPath = 'topsubtitles'+tableParams.formPath;
+            tableParams.formPath = 'progress'+tableParams.formPath;
             break;
         case 5: //permissoes
             tableParams.headCells.push('ID','Nome','Descrição','N° de usuários');

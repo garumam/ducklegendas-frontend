@@ -119,14 +119,14 @@ export default () =>(
           />
           <AppRoute
             exact
-            path={`${dashboardPath}/topsubtitles`}
-            layout={(props) => <Dashboard title="Top Legendas" {...props} />}
-            component={() => <List title="Top Legendas" table={4} />}
+            path={`${dashboardPath}/progress`}
+            layout={(props) => <Dashboard title="Legendas em andamento" {...props} />}
+            component={() => <List title="Legendas em andamento" table={4} />}
           />
           <AppRoute
-            path={`${dashboardPath}/topsubtitles/form/:id?`}
-            layout={(props) => <Dashboard title="Top Legendas" {...props} />}
-            component={() => <Form title="Top Legendas" form={4} />}
+            path={`${dashboardPath}/progress/form/:id?`}
+            layout={(props) => <Dashboard title="Legendas em andamento" {...props} />}
+            component={() => <Form title="Legendas em andamento" form={4} />}
           />
           <AppRoute
             exact
@@ -148,8 +148,8 @@ export default () =>(
            <AppRoute
             exact
             path={`${dashboardPath}/gallery`}
-            layout={(props) => <Dashboard title="Gallery" {...props} />}
-            component={() => <List title="Gallery" table={7} />}
+            layout={(props) => <Dashboard title="Galeria" {...props} />}
+            component={() => <List title="Galeria" table={7} />}
           />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>
