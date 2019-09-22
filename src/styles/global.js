@@ -174,7 +174,7 @@ img {
   border: 0;
 }
 
-a {
+a,a:hover {
   color: white;
   text-decoration: none;
 }
