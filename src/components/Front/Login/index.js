@@ -13,17 +13,15 @@ const Login = (props) => {
   const {title,history} = props;
   const [errors,setErrors] = React.useState(null);
   if(getAuth()){
+    console.log('dsa',getAuth())
     history.push('/dashboard')
   }
   async function logar(e) {
     e.preventDefault();
     await api.post('/login', {email:'admin@admin.com',password:'123456'})
     .then(r=>{
-      const json = JSON.stringify(r.data)
-      localStorage.setItem('user',json)
-
-      
-
+      localStorage.setItem('user',JSON.stringify(r.data))
+      localStorage.setItem('token',JSON.stringify(r.data.access_token))
       history.push('/dashboard')
     }).catch(e=>{
       console.log(e.response.data.message)
