@@ -19,16 +19,15 @@ const dashboardPath = "/dashboard";
 
 export default props => {
   const [open, setOpen] = React.useState(true);
-  const [data,setData] = React.useState({});
+  const [data,setData] = React.useState({user: {}});
   const refMenu = React.useRef(null);
   
-
   useEffect(()=> {
-      const userData = localStorage.getItem("user");
-      
-      const res = JSON.parse(userData)
+    
+      const res = JSON.parse(localStorage.getItem("user"))
+
       if(res)
-       setData(res)
+       setData({user : res.user})
       
   },[]);
 
@@ -144,7 +143,7 @@ export default props => {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  width: "160px",
+                  width: "200px",
                   height: "100%",
                   cursor: "pointer",
                   marginLeft: ".8rem",
@@ -152,7 +151,7 @@ export default props => {
                   padding: "0 1.3rem"
                 }}
               >
-                <span style={{ fontSize: ".9rem" }}>{console.log(data[0])}</span>
+                <span style={{ fontSize: ".9rem",paddingLeft:'.5rem' }}>{data.user.name}</span>
                 <Avatar
                   src="images/avatars/ironman.png"
                   size="xlarge"

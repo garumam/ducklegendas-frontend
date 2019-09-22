@@ -19,9 +19,7 @@ const Login = (props) => {
     e.preventDefault();
     await api.post('/login', {email:'admin@admin.com',password:'123456'})
     .then(r=>{
-      console.log([r.data])
-      const json = JSON.stringify([r.data])
-      // console.log(json)
+      const json = JSON.stringify(r.data)
       localStorage.setItem('user',json)
 
       
