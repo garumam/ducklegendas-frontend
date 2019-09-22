@@ -14,6 +14,7 @@ import Indice from "./components/Front/Indice";
 import Form from "./components/Dashboard/Menu/Form";
 import List from "./components/Dashboard/Menu/List";
 import Logo from "./assets/img/duck-128.png";
+import ResetarSenha from "./components/Front/ResetarSenha";
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
     <Route
@@ -75,6 +76,15 @@ export default () =>(
               <>
                 <Header title="Legendas" logo={Logo} />
                 <Login title="Login" />
+              </>
+            )}
+          />
+          <Route
+            path="/reset"
+            render={() => (
+              <>
+                <Header title="Legendas" logo={Logo} />
+                <ResetarSenha title="Resetar senha" />
               </>
             )}
           />

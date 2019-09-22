@@ -33,15 +33,13 @@ export default props => {
           <div className="card-border" />
           <form className="formulario">
             <InputPersonalizado name="E-mail" type="email" />
-            <InputPersonalizado name="Senha" type="password" />
             <InputPersonalizado
               type="submit"
-              value="Logar"
+              value="Resetar"
               onClick={e => logar(e)}
             />
             <Error>
             {errors && <span>{errors}</span>}
-            <Link to='/reset'>Esqueceu a senha ?</Link>
             </Error>
            
           </form>

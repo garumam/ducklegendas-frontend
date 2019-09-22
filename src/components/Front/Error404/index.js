@@ -1,7 +1,7 @@
 import React from "react";
 
 export default () => (
-  <section className="card contato card-shadow">
+  <section className="card contato card-shadow" style={{height: '400px',marginBottom: '1.55rem'}}>
     <div className="container">
       <div className="row">
         <div className="col-12">

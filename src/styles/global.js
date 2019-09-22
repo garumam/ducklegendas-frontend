@@ -127,6 +127,7 @@ body {
 
 
 .formulario {
+  width:100%;
    display: flex;
     padding: 1rem;
     justify-content: flex-start;
