@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {
   Header,
   HeaderDashboard,
@@ -19,7 +19,19 @@ const dashboardPath = "/dashboard";
 
 export default props => {
   const [open, setOpen] = React.useState(true);
+  const [data,setData] = React.useState({});
   const refMenu = React.useRef(null);
+  
+
+  useEffect(()=> {
+      const userData = localStorage.getItem("user");
+      
+      const res = JSON.parse(userData)
+      if(res)
+       setData(res)
+      
+  },[]);
+
 
   function handlerMenuLateral() {
     setOpen(!open);
@@ -140,7 +152,7 @@ export default props => {
                   padding: "0 1.3rem"
                 }}
               >
-                <span style={{ fontSize: ".9rem" }}>Admin</span>
+                <span style={{ fontSize: ".9rem" }}>{console.log(data[0])}</span>
                 <Avatar
                   src="images/avatars/ironman.png"
                   size="xlarge"

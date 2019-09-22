@@ -19,14 +19,12 @@ const Login = (props) => {
     e.preventDefault();
     await api.post('/login', {email:'admin@admin.com',password:'123456'})
     .then(r=>{
-      console.log(r.data)
-      const json = JSON.stringify(r.data)
-      console.log(json)
+      console.log([r.data])
+      const json = JSON.stringify([r.data])
+      // console.log(json)
       localStorage.setItem('user',json)
 
-      const json2 = localStorage.getItem("user");
-      const notes = JSON.parse(json2);
-      console.log(notes)
+      
 
       history.push('/dashboard')
     }).catch(e=>{
