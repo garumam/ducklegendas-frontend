@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch,Redirect } from "react-router-dom";
 import ScrollToTop from "./components/App/ScrollToTop";
 import App from "./components/App/App.js";
 import Legendas from "./components/Front/Legendas";
@@ -15,6 +15,7 @@ import Form from "./components/Dashboard/Menu/Form";
 import List from "./components/Dashboard/Menu/List";
 import Logo from "./assets/img/duck-128.png";
 import ResetarSenha from "./components/Front/ResetarSenha";
+import {isAuthenticated} from './services/api';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
     <Route
@@ -26,6 +27,21 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
       )}
     />
   );
+
+const PrivateRoute = ({ component: Component,layout: Layout, ...rest}) =>(
+  <Route
+    {...rest}
+    render={props => isAuthenticated() ? ( 
+    <Layout>
+      <Component {...props} />
+    </Layout> ) 
+    : (
+      <Redirect to={{pathname: "/",state:{ from: props.location}}} />
+    )
+    }
+  />
+);
+
 
 const dashboardPath = '/dashboard';
 
@@ -88,7 +104,7 @@ export default () =>(
               </>
             )}
           />
-          <AppRoute
+          <PrivateRoute
             exact
             path={dashboardPath}
             layout={(props) => <Dashboard title="Dashboard" {...props} />}

@@ -2,7 +2,7 @@ import React from "react";
 import {LoginSection,Error} from "./styles";
 import {Link} from 'react-router-dom';
 import { InputPersonalizado } from "../Contato";
-import api,{getAuth} from '../../../services/api';
+import api,{isAuthenticated} from '../../../services/api';
 import {withRouter} from 'react-router-dom';
 
 var estilo = {
@@ -12,8 +12,8 @@ var estilo = {
 const Login = (props) => {
   const {title,history} = props;
   const [errors,setErrors] = React.useState(null);
-  if(getAuth()){
-    console.log('dsa',getAuth())
+  if(isAuthenticated()){
+    console.log('dsa',isAuthenticated())
     history.push('/dashboard')
   }
   async function logar(e) {
