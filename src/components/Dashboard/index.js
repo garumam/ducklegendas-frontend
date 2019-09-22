@@ -19,18 +19,8 @@ const dashboardPath = "/dashboard";
 
 export default props => {
   const [open, setOpen] = React.useState(true);
-  const [data,setData] = React.useState({user: {}});
+  const [data,setData] = React.useState(JSON.parse(localStorage.getItem("user")));
   const refMenu = React.useRef(null);
-  
-  useEffect(()=> {
-    
-      const res = JSON.parse(localStorage.getItem("user"))
-
-      if(res)
-       setData({user : res.user})
-      
-  },[]);
-
 
   function handlerMenuLateral() {
     setOpen(!open);
