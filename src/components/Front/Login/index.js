@@ -1,19 +1,34 @@
 import React from "react";
-import {Login,Error} from "./styles";
+import {LoginSection,Error} from "./styles";
 import {Link} from 'react-router-dom';
 import { InputPersonalizado } from "../Contato";
-import api from '../../../services/api';
+import api,{getAuth} from '../../../services/api';
+import {withRouter} from 'react-router-dom';
+
 var estilo = {
   paddingTop: "6.38rem"
 };
-export default props => {
+
+const Login = (props) => {
+  const {title,history} = props;
   const [errors,setErrors] = React.useState(null);
+  if(getAuth()){
+    history.push('/dashboard')
+  }
   async function logar(e) {
     e.preventDefault();
     await api.post('/login', {email:'admin@admin.com',password:'123456'})
     .then(r=>{
       console.log(r.data)
-      // setErrors(r.data)
+      const json = JSON.stringify(r.data)
+      console.log(json)
+      localStorage.setItem('user',json)
+
+      const json2 = localStorage.getItem("user");
+      const notes = JSON.parse(json2);
+      console.log(notes)
+
+      history.push('/dashboard')
     }).catch(e=>{
       console.log(e.response.data.message)
       setErrors(e.response.data.message)
@@ -22,12 +37,13 @@ export default props => {
   }
   return (
     <div style={estilo} className="container flex-center">
-    <Login className="card card-shadow">
+      {console.log('2')}
+    <LoginSection className="card card-shadow">
       <div className="container">
         <div className="row">
           <div className="col-12">
             <div className="header-card">
-              <h2>{props.title}</h2>
+              <h2>{title}</h2>
             </div>
           </div>
           <div className="card-border" />
@@ -47,7 +63,9 @@ export default props => {
           </form>
         </div>
       </div>
-    </Login>
+    </LoginSection>
     </div>
   );
 };
+
+export default withRouter(Login);

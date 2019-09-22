@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Login = styled.section`
+export const LoginSection = styled.section`
   width: 50%;
 `;
 
