@@ -26,8 +26,8 @@ const Dashboard = props => {
 
   async function logout(e) {
     e.preventDefault();
-    api.defaults.headers.common['Authorization'] = isAuthenticated();
-    console.log(api.defaults.headers);
+    
+    api.defaults.headers.Authorization = isAuthenticated();
 
     await api.post('/logout')
     .then(r=>{

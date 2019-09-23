@@ -16,11 +16,10 @@ export const isAuthenticated = () =>{
     return (dateToken.getTime() > dateNow.getTime() ) ? `Bearer ${token}` : null;
 }
 
-const api =  axios.create({
+export default axios.create({
     baseURL: 'http://127.0.0.1:8000/api',
     headers:{
         Authorization: isAuthenticated(),
         Accept: 'application/json'
     }
 });
-export default api;
