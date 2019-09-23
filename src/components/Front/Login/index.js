@@ -21,8 +21,8 @@ const Login = (props) => {
     await api.post('/login', {email:'admin@admin.com',password:'123456'})
     .then(r=>{
       localStorage.setItem('user',JSON.stringify(r.data))
-      localStorage.setItem('token',JSON.stringify(r.data.access_token))
-      localStorage.setItem('expirate',JSON.stringify(r.data.token_expirate))
+      localStorage.setItem('token',r.data.access_token)
+      localStorage.setItem('expirate',r.data.token_expirate)
       history.push('/dashboard')
     }).catch(e=>{
       console.log(e.response.data.message)

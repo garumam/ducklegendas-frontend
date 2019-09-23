@@ -11,16 +11,36 @@ import {
 } from "./styles";
 import { Avatar } from "@rmwc/avatar";
 import { Ripple } from "@rmwc/ripple";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
+import api,{isAuthenticated} from '../../services/api';
 import logo from "../../assets/img/duck-128.png";
 import "@rmwc/avatar/avatar.css";
 
 const dashboardPath = "/dashboard";
 
-export default props => {
+const Dashboard = props => {
+  const {history} = props;
   const [open, setOpen] = React.useState(true);
   const [data,setData] = React.useState(JSON.parse(localStorage.getItem("user")));
   const refMenu = React.useRef(null);
+
+  async function logout(e) {
+    e.preventDefault();
+    api.defaults.headers.common['Authorization'] = isAuthenticated();
+    console.log(api.defaults.headers);
+
+    await api.post('/logout')
+    .then(r=>{
+      console.log(r);
+
+      localStorage.clear();
+
+      history.push('/painel');
+    }).catch(e=>{
+      console.log(e.response.data.message)
+    })
+    
+  }
 
   function handlerMenuLateral() {
     setOpen(!open);
@@ -112,7 +132,7 @@ export default props => {
               </NavLink>
             </li>
           </NavLinks>
-          <MenuLogout>Sair</MenuLogout>
+          <MenuLogout onClick={e => logout(e)}>Sair</MenuLogout>
         </Nav>
       </Header>
 
@@ -159,3 +179,5 @@ export default props => {
     </Container>
   );
 };
+
+export default withRouter(Dashboard);
