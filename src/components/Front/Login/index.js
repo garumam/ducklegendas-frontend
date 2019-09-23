@@ -22,6 +22,7 @@ const Login = (props) => {
     .then(r=>{
       localStorage.setItem('user',JSON.stringify(r.data))
       localStorage.setItem('token',JSON.stringify(r.data.access_token))
+      localStorage.setItem('expirate',JSON.stringify(r.data.token_expirate))
       history.push('/dashboard')
     }).catch(e=>{
       console.log(e.response.data.message)
