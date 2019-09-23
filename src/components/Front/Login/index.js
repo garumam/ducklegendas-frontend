@@ -23,6 +23,7 @@ const Login = (props) => {
       localStorage.setItem('user',JSON.stringify(r.data))
       localStorage.setItem('token',r.data.access_token)
       localStorage.setItem('expirate',r.data.token_expirate)
+      api.defaults.headers.Authorization = isAuthenticated();
       history.push('/dashboard')
     }).catch(e=>{
       console.log(e.response.data.message)
