@@ -3,7 +3,7 @@ import {Contato} from "./styles.js";
 
 export const InputPersonalizado = (props) => (
   <Fragment>
-    {props.type !=="submit" ? <label htmlFor={props.name}>{props.name}</label> :""}
+    {props.type !=="submit" ? <label htmlFor={props.title}>{props.title}</label> :""}
    
     {props.type === "textarea" ? <textarea {...props} />  : <input {...props}/> }
   </Fragment>

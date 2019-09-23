@@ -12,13 +12,20 @@ var estilo = {
 const Login = (props) => {
   const {title,history} = props;
   const [errors,setErrors] = React.useState(null);
+  const [input,setInput] = React.useReducer( (state, newState) => ({...state, ...newState}),
+    {
+      email: '',
+      password: ''
+    }
+  );
+
   if(isAuthenticated()){
     console.log('dsa',isAuthenticated())
     history.push('/dashboard')
   }
   async function logar(e) {
     e.preventDefault();
-    await api.post('/login', {email:'admin@admin.com',password:'123456'})
+    await api.post('/login', {email: input.email,password: input.password})
     .then(r=>{
       localStorage.setItem('user',JSON.stringify(r.data))
       localStorage.setItem('token',r.data.access_token)
@@ -30,6 +37,11 @@ const Login = (props) => {
       setErrors(e.response.data.message)
     })
     
+  }
+  function handleInputChange(e){
+    const { name, value} = e.target;
+    setInput({ [name]: value});
+    console.log(input);
   }
   return (
     <div style={estilo} className="container flex-center">
@@ -44,8 +56,8 @@ const Login = (props) => {
           </div>
           <div className="card-border" />
           <form className="formulario">
-            <InputPersonalizado name="E-mail" type="email" />
-            <InputPersonalizado name="Senha" type="password" />
+            <InputPersonalizado title="E-mail" name="email" type="email" value={input.email} onChange={handleInputChange} />
+            <InputPersonalizado title="Senha" name="password" type="password" value={input.password} onChange={handleInputChange} />
             <InputPersonalizado
               type="submit"
               value="Logar"
