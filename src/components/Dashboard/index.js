@@ -26,7 +26,7 @@ const Dashboard = props => {
 
   async function logout(e) {
     e.preventDefault();
-
+    
     await api.post('/logout')
     .then(r=>{
       console.log(r);
