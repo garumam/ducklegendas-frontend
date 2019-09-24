@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch,Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./components/App/ScrollToTop";
 import App from "./components/App/App.js";
 import Legendas from "./components/Front/Legendas";
@@ -16,6 +16,7 @@ import List from "./components/Dashboard/Menu/List";
 import Logo from "./assets/img/duck-128.png";
 import ResetarSenha from "./components/Front/ResetarSenha";
 import {isAuthenticated} from './services/api';
+import TokenExpired from './services/TokenExpired';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
     <Route
@@ -36,7 +37,7 @@ const PrivateRoute = ({ component: Component,layout: Layout, ...rest}) =>(
       <Component {...props} />
     </Layout> ) 
     : (
-      <Redirect to={{pathname: "/",state:{ from: props.location}}} />
+      <TokenExpired location={props.location} />
     )
     }
   />
