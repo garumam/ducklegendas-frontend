@@ -6,7 +6,7 @@ const TokenExpired = (props) => {
     
     async function deleteToken() {
         
-        await api.get('/erro')
+        await api.get('/error')
         .then(r=>{
           console.log(r);
     
