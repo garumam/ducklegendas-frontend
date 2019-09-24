@@ -16,6 +16,12 @@ export const isAuthenticated = () =>{
     return (dateToken.getTime() > dateNow.getTime() ) ? `Bearer ${token}` : null;
 }
 
+export const isToken = () =>{
+    const token = localStorage.getItem('token');
+   
+    return token;
+}
+
 const api = axios.create({
     baseURL: 'http://127.0.0.1:8000/api',
     headers:{
