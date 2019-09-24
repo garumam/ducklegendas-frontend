@@ -22,7 +22,7 @@ const Login = (props) => {
   if(isAuthenticated()){
     console.log('dsa',isAuthenticated())
     history.push('/dashboard')
-  }else if(isToken){
+  }else if(isToken()){
      api.get('/error')
     .then(r=>{
       console.log(r);
