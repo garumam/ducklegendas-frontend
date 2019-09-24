@@ -9,6 +9,7 @@ import {
   DivCustom
 } from "./styles";
 import { withRouter } from "react-router-dom";
+import api from '../../../../services/api';
 import image from "../../../../assets/img/man.png";
 
 const Form = props => {
@@ -85,14 +86,34 @@ const Form = props => {
     initialValues[names[index]] = "";
   }
 
+  const store = async (values) => {
+    console.log(values);
+
+    const formData = new FormData();
+    Object.keys(values).map((key) => {
+      formData.append(key, values[key]);
+    });
+    await api.post('/register', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+    .then(r=>{
+      console.log('RESPOSTA SERVIDOR: ',r);
+    }).catch(e=>{
+      
+      if (!e.status) { // NETWORK ERROR
+        console.log(e);
+      }else{
+        console.log(e.response.data.message)
+      }
+      
+    });
+    
+  }
+
   return (
     <Formik
       initialValues={{
         ...initialValues
       }}
-      onSubmit={values => {
-        console.log(values);
-      }}
+      onSubmit={store}
       render={({
         touched,
         errors,

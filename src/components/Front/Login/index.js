@@ -43,8 +43,15 @@ const Login = (props) => {
       api.defaults.headers.Authorization = isAuthenticated();
       history.push('/dashboard')
     }).catch(e=>{
-      console.log(e.response.data.message)
-      setErrors(e.response.data.message)
+      
+      if (!e.status) { // NETWORK ERROR
+        console.log(e)
+        setErrors('Problema de conexão com o servidor, tente mais tarde!')
+      }else{
+        console.log(e.response.data.message)
+        setErrors(e.response.data.message)
+      }
+      
     })
     
   }
