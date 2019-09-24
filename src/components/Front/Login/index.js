@@ -30,7 +30,13 @@ const Login = (props) => {
       localStorage.clear();
 
     }).catch(e=>{
-      console.log(e.response.data.message)
+
+      if (e.response === undefined) { // NETWORK ERROR
+        console.log('Sem conexão');
+      }else{
+        console.log(e.response.data.error);
+      }
+
     })
   }
   async function logar(e) {

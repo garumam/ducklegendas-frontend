@@ -23,12 +23,12 @@ const Form = props => {
     case 1: //usuários
       labels.push("Nome", "E-mail", "Senha", "Permissão", "Imagem");
       types.push("text", "email", "password", "select", "file");
-      names.push("nome", "email", "password", "permissao", "img");
+      names.push("name", "email", "password", "permission", "img");
       break;
     case 2: //legendas
       labels.push("Nome", "Categoria", "Ano", "Imagem", "URL", "Autor");
       types.push("text", "select", "number", "file", "text", "disabled");
-      names.push("nome", "categoria", "ano", "img", "url", "autor");
+      names.push("name", "categoria", "ano", "img", "url", "autor");
       break;
     case 3: //categorias
       labels.push("Nome", "Classificação");
@@ -93,15 +93,16 @@ const Form = props => {
     Object.keys(values).map((key) => {
       formData.append(key, values[key]);
     });
+
     await api.post('/register', formData, {headers: {'Content-Type': 'multipart/form-data'}})
     .then(r=>{
       console.log('RESPOSTA SERVIDOR: ',r);
     }).catch(e=>{
-      
-      if (!e.status) { // NETWORK ERROR
-        console.log(e);
+
+      if (e.response === undefined) { // NETWORK ERROR
+        console.log('Sem conexão');
       }else{
-        console.log(e.response.data.message)
+        console.log(e.response.data.error);
       }
       
     });
