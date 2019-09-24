@@ -110,68 +110,68 @@ export default () =>(
             layout={(props) => <Dashboard title="Dashboard" {...props} />}
             component={() => <div>Dashboard Home</div>}
           />
-          <AppRoute
+          <PrivateRoute
             exact
             path={`${dashboardPath}/users`}
             layout={(props) => <Dashboard title="Usuários" {...props} />}
             component={() => <List title="Usuários" table={1} />}
           />
-          <AppRoute
+          <PrivateRoute
             path={`${dashboardPath}/users/form/:id?`}
             layout={(props) => <Dashboard title="Usuários" {...props} />}
             component={() => <Form title="Usuários" form={1} />}
           />
-          <AppRoute
+          <PrivateRoute
             exact
             path={`${dashboardPath}/subtitles`}
             layout={(props) => <Dashboard title="Legendas" {...props} />}
             component={() => <List title="Legendas" table={2} />}
           />
-          <AppRoute
+          <PrivateRoute
             path={`${dashboardPath}/subtitles/form/:id?`}
             layout={(props) => <Dashboard title="Legendas" {...props} />}
             component={() => <Form title="Legendas" form={2} />}
           />
-          <AppRoute
+          <PrivateRoute
             exact
             path={`${dashboardPath}/categories`}
             layout={(props) => <Dashboard title="Categorias" {...props} />}
             component={() => <List title="Categorias" table={3} />}
           />
-          <AppRoute
+          <PrivateRoute
             path={`${dashboardPath}/categories/form/:id?`}
             layout={(props) => <Dashboard title="Categorias" {...props} />}
             component={() => <Form title="Categorias" form={3} />}
           />
-          <AppRoute
+          <PrivateRoute
             exact
             path={`${dashboardPath}/progress`}
             layout={(props) => <Dashboard title="Legendas em andamento" {...props} />}
             component={() => <List title="Legendas em andamento" table={4} />}
           />
-          <AppRoute
+          <PrivateRoute
             path={`${dashboardPath}/progress/form/:id?`}
             layout={(props) => <Dashboard title="Legendas em andamento" {...props} />}
             component={() => <Form title="Legendas em andamento" form={4} />}
           />
-          <AppRoute
+          <PrivateRoute
             exact
             path={`${dashboardPath}/permissions`}
             layout={(props) => <Dashboard title="Permissões" {...props} />}
             component={() => <List title="Permissões" table={5} />}
           />
-          <AppRoute
+          <PrivateRoute
             path={`${dashboardPath}/permissions/form/:id?`}
             layout={(props) => <Dashboard title="Permissões" {...props} />}
             component={() => <Form title="Permissões" form={5} />}
           />
-           <AppRoute
+           <PrivateRoute
             exact
             path={`${dashboardPath}/ranking`}
             layout={(props) => <Dashboard title="Ranking" {...props} />}
             component={() => <List title="Ranking" table={6} />}
           />
-           <AppRoute
+           <PrivateRoute
             exact
             path={`${dashboardPath}/gallery`}
             layout={(props) => <Dashboard title="Galeria" {...props} />}
