@@ -18,11 +18,11 @@ const Login = (props) => {
       password: ''
     }
   );
+  console.log(props);
 
   if(isAuthenticated()){
-    console.log('dsa',isAuthenticated())
     history.push('/dashboard')
-  }else if(isToken()){
+  }else if(isToken() && props.location.state===undefined){
      api.get('/error')
     .then(r=>{
       console.log(r);
