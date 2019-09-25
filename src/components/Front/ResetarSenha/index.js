@@ -22,18 +22,19 @@ const ResetarSenha = props => {
     
     const values = {email: input.email};
     if(token){
-      values.urlFront = ''
+      values.token = token;
+      values.password = input.password;
+      values.password_confirmation = input.password_confirmation;
     }else{
-      values.password = ''
-      values.password_confirmation = ''
+      values.urlFront = window.location.href;
     }
 
     const uriApi = token? '/password/reset' : '/password/create';
 
-    await api.post(uriApi, {email:'admin@admin.com',password:'123456'})
+    await api.post(uriApi, values)
     .then(r=>{
       console.log(r.data)
-      // setErrors(r.data)
+      setErrors(r.data.success);
     }).catch(e=>{
 
       if (e.response === undefined) { // NETWORK ERROR
