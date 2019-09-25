@@ -12,7 +12,7 @@ import {
 import { Avatar } from "@rmwc/avatar";
 import { Ripple } from "@rmwc/ripple";
 import { NavLink, withRouter } from "react-router-dom";
-import api from '../../services/api';
+import api, {baseUrl} from '../../services/api';
 import logo from "../../assets/img/duck-128.png";
 import userImg from "../../assets/img/man.png";
 import "@rmwc/avatar/avatar.css";
@@ -163,7 +163,7 @@ const Dashboard = props => {
                 <span style={{ fontSize: ".9rem",paddingLeft:'.5rem' }}>{data.user.name}</span>
                 <Avatar
                 style={{height:'48px'}}
-                  src={data.user.img || userImg}
+                  src={data.user.image? baseUrl+data.user.image: false || userImg}
                   size="xlarge"
                   name="Tony Stark"
                 />

@@ -22,8 +22,10 @@ export const isToken = () =>{
     return token;
 }
 
+export const baseUrl = 'http://127.0.0.1:8000/';
+
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: `${baseUrl}api`,
     headers:{
         Authorization: isAuthenticated(),
         Accept: '*/*'

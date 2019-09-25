@@ -50,12 +50,12 @@ const Login = (props) => {
       history.push('/dashboard')
     }).catch(e=>{
       
-      if (!e.status) { // NETWORK ERROR
-        console.log(e)
-        setErrors('Problema de conexão com o servidor, tente mais tarde!')
+      if (e.response === undefined) { // NETWORK ERROR
+        console.log('Sem conexão');
+        setErrors('Problema de conexão com o servidor, tente mais tarde!');
       }else{
-        console.log(e.response.data.message)
-        setErrors(e.response.data.message)
+        console.log(e.response.data.error);
+        setErrors(e.response.data.error);
       }
       
     })

@@ -97,7 +97,7 @@ export default () =>(
             )}
           />
           <Route
-            path="/reset"
+            path="/reset/:token?"
             render={() => (
               <>
                 <Header title="Legendas" logo={Logo} />

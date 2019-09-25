@@ -1,25 +1,59 @@
 import React from "react";
 import {Login,Error} from "./styles";
-import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import { InputPersonalizado } from "../Contato";
 import api from '../../../services/api';
 var estilo = {
   paddingTop: "6.38rem"
 };
-export default props => {
+const ResetarSenha = props => {
   const [errors,setErrors] = React.useState(null);
-  async function logar(e) {
+  const [input,setInput] = React.useReducer( (state, newState) => ({...state, ...newState}),
+    {
+      email: '',
+      password: '',
+      password_confirmation: ''
+    }
+  );
+  const {token} = props.match.params;
+  
+  async function resetPassword(e) {
     e.preventDefault();
-    await api.post('/login', {email:'admin@admin.com',password:'123456'})
+    
+    const values = {email: input.email};
+    if(token){
+      values.urlFront = ''
+    }else{
+      values.password = ''
+      values.password_confirmation = ''
+    }
+
+    const uriApi = token? '/password/reset' : '/password/create';
+
+    await api.post(uriApi, {email:'admin@admin.com',password:'123456'})
     .then(r=>{
       console.log(r.data)
       // setErrors(r.data)
     }).catch(e=>{
-      console.log(e.response.data.message)
-      setErrors(e.response.data.message)
+
+      if (e.response === undefined) { // NETWORK ERROR
+        console.log('Sem conexão');
+        setErrors('Problema de conexão com o servidor, tente mais tarde!');
+      }else{
+        console.log(e.response.data.error);
+        setErrors(e.response.data.error);
+      }
+
     })
     
   }
+
+  function handleInputChange(e){
+    const { name, value} = e.target;
+    setInput({ [name]: value});
+    console.log(input);
+  }
+
   return (
     <div style={estilo} className="container flex-center">
     <Login className="card card-shadow">
@@ -32,11 +66,27 @@ export default props => {
           </div>
           <div className="card-border" />
           <form className="formulario">
-            <InputPersonalizado name="E-mail" type="email" />
+            <InputPersonalizado title="E-mail" name="email" type="email" 
+              value={input.email} 
+              onChange={handleInputChange} 
+            />
+            {token && 
+            <>
+            <InputPersonalizado title="Senha" name="password" type="password" 
+            value={input.password} 
+            onChange={handleInputChange} 
+            />
+            <InputPersonalizado title="Confirmação de senha" name="password_confirmation" type="password" 
+              value={input.password_confirmation} 
+              onChange={handleInputChange} 
+            /> 
+            </>
+            }
+            
             <InputPersonalizado
               type="submit"
               value="Resetar"
-              onClick={e => logar(e)}
+              onClick={e => resetPassword(e)}
             />
             <Error>
             {errors && <span>{errors}</span>}
@@ -49,3 +99,5 @@ export default props => {
     </div>
   );
 };
+
+export default withRouter(ResetarSenha);
