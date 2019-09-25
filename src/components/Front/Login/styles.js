@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 export const LoginSection = styled.section`
-  width: 50%;
+  width: 40vw;
+  @media (max-width: 1000px) {
+    width:80vw;
+  }
 `;
 
 export const Error = styled.div`
