@@ -91,7 +91,7 @@ const Form = props => {
 
     const formData = new FormData();
     Object.keys(values).map((key) => {
-      formData.append(key, values[key]);
+      return formData.append(key, values[key]);
     });
 
     await api.post('/register', formData, {headers: {'Content-Type': 'multipart/form-data'}})
