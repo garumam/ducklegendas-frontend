@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React from "react";
 import {
   Header,
   HeaderDashboard,
@@ -12,8 +12,9 @@ import {
 import { Avatar } from "@rmwc/avatar";
 import { Ripple } from "@rmwc/ripple";
 import { NavLink, withRouter } from "react-router-dom";
-import api,{isAuthenticated} from '../../services/api';
+import api from '../../services/api';
 import logo from "../../assets/img/duck-128.png";
+import userImg from "../../assets/img/man.png";
 import "@rmwc/avatar/avatar.css";
 
 const dashboardPath = "/dashboard";
@@ -161,7 +162,8 @@ const Dashboard = props => {
               >
                 <span style={{ fontSize: ".9rem",paddingLeft:'.5rem' }}>{data.user.name}</span>
                 <Avatar
-                  src="images/avatars/ironman.png"
+                style={{height:'48px'}}
+                  src={data.user.img || userImg}
                   size="xlarge"
                   name="Tony Stark"
                 />
