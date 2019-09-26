@@ -142,9 +142,9 @@ const Form = props => {
                     <span key={key}>{errorsReponse[key]}</span>
                   ))}
                 {inputParams.map((input, index) => (
-                  errors[input.name] && touched[input.name] ? (
+                  errors[input.name] && touched[input.name] && (
                     <span key={index}>{errors[input.name]}</span>
-                  ) : null
+                  )
                 ))}
             </Error>
             {inputParams.map((input, index) => {
