@@ -28,16 +28,16 @@ const Dashboard = props => {
   async function logout(e) {
     e.preventDefault();
     
-    await api.post('/logout')
-    .then(r=>{
-      console.log(r);
+    const res = await api.post('/logout')
+    if(res.success){
+      console.log(res.success);
 
       localStorage.clear();
 
       history.push('/painel');
-    }).catch(e=>{
-      console.log(e.response.data.message)
-    })
+    }else if(res.error){
+      console.log('Problema no logout: ',res.error);
+    }
     
   }
 

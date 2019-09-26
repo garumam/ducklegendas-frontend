@@ -33,8 +33,8 @@ const ResetarSenha = props => {
     const uriApi = token ? "/password/reset" : "/password/create";
 
     const res = await api.post(uriApi, values);
-    console.log(res);
-    setErrors(res);
+    setErrors(res.success || res.error);
+    
   }
 
   function handleInputChange(e) {

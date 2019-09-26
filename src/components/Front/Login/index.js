@@ -42,25 +42,18 @@ const Login = (props) => {
   // }
   async function logar(e) {
     e.preventDefault();
-    await api.post('/login', {email: input.email,password: input.password})
-    .then(r=>{
-      localStorage.setItem('user',JSON.stringify(r.data))
-      localStorage.setItem('token',r.data.access_token)
-      localStorage.setItem('expirate',r.data.token_expirate)
+    const res = await api.post('/login', {email: input.email,password: input.password})
+    if(res.success){
+      const data = res.success;
+      console.log('RESPOSTA LOGAR: ', data);
+      localStorage.setItem('user',JSON.stringify(data));
+      localStorage.setItem('token',data.access_token);
+      localStorage.setItem('expirate',data.token_expirate);
       api.defaults.headers.Authorization = isAuthenticated();
-      history.push('/dashboard')
-    }).catch(e=>{
-      
-      if (e.response === undefined) { // NETWORK ERROR
-        console.log('Sem conexão');
-        setErrors('Problema de conexão com o servidor, tente mais tarde!');
-      }else{
-        console.log(e.response.data.error);
-        setErrors(e.response.data.error);
-      }
-      
-    })
-    
+      history.push('/dashboard');
+    }else if(res.error){
+      setErrors(res.error);
+    }
   }
   function handleInputChange(e){
     const { name, value} = e.target;

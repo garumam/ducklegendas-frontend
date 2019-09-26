@@ -6,24 +6,29 @@ import {
   InputText,
   HeaderCard,
   SelectCustom,
-  DivCustom
+  DivCustom,
+  Error
 } from "./styles";
 import { withRouter } from "react-router-dom";
 import api from '../../../../services/api';
 import image from "../../../../assets/img/man.png";
+import * as YupValidation from '../../../../services/YupValidation';
 
 const Form = props => {
+  const [errorsReponse, setErrors] = React.useState(null);
   const inputParams = [],
     labels = [],
     types = [],
     names = [],
-    initialValues = {};
+    initialValues = {},
+    validationSchema = [];
 
   switch (props.form) {
     case 1: //usuários
       labels.push("Nome", "E-mail", "Senha", "Permissão", "Imagem");
       types.push("text", "email", "password", "select", "file");
       names.push("name", "email", "password", "permission", "img");
+      validationSchema.push(YupValidation.UserSchema);
       break;
     case 2: //legendas
       labels.push("Nome", "Categoria", "Ano", "Imagem", "URL", "Autor");
@@ -94,19 +99,8 @@ const Form = props => {
       return formData.append(key, values[key]);
     });
 
-    await api.post('/register', formData, {headers: {'Content-Type': 'multipart/form-data'}})
-    .then(r=>{
-      console.log('RESPOSTA SERVIDOR: ',r);
-    }).catch(e=>{
-
-      if (e.response === undefined) { // NETWORK ERROR
-        console.log('Sem conexão');
-      }else{
-        console.log(e.response.data.error);
-      }
-      
-    });
-    
+    const res = await api.post('/register', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+    setErrors(res.success || res.error);
   }
 
   return (
@@ -114,6 +108,7 @@ const Form = props => {
       initialValues={{
         ...initialValues
       }}
+      validationSchema={validationSchema[0]}
       onSubmit={store}
       render={({
         touched,
@@ -141,6 +136,17 @@ const Form = props => {
           </HeaderCard>
           <div className="card-border" />
           <CustomForm onSubmit={handleSubmit} className="formulario">
+            <Error>
+                {errorsReponse &&
+                  Object.keys(errorsReponse).map(key => (
+                    <span key={key}>{errorsReponse[key]}</span>
+                  ))}
+                {inputParams.map((input, index) => (
+                  errors[input.name] && touched[input.name] ? (
+                    <span key={index}>{errors[input.name]}</span>
+                  ) : null
+                ))}
+            </Error>
             {inputParams.map((input, index) => {
               switch (props.form) {
                 case 1: //usuários

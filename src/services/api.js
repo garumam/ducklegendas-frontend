@@ -24,22 +24,12 @@ export const isToken = () =>{
 
 export const getError = (props) => {
     if(isToken() && props.location.state===undefined){
-        api.get('/error')
-       .then(r=>{
-         console.log(r);
-   
-         localStorage.clear();
-   
-       }).catch(e=>{
-         localStorage.clear();
-         if (e.response === undefined) { // NETWORK ERROR
-           console.log('Sem conexão');
-         }else{
-           console.log(e.response.data.error);
-         }
-   
-       })
-     }
+      const res = api.get('/error');
+      if(res.error){
+        console.log(res.error);
+        localStorage.clear();
+      }
+    }
 }
  
 export const baseUrl = 'http://127.0.0.1:8000/';
@@ -52,11 +42,18 @@ const api = axios.create({
     }
 });
 
-// api.interceptors.response.use((response) => {
-//     return response.data;
-// }, function (error) {
-//         // console.log(error.response.data.error);
-//     return Promise.resolve(error.response.data.error);
-// });
+api.interceptors.response.use((response) => {
+    return response.data;
+}, function (error) {
+    //console.log(error.response.data.error);
+    const errorResponse = {};
+    if (error.response === undefined) { // NETWORK ERROR
+      errorResponse.error = ['Problema de conexão com o servidor, tente mais tarde!'];
+    }else{
+      errorResponse.error = error.response.data.error;
+    }
+    
+    return errorResponse;
+});
 
 export default api;
