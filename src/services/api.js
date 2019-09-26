@@ -32,4 +32,11 @@ const api = axios.create({
     }
 });
 
+api.interceptors.response.use((response) => {
+    return response.data;
+}, function (error) {
+        // console.log(error.response.data.error);
+    return Promise.resolve(error.response.data.error);
+});
+
 export default api;

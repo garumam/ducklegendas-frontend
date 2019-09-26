@@ -32,22 +32,9 @@ const ResetarSenha = props => {
 
     const uriApi = token ? "/password/reset" : "/password/create";
 
-    await api
-      .post(uriApi, values)
-      .then(r => {
-        console.log(r.data);
-        setErrors(r.data.success);
-      })
-      .catch(e => {
-        if (e.response === undefined) {
-          // NETWORK ERROR
-          console.log("Sem conexão");
-          setErrors("Problema de conexão com o servidor, tente mais tarde!");
-        } else {
-          console.log(e.response.data.error);
-          setErrors(e.response.data.error);
-        }
-      });
+    const res = await api.post(uriApi, values);
+    console.log(res);
+    setErrors(res);
   }
 
   function handleInputChange(e) {
