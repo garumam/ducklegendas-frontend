@@ -101,9 +101,9 @@ const ResetarSenha = props => {
               />
               <Error>
                 {errors &&
-                  Object.keys(errors).map(key => {
-                    return <span>{errors[key]}</span>
-                  })}
+                  Object.keys(errors).map(key => (
+                    <span>{errors[key]}</span>
+                  ))}
               </Error>
             </form>
           </div>
