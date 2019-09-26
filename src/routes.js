@@ -16,7 +16,7 @@ import List from "./components/Dashboard/Menu/List";
 import Logo from "./assets/img/duck-128.png";
 import ResetarSenha from "./components/Front/ResetarSenha";
 import TokenExpired from "./services/TokenExpired";
-import {isAuthenticated} from './services/api';
+import {isAuthenticated,getError} from './services/api';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
     <Route
@@ -38,6 +38,24 @@ const PrivateRoute = ({ component: Component,layout: Layout, ...rest}) =>(
     </Layout> ) 
     : (
       <TokenExpired location={props.location} />
+    )
+    }
+  />
+);
+
+const PrivateRouteLogin = ({ layout: Layout, ...rest}) =>(
+  <Route
+    {...rest}
+    render={props => isAuthenticated() ? ( 
+        props.history.push('/dashboard')
+     ) 
+    : (
+      <>
+        {getError(props)}
+        <Layout {...props}/> 
+      </>
+     
+    
     )
     }
   />
@@ -87,9 +105,10 @@ export default () =>(
             layout={App}
             component={() => <Post title="Single Post" />}
           />
-          <Route
+          <PrivateRouteLogin
+            exact
             path="/painel"
-            render={() => (
+            layout={(props) => (
               <>
                 <Header title="Legendas" logo={Logo} />
                 <Login title="Login" />

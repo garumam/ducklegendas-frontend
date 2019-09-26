@@ -22,6 +22,26 @@ export const isToken = () =>{
     return token;
 }
 
+export const getError = (props) => {
+    if(isToken() && props.location.state===undefined){
+        api.get('/error')
+       .then(r=>{
+         console.log(r);
+   
+         localStorage.clear();
+   
+       }).catch(e=>{
+         localStorage.clear();
+         if (e.response === undefined) { // NETWORK ERROR
+           console.log('Sem conexão');
+         }else{
+           console.log(e.response.data.error);
+         }
+   
+       })
+     }
+}
+ 
 export const baseUrl = 'http://127.0.0.1:8000/';
 
 const api = axios.create({
@@ -32,11 +52,11 @@ const api = axios.create({
     }
 });
 
-api.interceptors.response.use((response) => {
-    return response.data;
-}, function (error) {
-        // console.log(error.response.data.error);
-    return Promise.resolve(error.response.data.error);
-});
+// api.interceptors.response.use((response) => {
+//     return response.data;
+// }, function (error) {
+//         // console.log(error.response.data.error);
+//     return Promise.resolve(error.response.data.error);
+// });
 
 export default api;

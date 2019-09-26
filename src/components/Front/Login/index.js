@@ -2,7 +2,7 @@ import React from "react";
 import {LoginSection,Error} from "./styles";
 import {Link} from 'react-router-dom';
 import { InputPersonalizado } from "../Contato";
-import api,{isAuthenticated,isToken} from '../../../services/api';
+import api,{isAuthenticated} from '../../../services/api';
 import {withRouter} from 'react-router-dom';
 
 var estilo = {
@@ -18,27 +18,28 @@ const Login = (props) => {
       password: ''
     }
   );
-  console.log(props);
+ 
+  // if(isAuthenticated()){
+  //   history.push('/dashboard')
+  // }else 
+  
+  // if(isToken() && props.location.state===undefined){
+  //    api.get('/error')
+  //   .then(r=>{
+  //     console.log(r);
 
-  if(isAuthenticated()){
-    history.push('/dashboard')
-  }else if(isToken() && props.location.state===undefined){
-     api.get('/error')
-    .then(r=>{
-      console.log(r);
+  //     localStorage.clear();
 
-      localStorage.clear();
+  //   }).catch(e=>{
+  //     localStorage.clear();
+  //     if (e.response === undefined) { // NETWORK ERROR
+  //       console.log('Sem conexão');
+  //     }else{
+  //       console.log(e.response.data.error);
+  //     }
 
-    }).catch(e=>{
-
-      if (e.response === undefined) { // NETWORK ERROR
-        console.log('Sem conexão');
-      }else{
-        console.log(e.response.data.error);
-      }
-
-    })
-  }
+  //   })
+  // }
   async function logar(e) {
     e.preventDefault();
     await api.post('/login', {email: input.email,password: input.password})
