@@ -47,7 +47,7 @@ api.interceptors.response.use((response) => {
 }, function (error) {
     //console.log(error.response.data.error);
     const errorResponse = {};
-    if (error.response === undefined) { // NETWORK ERROR
+    if (error.response === undefined || error.response.status === 500) { // NETWORK ERROR
       errorResponse.error = ['Problema de conexão com o servidor, tente mais tarde!'];
     }else{
       errorResponse.error = error.response.data.error;
