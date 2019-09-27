@@ -15,6 +15,7 @@ import {withRouter} from 'react-router-dom';
 import './styles.css';
 import {HeaderCard} from '../Form/styles';
 import '@rmwc/data-table/data-table.css';
+import api from '../../../../services/api';
 
 export const dataTotal = [
     {id:1,cell1: 'Cookies', cell2: 25, cell3: '$2.90'},
@@ -49,6 +50,9 @@ export const dataTotal = [
     {id:30,cell1: 'Chicken', cell2: 25, cell3: '$2.90'}
 ];
 
+
+
+
 const Paginator = (items, page, per_page) => {
  
     page = page || 0;
@@ -66,6 +70,12 @@ const Paginator = (items, page, per_page) => {
     };
 }
 
+async function getUsers(){
+    const data = await api.post('/users');
+    console.log(data);
+}
+
+
 const List = (props) => {
     const [dataPaginada, setDataPaginada] = React.useState(Paginator(dataTotal));
     const [allData, setAllData] = React.useState(dataTotal);
@@ -74,6 +84,9 @@ const List = (props) => {
         headCells: [],
         formPath: '/form'
     };
+
+   getUsers();
+    
 
     switch(props.table){
         case 1: //usuários
