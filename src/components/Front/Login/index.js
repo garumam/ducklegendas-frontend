@@ -1,28 +1,29 @@
 import React from "react";
-import {LoginSection,Error} from "./styles";
-import {Link} from 'react-router-dom';
+import { LoginSection, Error } from "./styles";
+import { Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
-import api,{isAuthenticated} from '../../../services/api';
-import {withRouter} from 'react-router-dom';
+import api, { isAuthenticated } from "../../../services/api";
+import { withRouter } from "react-router-dom";
 
 var estilo = {
   paddingTop: "6.38rem"
 };
 
-const Login = (props) => {
-  const {title,history} = props;
-  const [errors,setErrors] = React.useState(null);
-  const [input,setInput] = React.useReducer( (state, newState) => ({...state, ...newState}),
+const Login = props => {
+  const { title, history } = props;
+  const [errors, setErrors] = React.useState(null);
+  const [input, setInput] = React.useReducer(
+    (state, newState) => ({ ...state, ...newState }),
     {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     }
   );
- 
+
   // if(isAuthenticated()){
   //   history.push('/dashboard')
-  // }else 
-  
+  // }else
+
   // if(isToken() && props.location.state===undefined){
   //    api.get('/error')
   //   .then(r=>{
@@ -42,53 +43,70 @@ const Login = (props) => {
   // }
   async function logar(e) {
     e.preventDefault();
-    const res = await api.post('/login', {email: input.email,password: input.password})
-    if(res.success){
+    const res = await api.post("/login", {
+      email: input.email,
+      password: input.password
+    });
+    if (res.success) {
       const data = res.success;
-      console.log('RESPOSTA LOGAR: ', data);
-      localStorage.setItem('user',JSON.stringify(data));
-      localStorage.setItem('token',data.access_token);
-      localStorage.setItem('expirate',data.token_expirate);
+      console.log("RESPOSTA LOGAR: ", data);
+      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("expirate", data.token_expirate);
       api.defaults.headers.Authorization = isAuthenticated();
-      history.push('/dashboard');
-    }else if(res.error){
+      history.push("/dashboard");
+    } else if (res.error) {
       setErrors(res.error);
     }
   }
-  function handleInputChange(e){
-    const { name, value} = e.target;
-    setInput({ [name]: value});
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+    setInput({ [name]: value });
     console.log(input);
   }
   return (
     <div style={estilo} className="container flex-center">
-      {console.log('2')}
-    <LoginSection className="card card-shadow">
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <div className="header-card">
-              <h2>{title}</h2>
+      {console.log("2")}
+      <LoginSection className="card card-shadow">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="header-card">
+                <h2>{title}</h2>
+              </div>
             </div>
+            <div className="card-border" />
+            <form className="formulario">
+              <InputPersonalizado
+                title="E-mail"
+                name="email"
+                type="email"
+                value={input.email}
+                onChange={handleInputChange}
+              />
+              <InputPersonalizado
+                title="Senha"
+                name="password"
+                type="password"
+                value={input.password}
+                onChange={handleInputChange}
+              />
+              <InputPersonalizado
+                type="submit"
+                value="Logar"
+                onClick={e => logar(e)}
+              />
+              <Error>
+                {errors &&
+                  Object.keys(errors).map(key => (
+                    <span key={key}>{errors[key]}</span>
+                  ))}
+                <Link to="/reset">Esqueceu a senha ?</Link>
+              </Error>
+            </form>
           </div>
-          <div className="card-border" />
-          <form className="formulario">
-            <InputPersonalizado title="E-mail" name="email" type="email" value={input.email} onChange={handleInputChange} />
-            <InputPersonalizado title="Senha" name="password" type="password" value={input.password} onChange={handleInputChange} />
-            <InputPersonalizado
-              type="submit"
-              value="Logar"
-              onClick={e => logar(e)}
-            />
-            <Error>
-            {errors && <span>{errors}</span>}
-            <Link to='/reset'>Esqueceu a senha ?</Link>
-            </Error>
-           
-          </form>
         </div>
-      </div>
-    </LoginSection>
+      </LoginSection>
     </div>
   );
 };
