@@ -37,6 +37,7 @@ const Dashboard = props => {
       history.push('/painel');
     }else if(res.error){
       console.log('Problema no logout: ',res.error);
+      localStorage.clear();
     }
     
   }
