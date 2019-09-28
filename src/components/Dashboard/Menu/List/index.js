@@ -52,20 +52,19 @@ export const dataTotal = [
 
 
 
-
+// 10  offset = 100 100%100 = 0
 const Paginator = (items, page, per_page) => {
  
     page = page || 0;
     per_page = per_page || 10;
-    let offset = page * per_page,
-
-    paginatedItems = items.slice(offset).slice(0, per_page),
-    total_pages = Math.ceil(items.length / per_page);
+    let offset = page * per_page;
+    offset = offset >= 100? offset%100 : offset;
+    let paginatedItems = items.slice(offset).slice(0, per_page);
+    //total_pages = Math.ceil(items.length / per_page);
     return {
     page: page,
     per_page: per_page,
     total: items.length,
-    total_pages: total_pages,
     data: paginatedItems
     };
 }
@@ -76,16 +75,21 @@ const Paginator = (items, page, per_page) => {
 const List = (props) => {
     const [dataPaginada, setDataPaginada] = React.useState([]);
     const [allData, setAllData] = React.useState([]);
+    const [pagelevel, setPagelevel] = React.useState(0);
+    const [totalPages, setTotalPages] = React.useState(0);
+    const [pageSelected, setPageSelected] = React.useState(0);
 
     useEffect(() => {
         async function getUsers(){
-            const data = await api.post('/users');
+            const data = await api.post('/users', {pagelevel: pagelevel});
             console.log(data);
-             setDataPaginada(Paginator(data));
-             setAllData(data);
+
+            setDataPaginada(Paginator(data.users,pageSelected));
+            setAllData(data.users);
+            setTotalPages(Math.ceil(data.totalUsers / 10));
         }
         getUsers()
-    },[])
+    },[pagelevel])
 
     const tableParams = {
         headCells: [],
@@ -131,9 +135,16 @@ const List = (props) => {
 
     const handlePageClick = data => {
         let selected = data.selected;
-        let dados = Paginator(allData, selected);
-        console.log(dados);
-        setDataPaginada(dados);
+        let newlevelpage = Math.floor(selected/10);
+        if(pagelevel !== newlevelpage){
+            setPageSelected(selected);
+            setPagelevel(newlevelpage);
+        }else{
+            let dados = Paginator(allData, selected);
+            console.log(dados);
+            setDataPaginada(dados);
+        }
+        
     };
 
     return(
@@ -189,7 +200,7 @@ const List = (props) => {
             nextLabel={<i className="material-icons">keyboard_arrow_right</i>}
             breakLabel={'...'}
             breakClassName={'break'}
-            pageCount={dataPaginada.total_pages}
+            pageCount={totalPages}
             marginPagesDisplayed={2}
             pageRangeDisplayed={2}
             onPageChange={handlePageClick}
