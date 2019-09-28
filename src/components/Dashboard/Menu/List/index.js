@@ -81,12 +81,12 @@ const List = (props) => {
 
     useEffect(() => {
         async function getUsers(){
-            const data = await api.post('/users', {pagelevel: pagelevel});
-            console.log(data);
+            const res = await api.post('/users');
+            console.log(res);
 
-            setDataPaginada(Paginator(data.users,pageSelected));
-            setAllData(data.users);
-            setTotalPages(Math.ceil(data.totalUsers / 10));
+            setDataPaginada(Paginator(res.data,pageSelected));
+            setAllData(res.data);
+            setTotalPages(Math.ceil(res.total / 10));
         }
         getUsers()
     },[pagelevel])
