@@ -72,7 +72,9 @@ const List = props => {
     {
       pageSelected: 0,
       pageLevel: 1,
-      dataPaginada: []
+      dataPaginada: [],
+      data: [],
+      total: 0
     }
   );
 
