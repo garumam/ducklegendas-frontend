@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { 
     DataTable,
     DataTableContent, 
@@ -70,22 +70,29 @@ const Paginator = (items, page, per_page) => {
     };
 }
 
-async function getUsers(){
-    const data = await api.post('/users');
-    console.log(data);
-}
+
 
 
 const List = (props) => {
-    const [dataPaginada, setDataPaginada] = React.useState(Paginator(dataTotal));
-    const [allData, setAllData] = React.useState(dataTotal);
+    const [dataPaginada, setDataPaginada] = React.useState([]);
+    const [allData, setAllData] = React.useState([]);
+
+    useEffect(() => {
+        async function getUsers(){
+            const data = await api.post('/users');
+            console.log(data);
+             setDataPaginada(Paginator(getUsers()));
+             setAllData(data);
+        }
+        getUsers()
+    },[])
 
     const tableParams = {
         headCells: [],
         formPath: '/form'
     };
 
-   getUsers();
+
     
 
     switch(props.table){
@@ -147,7 +154,7 @@ const List = (props) => {
             </DataTableRow>
             </DataTableHead>
             <DataTableBody>
-                { 
+                { dataPaginada.data &&
                 dataPaginada.data.map((obj, index) => (
                 <DataTableRow key={index}>
                     {
