@@ -81,7 +81,7 @@ const List = (props) => {
         async function getUsers(){
             const data = await api.post('/users');
             console.log(data);
-             setDataPaginada(Paginator(getUsers()));
+             setDataPaginada(Paginator(data));
              setAllData(data);
         }
         getUsers()
@@ -89,6 +89,7 @@ const List = (props) => {
 
     const tableParams = {
         headCells: [],
+        headNames: [],
         formPath: '/form'
     };
 
@@ -97,7 +98,8 @@ const List = (props) => {
 
     switch(props.table){
         case 1: //usuários
-            tableParams.headCells.push('ID','Usuário','Senha','E-mail');
+            tableParams.headCells.push('ID','Nome','E-mail');
+            tableParams.headNames.push('id','name','email');
             tableParams.formPath = 'users'+tableParams.formPath;
             break;
         case 2: //legendas
@@ -159,7 +161,7 @@ const List = (props) => {
                 <DataTableRow key={index}>
                     {
                     Object.keys(obj).map((item, i) => (
-                        <DataTableCell key={i}>{obj[item]}</DataTableCell>
+                        tableParams.headNames.includes(item) && <DataTableCell key={i}>{obj[item]}</DataTableCell>
                     ))
                     }
                     <DataTableCell>
