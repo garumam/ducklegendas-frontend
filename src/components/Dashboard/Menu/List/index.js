@@ -56,14 +56,8 @@ const Paginator = (items, page, per_page) => {
   per_page = per_page || 10;
   let offset = page * per_page;
   offset = offset >= 100 ? offset % 100 : offset;
-  let paginatedItems = items.slice(offset).slice(0, per_page);
-  //total_pages = Math.ceil(items.length / per_page);
-  return {
-    page: page,
-    per_page: per_page,
-    total: items.length,
-    data: paginatedItems
-  };
+
+  return items.slice(offset).slice(0, per_page);
 };
 
 const List = props => {
@@ -187,8 +181,8 @@ const List = props => {
             </DataTableRow>
           </DataTableHead>
           <DataTableBody>
-            {entities.dataPaginada.data &&
-              entities.dataPaginada.data.map((obj, index) => (
+            {entities.dataPaginada &&
+              entities.dataPaginada.map((obj, index) => (
                 <DataTableRow key={index}>
                   {Object.keys(obj).map(
                     (item, i) =>
