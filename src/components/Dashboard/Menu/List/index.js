@@ -81,7 +81,7 @@ const List = (props) => {
 
     useEffect(() => {
         async function getUsers(){
-            const res = await api.post('/users');
+            const res = await api.post(`/users?page=${pagelevel+1}`);
             console.log(res);
 
             setDataPaginada(Paginator(res.data,pageSelected));
