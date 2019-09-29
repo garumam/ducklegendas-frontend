@@ -32,7 +32,7 @@ const List = props => {
     (state, newState) => ({ ...state, ...newState }),
     {
       pageSelected: 0,
-      pageLevel: 1,
+      page: 1,
       dataPaginada: [],
       data: [],
       total: 0
@@ -41,7 +41,7 @@ const List = props => {
 
   useEffect(() => {
     async function getUsers() {
-      const res = await api.post(`/users?page=${entities.pageLevel}`);
+      const res = await api.post(`/users?page=${entities.page}`);
       if(!res.error){
         setEntities({
           ...res,
@@ -53,7 +53,7 @@ const List = props => {
     }
     getUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entities.pageLevel]);
+  }, [entities.page]);
 
   const tableParams = {
     headCells: [],
@@ -102,10 +102,10 @@ const List = props => {
   const handlePageClick = data => {
     let selected = data.selected;
     let newlevelpage = Math.floor(selected / 10 + 1);
-    if (entities.pageLevel !== newlevelpage) {
+    if (entities.page !== newlevelpage) {
       setEntities({
         pageSelected: selected,
-        pageLevel: newlevelpage
+        page: newlevelpage
       });
     } else {
       let dados = Paginator(entities.data, selected);
