@@ -53,6 +53,8 @@ const List = props => {
           total: Math.ceil(res.total / 10),
           pageSelected: entities.pageSelected
         });
+      }else{
+        alert(res.error);
       }
       console.log(res);
     }
