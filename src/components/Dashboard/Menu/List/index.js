@@ -150,14 +150,15 @@ const List = props => {
           </DataTableHead>
           <DataTableBody>
             {entities.dataPaginada &&
-              entities.dataPaginada.map((obj, index) => (
+              entities.dataPaginada.map((user, index) => (
                 <DataTableRow key={index}>
-                  {Object.keys(obj).map(
+                  {Object.keys(user).map(
                     (item, i) =>
                       tableParams.headNames.includes(item) && (
-                        <DataTableCell key={i}>{obj[item]}</DataTableCell>
+                        <DataTableCell key={i}>{user[item]}</DataTableCell>
                       )
                   )}
+                 
                   <DataTableCell>
                     <Fab
                       style={{
@@ -168,7 +169,10 @@ const List = props => {
                       icon="create"
                       type="button"
                       onClick={() => {
-                        props.history.push(`${tableParams.formPath}/${obj.id}`);
+                        props.history.push({
+                          pathname: `${tableParams.formPath}/${user.id}`,
+                          state:{ user: user}
+                        });
                       }}
                     />
                     <Fab

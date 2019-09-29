@@ -16,12 +16,18 @@ import * as YupValidation from '../../../../services/YupValidation';
 
 const Form = props => {
   const [errorsReponse, setErrors] = React.useState(null);
+  const [initialValues, setInitialValues] = React.useState({
+    name: props.location.state ? props.location.state.user.name : null,
+    email: props.location.state ? props.location.state.user.email : null,
+  });
   const inputParams = [],
     labels = [],
     types = [],
     names = [],
-    initialValues = {},
     validationSchema = [];
+
+
+    console.log(initialValues)
 
   switch (props.form) {
     case 1: //usuários
@@ -29,6 +35,7 @@ const Form = props => {
       types.push("text", "email", "password", "select", "file");
       names.push("name", "email", "password", "permission", "img");
       validationSchema.push(YupValidation.UserSchema);
+      // createInput(data)
       break;
     case 2: //legendas
       labels.push("Nome", "Categoria", "Ano", "Imagem", "URL", "Autor");
@@ -82,14 +89,23 @@ const Form = props => {
     default:
   }
 
-  for (let index = 0; index < labels.length; index++) {
-    inputParams.push({
-      label: labels[index],
-      type: types[index],
-      name: names[index]
-    });
-    initialValues[names[index]] = "";
-  }
+  // function createInput(data){
+    for (let index = 0; index < labels.length; index++) {
+      inputParams.push({
+        label: labels[index],
+        type: types[index],
+        name: names[index]
+      });
+      // initialValues[names[index]] = "";
+    }
+
+    // Object.keys(data).map((value) => {
+    //   initialValues[value] = data[value]
+    //   console.log(initialValues)
+    // })
+  // }
+
+  
 
   const store = async (values) => {
     console.log(values);
@@ -105,9 +121,8 @@ const Form = props => {
 
   return (
     <Formik
-      initialValues={{
-        ...initialValues
-      }}
+      initialValues={initialValues}
+      enableReinitialize
       validationSchema={validationSchema[0]}
       onSubmit={store}
       render={({
@@ -304,6 +319,7 @@ const Form = props => {
                   onBlur={handleBlur}
                   type={input.type}
                   name={input.name}
+                  value={initialValues[input.name]}
                 />
               );
             })}
