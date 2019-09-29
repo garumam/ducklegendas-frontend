@@ -17,39 +17,6 @@ import { HeaderCard } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import api from "../../../../services/api";
 
-export const dataTotal = [
-  { id: 1, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 2, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 3, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 4, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 5, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 6, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 7, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 8, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 9, cell1: "Cake", cell2: 25, cell3: "$2.90" },
-  { id: 10, cell1: "Cake", cell2: 25, cell3: "$2.90" },
-  { id: 11, cell1: "Cake", cell2: 25, cell3: "$3.90" },
-  { id: 12, cell1: "Cake", cell2: 25, cell3: "$2.90" },
-  { id: 13, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 14, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 15, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 16, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 17, cell1: "Teste", cell2: 25, cell3: "$3.90" },
-  { id: 18, cell1: "Teste", cell2: 25, cell3: "$2.90" },
-  { id: 19, cell1: "Teste", cell2: 25, cell3: "$2.90" },
-  { id: 20, cell1: "Teste", cell2: 25, cell3: "$3.90" },
-  { id: 21, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 22, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 23, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 24, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 25, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 26, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 27, cell1: "Cookies", cell2: 25, cell3: "$2.90" },
-  { id: 28, cell1: "Chicken", cell2: 25, cell3: "$2.90" },
-  { id: 29, cell1: "Chicken", cell2: 25, cell3: "$2.90" },
-  { id: 30, cell1: "Chicken", cell2: 25, cell3: "$2.90" }
-];
-
 // 10  offset = 100 100%100 = 0
 const Paginator = (items, page, per_page) => {
   page = page || 0;
@@ -75,16 +42,17 @@ const List = props => {
   useEffect(() => {
     async function getUsers() {
       const res = await api.post(`/users?page=${entities.pageLevel}`);
-      setEntities({
-        ...res,
-        dataPaginada: Paginator(res.data, entities.pageSelected),
-        total: Math.ceil(res.total / 10)
-      });
-
-      console.log(res.data);
+      if(!res.error){
+        setEntities({
+          ...res,
+          dataPaginada: Paginator(res.data, entities.pageSelected),
+          total: Math.ceil(res.total / 10)
+        });
+      }
       console.log(res);
     }
     getUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entities.pageLevel]);
 
   const tableParams = {
@@ -161,7 +129,7 @@ const List = props => {
         )}
       </HeaderCard>
       <div className="card-border" />
-      <DataTable style={{ border: "none" }}>
+      <DataTable style={{ height:'412px',border: "none" }}>
         <DataTableContent style={{ width: "100%" }}>
           <DataTableHead>
             <DataTableRow>
