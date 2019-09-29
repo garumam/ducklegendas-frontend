@@ -188,7 +188,10 @@ const List = props => {
                       onClick={() => {
                         props.history.push({
                           pathname: `${tableParams.formPath}/${user.id}`,
-                          state:{ user: user}
+                          state:{ 
+                            user: user,
+                            entities: entities
+                          }
                         });
                       }}
                     />
