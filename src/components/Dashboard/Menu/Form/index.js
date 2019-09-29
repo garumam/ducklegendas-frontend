@@ -16,14 +16,14 @@ import * as YupValidation from '../../../../services/YupValidation';
 
 const Form = props => {
   const [errorsReponse, setErrors] = React.useState(null);
-  // const [initialValues, setInitialValues] = React.useState({});
+  let data = {};
 
   const inputParams = [],
     labels = [],
     types = [],
     names = [],
     validationSchema = [],
-    initialValues={};
+    initialValues={}
 
 
     // console.log(initialValues)
@@ -34,15 +34,7 @@ const Form = props => {
       types.push("text", "email", "password", "select", "file");
       names.push("name", "email", "password", "permission", "img");
       validationSchema.push(YupValidation.UserSchema);
-      if(props.location.state != null){
-        createInput(props.location.state.user)
-        // setInitialValues({
-        //   name: props.location.state ? props.location.state.user.name : "",
-        //   email: props.location.state ? props.location.state.user.email : "",
-        // })
-      }
-     
-      // createInput(data)
+      data = props.location.state ? props.location.state.user : null;
       break;
     case 2: //legendas
       labels.push("Nome", "Categoria", "Ano", "Imagem", "URL", "Autor");
@@ -96,24 +88,19 @@ const Form = props => {
     default:
   }
 
-  function createInput(data){
+  //inicio dos inputs
     for (let index = 0; index < labels.length; index++) {
       inputParams.push({
         label: labels[index],
         type: types[index],
         name: names[index]
       });
-      initialValues[names[index]] = "";
+     
+      initialValues[names[index]] = data ? data[names[index]] : '';
+      
     }
-
-    Object.keys(data).map((value) => {
-      initialValues[value] = data[value]
-      console.log(initialValues)
-    })
-  }
-
-  
-
+    console.log(initialValues)
+// fim dos inputs
   const store = async (values) => {
     console.log(values);
 
