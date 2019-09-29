@@ -16,19 +16,17 @@ import * as YupValidation from '../../../../services/YupValidation';
 
 const Form = props => {
   const [errorsReponse, setErrors] = React.useState(null);
-  const [initialValues, setInitialValues] = React.useState({
-    name: props.location.state ? props.location.state.user.name : "",
-    email: props.location.state ? props.location.state.user.email : "",
-  });
+  // const [initialValues, setInitialValues] = React.useState({});
 
   const inputParams = [],
     labels = [],
     types = [],
     names = [],
-    validationSchema = [];
+    validationSchema = [],
+    initialValues={};
 
 
-    console.log(initialValues)
+    // console.log(initialValues)
 
   switch (props.form) {
     case 1: //usuários
@@ -36,6 +34,14 @@ const Form = props => {
       types.push("text", "email", "password", "select", "file");
       names.push("name", "email", "password", "permission", "img");
       validationSchema.push(YupValidation.UserSchema);
+      if(props.location.state != null){
+        createInput(props.location.state.user)
+        // setInitialValues({
+        //   name: props.location.state ? props.location.state.user.name : "",
+        //   email: props.location.state ? props.location.state.user.email : "",
+        // })
+      }
+     
       // createInput(data)
       break;
     case 2: //legendas
@@ -90,21 +96,21 @@ const Form = props => {
     default:
   }
 
-  // function createInput(data){
+  function createInput(data){
     for (let index = 0; index < labels.length; index++) {
       inputParams.push({
         label: labels[index],
         type: types[index],
         name: names[index]
       });
-      // initialValues[names[index]] = "";
+      initialValues[names[index]] = "";
     }
 
-    // Object.keys(data).map((value) => {
-    //   initialValues[value] = data[value]
-    //   console.log(initialValues)
-    // })
-  // }
+    Object.keys(data).map((value) => {
+      initialValues[value] = data[value]
+      console.log(initialValues)
+    })
+  }
 
   
 
