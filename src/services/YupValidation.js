@@ -12,26 +12,36 @@ export const UserSchema = Yup.object().shape({
     email: Yup.string()
         .email('E-mail inválido!')
         .required('E-mail é obrigatório!'),
-//     img: Yup.mixed() //value.size em bytes 1000000 bytes = 1000 kb
-//         .test('fileType', "Formato de imagem não suportado", value => [
-//             'image/jpg', 'image/jpeg', 'image/png'
-//         ].includes(value.type))
-//         .test('fileDimension', "Resolução da imagem muito grande, limite 640x640!",async value => {
-//             function detectDimension(URL, callback) {
-//                 const image = new Image();
-//                 image.src = URL;
-//                 image.onload = function() {
-//                   const result = this.width <= 640 && this.height <= 640;
-//                   callback(result);
-//                 };
-//             }
-//             const detectPromisse = new Promise(function(resolve, reject) {
-//                 detectDimension(URL.createObjectURL(value), (result) => resolve(result))
-//             }); 
-//             const canReturn = [];
-//             await detectPromisse.then(result=>canReturn.push(result));
-
-//             return canReturn[0];
-//         })
-//         .test('fileSize', "O arquivo é muito pesado, peso limite é 1000kb", value => value.size <= 1000000),
+    img: Yup.mixed() //value.size em bytes 1000000 bytes = 1000 kb
+        .test('fileType', "Formato de imagem não suportado", value => {
+            if(value){
+                return ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type);
+            }
+            return true;
+        })
+        .test('fileDimension', "Resolução da imagem muito grande, limite 640x640!",async value => {
+            if(value){
+                function detectDimension(URL, callback) {
+                    const image = new Image();
+                    image.src = URL;
+                    image.onload = function() {
+                      const result = this.width <= 640 && this.height <= 640;
+                      callback(result);
+                    };
+                }
+                const detectPromisse = new Promise(function(resolve, reject) {
+                    detectDimension(URL.createObjectURL(value), (result) => resolve(result))
+                }); 
+                const canReturn = [];
+                await detectPromisse.then(result=>canReturn.push(result));
+                return canReturn[0];
+            }
+            return true;
+        })
+        .test('fileSize', "O arquivo é muito pesado, peso limite é 1000kb", value => {
+            if(value){
+                return value.size <= 1000000;
+            }
+            return true;
+        }),
 });
