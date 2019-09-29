@@ -20,6 +20,7 @@ const Form = props => {
     name: props.location.state ? props.location.state.user.name : "",
     email: props.location.state ? props.location.state.user.email : "",
   });
+
   const inputParams = [],
     labels = [],
     types = [],
@@ -319,7 +320,7 @@ const Form = props => {
                   onBlur={handleBlur}
                   type={input.type}
                   name={input.name}
-                  value={initialValues[input.name]}
+                  value={values[input.name]}
                 />
               );
             })}
