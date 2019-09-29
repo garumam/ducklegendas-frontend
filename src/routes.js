@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch,Redirect } from "react-router-dom";
 import ScrollToTop from "./components/App/ScrollToTop";
 import App from "./components/App/App.js";
 import Legendas from "./components/Front/Legendas";
@@ -49,7 +49,8 @@ const PrivateRouteLogin = ({ layout: Layout, ...rest }) => (
     {...rest}
     render={props =>
       isAuthenticated() ? (
-        props.history.push("/dashboard")
+        <Redirect to="/dashboard"/>
+        // props.history.push("/dashboard")
       ) : (
         <>
           {getError(props)}
@@ -104,7 +105,6 @@ export default () => (
             component={() => <Post title="Single Post" />}
           />
           <PrivateRouteLogin
-            exact
             path="/painel"
             layout={props => (
               <>
