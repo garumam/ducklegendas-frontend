@@ -18,9 +18,9 @@ import "@rmwc/data-table/data-table.css";
 import api from "../../../../services/api";
 
 // 10  offset = 100 100%100 = 0
-const Paginator = (items, page, per_page) => {
+const Paginator = (items, page) => {
   page = page || 0;
-  per_page = per_page || 10;
+  let per_page = 10;
   let offset = page * per_page;
   offset = offset >= 100 ? offset % 100 : offset;
 
