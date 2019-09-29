@@ -17,8 +17,8 @@ import * as YupValidation from '../../../../services/YupValidation';
 const Form = props => {
   const [errorsReponse, setErrors] = React.useState(null);
   const [initialValues, setInitialValues] = React.useState({
-    name: props.location.state ? props.location.state.user.name : null,
-    email: props.location.state ? props.location.state.user.email : null,
+    name: props.location.state ? props.location.state.user.name : "",
+    email: props.location.state ? props.location.state.user.email : "",
   });
   const inputParams = [],
     labels = [],
