@@ -7,7 +7,8 @@ import {
   DataTableCell,
   DataTableHeadCell,
   DataTableBody,
-  Fab
+  Fab,
+  CircularProgress
 } from "rmwc";
 import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
@@ -15,6 +16,7 @@ import { withRouter } from "react-router-dom";
 import "./styles.css";
 import { HeaderCard } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
+import '@rmwc/circular-progress/circular-progress.css';
 import api from "../../../../services/api";
 
 // 10  offset = 100 100%100 = 0
@@ -128,7 +130,7 @@ const List = props => {
     }
   };
 
-  return (
+  return (entities.total === 0? <CircularProgress size="xlarge" style={{ margin: 'auto' }}/> :
     <>
       <HeaderCard>
         <h2>{props.title}</h2>
