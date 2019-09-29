@@ -23,7 +23,7 @@ const Form = props => {
     types = [],
     names = [],
     validationSchema = [],
-    initialValues={}
+    initialValues={};
 
 
     // console.log(initialValues)
