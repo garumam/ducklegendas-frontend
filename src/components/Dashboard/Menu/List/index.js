@@ -42,16 +42,30 @@ const List = props => {
   useEffect(() => {
     async function getUsers() {
       const res = await api.post(`/users?page=${entities.page}`);
+
       if(!res.error){
+        console.log('Página selecionada: ',entities.pageSelected);
         setEntities({
           ...res,
           dataPaginada: Paginator(res.data, entities.pageSelected),
-          total: Math.ceil(res.total / 10)
+          total: Math.ceil(res.total / 10),
+          pageSelected: entities.pageSelected
         });
       }
       console.log(res);
     }
-    getUsers();
+
+    if(props.location.state){
+      if(props.location.state.anyChange){
+        getUsers();
+      }else{
+        setEntities({...props.location.state.entities});
+        props.location.state = undefined;
+      }
+    }else{
+      getUsers();
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entities.page]);
 
@@ -110,7 +124,7 @@ const List = props => {
     } else {
       let dados = Paginator(entities.data, selected);
       console.log(dados);
-      setEntities({ dataPaginada: dados });
+      setEntities({ dataPaginada: dados, pageSelected: selected });
     }
   };
 
@@ -123,7 +137,10 @@ const List = props => {
             icon="add"
             type="button"
             onClick={() => {
-              props.history.push(tableParams.formPath);
+              props.history.push({
+                pathname: tableParams.formPath,
+                state:{ entities: entities}
+              });
             }}
           />
         )}
@@ -191,6 +208,7 @@ const List = props => {
         </DataTableContent>
       </DataTable>
       <ReactPaginate
+        forcePage={entities.pageSelected}
         previousLabel={<i className="material-icons">keyboard_arrow_left</i>}
         nextLabel={<i className="material-icons">keyboard_arrow_right</i>}
         breakLabel={"..."}

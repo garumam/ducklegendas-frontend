@@ -15,7 +15,15 @@ import image from "../../../../assets/img/man.png";
 import * as YupValidation from '../../../../services/YupValidation';
 
 const Form = props => {
-  const [errorsReponse, setErrors] = React.useState(null);
+  // const [errorsReponse, setErrors] = React.useState(null);
+  // const [anyChange, setAnyChange] = React.useState(false);
+  const [entities, setEntities] = React.useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      errorsReponse: null,
+      anyChange: false
+    }
+  );
   let data = {};
 
   const inputParams = [],
@@ -110,7 +118,18 @@ const Form = props => {
     });
 
     const res = await api.post('/register', formData, {headers: {'Content-Type': 'multipart/form-data'}})
-    setErrors(res.success || res.error);
+    
+    if(res.success){
+      setEntities({
+        anyChange: true,
+        errorsReponse: res.success 
+      });
+    }else{
+      setEntities({
+        errorsReponse: res.error 
+      });
+    }
+ 
   }
 
   return (
@@ -137,7 +156,13 @@ const Form = props => {
                 style={{ marginRight: "12px" }}
                 type="button"
                 onClick={() => {
-                  props.history.goBack();
+                  props.history.replace({
+                    pathname: `/dashboard/users`,
+                    state:{ 
+                      anyChange: props.location.state? entities.anyChange : true,
+                      entities: props.location.state && props.location.state.entities
+                    }
+                  });;
                 }}
               />
               <Fab icon="save" type="button" onClick={handleSubmit} />
@@ -146,9 +171,9 @@ const Form = props => {
           <div className="card-border" />
           <CustomForm onSubmit={handleSubmit} className="formulario">
             <Error>
-                {errorsReponse &&
-                  Object.keys(errorsReponse).map(key => (
-                    <span key={key}>{errorsReponse[key]}</span>
+                {entities.errorsReponse &&
+                  Object.keys(entities.errorsReponse).map(key => (
+                    <span key={key}>{entities.errorsReponse[key]}</span>
                   ))}
                 {inputParams.map((input, index) => (
                   errors[input.name] && touched[input.name] && (
