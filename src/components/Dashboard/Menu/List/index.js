@@ -12,11 +12,11 @@ import {
 } from "rmwc";
 import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
-
+import Modal from "../../../Modal";
 import "./styles.css";
 import { HeaderCard } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
-import '@rmwc/circular-progress/circular-progress.css';
+import "@rmwc/circular-progress/circular-progress.css";
 import api from "../../../../services/api";
 
 // 10  offset = 100 100%100 = 0
@@ -30,6 +30,8 @@ const Paginator = (items, page) => {
 };
 
 const List = props => {
+  const [openModal, setOpenModal] = React.useState({ open: false });
+
   const [entities, setEntities] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -45,33 +47,47 @@ const List = props => {
     async function getUsers() {
       const res = await api.post(`/users?page=${entities.page}`);
 
-      if(!res.error){
-        console.log('Página selecionada: ',entities.pageSelected);
+      if (!res.error) {
+        console.log("Página selecionada: ", entities.pageSelected);
         setEntities({
           ...res,
           dataPaginada: Paginator(res.data, entities.pageSelected),
           total: Math.ceil(res.total / 10),
           pageSelected: entities.pageSelected
         });
-      }else{
-        alert(res.error);
+      } else {
+        setOpenModal({ open: true, error: res.error });
       }
       console.log(res);
     }
 
-    if(props.location.state){
-      if(props.location.state.anyChange){
+    if (props.location.state) {
+      if (props.location.state.anyChange) {
         getUsers();
-      }else{
-        setEntities({...props.location.state.entities});
+      } else {
+        setEntities({ ...props.location.state.entities });
         props.location.state = undefined;
       }
-    }else{
+    } else {
       getUsers();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entities.page]);
+
+  const error = () => (
+    <>
+      <Modal
+        onClose={() => setOpenModal({ open: false })}
+        show={openModal.open}
+        title={"Error"}>
+        {openModal.error}
+      </Modal>
+      {!openModal.open &&
+        <CircularProgress size="xlarge" style={{ margin: "auto" }} />
+      }
+    </>
+  );
 
   const tableParams = {
     headCells: [],
@@ -132,7 +148,9 @@ const List = props => {
     }
   };
 
-  return (entities.total === 0? <CircularProgress size="xlarge" style={{ margin: 'auto' }}/> :
+  return entities.total === 0 ? (
+    error()
+  ) : (
     <>
       <HeaderCard>
         <h2>{props.title}</h2>
@@ -143,14 +161,14 @@ const List = props => {
             onClick={() => {
               props.history.push({
                 pathname: tableParams.formPath,
-                state:{ entities: entities}
+                state: { entities: entities }
               });
             }}
           />
         )}
       </HeaderCard>
       <div className="card-border" />
-      <DataTable style={{ height:'412px',border: "none" }}>
+      <DataTable style={{ height: "412px", border: "none" }}>
         <DataTableContent style={{ width: "100%" }}>
           <DataTableHead>
             <DataTableRow>
@@ -179,7 +197,7 @@ const List = props => {
                         <DataTableCell key={i}>{user[item]}</DataTableCell>
                       )
                   )}
-                 
+
                   <DataTableCell>
                     <Fab
                       style={{
@@ -192,7 +210,7 @@ const List = props => {
                       onClick={() => {
                         props.history.push({
                           pathname: `${tableParams.formPath}/${user.id}`,
-                          state:{ 
+                          state: {
                             user: user,
                             entities: entities
                           }
