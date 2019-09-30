@@ -16,7 +16,7 @@ import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
 import Modal from "../../../Modal";
 import "./styles.css";
-import { HeaderCard } from "../Form/styles";
+import { HeaderCard,InputSearch } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
 import api from "../../../../services/api";
@@ -174,7 +174,15 @@ const List = props => {
     <>
       <HeaderCard>
         <h2>{props.title}</h2>
-        <TextField 
+        <div style={{display:'flex',alignItems:'center'}}>
+        <Switch
+          style={{height:'60px',color:'rgba(0,0,0,.6)',fontWeight:600,fontFamily:'Montserrat, sans-serif'}}
+          id="realTime"
+          checked={checked}
+          onChange={e => setChecked(e.currentTarget.checked)}
+          label="Tempo real"
+        />
+        <InputSearch 
           icon={{
             icon: 'search',
             tabIndex: 0,
@@ -196,12 +204,7 @@ const List = props => {
             checked && onSearch();
           }} 
         />
-        <Switch
-          id="realTime"
-          checked={checked}
-          onChange={e => setChecked(e.currentTarget.checked)}
-          label="Pesquisa em tempo real"
-        />
+      
         {props.title !== "Ranking" && (
           <Fab
             icon="add"
@@ -214,6 +217,7 @@ const List = props => {
             }}
           />
         )}
+        </div>
       </HeaderCard>
       <div className="card-border" />
       <DataTable style={{ height: "100%", border: "none" }}>

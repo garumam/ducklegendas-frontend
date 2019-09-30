@@ -20,6 +20,25 @@ export const InputText = styled(TextField)`
     }
 `;
 
+export const InputSearch = styled(TextField)`
+    border:0;
+    border-radius:0;
+    height:60px;
+    margin-left: 2rem;
+    margin-right: 1rem;
+    input{
+        border-bottom:0;
+    }
+    
+    label:not(:disabled){
+        font-family: 'Montserrat', sans-serif;
+        font-size:.9rem;
+        margin:0;
+        top:23px;
+        font-weight:600;
+    }
+`;
+
 export const SelectCustom = styled(Select)`
     width: 49%;
    
