@@ -45,11 +45,14 @@ const api = axios.create({
 api.interceptors.response.use((response) => {
     return response.data;
 }, function (error) {
-    //console.log(error.response.data.error);
     const errorResponse = {};
     if (error.response === undefined || error.response.status === 500) { // NETWORK ERROR
       errorResponse.error = ['Problema de conexão com o servidor, tente mais tarde!'];
     }else{
+      if(error.response.status === 401){
+        localStorage.clear();
+        window.location.replace(`${window.location.origin}/painel`);
+      }
       errorResponse.error = error.response.data.error;
     }
     
