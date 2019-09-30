@@ -43,7 +43,7 @@ const List = props => {
       dataPaginada: [],
       data: [],
       total: 0,
-      trigSearch: 0
+      trigSearch: false
     }
   );
 
@@ -161,11 +161,7 @@ const List = props => {
   };
 
   const onSearch = (e) => {
-    let trigger = 0;
-    if(trigger === entities.trigSearch){
-      trigger = 1;
-    }
-    setEntities({ page: 1, pageSelected: 0, trigSearch: trigger });
+    setEntities({ page: 1, pageSelected: 0, trigSearch: !entities.trigSearch });
   }
 
   return entities.total === 0 ? (
