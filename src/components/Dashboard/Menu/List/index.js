@@ -9,7 +9,8 @@ import {
   DataTableBody,
   Fab,
   CircularProgress,
-  TextField
+  TextField,
+  Switch
 } from "rmwc";
 import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
@@ -33,6 +34,7 @@ const Paginator = (items, page) => {
 const List = props => {
   const [openModal, setOpenModal] = React.useState({ open: false });
   const [search, setSearch] = React.useState('');
+  const [checked, setChecked] = React.useState(false);
   const [entities, setEntities] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -189,7 +191,16 @@ const List = props => {
           }}
           value={search}
           label="Pesquisar..."
-          onChange={(e) => setSearch(e.target.value)} 
+          onChange={(e) => {
+            setSearch(e.target.value) 
+            checked && onSearch();
+          }} 
+        />
+        <Switch
+          id="realTime"
+          checked={checked}
+          onChange={e => setChecked(e.currentTarget.checked)}
+          label="Pesquisa em tempo real"
         />
         {props.title !== "Ranking" && (
           <Fab
