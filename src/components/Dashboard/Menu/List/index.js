@@ -8,7 +8,8 @@ import {
   DataTableHeadCell,
   DataTableBody,
   Fab,
-  CircularProgress
+  CircularProgress,
+  TextField
 } from "rmwc";
 import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
@@ -31,7 +32,7 @@ const Paginator = (items, page) => {
 
 const List = props => {
   const [openModal, setOpenModal] = React.useState({ open: false });
-
+  const [search, setSearch] = React.useState('');
   const [entities, setEntities] = React.useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -39,41 +40,94 @@ const List = props => {
       page: 1,
       dataPaginada: [],
       data: [],
-      total: 0
+      total: 0,
+      trigSearch: 0
     }
   );
 
-  useEffect(() => {
-    async function getUsers() {
-      const res = await api.post(`/users?page=${entities.page}`);
+  const tableParams = {
+    headCells: [],
+    headNames: [],
+    formPath: "/form",
+    uriSearch: ''
+  };
 
-      if (!res.error) {
+  switch (props.table) {
+    case 1: //usuários
+      tableParams.headCells.push("ID", "Nome", "E-mail");
+      tableParams.headNames.push("id", "name", "email");
+      tableParams.uriSearch = "users";
+      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      break;
+    case 2: //legendas
+      tableParams.headCells.push("ID", "Nome", "Categoria", "Autor");
+      tableParams.uriSearch = "subtitles";
+      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      break;
+    case 3: //categorias
+      tableParams.headCells.push("ID", "Nome", "Descrição", "Classificação");
+      tableParams.uriSearch = "categories";
+      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      break;
+    case 4: //legendas em andamento
+      tableParams.headCells.push("ID", "Legenda", "%", "Categoria");
+      tableParams.uriSearch = "progress";
+      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      break;
+    case 5: //permissoes
+      tableParams.headCells.push("ID", "Nome", "Descrição", "N° de usuários");
+      tableParams.uriSearch = "permissions";
+      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      break;
+    case 6: //ranking
+      tableParams.headCells.push(
+        "Posição",
+        "Usuario",
+        "Qtd de Legendas",
+        "Descrição"
+      );
+      tableParams.uriSearch = "ranking";
+      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      break;
+    case 7: //galeria
+      tableParams.headCells.push("ID", "Nome", "Descrição", "Descrição2");
+      tableParams.uriSearch = "gallery";
+      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      break;
+    default:
+  }
+
+  useEffect(() => {
+    async function getItens() {
+      const res = await api.post(`/${tableParams.uriSearch}?page=${entities.page}`,{ search: search });
+
+      if (res.success) {
         console.log("Página selecionada: ", entities.pageSelected);
         setEntities({
-          ...res,
-          dataPaginada: Paginator(res.data, entities.pageSelected),
-          total: Math.ceil(res.total / 10),
+          ...res.success,
+          dataPaginada: Paginator(res.success.data, entities.pageSelected),
+          total: Math.ceil(res.success.total / 10),
           pageSelected: entities.pageSelected
         });
       } else {
-        setOpenModal({ open: true, error: res.error });
+        setOpenModal({ open: true, error: res.error || 'Erro inesperado, por favor atualize a página!'});
       }
       console.log(res);
     }
 
     if (props.location.state) {
       if (props.location.state.anyChange) {
-        getUsers();
+        getItens();
       } else {
         setEntities({ ...props.location.state.entities });
         props.location.state = undefined;
       }
     } else {
-      getUsers();
+      getItens();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entities.page]);
+  }, [entities.page, entities.trigSearch]);
 
   const error = () => (
     <>
@@ -88,50 +142,6 @@ const List = props => {
       }
     </>
   );
-
-  const tableParams = {
-    headCells: [],
-    headNames: [],
-    formPath: "/form"
-  };
-
-  switch (props.table) {
-    case 1: //usuários
-      tableParams.headCells.push("ID", "Nome", "E-mail");
-      tableParams.headNames.push("id", "name", "email");
-      tableParams.formPath = "users" + tableParams.formPath;
-      break;
-    case 2: //legendas
-      tableParams.headCells.push("ID", "Nome", "Categoria", "Autor");
-      tableParams.formPath = "subtitles" + tableParams.formPath;
-      break;
-    case 3: //categorias
-      tableParams.headCells.push("ID", "Nome", "Descrição", "Classificação");
-      tableParams.formPath = "categories" + tableParams.formPath;
-      break;
-    case 4: //legendas em andamento
-      tableParams.headCells.push("ID", "Legenda", "%", "Categoria");
-      tableParams.formPath = "progress" + tableParams.formPath;
-      break;
-    case 5: //permissoes
-      tableParams.headCells.push("ID", "Nome", "Descrição", "N° de usuários");
-      tableParams.formPath = "permissions" + tableParams.formPath;
-      break;
-    case 6: //ranking
-      tableParams.headCells.push(
-        "Posição",
-        "Usuario",
-        "Qtd de Legendas",
-        "Descrição"
-      );
-      tableParams.formPath = "ranking" + tableParams.formPath;
-      break;
-    case 7: //galeria
-      tableParams.headCells.push("ID", "Nome", "Descrição", "Descrição2");
-      tableParams.formPath = "gallery" + tableParams.formPath;
-      break;
-    default:
-  }
 
   const handlePageClick = data => {
     let selected = data.selected;
@@ -148,12 +158,39 @@ const List = props => {
     }
   };
 
+  const onSearch = (e) => {
+    let trigger = 0;
+    if(trigger === entities.trigSearch){
+      trigger = 1;
+    }
+    setEntities({ page: 1, pageSelected: 0, trigSearch: trigger });
+  }
+
   return entities.total === 0 ? (
     error()
   ) : (
     <>
       <HeaderCard>
         <h2>{props.title}</h2>
+        <TextField 
+          icon={{
+            icon: 'search',
+            tabIndex: 0,
+            onClick: onSearch
+          }}
+          trailingIcon={{
+            icon: 'close',
+            tabIndex: 0,
+            onClick: () => setSearch('')
+          }} 
+          onKeyUp={(e) => {
+            if(e.keyCode === 13) //ENTER
+              onSearch();
+          }}
+          value={search}
+          label="Pesquisar..."
+          onChange={(e) => setSearch(e.target.value)} 
+        />
         {props.title !== "Ranking" && (
           <Fab
             icon="add"
