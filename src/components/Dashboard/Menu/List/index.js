@@ -216,7 +216,7 @@ const List = props => {
         )}
       </HeaderCard>
       <div className="card-border" />
-      <DataTable style={{ height: "412px", border: "none" }}>
+      <DataTable style={{ height: "100%", border: "none" }}>
         <DataTableContent style={{ width: "100%" }}>
           <DataTableHead>
             <DataTableRow>
