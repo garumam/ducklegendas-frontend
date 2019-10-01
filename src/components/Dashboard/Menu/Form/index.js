@@ -35,6 +35,7 @@ const Form = props => {
 
 
     // console.log(initialValues)
+  
 
   switch (props.form) {
     case 1: //usuários
@@ -159,7 +160,7 @@ const Form = props => {
                   props.history.replace({
                     pathname: `/dashboard/users`,
                     state:{ 
-                      anyChange: props.location.state? entities.anyChange : true,
+                      anyChange: props.location.state && props.location.state.islogin ? true : entities.anyChange,
                       entities: props.location.state && props.location.state.entities
                     }
                   });;
