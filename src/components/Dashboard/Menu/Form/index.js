@@ -10,7 +10,7 @@ import {
   Error
 } from "./styles";
 import { withRouter } from "react-router-dom";
-import api from '../../../../services/api';
+import api, {baseUrl} from '../../../../services/api';
 import image from "../../../../assets/img/man.png";
 import * as YupValidation from '../../../../services/YupValidation';
 
@@ -24,8 +24,8 @@ const Form = props => {
       anyChange: false
     }
   );
-  let data = {};
-
+  const [data, setData] = React.useState(null);
+  let dataPassed = null;
   const inputParams = [],
     labels = [],
     types = [],
@@ -33,17 +33,13 @@ const Form = props => {
     validationSchema = [],
     initialValues={};
 
-
-    // console.log(initialValues)
-  
-
   switch (props.form) {
     case 1: //usuários
       labels.push("Nome", "E-mail", "Senha", "Permissão", "Imagem");
       types.push("text", "email", "password", "select", "file");
-      names.push("name", "email", "password", "permission", "img");
+      names.push("name", "email", "password", "permission", "image");
       validationSchema.push(YupValidation.UserSchema);
-      data = props.location.state ? props.location.state.user : null;
+      dataPassed = props.location.state ? props.location.state.user : null;
       break;
     case 2: //legendas
       labels.push("Nome", "Categoria", "Ano", "Imagem", "URL", "Autor");
@@ -97,6 +93,26 @@ const Form = props => {
     default:
   }
 
+  React.useEffect(() => {
+
+    async function getUser() {
+      const res = await api.get(`/user/${props.match.params.id}`);
+      console.log(res.success);
+      if (res.success) {
+        setData(res.success);
+      } else {
+        setEntities({
+          errorsReponse: res.error 
+        });
+      }
+      
+    }
+    if(props.match.params.id && dataPassed === null){
+      getUser();
+    }
+
+  }, []);
+  
   //inicio dos inputs
     for (let index = 0; index < labels.length; index++) {
       inputParams.push({
@@ -104,12 +120,15 @@ const Form = props => {
         type: types[index],
         name: names[index]
       });
-     
-      initialValues[names[index]] = data ? data[names[index]] : '';
+      
+      initialValues[names[index]] = dataPassed ? dataPassed[names[index]] : 
+                                          data ? data[names[index]] : '';
       
     }
-    console.log(initialValues)
+    Object.keys(initialValues).map((key) => initialValues[key]? null : initialValues[key] = '')
+    console.log('valores iniciais formulário: ' ,initialValues)
 // fim dos inputs
+
   const store = async (values) => {
     console.log(values);
 
@@ -117,9 +136,17 @@ const Form = props => {
     Object.keys(values).map((key) => {
       return formData.append(key, values[key]);
     });
+    let uri = '/register';
 
-    const res = await api.post('/register', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+    if(data || dataPassed){
+      const userId = data? data.id : dataPassed.id;
+      uri = `${uri}/update/${userId}`
+      formData.append('_method', 'PATCH');
+    }
     
+    const res = await api.post(uri, formData, {headers: {'Content-Type': 'multipart/form-data'}});
+
+    console.log('res',res);
     if(res.success){
       setEntities({
         anyChange: true,
@@ -210,7 +237,7 @@ const Form = props => {
                           src={
                             values[input.name] instanceof File
                               ? URL.createObjectURL(values[input.name])
-                              : image
+                              : values[input.name]? baseUrl+values[input.name] : image
                           }
                           alt=""
                         />

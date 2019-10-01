@@ -12,15 +12,15 @@ export const UserSchema = Yup.object().shape({
     email: Yup.string()
         .email('E-mail inválido!')
         .required('E-mail é obrigatório!'),
-    img: Yup.mixed() //value.size em bytes 1000000 bytes = 1000 kb
+    image: Yup.mixed() //value.size em bytes 1000000 bytes = 1000 kb
         .test('fileType', "Formato de imagem não suportado", value => {
-            if(value){
+            if(value instanceof File){
                 return ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type);
             }
             return true;
         })
         .test('fileDimension', "Resolução da imagem muito grande, limite 640x640!",async value => {
-            if(value){
+            if(value instanceof File){
                 function detectDimension(URL, callback) {
                     const image = new Image();
                     image.src = URL;
@@ -39,7 +39,7 @@ export const UserSchema = Yup.object().shape({
             return true;
         })
         .test('fileSize', "O arquivo é muito pesado, peso limite é 1000kb", value => {
-            if(value){
+            if(value instanceof File){
                 return value.size <= 1000000;
             }
             return true;
