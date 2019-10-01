@@ -148,7 +148,7 @@ const Dashboard = props => {
           ]}
           endContent={
             <Ripple onClick={()=> props.history.push({
-                pathname: `users/form/${data.user.id}`,
+                pathname: `/dashboard/users/form/${data.user.id}`,
                 state: { user: data.user }
               })}>
               <div
