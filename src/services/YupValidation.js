@@ -12,6 +12,13 @@ export const UserSchema = Yup.object().shape({
     email: Yup.string()
         .email('E-mail inválido!')
         .required('E-mail é obrigatório!'),
+    user_type: Yup.string()
+                  .test('exist', "Tipo de usuário não válido!", (value) => {
+                      if(value){
+                        return ["admin", "moderador", "autor", "legender"].includes(value);
+                      }
+                      return true;
+                  }),    
     image: Yup.mixed() //value.size em bytes 1000000 bytes = 1000 kb
         .test('fileType', "Formato de imagem não suportado", value => {
             if(value instanceof File){

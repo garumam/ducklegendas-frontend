@@ -1,11 +1,12 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
-import api from './api';
+import {getRequest} from './api';
 
 const TokenExpired = (props) => {
     
     async function deleteToken() {
-        await api.get('/error')
+        //await api.get('/error')
+        await getRequest('/error');
         localStorage.clear();
     }
     deleteToken();

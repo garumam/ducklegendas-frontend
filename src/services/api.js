@@ -16,22 +16,28 @@ export const isAuthenticated = () =>{
     return (dateToken.getTime() > dateNow.getTime() ) ? `Bearer ${token}` : null;
 }
 
-export const isToken = () =>{
-    const token = localStorage.getItem('token');
+// export const isToken = () =>{
+//     const token = localStorage.getItem('token');
    
-    return token;
-}
+//     return token;
+// }
 
-export const getError = (props) => {
-    if(isToken() && props.location.state===undefined){
-      const res = api.get('/error');
-      if(res.error){
-        console.log(res.error);
-        localStorage.clear();
-      }
-    }
-}
- 
+// export const getError = (props) => {
+//     if(isToken() && props.location.state===undefined){
+//       const res = api.get('/error');
+//       if(res.error){
+//         console.log(res.error);
+//         localStorage.clear();
+//       }
+//     }
+// }
+
+export const postRequest = (uri, body, config) => api.post(uri, body, config);
+
+export const getRequest = (uri) => api.get(uri);
+
+export const refreshAuthorization = () => {api.defaults.headers.Authorization = isAuthenticated();}
+
 export const baseUrl = 'http://127.0.0.1:8000/';
 
 const api = axios.create({
@@ -58,5 +64,3 @@ api.interceptors.response.use((response) => {
     
     return errorResponse;
 });
-
-export default api;

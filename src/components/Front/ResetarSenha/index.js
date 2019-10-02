@@ -2,7 +2,7 @@ import React from "react";
 import { Login, Error } from "./styles";
 import { withRouter } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
-import api from "../../../services/api";
+import {postRequest} from "../../../services/api";
 var estilo = {
   paddingTop: "6.38rem"
 };
@@ -32,7 +32,8 @@ const ResetarSenha = props => {
 
     const uriApi = token ? "/password/reset" : "/password/create";
 
-    const res = await api.post(uriApi, values);
+    //const res = await api.post(uriApi, values);
+    const res = await postRequest(uriApi, values);
     setErrors(res.success || res.error);
     
   }

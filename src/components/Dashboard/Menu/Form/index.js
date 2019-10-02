@@ -10,7 +10,7 @@ import {
   Error
 } from "./styles";
 import { withRouter } from "react-router-dom";
-import api, {baseUrl} from '../../../../services/api';
+import {baseUrl, getRequest, postRequest} from '../../../../services/api';
 import image from "../../../../assets/img/man.png";
 import * as YupValidation from '../../../../services/YupValidation';
 
@@ -35,9 +35,9 @@ const Form = props => {
 
   switch (props.form) {
     case 1: //usuários
-      labels.push("Nome", "E-mail", "Senha", "Permissão", "Imagem");
+      labels.push("Nome", "E-mail", "Senha", "Tipo", "Imagem");
       types.push("text", "email", "password", "select", "file");
-      names.push("name", "email", "password", "permission", "image");
+      names.push("name", "email", "password", "user_type", "image");
       validationSchema.push(YupValidation.UserSchema);
       dataPassed = props.location.state ? props.location.state.user : null;
       break;
@@ -91,7 +91,8 @@ const Form = props => {
   React.useEffect(() => {
 
     async function getUser() {
-      const res = await api.get(`/user/${props.match.params.id}`);
+      //const res = await api.get(`/user/${props.match.params.id}`);
+      const res = await getRequest(`/user/${props.match.params.id}`);
       console.log(res.success);
       if (res.success) {
         setData(res.success);
@@ -139,8 +140,8 @@ const Form = props => {
       formData.append('_method', 'PATCH');
     }
     
-    const res = await api.post(uri, formData, {headers: {'Content-Type': 'multipart/form-data'}});
-
+    //const res = await api.post(uri, formData, {headers: {'Content-Type': 'multipart/form-data'}});
+    const res = await postRequest(uri, formData, {headers: {'Content-Type': 'multipart/form-data'}});
     console.log('res',res);
     if(res.success){
       setEntities({
@@ -210,7 +211,7 @@ const Form = props => {
                   if (input.type === "select") {
                     return (
                       <SelectCustom
-                        options={["admin", "legender"]}
+                        options={["admin", "moderador", "autor", "legender"]}
                         key={index}
                         label={input.label}
                         name={input.name}

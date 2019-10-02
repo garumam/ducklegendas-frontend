@@ -19,7 +19,7 @@ import "./styles.css";
 import { HeaderCard,InputSearch } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
-import api from "../../../../services/api";
+import {postRequest} from "../../../../services/api";
 
 // 10  offset = 100 100%100 = 0
 const Paginator = (items, page) => {
@@ -96,8 +96,8 @@ const List = props => {
 
   useEffect(() => {
     async function getItens() {
-      const res = await api.post(`/${tableParams.uriSearch}?page=${entities.page}`,{ search: search });
-
+      //const res = await api.post(`/${tableParams.uriSearch}?page=${entities.page}`,{ search: search });
+      const res = await postRequest(`/${tableParams.uriSearch}?page=${entities.page}`,{ search: search });
       if (res.success) {
         console.log("Página selecionada: ", entities.pageSelected);
         setEntities({

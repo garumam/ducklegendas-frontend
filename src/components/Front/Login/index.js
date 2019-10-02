@@ -2,7 +2,7 @@ import React from "react";
 import { LoginSection, Error } from "./styles";
 import { Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
-import api, { isAuthenticated } from "../../../services/api";
+import { postRequest, refreshAuthorization } from "../../../services/api";
 import { withRouter } from "react-router-dom";
 
 var estilo = {
@@ -43,17 +43,23 @@ const Login = props => {
   // }
   async function logar(e) {
     e.preventDefault();
-    const res = await api.post("/login", {
-      email: input.email,
-      password: input.password
+    // const res = await api.post("/login", {
+    //   email: input.email,
+    //   password: input.password
+    // });
+    const res = await postRequest("/login", {
+         email: input.email,
+         password: input.password
     });
+
     if (res.success) {
       const data = res.success;
       console.log("RESPOSTA LOGAR: ", data);
       localStorage.setItem("user", JSON.stringify(data));
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("expirate", data.token_expirate);
-      api.defaults.headers.Authorization = isAuthenticated();
+      //api.defaults.headers.Authorization = isAuthenticated();
+      refreshAuthorization();
       history.push("/dashboard");
     } else if (res.error) {
       setErrors(res.error);

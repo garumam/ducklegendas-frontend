@@ -53,7 +53,7 @@ const PrivateRouteLogin = ({ layout: Layout, ...rest }) => (
         // props.history.push("/dashboard")
       ) : (
         <>
-          {getError(props)}
+          {/* {getError(props)} */}
           <Layout {...props} />
         </>
       )
