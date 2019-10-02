@@ -20,9 +20,9 @@ export default props => (
         </div>
         <div className="card-border" />
         <form className="formulario">
-          <InputPersonalizado name="Nome" type="text" />
-          <InputPersonalizado name="E-mail" type="email" />
-          <InputPersonalizado name="Mensagem" type="textarea" />
+          <InputPersonalizado title ="Nome" name="Nome" type="text" />
+          <InputPersonalizado title ="E-mail" name="E-mail" type="email" />
+          <InputPersonalizado title ="Mensagem" name="Mensagem" type="textarea" />
           <InputPersonalizado type="submit" value="Enviar" />
         </form>
       </div>
