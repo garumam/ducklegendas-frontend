@@ -5,7 +5,8 @@ import { Link, NavLink } from "react-router-dom";
 
 export default props => {
   let mobileInput = React.createRef();
-  const data = JSON.parse(localStorage.getItem("user"))
+  const name = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")).user.name : 'Painel';
+  const link = name === 'Painel' ? '/painel' : '/dashboard'
   
   const navSlide = () => {
     const mobile = mobileInput.current;
@@ -57,16 +58,9 @@ export default props => {
               </NavLink>
             </li>
             <li>
-              {
-                data ?
-                <NavLink activeClassName="is-active" to="/dashboard" alt="Painel">
-                {data.user.name}
+              <NavLink activeClassName="is-active" to={link} alt="Painel">
+                {name}
               </NavLink>
-              :
-              <NavLink activeClassName="is-active" to="/painel" alt="Painel">
-                Painel
-              </NavLink>
-              }
             </li>
             <li>
               <Dropdown>
