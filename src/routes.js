@@ -178,26 +178,15 @@ export default () => (
           />
           <PrivateRoute
             exact
-            path={`${dashboardPath}/permissions`}
-            layout={props => <Dashboard title="Permissões" {...props} />}
-            component={() => <List title="Permissões" table={5} />}
-          />
-          <PrivateRoute
-            path={`${dashboardPath}/permissions/form/:id?`}
-            layout={props => <Dashboard title="Permissões" {...props} />}
-            component={() => <Form title="Permissões" form={5} />}
-          />
-          <PrivateRoute
-            exact
             path={`${dashboardPath}/ranking`}
             layout={props => <Dashboard title="Ranking" {...props} />}
-            component={() => <List title="Ranking" table={6} />}
+            component={() => <List title="Ranking" table={5} />}
           />
           <PrivateRoute
             exact
             path={`${dashboardPath}/gallery`}
             layout={props => <Dashboard title="Galeria" {...props} />}
-            component={() => <List title="Galeria" table={7} />}
+            component={() => <List title="Galeria" table={6} />}
           />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>

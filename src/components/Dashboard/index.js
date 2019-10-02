@@ -122,15 +122,6 @@ const Dashboard = props => {
                 Usuários
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                activeClassName="is-active"
-                to={`${dashboardPath}/permissions`}
-                alt="Permissões"
-              >
-                Permissões
-              </NavLink>
-            </li>
           </NavLinks>
           <MenuLogout onClick={e => logout(e)}>Sair</MenuLogout>
         </Nav>

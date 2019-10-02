@@ -80,11 +80,6 @@ const Form = props => {
         "autor"
       );
       break;
-    case 5: //permissoes
-      labels.push("Nome", "Descrição");
-      types.push("text", "text");
-      names.push("nome", "descricao");
-      break;
     case 7: //galeria
       labels.push("Nome", "Descrição");
       types.push("text", "text");

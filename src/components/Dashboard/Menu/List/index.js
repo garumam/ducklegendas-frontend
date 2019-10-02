@@ -76,12 +76,7 @@ const List = props => {
       tableParams.uriSearch = "progress";
       tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
       break;
-    case 5: //permissoes
-      tableParams.headCells.push("ID", "Nome", "Descrição", "N° de usuários");
-      tableParams.uriSearch = "permissions";
-      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
-      break;
-    case 6: //ranking
+    case 5: //ranking
       tableParams.headCells.push(
         "Posição",
         "Usuario",
@@ -91,7 +86,7 @@ const List = props => {
       tableParams.uriSearch = "ranking";
       tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
       break;
-    case 7: //galeria
+    case 6: //galeria
       tableParams.headCells.push("ID", "Nome", "Descrição", "Descrição2");
       tableParams.uriSearch = "gallery";
       tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
