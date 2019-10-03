@@ -133,9 +133,9 @@ const List = props => {
       <Modal
         onClose={() => setOpenModal({ open: false })}
         show={openModal.open}
-        title={"Error"}>
-        {openModal.error}
-      </Modal>
+        title={"Error"}
+        content={openModal.error}/>
+     
       {!openModal.open &&
         <CircularProgress size="xlarge" style={{ margin: "auto" }} />
       }
