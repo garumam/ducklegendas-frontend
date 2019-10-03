@@ -135,7 +135,7 @@ export default () => (
             component={() => <List title="Usuários" table={1} />}
           />
           <PrivateRoute
-            path={`${dashboardPath}/users/form/:id?`}
+            path={`${dashboardPath}/users/user/:id?`}
             layout={props => <Dashboard title="Usuários" {...props} />}
             component={() => <Form title="Usuários" form={1} />}
           />

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { createRef } from "react";
 // import "../Header/styles.css";
 import {Header,Nav,Logo,Mobile,CHK,NavLinks,Dropdown,DropdownMenu,InputDropdownMenu} from "../Header/styles";
 import { Link, NavLink } from "react-router-dom";
 
 export default props => {
-  let mobileInput = React.createRef();
+  let mobileInput = createRef();
   const name = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")).user.name : 'Painel';
   const link = name === 'Painel' ? '/painel' : '/dashboard'
   

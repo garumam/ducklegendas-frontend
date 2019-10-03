@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import { Formik } from "formik";
 import { Fab } from "@rmwc/fab";
 import {
@@ -15,16 +15,14 @@ import image from "../../../../assets/img/man.png";
 import * as YupValidation from '../../../../services/YupValidation';
 
 const Form = props => {
-  // const [errorsReponse, setErrors] = React.useState(null);
-  // const [anyChange, setAnyChange] = React.useState(false);
-  const [entities, setEntities] = React.useReducer(
+  const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       errorsReponse: null,
       anyChange: false
     }
   );
-  const [data, setData] = React.useState(null);
+  const [data, setData] = useState(null);
   let dataPassed = null;
   const inputParams = [],
     labels = [],
@@ -88,7 +86,7 @@ const Form = props => {
     default:
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
 
     async function getUser() {
       //const res = await api.get(`/user/${props.match.params.id}`);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useReducer } from "react";
 import { Login, Error } from "./styles";
 import { withRouter } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
@@ -7,8 +7,8 @@ var estilo = {
   paddingTop: "6.38rem"
 };
 const ResetarSenha = props => {
-  const [errors, setErrors] = React.useState(null);
-  const [input, setInput] = React.useReducer(
+  const [errors, setErrors] = useState(null);
+  const [input, setInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       email: "",

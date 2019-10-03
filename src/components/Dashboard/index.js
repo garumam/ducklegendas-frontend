@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   Header,
   HeaderDashboard,
@@ -21,9 +21,9 @@ const dashboardPath = "/dashboard";
 
 const Dashboard = props => {
   const {history} = props;
-  const [open, setOpen] = React.useState(true);
-  const [data,setData] = React.useState(JSON.parse(localStorage.getItem("user")));
-  const refMenu = React.useRef(null);
+  const [open, setOpen] = useState(true);
+  const [data,setData] = useState(JSON.parse(localStorage.getItem("user")));
+  const refMenu = useRef(null);
 
   async function logout(e) {
     e.preventDefault();

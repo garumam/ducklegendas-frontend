@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import {
   DataTable,
   DataTableContent,
@@ -32,10 +32,8 @@ const Paginator = (items, page) => {
 };
 
 const List = props => {
-  const [openModal, setOpenModal] = React.useState({ open: false });
-  const [search, setSearch] = React.useState('');
-  const [checked, setChecked] = React.useState(false);
-  const [entities, setEntities] = React.useReducer(
+  const [openModal, setOpenModal] = useState({ open: false });
+  const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       pageSelected: 0,
@@ -43,14 +41,17 @@ const List = props => {
       dataPaginada: [],
       data: [],
       total: 0,
-      trigSearch: false
+      trigSearch: false,
+      loading: true,
+      search: '',
+      checked: false
     }
   );
 
   const tableParams = {
     headCells: [],
     headNames: [],
-    formPath: "/form",
+    formPath: "/user",
     uriSearch: ''
   };
 
@@ -97,14 +98,15 @@ const List = props => {
   useEffect(() => {
     async function getItens() {
       //const res = await api.post(`/${tableParams.uriSearch}?page=${entities.page}`,{ search: search });
-      const res = await postRequest(`/${tableParams.uriSearch}?page=${entities.page}`,{ search: search });
+      const res = await postRequest(`/${tableParams.uriSearch}?page=${entities.page}`,{ search: entities.search });
       if (res.success) {
         console.log("Página selecionada: ", entities.pageSelected);
         setEntities({
           ...res.success,
           dataPaginada: Paginator(res.success.data, entities.pageSelected),
           total: Math.ceil(res.success.total / 10),
-          pageSelected: entities.pageSelected
+          pageSelected: entities.pageSelected,
+          loading: false
         });
       } else {
         setOpenModal({ open: true, error: res.error || 'Erro inesperado, por favor atualize a página!'});
@@ -113,7 +115,7 @@ const List = props => {
     }
 
     if (props.location.state) {
-      if (props.location.state.anyChange) {
+      if (props.location.state.anyChange || !props.location.state.entities) {
         getItens();
       } else {
         setEntities({ ...props.location.state.entities });
@@ -159,7 +161,7 @@ const List = props => {
     setEntities({ page: 1, pageSelected: 0, trigSearch: !entities.trigSearch });
   }
 
-  return entities.total === 0 ? (
+  return entities.loading ? (
     error()
   ) : (
     <>
@@ -169,8 +171,8 @@ const List = props => {
         <Switch
           style={{height:'60px',color:'rgba(0,0,0,.6)',fontWeight:600,fontFamily:'Montserrat, sans-serif'}}
           id="realTime"
-          checked={checked}
-          onChange={e => setChecked(e.currentTarget.checked)}
+          checked={entities.checked}
+          onChange={e => setEntities({ checked: e.currentTarget.checked })}
           label="Tempo real"
         />
         <InputSearch 
@@ -182,17 +184,20 @@ const List = props => {
           trailingIcon={{
             icon: 'close',
             tabIndex: 0,
-            onClick: () => setSearch('')
+            onClick: () => {
+              setEntities({ search: '' })
+              entities.checked && onSearch();
+            }
           }} 
           onKeyUp={(e) => {
             if(e.keyCode === 13) //ENTER
               onSearch();
           }}
-          value={search}
+          value={entities.search}
           label="Pesquisar..."
           onChange={(e) => {
-            setSearch(e.target.value) 
-            checked && onSearch();
+            setEntities({ search: e.target.value }) 
+            entities.checked && onSearch();
           }} 
         />
       

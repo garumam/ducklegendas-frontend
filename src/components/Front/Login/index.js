@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useReducer } from "react";
 import { LoginSection, Error } from "./styles";
 import { Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
@@ -11,8 +11,8 @@ var estilo = {
 
 const Login = props => {
   const { title, history } = props;
-  const [errors, setErrors] = React.useState(null);
-  const [input, setInput] = React.useReducer(
+  const [errors, setErrors] = useState(null);
+  const [input, setInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       email: "",
