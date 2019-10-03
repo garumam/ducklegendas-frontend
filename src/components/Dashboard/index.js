@@ -70,7 +70,7 @@ const Dashboard = props => {
             <li>
               <NavLink
                 activeClassName="is-active"
-                to={`${dashboardPath}/ranking`}
+                to={`${dashboardPath}/rankings`}
                 alt="Ranking"
               >
                 Ranking
@@ -140,8 +140,8 @@ const Dashboard = props => {
           ]}
           endContent={
             <Ripple onClick={()=> props.history.push({
-                pathname: `/dashboard/users/form/${data.user.id}`,
-                state: { user: data.user , islogin : true }
+                pathname: `/dashboard/users/user/${data.user.id}`,
+                state: { item: data.user , islogin : true }
               })}>
               <div
                 style={{

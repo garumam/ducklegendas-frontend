@@ -51,46 +51,46 @@ const List = props => {
   const tableParams = {
     headCells: [],
     headNames: [],
-    formPath: "/user",
+    formPath: '',
     uriSearch: ''
   };
 
   switch (props.table) {
     case 1: //usuários
       tableParams.headCells.push("ID", "Nome", "E-mail");
-      tableParams.headNames.push("id", "name", "email");
+      // headNames são os nomes dos index (key) dos dados
+      // da dataPaginada que poderão ser inseridos na tabela
+      tableParams.headNames.push("id", "name", "email"); 
       tableParams.uriSearch = "users";
-      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      tableParams.formPath = tableParams.uriSearch + "/user";
       break;
     case 2: //legendas
       tableParams.headCells.push("ID", "Nome", "Categoria", "Autor");
       tableParams.uriSearch = "subtitles";
-      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      tableParams.formPath = tableParams.uriSearch + "/subtitle";
       break;
     case 3: //categorias
       tableParams.headCells.push("ID", "Nome", "Descrição", "Classificação");
       tableParams.uriSearch = "categories";
-      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      tableParams.formPath = tableParams.uriSearch + "/category";
       break;
     case 4: //legendas em andamento
       tableParams.headCells.push("ID", "Legenda", "%", "Categoria");
       tableParams.uriSearch = "progress";
-      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
+      tableParams.formPath = tableParams.uriSearch + "/subtitle";
       break;
-    case 5: //ranking
+    case 5: //galeria
+      tableParams.headCells.push("ID", "Nome", "Descrição", "Descrição2");
+      tableParams.uriSearch = "gallery";
+      tableParams.formPath = tableParams.uriSearch + "/image";
+      break;
+    case 6: //ranking
       tableParams.headCells.push(
         "Posição",
         "Usuario",
         "Qtd de Legendas",
         "Descrição"
       );
-      tableParams.uriSearch = "ranking";
-      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
-      break;
-    case 6: //galeria
-      tableParams.headCells.push("ID", "Nome", "Descrição", "Descrição2");
-      tableParams.uriSearch = "gallery";
-      tableParams.formPath = tableParams.uriSearch + tableParams.formPath;
       break;
     default:
   }
@@ -237,12 +237,12 @@ const List = props => {
           </DataTableHead>
           <DataTableBody>
             {entities.dataPaginada &&
-              entities.dataPaginada.map((user, index) => (
+              entities.dataPaginada.map((item, index) => (
                 <DataTableRow key={index}>
-                  {Object.keys(user).map(
-                    (item, i) =>
-                      tableParams.headNames.includes(item) && (
-                        <DataTableCell key={i}>{user[item]}</DataTableCell>
+                  {Object.keys(item).map(
+                    (objectKey, i) =>
+                      tableParams.headNames.includes(objectKey) && (
+                        <DataTableCell key={i}>{item[objectKey]}</DataTableCell>
                       )
                   )}
 
@@ -257,9 +257,9 @@ const List = props => {
                       type="button"
                       onClick={() => {
                         props.history.push({
-                          pathname: `${tableParams.formPath}/${user.id}`,
+                          pathname: `${tableParams.formPath}/${item.id}`,
                           state: {
-                            user: user,
+                            item: item,
                             entities: entities
                           }
                         });

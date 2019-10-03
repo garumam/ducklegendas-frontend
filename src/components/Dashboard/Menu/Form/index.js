@@ -23,13 +23,14 @@ const Form = props => {
     }
   );
   const [data, setData] = useState(null);
-  let dataPassed = null;
+
   const inputParams = [],
     labels = [],
     types = [],
     names = [],
     validationSchema = [],
-    initialValues={};
+    initialValues={},
+    dataPassed = props.location.state ? props.location.state.item : null;
 
   switch (props.form) {
     case 1: //usuários
@@ -37,7 +38,6 @@ const Form = props => {
       types.push("text", "email", "password", "select", "file");
       names.push("name", "email", "password", "user_type", "image");
       validationSchema.push(YupValidation.UserSchema);
-      dataPassed = props.location.state ? props.location.state.user : null;
       break;
     case 2: //legendas
       labels.push("Nome", "Categoria", "Ano", "Imagem", "URL", "Autor");
@@ -49,7 +49,7 @@ const Form = props => {
       types.push("text", "text");
       names.push("categoria", "classificacao");
       break;
-    case 4: //toplegendas
+    case 4: //legendas em andamento
       labels.push(
         "Nome",
         "Categoria",
@@ -78,7 +78,7 @@ const Form = props => {
         "autor"
       );
       break;
-    case 7: //galeria
+    case 5: //galeria
       labels.push("Nome", "Descrição");
       types.push("text", "text");
       names.push("nome", "descricao");
@@ -133,8 +133,8 @@ const Form = props => {
     let uri = '/register';
 
     if(data || dataPassed){
-      const userId = data? data.id : dataPassed.id;
-      uri = `${uri}/update/${userId}`
+      const itemId = data? data.id : dataPassed.id;
+      uri = `${uri}/update/${itemId}`
       formData.append('_method', 'PATCH');
     }
     

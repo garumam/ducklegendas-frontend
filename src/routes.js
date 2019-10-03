@@ -146,7 +146,7 @@ export default () => (
             component={() => <List title="Legendas" table={2} />}
           />
           <PrivateRoute
-            path={`${dashboardPath}/subtitles/form/:id?`}
+            path={`${dashboardPath}/subtitles/subtitle/:id?`}
             layout={props => <Dashboard title="Legendas" {...props} />}
             component={() => <Form title="Legendas" form={2} />}
           />
@@ -157,7 +157,7 @@ export default () => (
             component={() => <List title="Categorias" table={3} />}
           />
           <PrivateRoute
-            path={`${dashboardPath}/categories/form/:id?`}
+            path={`${dashboardPath}/categories/category/:id?`}
             layout={props => <Dashboard title="Categorias" {...props} />}
             component={() => <Form title="Categorias" form={3} />}
           />
@@ -170,7 +170,7 @@ export default () => (
             component={() => <List title="Legendas em andamento" table={4} />}
           />
           <PrivateRoute
-            path={`${dashboardPath}/progress/form/:id?`}
+            path={`${dashboardPath}/progress/subtitle/:id?`}
             layout={props => (
               <Dashboard title="Legendas em andamento" {...props} />
             )}
@@ -178,15 +178,22 @@ export default () => (
           />
           <PrivateRoute
             exact
-            path={`${dashboardPath}/ranking`}
-            layout={props => <Dashboard title="Ranking" {...props} />}
-            component={() => <List title="Ranking" table={5} />}
+            path={`${dashboardPath}/gallery`}
+            layout={props => <Dashboard title="Galeria" {...props} />}
+            component={() => <List title="Galeria" table={5} />}
+          />
+          <PrivateRoute
+            path={`${dashboardPath}/gallery/image/:id?`}
+            layout={props => (
+              <Dashboard title="Galeria" {...props} />
+            )}
+            component={() => <Form title="Galeria" form={5} />}
           />
           <PrivateRoute
             exact
-            path={`${dashboardPath}/gallery`}
-            layout={props => <Dashboard title="Galeria" {...props} />}
-            component={() => <List title="Galeria" table={6} />}
+            path={`${dashboardPath}/rankings`}
+            layout={props => <Dashboard title="Ranking" {...props} />}
+            component={() => <List title="Ranking" table={6} />}
           />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>
