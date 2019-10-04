@@ -16,7 +16,7 @@ const Modal = (props) => {
     </div>
   );
 
-  return props.show ? show() : null;
+  return props.show && show();
 };
 
 export default Modal;
