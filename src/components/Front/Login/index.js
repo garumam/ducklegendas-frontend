@@ -2,8 +2,9 @@ import React, { useState, useReducer } from "react";
 import { LoginSection, Error } from "./styles";
 import { Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
-import { postRequest, refreshAuthorization } from "../../../services/api";
+import { postRequest, refreshAuthorization } from "services/api";
 import { withRouter } from "react-router-dom";
+import CryptoJS from 'crypto-js';
 
 var estilo = {
   paddingTop: "6.38rem"
@@ -55,6 +56,16 @@ const Login = props => {
     if (res.success) {
       const data = res.success;
       console.log("RESPOSTA LOGAR: ", data);
+
+      const encrypt = CryptoJS.AES.encrypt(JSON.stringify(data),'senha secreta')
+      console.log("encript data:"+encrypt)
+
+      const decrypt = CryptoJS.AES.decrypt(encrypt.toString(),'senha secreta')
+      console.log("decrypt:",decrypt)
+
+      const decryptedData = JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
+      console.log("decrypt data:",decryptedData)
+
       localStorage.setItem("user", JSON.stringify(data));
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("expirate", data.token_expirate);

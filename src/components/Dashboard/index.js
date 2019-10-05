@@ -12,9 +12,9 @@ import {
 import { Avatar } from "@rmwc/avatar";
 import { Ripple } from "@rmwc/ripple";
 import { NavLink, withRouter } from "react-router-dom";
-import {baseUrl, getRequest} from '../../services/api';
-import logo from "../../assets/img/duck-128.png";
-import userImg from "../../assets/img/man.png";
+import {baseUrl, getRequest} from 'services/api';
+import logo from "assets/img/duck-128.png";
+import userImg from "assets/img/man.png";
 import "@rmwc/avatar/avatar.css";
 
 const dashboardPath = "/dashboard";

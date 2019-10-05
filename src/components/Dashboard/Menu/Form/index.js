@@ -10,9 +10,9 @@ import {
   Error
 } from "./styles";
 import { withRouter } from "react-router-dom";
-import {baseUrl, getRequest, postRequest} from '../../../../services/api';
-import image from "../../../../assets/img/man.png";
-import * as YupValidation from '../../../../services/YupValidation';
+import {baseUrl, getRequest, postRequest} from 'services/api';
+import image from "assets/img/man.png";
+import * as YupValidation from 'services/YupValidation';
 
 const Form = props => {
   const [entities, setEntities] = useReducer(

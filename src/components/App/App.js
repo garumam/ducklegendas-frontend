@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "../Front/Header";
 import Footer from "../Front/Footer";
-import Logo from "../../assets/img/duck-128.png";
+import Logo from "assets/img/duck-128.png";
 import Front from "../Front/Front";
 // import PropTypes from "prop-types";
 // import { withRouter } from "react-router";

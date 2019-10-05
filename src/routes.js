@@ -1,22 +1,23 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch,Redirect } from "react-router-dom";
-import ScrollToTop from "./components/App/ScrollToTop";
-import App from "./components/App/App.js";
-import Legendas from "./components/Front/Legendas";
-import Ranking from "./components/Front/Ranking";
-import Contato from "./components/Front/Contato";
-import Post from "./components/Front/Post/";
-import Error404 from "./components/Front/Error404";
-import Login from "./components/Front/Login";
-import Header from "./components/Front/Header";
-import Dashboard from "./components/Dashboard";
-import Indice from "./components/Front/Indice";
-import Form from "./components/Dashboard/Menu/Form";
-import List from "./components/Dashboard/Menu/List";
-import Logo from "./assets/img/duck-128.png";
-import ResetarSenha from "./components/Front/ResetarSenha";
-import TokenExpired from "./services/TokenExpired";
-import { isAuthenticated, getError } from "./services/api";
+import ScrollToTop from "components/App/ScrollToTop";
+import App from "components/App/App.js";
+import Legendas from "components/Front/Legendas";
+import Ranking from "components/Front/Ranking";
+import Gallery from "components/Dashboard/Gallery";
+import Contato from "components/Front/Contato";
+import Post from "components/Front/Post/";
+import Error404 from "components/Front/Error404";
+import Login from "components/Front/Login";
+import Header from "components/Front/Header";
+import Dashboard from "components/Dashboard";
+import Indice from "components/Front/Indice";
+import Form from "components/Dashboard/Menu/Form";
+import List from "components/Dashboard/Menu/List";
+import Logo from "assets/img/duck-128.png";
+import ResetarSenha from "components/Front/ResetarSenha";
+import TokenExpired from "services/TokenExpired";
+import { isAuthenticated } from "services/api";
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
@@ -180,7 +181,7 @@ export default () => (
             exact
             path={`${dashboardPath}/gallery`}
             layout={props => <Dashboard title="Galeria" {...props} />}
-            component={() => <List title="Galeria" table={5} />}
+            component={() => <Gallery title="Galeria" />}
           />
           <PrivateRoute
             path={`${dashboardPath}/gallery/image/:id?`}

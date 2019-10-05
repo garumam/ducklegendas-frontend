@@ -9,17 +9,16 @@ import {
   DataTableBody,
   Fab,
   CircularProgress,
-  TextField,
   Switch
 } from "rmwc";
 import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
-import Modal from "../../../Modal";
+import Modal from "components/Modal";
 import "./styles.css";
 import { HeaderCard,InputSearch } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
-import {postRequest} from "../../../../services/api";
+import {postRequest} from "services/api";
 
 // 10  offset = 100 100%100 = 0
 const Paginator = (items, page) => {
