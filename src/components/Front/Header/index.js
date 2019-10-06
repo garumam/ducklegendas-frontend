@@ -2,10 +2,10 @@ import React, { createRef,useContext } from "react";
 import {Header,Nav,Logo,Mobile,CHK,NavLinks,Dropdown,DropdownMenu,InputDropdownMenu} from "../Header/styles";
 import { Link, NavLink } from "react-router-dom";
 import {decryptLogin} from 'services/api';
-import UserContext from 'context/UserContext';
+import AuthContext from 'context/AuthContext';
 
 export default (props) => {
-  const userData = useContext(UserContext);
+  const userData = useContext(AuthContext);
   console.log(userData);
   let mobileInput = createRef();
   let name = 'Painel';
