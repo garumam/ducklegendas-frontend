@@ -102,7 +102,7 @@ const Form = props => {
     if(props.match.params.id && dataPassed === null){
       getUser();
     }
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps  
   }, []);
   
   //inicio dos inputs
