@@ -6,7 +6,8 @@ export const isAuthenticated = () => {
 
   // try{
     const user = localStorage.getItem("user");
-    if(typeof user === 'string' || user instanceof String){
+    if(user && (typeof user === 'string' || user instanceof String)){
+    // if(typeof user === 'string' || user instanceof String){
 
       const decrypt = CryptoJS.AES.decrypt(user,'senha secreta') || null;
       if(decrypt){
