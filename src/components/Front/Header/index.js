@@ -1,19 +1,16 @@
 import React, { createRef } from "react";
 import {Header,Nav,Logo,Mobile,CHK,NavLinks,Dropdown,DropdownMenu,InputDropdownMenu} from "../Header/styles";
 import { Link, NavLink } from "react-router-dom";
-import CryptoJS from 'crypto-js';
+import {decryptLogin} from 'services/api';
 
 export default props => {
   let mobileInput = createRef();
   let name = 'Painel';
-  // const user = localStorage.getItem("user");
-  // if(user){
-  //   const decrypt = CryptoJS.AES.decrypt(localStorage.getItem("user"),'senha secreta') || null;
-  //   console.log("decrypt:",decrypt)
-  //   const decryptedData = JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
-  //   console.log("decrypt data:",decryptedData)
-  //   name = decryptedData.user.name;
-  // }
+  const user = decryptLogin();
+  console.log(user)
+  if(user){
+    name = user.user.name;
+  }
 
   const link = name === 'Painel' ? '/painel' : '/dashboard'
   
