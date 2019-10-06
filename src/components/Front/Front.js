@@ -3,13 +3,9 @@ import Doacao from "./Doacao";
 import TopLegendas from "./LegendasAndamento";
 import Parceiros from "./Parceiros";
 
-var estilo = {
-  paddingTop: "7rem"
-};
-
 export default props => (
   <Fragment>
-    <div style={estilo} className="container">
+    <div  className="container paddingTop">
       <div className="alert alert-success">
         Quer ajudar a postar legendas no site ? entre em contato e peça seu
         login !!!

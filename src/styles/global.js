@@ -39,6 +39,10 @@ table {
   border-spacing: 0;
 }
 
+.paddingTop {
+  padding-top: 6.38rem;
+}
+
 .flex-center {
     width: 100%;
     height: calc(100% - 80px);

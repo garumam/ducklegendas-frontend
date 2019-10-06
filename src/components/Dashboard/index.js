@@ -17,41 +17,30 @@ import logo from "assets/img/duck-128.png";
 import userImg from "assets/img/man.png";
 import "@rmwc/avatar/avatar.css";
 
-
 const dashboardPath = "/dashboard";
 
 const Dashboard = props => {
   const {history} = props;
   const [open, setOpen] = useState(true);
   const refMenu = useRef(null);
-
-  // const decrypt = CryptoJS.AES.decrypt(localStorage.getItem("user"),'senha secreta')
-  // console.log("decrypt:",decrypt)
-  // const decryptedData = JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
-  // console.log("decrypt data:",decryptedData)
   const [data,setData] = useState(decryptLogin());
 
   async function logout(e) {
     e.preventDefault();
     
-    //const res = await api.post('/logout')
     const res = await getRequest('/logout');
     if(res.success){
       console.log(res.success);
-
       localStorage.clear();
-
       history.push('/painel');
     }else if(res.error){
       console.log('Problema no logout: ',res.error);
       localStorage.clear();
     }
-    
   }
 
   function handlerMenuLateral() {
     setOpen(!open);
-
     if (open) refMenu.current.style = "margin-left: -220px";
     else refMenu.current.style = "margin-left: 0";
   }

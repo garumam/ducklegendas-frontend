@@ -2,10 +2,8 @@ import React, { useState, useReducer } from "react";
 import { Login, Error } from "./styles";
 import { withRouter } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
-import {postRequest} from "../../../services/api";
-var estilo = {
-  paddingTop: "6.38rem"
-};
+import {postRequest} from "services/api";
+
 const ResetarSenha = props => {
   const [errors, setErrors] = useState(null);
   const [input, setInput] = useReducer(
@@ -20,7 +18,6 @@ const ResetarSenha = props => {
 
   async function resetPassword(e) {
     e.preventDefault();
-
     const values = { email: input.email };
     if (token) {
       values.token = token;
@@ -31,11 +28,8 @@ const ResetarSenha = props => {
     }
 
     const uriApi = token ? "/password/reset" : "/password/create";
-
-    //const res = await api.post(uriApi, values);
     const res = await postRequest(uriApi, values);
     setErrors(res.success || res.error);
-    
   }
 
   function handleInputChange(e) {
@@ -45,7 +39,7 @@ const ResetarSenha = props => {
   }
 
   return (
-    <div style={estilo} className="container flex-center">
+    <div className="container flex-center">
       <Login className="card card-shadow">
         <div className="container">
           <div className="row">

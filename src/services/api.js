@@ -3,30 +3,18 @@ import CryptoJS from 'crypto-js';
 
 const SECRETKEY = 'DUCKLEGENDAS';
 
-
 export const isAuthenticated = () => {
 
   const decryptedData = decryptLogin();
   if(decryptedData){
-
     console.log('ddasda',decryptedData.user.access_token)
     const token = decryptedData.user.access_token;
     const date = decryptedData.user.token_expirate;
     const dateToken = new Date(date);
-    // let novadatatoken = novadate.getFullYear() + "-" + (novadate.getMonth() + 1) + "-" + novadate.getDate() + " " + novadate.getHours() + ":" + novadate.getMinutes() + ":" + novadate.getSeconds()
-
-    // console.log("data token: "+novadatatoken);
     const dateNow = new Date();
-    // let formatted_date = datejs.getFullYear() + "-" + (datejs.getMonth() + 1) + "-" + datejs.getDate() + " " + datejs.getHours() + ":" + datejs.getMinutes() + ":" + datejs.getSeconds()
-    // console.log("data atual formatada: "+formatted_date.toString())
-    
-    // console.log(dateToken.getTime() < dateNow.getTime())
     return (dateToken.getTime() > dateNow.getTime() ) ? `Bearer ${token}` : null;
-
   }
-
   return null; 
-
 }
 
 export function encryptLogin(data){
@@ -41,22 +29,6 @@ export function decryptLogin(){
     return false;
   }
 }
-
-// export const isToken = () =>{
-//     const token = localStorage.getItem('token');
-   
-//     return token;
-// }
-
-// export const getError = (props) => {
-//     if(isToken() && props.location.state===undefined){
-//       const res = api.get('/error');
-//       if(res.error){
-//         console.log(res.error);
-//         localStorage.clear();
-//       }
-//     }
-// }
 
 export const postRequest = (uri, body, config) => api.post(uri, body, config);
 

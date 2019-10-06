@@ -7,11 +7,9 @@ export default props => {
   let mobileInput = createRef();
   let name = 'Painel';
   const user = decryptLogin();
-  console.log(user)
-  if(user){
+  if(user)
     name = user.user.name;
-  }
-
+  
   const link = name === 'Painel' ? '/painel' : '/dashboard'
   
   const navSlide = () => {

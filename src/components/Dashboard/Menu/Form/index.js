@@ -89,7 +89,6 @@ const Form = props => {
   useEffect(() => {
 
     async function getUser() {
-      //const res = await api.get(`/user/${props.match.params.id}`);
       const res = await getRequest(`/user/${props.match.params.id}`);
       console.log(res.success);
       if (res.success) {
@@ -99,7 +98,6 @@ const Form = props => {
           errorsReponse: res.error 
         });
       }
-      
     }
     if(props.match.params.id && dataPassed === null){
       getUser();
@@ -138,7 +136,6 @@ const Form = props => {
       formData.append('_method', 'PATCH');
     }
     
-    //const res = await api.post(uri, formData, {headers: {'Content-Type': 'multipart/form-data'}});
     const res = await postRequest(uri, formData, {headers: {'Content-Type': 'multipart/form-data'}});
     console.log('res',res);
     if(res.success){
@@ -151,7 +148,6 @@ const Form = props => {
         errorsReponse: res.error 
       });
     }
- 
   }
 
   return (

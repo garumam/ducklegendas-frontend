@@ -5,7 +5,6 @@ import {getRequest} from './api';
 const TokenExpired = (props) => {
     
     async function deleteToken() {
-        //await api.get('/error')
         await getRequest('/error');
         localStorage.clear();
     }

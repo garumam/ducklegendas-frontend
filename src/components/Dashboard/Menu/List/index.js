@@ -96,7 +96,6 @@ const List = props => {
 
   useEffect(() => {
     async function getItens() {
-      //const res = await api.post(`/${tableParams.uriSearch}?page=${entities.page}`,{ search: search });
       const res = await postRequest(`/${tableParams.uriSearch}?page=${entities.page}`,{ search: entities.search });
       if (res.success) {
         console.log("Página selecionada: ", entities.pageSelected);

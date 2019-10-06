@@ -5,10 +5,6 @@ import { InputPersonalizado } from "../Contato";
 import { postRequest, refreshAuthorization, encryptLogin} from "services/api";
 import { withRouter } from "react-router-dom";
 
-var estilo = {
-  paddingTop: "6.38rem"
-};
-
 const Login = (props) => {
   const { title, history } = props;
   const [errors, setErrors] = useState(null);
@@ -20,33 +16,8 @@ const Login = (props) => {
     }
   );
 
-  // if(isAuthenticated()){
-  //   history.push('/dashboard')
-  // }else
-
-  // if(isToken() && props.location.state===undefined){
-  //    api.get('/error')
-  //   .then(r=>{
-  //     console.log(r);
-
-  //     localStorage.clear();
-
-  //   }).catch(e=>{
-  //     localStorage.clear();
-  //     if (e.response === undefined) { // NETWORK ERROR
-  //       console.log('Sem conexão');
-  //     }else{
-  //       console.log(e.response.data.error);
-  //     }
-
-  //   })
-  // }
   async function logar(e) {
     e.preventDefault();
-    // const res = await api.post("/login", {
-    //   email: input.email,
-    //   password: input.password
-    // });
     const res = await postRequest("/login", {
          email: input.email,
          password: input.password
@@ -55,20 +26,7 @@ const Login = (props) => {
     if (res.success) {
       const data = res.success;
       console.log("RESPOSTA LOGAR: ", data);
-
-      // const encrypt = CryptoJS.AES.encrypt(JSON.stringify(data),'senha secreta')
-      // console.log("encript data:"+encrypt)
-
-      // const decrypt = CryptoJS.AES.decrypt(encrypt.toString(),'senha secreta')
-      // console.log("decrypt:",decrypt)
-
-      // const decryptedData = JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
-      // console.log("decrypt data:",decryptedData)
-
       localStorage.setItem("user", encryptLogin(data));
-      // localStorage.setItem("token", data.access_token);
-      // localStorage.setItem("expirate", data.token_expirate);
-      //api.defaults.headers.Authorization = isAuthenticated();
       refreshAuthorization();
       history.push("/dashboard");
     } else if (res.error) {
@@ -81,8 +39,7 @@ const Login = (props) => {
     console.log(input);
   }
   return (
-    <div style={estilo} className="container flex-center">
-      {console.log("2")}
+    <div className="container flex-center paddingTop">
       <LoginSection className="card card-shadow">
         <div className="container">
           <div className="row">

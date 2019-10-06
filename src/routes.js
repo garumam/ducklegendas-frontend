@@ -51,12 +51,8 @@ const PrivateRouteLogin = ({ layout: Layout, ...rest }) => (
     render={props =>
       isAuthenticated() ? (
         <Redirect to="/dashboard"/>
-        // props.history.push("/dashboard")
       ) : (
-        <>
-          {/* {getError(props)} */}
-          <Layout {...props} />
-        </>
+        <Layout {...props} />
       )
     }
   />
