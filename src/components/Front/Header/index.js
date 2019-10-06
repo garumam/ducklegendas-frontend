@@ -1,9 +1,12 @@
-import React, { createRef } from "react";
+import React, { createRef,useContext } from "react";
 import {Header,Nav,Logo,Mobile,CHK,NavLinks,Dropdown,DropdownMenu,InputDropdownMenu} from "../Header/styles";
 import { Link, NavLink } from "react-router-dom";
 import {decryptLogin} from 'services/api';
+import UserContext from 'context/UserContext';
 
-export default props => {
+export default (props) => {
+  const userData = useContext(UserContext);
+  console.log(userData);
   let mobileInput = createRef();
   let name = 'Painel';
   const user = decryptLogin();
