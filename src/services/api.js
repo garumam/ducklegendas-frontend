@@ -5,12 +5,13 @@ import CryptoJS from 'crypto-js';
 export const isAuthenticated = () => {
 
   // try{
-    const user = localStorage.getItem("user")
-    if(user){
+    const user = localStorage.getItem("user");
+    if(typeof user === 'string' || user instanceof String){
+
       const decrypt = CryptoJS.AES.decrypt(user,'senha secreta') || null;
       if(decrypt){
       const decryptedData = IsJsonString(decrypt.toString(CryptoJS.enc.Utf8));
-      console.log(decrypt)
+      
         if(decryptedData){
           console.log('ddasda',decryptedData.user.access_token)
           const token = decryptedData.user.access_token;
@@ -26,7 +27,7 @@ export const isAuthenticated = () => {
           // console.log(dateToken.getTime() < dateNow.getTime())
           return (dateToken.getTime() > dateNow.getTime() ) ? `Bearer ${token}` : null;
       }else{
-        return null
+        return null;
       }
       
       }
