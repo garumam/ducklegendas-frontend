@@ -1,19 +1,53 @@
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 
 
-export const isAuthenticated = () =>{
-    const token = localStorage.getItem('token');
-    const date = localStorage.getItem('expirate');
-    const dateToken = new Date(date);
-    // let novadatatoken = novadate.getFullYear() + "-" + (novadate.getMonth() + 1) + "-" + novadate.getDate() + " " + novadate.getHours() + ":" + novadate.getMinutes() + ":" + novadate.getSeconds()
+export const isAuthenticated = () => {
 
-    // console.log("data token: "+novadatatoken);
-    const dateNow = new Date();
-    // let formatted_date = datejs.getFullYear() + "-" + (datejs.getMonth() + 1) + "-" + datejs.getDate() + " " + datejs.getHours() + ":" + datejs.getMinutes() + ":" + datejs.getSeconds()
-    // console.log("data atual formatada: "+formatted_date.toString())
-    
-    // console.log(dateToken.getTime() < dateNow.getTime())
-    return (dateToken.getTime() > dateNow.getTime() ) ? `Bearer ${token}` : null;
+  // try{
+    const user = localStorage.getItem("user")
+    if(user){
+      const decrypt = CryptoJS.AES.decrypt(user,'senha secreta') || null;
+      if(decrypt){
+      const decryptedData = IsJsonString(decrypt.toString(CryptoJS.enc.Utf8));
+      console.log(decrypt)
+        if(decryptedData){
+          console.log('ddasda',decryptedData.user.access_token)
+          const token = decryptedData.user.access_token;
+          const date = decryptedData.user.token_expirate;
+          const dateToken = new Date(date);
+          // let novadatatoken = novadate.getFullYear() + "-" + (novadate.getMonth() + 1) + "-" + novadate.getDate() + " " + novadate.getHours() + ":" + novadate.getMinutes() + ":" + novadate.getSeconds()
+      
+          // console.log("data token: "+novadatatoken);
+          const dateNow = new Date();
+          // let formatted_date = datejs.getFullYear() + "-" + (datejs.getMonth() + 1) + "-" + datejs.getDate() + " " + datejs.getHours() + ":" + datejs.getMinutes() + ":" + datejs.getSeconds()
+          // console.log("data atual formatada: "+formatted_date.toString())
+          
+          // console.log(dateToken.getTime() < dateNow.getTime())
+          return (dateToken.getTime() > dateNow.getTime() ) ? `Bearer ${token}` : null;
+      }else{
+        return null
+      }
+      
+      }
+    }
+
+    return null;
+   
+  // }catch{
+  //   console.log('error')
+  //   return null;
+  // }
+   
+   
+}
+
+function IsJsonString(str) {
+  try {
+      return JSON.parse(str);
+  } catch (e) {
+      return false;
+  }
 }
 
 // export const isToken = () =>{

@@ -10,7 +10,7 @@ var estilo = {
   paddingTop: "6.38rem"
 };
 
-const Login = props => {
+const Login = (props) => {
   const { title, history } = props;
   const [errors, setErrors] = useState(null);
   const [input, setInput] = useReducer(
@@ -60,15 +60,15 @@ const Login = props => {
       const encrypt = CryptoJS.AES.encrypt(JSON.stringify(data),'senha secreta')
       console.log("encript data:"+encrypt)
 
-      const decrypt = CryptoJS.AES.decrypt(encrypt.toString(),'senha secreta')
-      console.log("decrypt:",decrypt)
+      // const decrypt = CryptoJS.AES.decrypt(encrypt.toString(),'senha secreta')
+      // console.log("decrypt:",decrypt)
 
-      const decryptedData = JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
-      console.log("decrypt data:",decryptedData)
+      // const decryptedData = JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
+      // console.log("decrypt data:",decryptedData)
 
-      localStorage.setItem("user", JSON.stringify(data));
-      localStorage.setItem("token", data.access_token);
-      localStorage.setItem("expirate", data.token_expirate);
+      localStorage.setItem("user", encrypt);
+      // localStorage.setItem("token", data.access_token);
+      // localStorage.setItem("expirate", data.token_expirate);
       //api.defaults.headers.Authorization = isAuthenticated();
       refreshAuthorization();
       history.push("/dashboard");
