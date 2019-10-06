@@ -6,60 +6,39 @@ const SECRETKEY = 'DUCKLEGENDAS';
 
 export const isAuthenticated = () => {
 
-  // try{
-    const user = localStorage.getItem("user");
-    if(user && (typeof user === 'string' || user instanceof String)){
-    // if(typeof user === 'string' || user instanceof String){
+  const decryptedData = decryptLogin();
+  if(decryptedData){
 
-      const decrypt = CryptoJS.AES.decrypt(user,SECRETKEY) || null;
-      if(decrypt){
-      const decryptedData = IsJsonString(decrypt);
-      
-        if(decryptedData){
-          console.log('ddasda',decryptedData.user.access_token)
-          const token = decryptedData.user.access_token;
-          const date = decryptedData.user.token_expirate;
-          const dateToken = new Date(date);
-          // let novadatatoken = novadate.getFullYear() + "-" + (novadate.getMonth() + 1) + "-" + novadate.getDate() + " " + novadate.getHours() + ":" + novadate.getMinutes() + ":" + novadate.getSeconds()
-      
-          // console.log("data token: "+novadatatoken);
-          const dateNow = new Date();
-          // let formatted_date = datejs.getFullYear() + "-" + (datejs.getMonth() + 1) + "-" + datejs.getDate() + " " + datejs.getHours() + ":" + datejs.getMinutes() + ":" + datejs.getSeconds()
-          // console.log("data atual formatada: "+formatted_date.toString())
-          
-          // console.log(dateToken.getTime() < dateNow.getTime())
-          return (dateToken.getTime() > dateNow.getTime() ) ? `Bearer ${token}` : null;
-      }else{
-        return null;
-      }
-      
-      }
-    }
+    console.log('ddasda',decryptedData.user.access_token)
+    const token = decryptedData.user.access_token;
+    const date = decryptedData.user.token_expirate;
+    const dateToken = new Date(date);
+    // let novadatatoken = novadate.getFullYear() + "-" + (novadate.getMonth() + 1) + "-" + novadate.getDate() + " " + novadate.getHours() + ":" + novadate.getMinutes() + ":" + novadate.getSeconds()
 
-    return null;
-   
-  // }catch{
-  //   console.log('error')
-  //   return null;
-  // }
-   
-   
+    // console.log("data token: "+novadatatoken);
+    const dateNow = new Date();
+    // let formatted_date = datejs.getFullYear() + "-" + (datejs.getMonth() + 1) + "-" + datejs.getDate() + " " + datejs.getHours() + ":" + datejs.getMinutes() + ":" + datejs.getSeconds()
+    // console.log("data atual formatada: "+formatted_date.toString())
+    
+    // console.log(dateToken.getTime() < dateNow.getTime())
+    return (dateToken.getTime() > dateNow.getTime() ) ? `Bearer ${token}` : null;
+
+  }
+
+  return null; 
+
 }
 
 export function encryptLogin(data){
     return CryptoJS.AES.encrypt(JSON.stringify(data),SECRETKEY);
 }
 
-export function decryptLogin(data){
-  const decrypt = CryptoJS.AES.decrypt(localStorage.getItem("user"),SECRETKEY)
-  return JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
-}
-
-function IsJsonString(decrypt) {
+export function decryptLogin(){
   try {
-      return JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
+    const decrypt = CryptoJS.AES.decrypt(localStorage.getItem("user"),SECRETKEY)
+    return JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
   } catch (e) {
-      return false;
+    return false;
   }
 }
 
