@@ -1,6 +1,8 @@
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 
+const SECRETKEY = 'DUCKLEGENDAS';
+
 
 export const isAuthenticated = () => {
 
@@ -9,7 +11,7 @@ export const isAuthenticated = () => {
     if(user && (typeof user === 'string' || user instanceof String)){
     // if(typeof user === 'string' || user instanceof String){
 
-      const decrypt = CryptoJS.AES.decrypt(user,'senha secreta') || null;
+      const decrypt = CryptoJS.AES.decrypt(user,SECRETKEY) || null;
       if(decrypt){
       const decryptedData = IsJsonString(decrypt);
       
@@ -42,6 +44,15 @@ export const isAuthenticated = () => {
   // }
    
    
+}
+
+export function encryptLogin(data){
+    return CryptoJS.AES.encrypt(JSON.stringify(data),SECRETKEY);
+}
+
+export function decryptLogin(data){
+  const decrypt = CryptoJS.AES.decrypt(localStorage.getItem("user"),SECRETKEY)
+  return JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
 }
 
 function IsJsonString(decrypt) {

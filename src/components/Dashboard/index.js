@@ -12,11 +12,11 @@ import {
 import { Avatar } from "@rmwc/avatar";
 import { Ripple } from "@rmwc/ripple";
 import { NavLink, withRouter } from "react-router-dom";
-import {baseUrl, getRequest} from 'services/api';
+import {baseUrl, getRequest,decryptLogin} from 'services/api';
 import logo from "assets/img/duck-128.png";
 import userImg from "assets/img/man.png";
 import "@rmwc/avatar/avatar.css";
-import CryptoJS from 'crypto-js';
+
 
 const dashboardPath = "/dashboard";
 
@@ -25,11 +25,11 @@ const Dashboard = props => {
   const [open, setOpen] = useState(true);
   const refMenu = useRef(null);
 
-  const decrypt = CryptoJS.AES.decrypt(localStorage.getItem("user"),'senha secreta')
-  console.log("decrypt:",decrypt)
-  const decryptedData = JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
-  console.log("decrypt data:",decryptedData)
-  const [data,setData] = useState(decryptedData);
+  // const decrypt = CryptoJS.AES.decrypt(localStorage.getItem("user"),'senha secreta')
+  // console.log("decrypt:",decrypt)
+  // const decryptedData = JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
+  // console.log("decrypt data:",decryptedData)
+  const [data,setData] = useState(decryptLogin());
 
   async function logout(e) {
     e.preventDefault();
