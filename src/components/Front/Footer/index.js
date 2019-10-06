@@ -28,7 +28,7 @@ const Footer = (props) => {
   function subir (e) {
     e.preventDefault();
     window.scroll({ top: 0, left: 0, behavior: "smooth" });
-    setIsLoading(true);
+    setIsLoading(!isLoading);
   }
 
   function fadeIn(el) {
