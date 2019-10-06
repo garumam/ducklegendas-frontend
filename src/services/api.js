@@ -11,7 +11,7 @@ export const isAuthenticated = () => {
 
       const decrypt = CryptoJS.AES.decrypt(user,'senha secreta') || null;
       if(decrypt){
-      const decryptedData = IsJsonString(decrypt.toString(CryptoJS.enc.Utf8));
+      const decryptedData = IsJsonString(decrypt);
       
         if(decryptedData){
           console.log('ddasda',decryptedData.user.access_token)
@@ -44,9 +44,9 @@ export const isAuthenticated = () => {
    
 }
 
-function IsJsonString(str) {
+function IsJsonString(decrypt) {
   try {
-      return JSON.parse(str);
+      return JSON.parse(decrypt.toString(CryptoJS.enc.Utf8));
   } catch (e) {
       return false;
   }
