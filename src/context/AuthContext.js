@@ -14,7 +14,7 @@ function AuthProvider (props) {
             encryptLogin({ user: { ...data.user, ...user } });
         }
     },[user]);
-
+    console.log("user vindo do provider route",user)
     return(
         <AuthContext.Provider value={[user, setUser]}>
             {props.children}

@@ -4,11 +4,11 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from 'context/AuthContext';
 
 export default (props) => {
-  const [user,] = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   let mobileInput = createRef();
 
-  const name = user? user.name || 'Painel' : 'Painel';
+  const name = user ? user.name : 'Painel';
   const link = name === 'Painel' ? '/painel' : '/dashboard'
   
   const navSlide = () => {
