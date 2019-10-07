@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import {
   Header,
   HeaderDashboard,
@@ -12,23 +12,30 @@ import {
 import { Avatar } from "@rmwc/avatar";
 import { Ripple } from "@rmwc/ripple";
 import { NavLink, withRouter } from "react-router-dom";
-import {baseUrl, getRequest,decryptLogin} from 'services/api';
+import { baseUrl, getRequest } from 'services/api';
 import logo from "assets/img/duck-128.png";
 import userImg from "assets/img/man.png";
+import { AuthContext } from 'context/AuthContext';
 import "@rmwc/avatar/avatar.css";
 
 const dashboardPath = "/dashboard";
 
 const Dashboard = props => {
   const {history} = props;
+  const [user, setUser] = useContext(AuthContext);
   const [open, setOpen] = useState(true);
   const refMenu = useRef(null);
-  const [data,setData] = useState(decryptLogin());
 
   async function logout(e) {
     e.preventDefault();
     
     const res = await getRequest('/logout');
+    
+    const resetUser = Object.keys(user).reduce((current, nextKeys) => {
+      return {...current, [nextKeys]: undefined};
+    },{});
+    setUser(resetUser);
+
     if(res.success){
       console.log(res.success);
       localStorage.clear();
@@ -135,8 +142,8 @@ const Dashboard = props => {
           ]}
           endContent={
             <Ripple onClick={()=> props.history.push({
-                pathname: `/dashboard/users/user/${data.user.id}`,
-                state: { item: data.user , islogin : true }
+                pathname: `/dashboard/users/user/${user.id}`,
+                state: { item: user , islogin : true }
               })}>
               <div
                 style={{
@@ -151,10 +158,10 @@ const Dashboard = props => {
                   padding: "0 1.3rem"
                 }}
               >
-                <span style={{ fontSize: ".9rem",paddingLeft:'.5rem' }}>{data.user.name}</span>
+                <span style={{ fontSize: ".9rem",paddingLeft:'.5rem' }}>{user.name}</span>
                 <Avatar
                 style={{height:'48px'}}
-                  src={data.user.image? baseUrl+data.user.image: false || userImg}
+                  src={user.image? baseUrl+user.image: false || userImg}
                   size="xlarge"
                   name="Tony Stark"
                 />

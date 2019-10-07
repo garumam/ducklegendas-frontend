@@ -1,11 +1,13 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useContext } from "react";
 import { LoginSection, Error } from "./styles";
 import { Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import { postRequest, encryptLogin} from "services/api";
 import { withRouter } from "react-router-dom";
+import { AuthContext } from 'context/AuthContext';
 
 const Login = (props) => {
+  const [, setUser] = useContext(AuthContext);
   const { title, history } = props;
   const [errors, setErrors] = useState(null);
   const [input, setInput] = useReducer(
@@ -26,6 +28,7 @@ const Login = (props) => {
     if (res.success) {
       console.log("RESPOSTA LOGAR: ", res.success);
       encryptLogin(res.success);
+      setUser(res.success.user);
       history.push("/dashboard");
     } else if (res.error) {
       setErrors(res.error);

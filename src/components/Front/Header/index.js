@@ -1,16 +1,14 @@
 import React, { createRef,useContext } from "react";
 import {Header,Nav,Logo,Mobile,CHK,NavLinks,Dropdown,DropdownMenu,InputDropdownMenu} from "../Header/styles";
 import { Link, NavLink } from "react-router-dom";
-import {decryptLogin} from 'services/api';
-import AuthContext from 'context/AuthContext';
+import { AuthContext } from 'context/AuthContext';
 
 export default (props) => {
-  const userData = useContext(AuthContext);
-  console.log(userData);
+  const [user,] = useContext(AuthContext);
 
   let mobileInput = createRef();
-  const {user} = decryptLogin();
-  const name =  user ? user.name : 'Painel';
+
+  const name = user? user.name || 'Painel' : 'Painel';
   const link = name === 'Painel' ? '/painel' : '/dashboard'
   
   const navSlide = () => {

@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useReducer, useState, useEffect, useContext } from "react";
 import { Formik } from "formik";
 import { Fab } from "@rmwc/fab";
 import {
@@ -13,8 +13,10 @@ import { withRouter } from "react-router-dom";
 import {baseUrl, getRequest, postRequest} from 'services/api';
 import image from "assets/img/man.png";
 import * as YupValidation from 'services/YupValidation';
+import { AuthContext } from 'context/AuthContext';
 
 const Form = props => {
+  const [user, setUser] = useContext(AuthContext);
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -129,13 +131,14 @@ const Form = props => {
       return formData.append(key, values[key]);
     });
     let uri = '/register';
-
+    let updateContext = false;
     if(data || dataPassed){
       const itemId = data? data.id : dataPassed.id;
       uri = `${uri}/update/${itemId}`
       formData.append('_method', 'PATCH');
+      updateContext = itemId === user.id;
     }
-    
+
     const res = await postRequest(uri, formData, {headers: {'Content-Type': 'multipart/form-data'}});
     console.log('res',res);
     if(res.success){
@@ -143,6 +146,17 @@ const Form = props => {
         anyChange: true,
         errorsReponse: res.success 
       });
+      if(updateContext){
+        const filename = values.image? values.image.name : null;
+        setUser({ 
+          name: values.name,
+          user_type: values.user_type,
+          email: values.email,
+          image: filename? 
+                ('img/users/'+user.id+filename.substring(filename.lastIndexOf('.'), filename.length)) 
+                : user.image
+        });
+      }   
     }else{
       setEntities({
         errorsReponse: res.error 

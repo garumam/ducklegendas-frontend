@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
+import { decryptLogin, encryptLogin } from 'services/api';
 
-const AuthContext = React.createContext({});
+const AuthContext = createContext([{}, () => {}]);
 
-// export const UserProvider = UserContext.Provider;
-// export const UserConsumer = UserContext.Consumer;
-export default AuthContext;
+function AuthProvider (props) {
+    const [user, setUser] = useReducer(
+        (state, newState) => ({ ...state, ...newState }),
+        decryptLogin().user
+      );
+    useEffect(() => {
+        const data = decryptLogin();
+        if(data){
+            encryptLogin({ user: { ...data.user, ...user } });
+        }
+    },[user]);
+
+    return(
+        <AuthContext.Provider value={[user, setUser]}>
+            {props.children}
+        </AuthContext.Provider>
+    );
+}
+
+export { AuthProvider, AuthContext };

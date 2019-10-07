@@ -18,7 +18,7 @@ import Logo from "assets/img/duck-128.png";
 import ResetarSenha from "components/Front/ResetarSenha";
 import TokenExpired from "services/TokenExpired";
 import { isAuthenticated } from "services/api";
-import AuthContext from 'context/AuthContext';
+import { AuthProvider } from 'context/AuthContext';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
@@ -64,7 +64,7 @@ const dashboardPath = "/dashboard";
 export default () => (
   <Router>
     <ScrollToTop>
-      <AuthContext.Provider value={dashboardPath}>
+      <AuthProvider>
         <Switch>
           <AppRoute
             exact
@@ -195,7 +195,7 @@ export default () => (
           />
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>
-      </AuthContext.Provider>
+      </AuthProvider>
     </ScrollToTop>
   </Router>
 );
