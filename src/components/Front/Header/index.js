@@ -7,12 +7,10 @@ import AuthContext from 'context/AuthContext';
 export default (props) => {
   const userData = useContext(AuthContext);
   console.log(userData);
+
   let mobileInput = createRef();
-  let name = 'Painel';
-  const user = decryptLogin();
-  if(user)
-    name = user.user.name;
-  
+  const {user} = decryptLogin();
+  const name =  user ? user.name : 'Painel';
   const link = name === 'Painel' ? '/painel' : '/dashboard'
   
   const navSlide = () => {

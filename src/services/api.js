@@ -18,7 +18,9 @@ export const isAuthenticated = () => {
 }
 
 export function encryptLogin(data){
-    return CryptoJS.AES.encrypt(JSON.stringify(data),SECRETKEY);
+    const dataUser = CryptoJS.AES.encrypt(JSON.stringify(data),SECRETKEY);
+    localStorage.setItem("user", dataUser);
+    refreshAuthorization();
 }
 
 export function decryptLogin(){

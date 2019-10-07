@@ -2,7 +2,7 @@ import React, { useState, useReducer } from "react";
 import { LoginSection, Error } from "./styles";
 import { Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
-import { postRequest, refreshAuthorization, encryptLogin} from "services/api";
+import { postRequest, encryptLogin} from "services/api";
 import { withRouter } from "react-router-dom";
 
 const Login = (props) => {
@@ -24,10 +24,8 @@ const Login = (props) => {
     });
 
     if (res.success) {
-      const data = res.success;
-      console.log("RESPOSTA LOGAR: ", data);
-      localStorage.setItem("user", encryptLogin(data));
-      refreshAuthorization();
+      console.log("RESPOSTA LOGAR: ", res.success);
+      encryptLogin(res.success);
       history.push("/dashboard");
     } else if (res.error) {
       setErrors(res.error);
