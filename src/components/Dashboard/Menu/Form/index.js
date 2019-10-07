@@ -17,6 +17,7 @@ import { AuthContext } from 'context/AuthContext';
 
 const Form = props => {
   const [user, setUser] = useContext(AuthContext);
+  const [data, setData] = useState(null);
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -24,7 +25,6 @@ const Form = props => {
       anyChange: false
     }
   );
-  const [data, setData] = useState(null);
 
   const inputParams = [],
     labels = [],
@@ -125,16 +125,16 @@ const Form = props => {
 
   const store = async (values) => {
     console.log(values);
-
+    let uri = '/register/update/';
+    let updateContext = false;
     const formData = new FormData();
     Object.keys(values).map((key) => {
       return formData.append(key, values[key]);
     });
-    let uri = '/register';
-    let updateContext = false;
+    
     if(data || dataPassed){
       const itemId = data? data.id : dataPassed.id;
-      uri = `${uri}/update/${itemId}`
+      uri = `${uri}${itemId}`
       formData.append('_method', 'PATCH');
       updateContext = itemId === user.id;
     }
