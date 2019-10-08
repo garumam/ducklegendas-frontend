@@ -5,10 +5,8 @@ import { AuthContext } from 'context/AuthContext';
 
 export default (props) => {
   const [user] = useContext(AuthContext);
-
   let mobileInput = createRef();
-
-  const name = user ? user.name : 'Painel';
+  const name =  user.name !== undefined ? user.name : 'Painel';
   const link = name === 'Painel' ? '/painel' : '/dashboard'
   
   const navSlide = () => {
