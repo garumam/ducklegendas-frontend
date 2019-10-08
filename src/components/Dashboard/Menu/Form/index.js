@@ -154,7 +154,8 @@ const Form = props => {
           email: values.email,
           image: filename? 
                 ('img/users/'+user.id+filename.substring(filename.lastIndexOf('.'), filename.length)) 
-                : user.image
+                : user.image,
+          update: true
         });
       }   
     }else{

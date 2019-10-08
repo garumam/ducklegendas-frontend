@@ -6,12 +6,17 @@ const AuthContext = createContext([{}, () => {}]);
 function AuthProvider (props) {
     const [user, setUser] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
-        decryptLogin().user
+        decryptLogin().user,
       );
     useEffect(() => {
-        const data = decryptLogin();
-        if(data){
-            encryptLogin({ user: { ...data.user, ...user } });
+        try{
+            const data = decryptLogin();
+            if(user.update){
+                console.log("encryptLogin use effect",user)
+                encryptLogin({ user: { ...data.user, ...user } });
+            }
+        }catch(e){
+            console.log(e)
         }
     },[user]);
     console.log("user vindo do provider route",user)
