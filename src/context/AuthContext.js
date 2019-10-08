@@ -13,10 +13,11 @@ function AuthProvider (props) {
             const data = decryptLogin();
             if(user.update){
                 console.log("encryptLogin use effect",user)
+                delete user.update;
                 encryptLogin({ user: { ...data.user, ...user } });
             }
         }catch(e){
-            console.log(e)
+            // console.log(e)
         }
     },[user]);
     console.log("user vindo do provider route",user)
