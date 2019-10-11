@@ -13,7 +13,7 @@ const Authorization = allowedRoles => Component => {
       return <Component />;
     } else {
       console.log("Sem permissão!");
-      return <h4 style={{ color: "black" }}>Sem permissão!</h4>;
+      return <h4 style={{ fontWeight:600, padding:'2rem',color: "red" }}>Sem permissão!</h4>;
     }
   };
   return WithAuthorization;

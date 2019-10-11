@@ -95,6 +95,7 @@ table {
     padding: 0;
     box-sizing: border-box;
     outline: 0;
+    font-family: 'Montserrat', sans-serif;
 }
 
 html, body, #root {
