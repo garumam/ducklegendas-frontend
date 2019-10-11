@@ -24,12 +24,9 @@ import ResetarSenha from "components/Front/ResetarSenha";
 import TokenExpired from "services/TokenExpired";
 import { isAuthenticated } from "services/api";
 import { AuthProvider } from "context/AuthContext";
-import Authorization from "services/Authorization";
+import Authorization,{Admin} from "services/Authorization";
 
 const dashboardPath = "/dashboard";
-const User = ["user"];
-const Moderador = ["moderador"];
-const Admin = ["admin", "moderador"];
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route

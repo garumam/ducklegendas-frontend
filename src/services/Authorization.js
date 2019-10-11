@@ -1,6 +1,10 @@
 import React,{useContext} from "react";
 import { AuthContext } from 'context/AuthContext';
 
+export const User = ["user"];
+export const Moderador = ["moderador"];
+export const Admin = ["admin", "moderador"];
+
 const Authorization = allowedRoles => Component => {
   const WithAuthorization = () => {
     const [user] = useContext(AuthContext);
@@ -9,7 +13,7 @@ const Authorization = allowedRoles => Component => {
       return <Component />;
     } else {
       console.log("Sem permissão!");
-      return <h1 style={{ color: "black" }}>Sem permissão!</h1>;
+      return <h4 style={{ color: "black" }}>Sem permissão!</h4>;
     }
   };
   return WithAuthorization;
