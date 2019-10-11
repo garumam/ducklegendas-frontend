@@ -4,8 +4,12 @@ import { AuthContext } from 'context/AuthContext';
 export const User = ["user"];
 export const Moderador = ["moderador"];
 export const Admin = ["admin", "moderador"];
+let roles = [];
 
+export const Can = (user_role) => (roles.includes(user_role) ? true : false)
+  
 const Authorization = allowedRoles => Component => {
+  roles = allowedRoles;
   const WithAuthorization = () => {
     const [user] = useContext(AuthContext);
     console.log("role user", user.user_type);

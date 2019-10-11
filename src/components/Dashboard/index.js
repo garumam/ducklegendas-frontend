@@ -16,6 +16,7 @@ import { baseUrl, getRequest } from 'services/api';
 import logo from "assets/img/duck-128.png";
 import userImg from "assets/img/man.png";
 import { AuthContext } from 'context/AuthContext';
+import { Can } from 'services/Authorization';
 import "@rmwc/avatar/avatar.css";
 
 const dashboardPath = "/dashboard";
@@ -26,6 +27,8 @@ const Dashboard = props => {
   const [open, setOpen] = useState(true);
   const refMenu = useRef(null);
 
+  const can = Can(user.user_type)
+  console.log('FUNCAO CAN ',can)
   async function logout(e) {
     e.preventDefault();
     
