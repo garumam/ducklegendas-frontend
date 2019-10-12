@@ -5,22 +5,22 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import ScrollToTop from "components/App/ScrollToTop";
-import App from "components/App/App.js";
-import Legendas from "components/Front/Legendas";
-import Ranking from "components/Front/Ranking";
-import Gallery from "components/Dashboard/Gallery";
-import Contato from "components/Front/Contato";
-import Post from "components/Front/Post/";
-import Error404 from "components/Front/Error404";
-import Login from "components/Front/Login";
-import Header from "components/Front/Header";
-import Dashboard from "components/Dashboard";
-import Indice from "components/Front/Indice";
-import Form from "components/Dashboard/Menu/Form";
-import List from "components/Dashboard/Menu/List";
+import ScrollToTop from "components/ScrollToTop";
+import App from "App";
+import Legendas from "pages/Front/Legendas";
+import Ranking from "pages/Front/Ranking";
+import Gallery from "pages/Dashboard/Gallery";
+import Contato from "pages/Front/Contato";
+import Post from "pages/Front/Post/";
+import Error404 from "pages/Front/Error404";
+import Login from "pages/Front/Login";
+import Header from "pages/Front/Header";
+import Dashboard from "pages/Dashboard";
+import Indice from "pages/Front/Indice";
+import Form from "pages/Dashboard/Menu/Form";
+import List from "pages/Dashboard/Menu/List";
 import Logo from "assets/img/duck-128.png";
-import ResetarSenha from "components/Front/ResetarSenha";
+import ResetarSenha from "pages/Front/ResetarSenha";
 import TokenExpired from "services/TokenExpired";
 import { isAuthenticated } from "services/api";
 import { AuthProvider } from "context/AuthContext";
