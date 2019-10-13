@@ -42,9 +42,9 @@ const Form = props => {
       validationSchema.push(YupValidation.UserSchema);
       break;
     case 2: //legendas
-      labels.push("Nome", "Categoria", "Ano", "Imagem", "URL", "Autor");
-      types.push("text", "select", "number", "file", "text", "disabled");
-      names.push("name", "categoria", "ano", "img", "url", "autor");
+      labels.push("Nome", "Categoria", "Ano", "URL","Imagem", "Status", "Autor");
+      types.push("text", "select", "number",  "text","file","disabled", "disabled");
+      names.push("name", "categoria", "ano",  "url","img","status", "autor");
       break;
     case 3: //categorias
       labels.push("Nome", "Classificação");
@@ -277,7 +277,8 @@ const Form = props => {
                   }
                   if (input.type === "file") {
                     return (
-                      <DivCustom key={index} style={{ width: "49%" }}>
+                      <DivCustom key={index} style={{ width: "100%",paddingBottom: '1rem' }}>
+                       <label style={{fontSize:'.9rem'}}>Imagem da Legenda</label>
                         <input
                           id="file"
                           name={input.name}
@@ -297,6 +298,7 @@ const Form = props => {
                       <InputText
                         disabled
                         key={index}
+                        value={input.name === 'autor' ? user.name : "Pendente" }
                         label={input.label}
                         onChange={handleChange}
                         onBlur={handleBlur}
