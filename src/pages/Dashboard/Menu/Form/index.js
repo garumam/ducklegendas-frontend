@@ -42,7 +42,7 @@ const Form = props => {
       validationSchema.push(YupValidation.UserSchema);
       break;
     case 2: //legendas
-      labels.push("Nome", "Categoria", "Ano", "URL","Imagem", "Status", "Autor");
+      labels.push("Nome", "Categoria", "Ano", "Link de Download","Imagem", "Status", "Autor");
       types.push("text", "select", "number",  "text","file","disabled", "disabled");
       names.push("name", "categoria", "ano",  "url","img","status", "autor");
       break;
@@ -54,29 +54,20 @@ const Form = props => {
     case 4: //legendas em andamento
       labels.push(
         "Nome",
-        "Categoria",
-        "Ano",
-        "Imagem",
-        "URL",
         "Porcentagem",
+        "Status",
         "Autor"
       );
       types.push(
         "text",
-        "select",
         "number",
-        "file",
-        "text",
-        "number",
+        "disabled",
         "disabled"
       );
       names.push(
         "nome",
-        "categoria",
-        "ano",
-        "img",
-        "url",
         "porcentagem",
+        "status",
         "autor"
       );
       break;
@@ -311,16 +302,17 @@ const Form = props => {
                 case 3: //categorias
                   break;
                 case 4: //toplegendas
-                  if (input.type === "select") {
+                  if (input.type === "disabled") {
                     return (
-                      <SelectCustom
-                        options={["admin", "legender"]}
+                      <InputText
+                        disabled
                         key={index}
+                        value={input.name === 'autor' ? user.name : "Pendente" }
                         label={input.label}
-                        name={input.name}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values[input.name]}
+                        type="text"
+                        name={input.name}
                       />
                     );
                   }
