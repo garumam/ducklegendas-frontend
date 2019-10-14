@@ -1,7 +1,7 @@
 import React, { createRef,useContext } from "react";
 import {Header,Nav,Logo,Mobile,CHK,NavLinks,Dropdown,DropdownMenu,InputDropdownMenu} from "../Header/styles";
 import { Link, NavLink } from "react-router-dom";
-import { AuthContext } from 'context/AuthContext';
+import { AuthContext } from 'utils/AuthContext';
 
 export default (props) => {
   const [user] = useContext(AuthContext);

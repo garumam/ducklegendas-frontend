@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import { postRequest, encryptLogin} from "services/api";
 import { withRouter } from "react-router-dom";
-import { AuthContext } from 'context/AuthContext';
+import { AuthContext } from 'utils/AuthContext';
 
 const Login = (props) => {
   const [, setUser] = useContext(AuthContext);

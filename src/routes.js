@@ -23,7 +23,7 @@ import Logo from "assets/img/duck-128.png";
 import ResetarSenha from "pages/Front/ResetarSenha";
 import TokenExpired from "services/TokenExpired";
 import { isAuthenticated } from "services/api";
-import { AuthProvider } from "context/AuthContext";
+import { AuthProvider } from "utils/AuthContext";
 import Authorization,{Admin} from "services/Authorization";
 
 const dashboardPath = "/dashboard";

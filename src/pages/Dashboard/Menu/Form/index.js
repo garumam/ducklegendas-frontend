@@ -13,7 +13,7 @@ import { withRouter } from "react-router-dom";
 import { baseUrl, getRequest, postRequest } from "services/api";
 import image from "assets/img/man.png";
 import * as YupValidation from "services/YupValidation";
-import { AuthContext } from "context/AuthContext";
+import { AuthContext } from "utils/AuthContext";
 
 const Form = props => {
   const [user, setUser] = useContext(AuthContext);

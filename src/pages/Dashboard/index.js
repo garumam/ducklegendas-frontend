@@ -15,7 +15,7 @@ import { NavLink, withRouter } from "react-router-dom";
 import { baseUrl, getRequest } from 'services/api';
 import logo from "assets/img/duck-128.png";
 import userImg from "assets/img/man.png";
-import { AuthContext } from 'context/AuthContext';
+import { AuthContext } from 'utils/AuthContext';
 import { Can } from 'services/Authorization';
 import "@rmwc/avatar/avatar.css";
 

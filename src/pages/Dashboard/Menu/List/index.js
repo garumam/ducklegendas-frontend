@@ -15,20 +15,11 @@ import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
 import Modal from "components/Modal";
 import "./styles.css";
-import { HeaderCard,InputSearch } from "../Form/styles";
+import { HeaderCard, InputSearch } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
-import {postRequest} from "services/api";
-
-// 10  offset = 100 100%100 = 0
-const Paginator = (items, page) => {
-  page = page || 0;
-  let per_page = 10;
-  let offset = page * per_page;
-  offset = offset >= 100 ? offset % 100 : offset;
-
-  return items.slice(offset).slice(0, per_page);
-};
+import { postRequest } from "services/api";
+import { Paginator } from "utils/Utils";
 
 const List = props => {
   const [openModal, setOpenModal] = useState({ open: false });
@@ -42,7 +33,7 @@ const List = props => {
       total: 0,
       trigSearch: false,
       loading: true,
-      search: '',
+      search: "",
       checked: false
     }
   );
@@ -50,8 +41,8 @@ const List = props => {
   const tableParams = {
     headCells: [],
     headNames: [],
-    formPath: '',
-    uriSearch: ''
+    formPath: "",
+    uriSearch: ""
   };
 
   switch (props.table) {
@@ -59,7 +50,7 @@ const List = props => {
       tableParams.headCells.push("ID", "Nome", "E-mail");
       // headNames são os nomes dos index (key) dos dados
       // da dataPaginada que poderão ser inseridos na tabela
-      tableParams.headNames.push("id", "name", "email"); 
+      tableParams.headNames.push("id", "name", "email");
       tableParams.uriSearch = "users";
       tableParams.formPath = tableParams.uriSearch + "/user";
       break;
@@ -96,7 +87,10 @@ const List = props => {
 
   useEffect(() => {
     async function getItens() {
-      const res = await postRequest(`/${tableParams.uriSearch}?page=${entities.page}`,{ search: entities.search });
+      const res = await postRequest(
+        `/${tableParams.uriSearch}?page=${entities.page}`,
+        { search: entities.search }
+      );
       if (res.success) {
         console.log("Página selecionada: ", entities.pageSelected);
         setEntities({
@@ -107,7 +101,10 @@ const List = props => {
           loading: false
         });
       } else {
-        setOpenModal({ open: true, error: res.error || 'Erro inesperado, por favor atualize a página!'});
+        setOpenModal({
+          open: true,
+          error: res.error || "Erro inesperado, por favor atualize a página!"
+        });
       }
       console.log(res);
     }
@@ -132,11 +129,12 @@ const List = props => {
         onClose={() => setOpenModal({ open: false })}
         show={openModal.open}
         title={"Error"}
-        content={openModal.error}/>
-     
-      {!openModal.open &&
+        content={openModal.error}
+      />
+
+      {!openModal.open && (
         <CircularProgress size="xlarge" style={{ margin: "auto" }} />
-      }
+      )}
     </>
   );
 
@@ -155,9 +153,9 @@ const List = props => {
     }
   };
 
-  const onSearch = (e) => {
+  const onSearch = e => {
     setEntities({ page: 1, pageSelected: 0, trigSearch: !entities.trigSearch });
-  }
+  };
 
   return entities.loading ? (
     error()
@@ -165,52 +163,58 @@ const List = props => {
     <>
       <HeaderCard>
         <h2>{props.title}</h2>
-        <div style={{display:'flex',alignItems:'center'}}>
-        <Switch
-          style={{height:'60px',color:'rgba(0,0,0,.6)',fontWeight:600,fontFamily:'Montserrat, sans-serif'}}
-          id="realTime"
-          checked={entities.checked}
-          onChange={e => setEntities({ checked: e.currentTarget.checked })}
-          label="Tempo real"
-        />
-        <InputSearch 
-          icon={{
-            icon: 'search',
-            tabIndex: 0,
-            onClick: onSearch
-          }}
-          trailingIcon={{
-            icon: 'close',
-            tabIndex: 0,
-            onClick: () => {
-              setEntities({ search: '' })
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Switch
+            style={{
+              height: "60px",
+              color: "rgba(0,0,0,.6)",
+              fontWeight: 600,
+              fontFamily: "Montserrat, sans-serif"
+            }}
+            id="realTime"
+            checked={entities.checked}
+            onChange={e => setEntities({ checked: e.currentTarget.checked })}
+            label="Tempo real"
+          />
+          <InputSearch
+            icon={{
+              icon: "search",
+              tabIndex: 0,
+              onClick: onSearch
+            }}
+            trailingIcon={{
+              icon: "close",
+              tabIndex: 0,
+              onClick: () => {
+                setEntities({ search: "" });
+                entities.checked && onSearch();
+              }
+            }}
+            onKeyUp={e => {
+              if (e.keyCode === 13)
+                //ENTER
+                onSearch();
+            }}
+            value={entities.search}
+            label="Pesquisar..."
+            onChange={e => {
+              setEntities({ search: e.target.value });
               entities.checked && onSearch();
-            }
-          }} 
-          onKeyUp={(e) => {
-            if(e.keyCode === 13) //ENTER
-              onSearch();
-          }}
-          value={entities.search}
-          label="Pesquisar..."
-          onChange={(e) => {
-            setEntities({ search: e.target.value }) 
-            entities.checked && onSearch();
-          }} 
-        />
-      
-        {props.title !== "Ranking" && (
-          <Fab
-            icon="add"
-            type="button"
-            onClick={() => {
-              props.history.push({
-                pathname: tableParams.formPath,
-                state: { entities: entities }
-              });
             }}
           />
-        )}
+
+          {props.title !== "Ranking" && (
+            <Fab
+              icon="add"
+              type="button"
+              onClick={() => {
+                props.history.push({
+                  pathname: tableParams.formPath,
+                  state: { entities: entities }
+                });
+              }}
+            />
+          )}
         </div>
       </HeaderCard>
       <div className="card-border" />
