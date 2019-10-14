@@ -1,8 +1,6 @@
-import {createGlobalStyle}  from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
-
-article,
+export default createGlobalStyle` article,
 aside,
 details,
 figcaption,
@@ -44,13 +42,13 @@ table {
 }
 
 .flex-center {
-    width: 100%;
-    height: calc(100% - 80px);
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    align-self: center;
+  width: 100%;
+  height: calc(100% - 80px);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  align-self: center;
 }
 
 .show {
@@ -91,16 +89,18 @@ table {
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: 0;
-    font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
-html, body, #root {
-    height: 100%;
-    width: 100%;
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
 }
 
 body {
@@ -127,71 +127,74 @@ body {
   -moz-text-shadow: 0 0 1px rgba(0, 0, 0, 0.01);
   -ms-text-shadow: 0 0 1px rgba(0, 0, 0, 0.01);
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.01);
-  user-select:none;
+  user-select: none;
 }
 
 
 .formulario {
-  width:100%;
-   display: flex;
-    padding: 1rem;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    color: var(--textcolor);
-    overflow-y: auto;
+  width: 100%;
+  display: flex;
+  padding: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  color: var(--textcolor);
+  overflow-y: auto;
 }
+
 .formulario label {
   padding-right: 1rem;
 }
 
-.formulario > input:last-child {
+.formulario>input:last-child {
   margin: 0;
 }
-.formulario
-    input,
-    textarea,
-    article input {
-        width: 100%;
-        margin-bottom: .7rem;
-        box-shadow: none;
-        -webkit-appearance: none;
-        border: 1px solid var(--corborda);
-        padding: .5rem 1rem;
-        font-weight: 700;
-        color: var(--textcolor);
-        min-height: 45px;
-        border-radius: 4px;
-    }
 
-    input[type=submit] {
-        background: var(--bgazul);
-        background-size: 200%;
-        color: white;
-        border: none;
-    }
+.formulario input,
+textarea,
+article input {
+  width: 100%;
+  margin-bottom: .7rem;
+  box-shadow: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--corborda);
+  padding: .5rem 1rem;
+  font-weight: 700;
+  color: var(--textcolor);
+  min-height: 45px;
+  border-radius: 4px;
+}
 
-    input[type=submit]:hover {
-        background: var(--bgazulreverse);
-    }
+input[type=submit] {
+  background: var(--bgazul);
+  background-size: 200%;
+  color: white;
+  border: none;
+}
+
+input[type=submit]:hover {
+  background: var(--bgazulreverse);
+}
 
 #overlay {
-  position: fixed;  
-  width: 100%; 
-  height: 100%; 
+  position: fixed;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
+
 img {
   max-width: 100%;
   border-style: none;
   border: 0;
 }
 
-a,a:hover {
+a,
+a:hover {
   color: white;
   text-decoration: none;
 }
@@ -257,19 +260,16 @@ p {
   border-top: 1px solid var(--corborda);
 }
 
-.mdc-text-field:not(.mdc-text-field--disabled)
-:not(.mdc-text-field--outlined)
-:not(.mdc-text-field--textarea) 
-.mdc-text-field__input {
-  border-bottom-color:var(--corborda);
+.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input {
+  border-bottom-color: var(--corborda);
 }
-.mdc-text-field:not(.mdc-text-field--disabled)
-:not(.mdc-text-field--outlined)
-:not(.mdc-text-field--textarea) 
-.mdc-text-field__input:hover {
-  border-bottom-color:var(--corborda);
+
+.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input:hover {
+  border-bottom-color: var(--corborda);
 }
-.nopadding{
-  padding:0 !important;
+
+.nopadding {
+  padding: 0 !important;
 }
+
 `;
