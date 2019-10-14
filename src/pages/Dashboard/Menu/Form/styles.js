@@ -86,12 +86,16 @@ export const HeaderCard = styled.div`
 
 export const Error = styled.div`
   display:flex;
-  flex-direction:column;
   width:100%;
-  justify-content:center;
-  align-items:center;
+  position: relative;
+  flex-direction:column;
+  background:#f8d7da;
+  border-color:#f5c6cb;
+  border-radius:.25rem;
+  margin-bottom:1rem;
+  padding:1rem;
   span{
-    color:red;
+    color:#721c24;
     font-size:.9rem;
   }
   a{

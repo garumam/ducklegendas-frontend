@@ -10,10 +10,10 @@ import {
   Error
 } from "./styles";
 import { withRouter } from "react-router-dom";
-import {baseUrl, getRequest, postRequest} from 'services/api';
+import { baseUrl, getRequest, postRequest } from "services/api";
 import image from "assets/img/man.png";
-import * as YupValidation from 'services/YupValidation';
-import { AuthContext } from 'context/AuthContext';
+import * as YupValidation from "services/YupValidation";
+import { AuthContext } from "context/AuthContext";
 
 const Form = props => {
   const [user, setUser] = useContext(AuthContext);
@@ -24,14 +24,14 @@ const Form = props => {
       errorsReponse: null,
       anyChange: false
     }
-  );
+  ); 
 
   const inputParams = [],
     labels = [],
     types = [],
     names = [],
     validationSchema = [],
-    initialValues={},
+    initialValues = {},
     dataPassed = props.location.state ? props.location.state.item : null;
 
   switch (props.form) {
@@ -42,34 +42,35 @@ const Form = props => {
       validationSchema.push(YupValidation.UserSchema);
       break;
     case 2: //legendas
-      labels.push("Nome", "Categoria", "Ano", "Link de Download","Imagem", "Status", "Autor");
-      types.push("text", "select", "number",  "text","file","disabled", "disabled");
-      names.push("name", "categoria", "ano",  "url","img","status", "autor");
-      break;
-    case 3: //categorias
-      labels.push("Nome", "Classificação");
-      types.push("text", "text");
-      names.push("categoria", "classificacao");
-      break;
-    case 4: //legendas em andamento
       labels.push(
         "Nome",
-        "Porcentagem",
+        "Categoria",
+        "Ano",
+        "Link de Download",
+        "Imagem",
         "Status",
         "Autor"
       );
       types.push(
         "text",
+        "select",
         "number",
+        "text",
+        "file",
         "disabled",
         "disabled"
       );
-      names.push(
-        "nome",
-        "porcentagem",
-        "status",
-        "autor"
-      );
+      names.push("name", "categoria", "ano", "url", "img", "status", "autor");
+      break;
+    case 3: //categorias
+      labels.push("Nome");
+      types.push("text");
+      names.push("categoria");
+      break;
+    case 4: //legendas em andamento
+      labels.push("Nome", "Porcentagem", "Status", "Autor");
+      types.push("text", "number", "disabled", "disabled");
+      names.push("nome", "porcentagem", "status", "autor");
       break;
     case 5: //galeria
       labels.push("Nome", "Descrição");
@@ -80,7 +81,6 @@ const Form = props => {
   }
 
   useEffect(() => {
-
     async function getUser() {
       const res = await getRequest(`/user/${props.match.params.id}`);
       console.log(res.success);
@@ -88,73 +88,81 @@ const Form = props => {
         setData(res.success);
       } else {
         setEntities({
-          errorsReponse: res.error 
+          errorsReponse: res.error
         });
       }
     }
-    if(props.match.params.id && dataPassed === null){
+    if (props.match.params.id && dataPassed === null) {
       getUser();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   //inicio dos inputs
-    for (let index = 0; index < labels.length; index++) {
-      inputParams.push({
-        label: labels[index],
-        type: types[index],
-        name: names[index]
-      });
-      
-      initialValues[names[index]] = dataPassed ? dataPassed[names[index]] : 
-                                          data ? data[names[index]] : '';
-      
-    }
-    Object.keys(initialValues).map((key) => initialValues[key]? null : initialValues[key] = '')
-    console.log('valores iniciais formulário: ' ,initialValues)
-// fim dos inputs
+  for (let index = 0; index < labels.length; index++) {
+    inputParams.push({
+      label: labels[index],
+      type: types[index],
+      name: names[index]
+    });
+
+    initialValues[names[index]] = dataPassed
+      ? dataPassed[names[index]]
+      : data
+      ? data[names[index]]
+      : "";
+  }
+  Object.keys(initialValues).map(key =>
+    initialValues[key] ? null : (initialValues[key] = "")
+  );
+  console.log("valores iniciais formulário: ", initialValues);
+  // fim dos inputs
 
   const store = async (values) => {
     console.log(values);
-    let uri = '/register/update/';
+    let uri = "/register/update/";
     let updateContext = false;
     const formData = new FormData();
-    Object.keys(values).map((key) => {
+    Object.keys(values).map(key => {
       return formData.append(key, values[key]);
     });
-    
-    if(data || dataPassed){
-      const itemId = data? data.id : dataPassed.id;
-      uri = `${uri}${itemId}`
-      formData.append('_method', 'PATCH');
+
+    if (data || dataPassed) {
+      const itemId = data ? data.id : dataPassed.id;
+      uri = `${uri}${itemId}`;
+      formData.append("_method", "PATCH");
       updateContext = itemId === user.id;
     }
 
-    const res = await postRequest(uri, formData, {headers: {'Content-Type': 'multipart/form-data'}});
-    console.log('res',res);
-    if(res.success){
+    const res = await postRequest(uri, formData, {
+      headers: { "Content-Type": "multipart/form-data" }
+    });
+    console.log("res", res);
+    if (res.success) {
       setEntities({
         anyChange: true,
-        errorsReponse: res.success 
+        errorsReponse: res.success
       });
-      if(updateContext){
-        const filename = values.image? values.image.name : null;
-        setUser({ 
+      if (updateContext) {
+        const filename = values.image ? values.image.name : null;
+        setUser({
           name: values.name,
           user_type: values.user_type,
           email: values.email,
-          image: filename? 
-                ('img/users/'+user.id+filename.substring(filename.lastIndexOf('.'), filename.length)) 
-                : user.image,
+          image: filename
+            ? "img/users/" +
+              user.id +
+              filename.substring(filename.lastIndexOf("."), filename.length)
+            : user.image,
           update: true
         });
-      }   
-    }else{
+      }
+    } else {
       setEntities({
-        errorsReponse: res.error 
+        errorsReponse: res.error
       });
     }
-  }
+  };
 
   return (
     <Formik
@@ -182,11 +190,15 @@ const Form = props => {
                 onClick={() => {
                   props.history.replace({
                     pathname: `/dashboard/users`,
-                    state:{ 
-                      anyChange: props.location.state && props.location.state.islogin ? true : entities.anyChange,
-                      entities: props.location.state && props.location.state.entities
+                    state: {
+                      anyChange:
+                        props.location.state && props.location.state.islogin
+                          ? true
+                          : entities.anyChange,
+                      entities:
+                        props.location.state && props.location.state.entities
                     }
-                  });;
+                  });
                 }}
               />
               <Fab icon="save" type="button" onClick={handleSubmit} />
@@ -194,17 +206,22 @@ const Form = props => {
           </HeaderCard>
           <div className="card-border" />
           <CustomForm onSubmit={handleSubmit} className="formulario">
-            <Error>
+            {(Object.keys(errors).length !== 0 || entities.errorsReponse) && (
+              <Error>
                 {entities.errorsReponse &&
                   Object.keys(entities.errorsReponse).map(key => (
-                    <span key={key}>{entities.errorsReponse[key]}</span>
+                    <span key={key}>*{entities.errorsReponse[key]}</span>
                   ))}
-                {inputParams.map((input, index) => (
-                  errors[input.name] && touched[input.name] && (
-                    <span key={index}>{errors[input.name]}</span>
-                  )
-                ))}
-            </Error>
+                {inputParams.map(
+                  (input, index) =>
+                    errors[input.name] &&
+                    touched[input.name] && (
+                      <span key={index}>*{errors[input.name]}</span>
+                    )
+                )}
+              </Error>
+            )}
+
             {inputParams.map((input, index) => {
               switch (props.form) {
                 case 1: //usuários
@@ -233,7 +250,9 @@ const Form = props => {
                           src={
                             values[input.name] instanceof File
                               ? URL.createObjectURL(values[input.name])
-                              : values[input.name]? baseUrl+values[input.name] : image
+                              : values[input.name]
+                              ? baseUrl + values[input.name]
+                              : image
                           }
                           alt=""
                         />
@@ -268,8 +287,13 @@ const Form = props => {
                   }
                   if (input.type === "file") {
                     return (
-                      <DivCustom key={index} style={{ width: "100%",paddingBottom: '1rem' }}>
-                       <label style={{fontSize:'.9rem'}}>Imagem da Legenda</label>
+                      <DivCustom
+                        key={index}
+                        style={{ width: "100%", paddingBottom: "1rem" }}
+                      >
+                        <label style={{ fontSize: ".9rem" }}>
+                          Imagem da Legenda
+                        </label>
                         <input
                           id="file"
                           name={input.name}
@@ -289,7 +313,7 @@ const Form = props => {
                       <InputText
                         disabled
                         key={index}
-                        value={input.name === 'autor' ? user.name : "Pendente" }
+                        value={input.name === "autor" ? user.name : "Pendente"}
                         label={input.label}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -307,7 +331,7 @@ const Form = props => {
                       <InputText
                         disabled
                         key={index}
-                        value={input.name === 'autor' ? user.name : "Pendente" }
+                        value={input.name === "autor" ? user.name : "Pendente"}
                         label={input.label}
                         onChange={handleChange}
                         onBlur={handleBlur}
