@@ -60,7 +60,8 @@ const List = props => {
       tableParams.formPath = tableParams.uriSearch + "/subtitle";
       break;
     case 3: //categorias
-      tableParams.headCells.push("ID", "Nome", "Descrição", "Classificação");
+      tableParams.headCells.push("ID", "Nome");
+      tableParams.headNames.push("id", "name");
       tableParams.uriSearch = "categories";
       tableParams.formPath = tableParams.uriSearch + "/category";
       break;
