@@ -213,6 +213,7 @@ const List = props => {
               onClick={() => {
                 props.history.push({
                   pathname: tableParams.formPath,
+                  oldPath: props.history.location.pathname,
                   state: { entities: entities }
                 });
               }}
@@ -263,6 +264,7 @@ const List = props => {
                       onClick={() => {
                         props.history.push({
                           pathname: `${tableParams.formPath}/${item.id}`,
+                          oldPath: props.history.location.pathname,
                           state: {
                             item: item,
                             entities: entities
