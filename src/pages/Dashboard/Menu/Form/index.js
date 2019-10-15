@@ -121,6 +121,8 @@ const Form = props => {
   console.log("valores iniciais formulário: ", initialValues);
   // fim dos inputs
 
+  const category = initialValues['category'];
+
   const store = async (values) => {
     console.log(values);
     let uri = `/${baseUri}/store`;
@@ -278,17 +280,18 @@ const Form = props => {
                   break;
                 case 2: //legendas
                   if (input.type === "select") {
+                    console.log('input values ',values[input.name].name)
                     const checkUser = user.user_type === 'user' ? 'disabled' : false;
                     return (
                       <SelectCustom
                         disabled={checkUser}
-                        options={input.name === 'category' ? ['1','2'] : ['PENDENTE','APROVADA']}
+                        options={input.name === 'category' ? [{ label : category.name , value : category.id}] : ['PENDENTE','APROVADA']}
                         key={index}
                         label={input.label}
                         name={input.name}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values[input.name]}
+                        value={values[input.name].name === undefined ? values[input.name] : values[input.name].id}
                       />
                     );
                   }
