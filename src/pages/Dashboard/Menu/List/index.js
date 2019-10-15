@@ -18,7 +18,7 @@ import "./styles.css";
 import { HeaderCard, InputSearch } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
-import { postRequest } from "services/api";
+import { getRequest } from "services/api";
 import { Paginator, getBackendUriBase } from "utils/Utils";
 
 const List = props => {
@@ -85,9 +85,8 @@ const List = props => {
 
   useEffect(() => {
     async function getItens() {
-      const res = await postRequest(
-        `/${baseUri}?page=${entities.page}`,
-        { search: entities.search }
+      const res = await getRequest(
+        `/${baseUri}?page=${entities.page}&search=${entities.search}`
       );
       if (res.success) {
         console.log("Página selecionada: ", entities.pageSelected);
