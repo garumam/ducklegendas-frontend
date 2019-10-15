@@ -80,8 +80,6 @@ const Form = props => {
     default:
   }
 
-  console.log(props)
-
   useEffect(() => {
     async function getUser() {
       const res = await getRequest(`/user/${props.match.params.id}`);

@@ -108,7 +108,7 @@ const List = props => {
           error: res.error || "Erro inesperado, por favor atualize a página!"
         });
       }
-      console.log(Paginator(res.success.data, entities.pageSelected));
+      console.log(res);
     }
 
     if (props.location.state) {
