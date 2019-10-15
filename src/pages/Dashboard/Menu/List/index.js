@@ -67,7 +67,8 @@ const List = props => {
       tableParams.formPath = tableParams.uriSearch + "/category";
       break;
     case 4: //legendas em andamento
-      tableParams.headCells.push("ID", "Legenda", "%", "Categoria");
+      tableParams.headCells.push("ID", "Legenda", "%", "Status");
+      tableParams.headNames.push('id','name','percent','status');
       tableParams.uriSearch = "progress";
       tableParams.formPath = tableParams.uriSearch + "/subtitle";
       break;

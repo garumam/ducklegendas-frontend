@@ -70,7 +70,7 @@ const Form = props => {
     case 4: //legendas em andamento
       labels.push("Nome", "Porcentagem", "Status", "Autor");
       types.push("text", "number", "disabled", "disabled");
-      names.push("nome", "porcentagem", "status", "autor");
+      names.push("name", "percent", "status", "autor");
       break;
     case 5: //galeria
       labels.push("Nome", "Descrição");
