@@ -63,7 +63,7 @@ const Form = props => {
         "disabled",
         "disabled"
       );
-      names.push("name", "category", "year", "url", "image", "status", "autor");
+      names.push("name", "category", "year", "url", "image", "status", "author");
       break;
     case 3: //categorias
       labels.push("Nome");
@@ -280,7 +280,7 @@ const Form = props => {
                   if (input.type === "select") {
                     return (
                       <SelectCustom
-                        options={["categoria 1", "categoria 2"]}
+                        options={["1", "2"]}
                         key={index}
                         label={input.label}
                         name={input.name}
@@ -318,7 +318,7 @@ const Form = props => {
                       <InputText
                         disabled
                         key={index}
-                        value={input.name === "autor" ? user.name : "Pendente"}
+                        value={input.name === "author" ? user.name : "Pendente"}
                         label={input.label}
                         onChange={handleChange}
                         onBlur={handleBlur}

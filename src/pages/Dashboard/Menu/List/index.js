@@ -54,8 +54,8 @@ const List = props => {
       tableParams.formPath = baseUri + "/user";
       break;
     case 2: //legendas
-      tableParams.headCells.push("ID", "Nome", "Ano", "Status","Categoria");
-      tableParams.headNames.push("id", "name", "year", "status", "category");
+      tableParams.headCells.push("ID", "Nome", "Ano", "Categoria", "Status");
+      tableParams.headNames.push("id", "name", "year", "category", "status");
       tableParams.formPath = baseUri + "/subtitle";
       break;
     case 3: //categorias
@@ -238,9 +238,9 @@ const List = props => {
             {entities.dataPaginada &&
               entities.dataPaginada.map((item, index) => (
                 <DataTableRow key={index}>
-                  {Object.keys(item).map(
+                  {tableParams.headNames.map(
                     (objectKey, i) =>
-                      tableParams.headNames.includes(objectKey) && (
+                      item[objectKey] && (
                         <DataTableCell key={i}>{item[objectKey]}</DataTableCell>
                       )
                   )}
