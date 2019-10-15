@@ -60,7 +60,7 @@ const Form = props => {
         "number",
         "text",
         "file",
-        "disabled",
+        "select",
         "disabled"
       );
       names.push("name", "category", "year", "url", "image", "status", "author");
@@ -278,9 +278,11 @@ const Form = props => {
                   break;
                 case 2: //legendas
                   if (input.type === "select") {
+                    const checkUser = user.user_type === 'user' ? 'disabled' : false;
                     return (
                       <SelectCustom
-                        options={["1", "2"]}
+                        disabled={checkUser}
+                        options={input.name === 'category' ? ['1','2'] : ['PENDENTE','CONCLUÍDA']}
                         key={index}
                         label={input.label}
                         name={input.name}
@@ -318,7 +320,7 @@ const Form = props => {
                       <InputText
                         disabled
                         key={index}
-                        value={input.name === "author" ? user.name : "Pendente"}
+                        value={input.name === "author" && user.name}
                         label={input.label}
                         onChange={handleChange}
                         onBlur={handleBlur}
