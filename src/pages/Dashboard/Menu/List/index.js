@@ -55,7 +55,8 @@ const List = props => {
       tableParams.formPath = tableParams.uriSearch + "/user";
       break;
     case 2: //legendas
-      tableParams.headCells.push("ID", "Nome", "Categoria", "Autor");
+      tableParams.headCells.push("ID", "Nome", "Ano", "Status","Categoria");
+      tableParams.headNames.push("id", "name", "year", "status", "category");
       tableParams.uriSearch = "subtitles";
       tableParams.formPath = tableParams.uriSearch + "/subtitle";
       break;
@@ -107,7 +108,7 @@ const List = props => {
           error: res.error || "Erro inesperado, por favor atualize a página!"
         });
       }
-      console.log(res);
+      console.log(Paginator(res.success.data, entities.pageSelected));
     }
 
     if (props.location.state) {

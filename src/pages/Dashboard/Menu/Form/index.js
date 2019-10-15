@@ -60,7 +60,7 @@ const Form = props => {
         "disabled",
         "disabled"
       );
-      names.push("name", "categoria", "ano", "url", "img", "status", "autor");
+      names.push("name", "category", "year", "url", "image", "status", "autor");
       break;
     case 3: //categorias
       labels.push("Nome");
@@ -79,6 +79,8 @@ const Form = props => {
       break;
     default:
   }
+
+  console.log(props)
 
   useEffect(() => {
     async function getUser() {
@@ -189,7 +191,7 @@ const Form = props => {
                 type="button"
                 onClick={() => {
                   props.history.replace({
-                    pathname: `/dashboard/users`,
+                    pathname: props.history.goBack(),
                     state: {
                       anyChange:
                         props.location.state && props.location.state.islogin
