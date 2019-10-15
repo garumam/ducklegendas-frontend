@@ -241,7 +241,7 @@ const List = props => {
                   {tableParams.headNames.map(
                     (objectKey, i) =>
                       item[objectKey] && (
-                        <DataTableCell key={i}>{item[objectKey]}</DataTableCell>
+                        <DataTableCell key={i}>{ typeof item[objectKey] === 'object' ? item[objectKey].name : item[objectKey]}</DataTableCell>
                       )
                   )}
 

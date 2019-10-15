@@ -282,7 +282,7 @@ const Form = props => {
                     return (
                       <SelectCustom
                         disabled={checkUser}
-                        options={input.name === 'category' ? ['1','2'] : ['PENDENTE','CONCLUÍDA']}
+                        options={input.name === 'category' ? ['1','2'] : ['PENDENTE','APROVADA']}
                         key={index}
                         label={input.label}
                         name={input.name}
