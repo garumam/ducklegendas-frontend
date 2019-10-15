@@ -14,6 +14,7 @@ import { baseUrl, getRequest, postRequest } from "services/api";
 import image from "assets/img/man.png";
 import * as YupValidation from "services/YupValidation";
 import { AuthContext } from "utils/AuthContext";
+import { getBackendUriBase } from "utils/Utils";
 
 const Form = props => {
   const [user, setUser] = useContext(AuthContext);
@@ -33,6 +34,8 @@ const Form = props => {
     validationSchema = [],
     initialValues = {},
     dataPassed = props.location.state ? props.location.state.item : null;
+
+  const baseUri = getBackendUriBase(props.history.location.pathname);
 
   switch (props.form) {
     case 1: //usuários
@@ -65,7 +68,7 @@ const Form = props => {
     case 3: //categorias
       labels.push("Nome");
       types.push("text");
-      names.push("categoria");
+      names.push("name");
       break;
     case 4: //legendas em andamento
       labels.push("Nome", "Porcentagem", "Status", "Autor");
@@ -81,8 +84,8 @@ const Form = props => {
   }
 
   useEffect(() => {
-    async function getUser() {
-      const res = await getRequest(`/user/${props.match.params.id}`);
+    async function getItem() {
+      const res = await getRequest(`/${baseUri}/${props.match.params.id}`);
       console.log(res.success);
       if (res.success) {
         setData(res.success);
@@ -93,7 +96,7 @@ const Form = props => {
       }
     }
     if (props.match.params.id && dataPassed === null) {
-      getUser();
+      getItem();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -120,7 +123,7 @@ const Form = props => {
 
   const store = async (values) => {
     console.log(values);
-    let uri = "/register/update/";
+    let uri = `/${baseUri}/store`;
     let updateContext = false;
     const formData = new FormData();
     Object.keys(values).map(key => {
@@ -129,9 +132,10 @@ const Form = props => {
 
     if (data || dataPassed) {
       const itemId = data ? data.id : dataPassed.id;
-      uri = `${uri}${itemId}`;
+      uri = `/${baseUri}/${itemId}`;
       formData.append("_method", "PATCH");
-      updateContext = itemId === user.id;
+      if(baseUri === 'users')
+        updateContext = itemId === user.id;
     }
 
     const res = await postRequest(uri, formData, {
@@ -189,7 +193,7 @@ const Form = props => {
                 type="button"
                 onClick={() => {
                   props.history.replace({
-                    pathname: props.location.oldPath || "/dashboard",
+                    pathname: `/dashboard/${baseUri}`,
                     state: {
                       anyChange:
                         props.location.state && props.location.state.islogin

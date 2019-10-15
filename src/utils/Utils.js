@@ -6,3 +6,12 @@ export const Paginator = (items, page) => {
     offset = offset >= 100 ? offset % 100 : offset;
     return items.slice(offset).slice(0, per_page);
   };
+
+export const getBackendUriBase = (path) => {
+  let baseUri = path;
+  baseUri = baseUri.replace("/dashboard/", "");
+  if(baseUri.indexOf("/") !== -1){
+    baseUri = baseUri.substring(0,baseUri.indexOf("/"));
+  }
+  return baseUri;
+}

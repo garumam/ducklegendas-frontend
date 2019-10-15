@@ -19,7 +19,7 @@ import { HeaderCard, InputSearch } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
 import { postRequest } from "services/api";
-import { Paginator } from "utils/Utils";
+import { Paginator, getBackendUriBase } from "utils/Utils";
 
 const List = props => {
   const [openModal, setOpenModal] = useState({ open: false });
@@ -41,9 +41,9 @@ const List = props => {
   const tableParams = {
     headCells: [],
     headNames: [],
-    formPath: "",
-    uriSearch: ""
+    formPath: ""
   };
+  const baseUri = getBackendUriBase(props.history.location.pathname);
 
   switch (props.table) {
     case 1: //usuários
@@ -51,31 +51,26 @@ const List = props => {
       // headNames são os nomes dos index (key) dos dados
       // da dataPaginada que poderão ser inseridos na tabela
       tableParams.headNames.push("id", "name", "email");
-      tableParams.uriSearch = "users";
-      tableParams.formPath = tableParams.uriSearch + "/user";
+      tableParams.formPath = baseUri + "/user";
       break;
     case 2: //legendas
       tableParams.headCells.push("ID", "Nome", "Ano", "Status","Categoria");
       tableParams.headNames.push("id", "name", "year", "status", "category");
-      tableParams.uriSearch = "subtitles";
-      tableParams.formPath = tableParams.uriSearch + "/subtitle";
+      tableParams.formPath = baseUri + "/subtitle";
       break;
     case 3: //categorias
       tableParams.headCells.push("ID", "Nome");
       tableParams.headNames.push("id", "name");
-      tableParams.uriSearch = "categories";
-      tableParams.formPath = tableParams.uriSearch + "/category";
+      tableParams.formPath = baseUri + "/category";
       break;
     case 4: //legendas em andamento
       tableParams.headCells.push("ID", "Legenda", "%", "Status");
       tableParams.headNames.push('id','name','percent','status');
-      tableParams.uriSearch = "progress";
-      tableParams.formPath = tableParams.uriSearch + "/subtitle";
+      tableParams.formPath = baseUri + "/subtitle";
       break;
     case 5: //galeria
       tableParams.headCells.push("ID", "Nome", "Descrição", "Descrição2");
-      tableParams.uriSearch = "gallery";
-      tableParams.formPath = tableParams.uriSearch + "/image";
+      tableParams.formPath = baseUri + "/image";
       break;
     case 6: //ranking
       tableParams.headCells.push(
@@ -91,7 +86,7 @@ const List = props => {
   useEffect(() => {
     async function getItens() {
       const res = await postRequest(
-        `/${tableParams.uriSearch}?page=${entities.page}`,
+        `/${baseUri}?page=${entities.page}`,
         { search: entities.search }
       );
       if (res.success) {
@@ -213,7 +208,6 @@ const List = props => {
               onClick={() => {
                 props.history.push({
                   pathname: tableParams.formPath,
-                  oldPath: props.history.location.pathname,
                   state: { entities: entities }
                 });
               }}
@@ -264,7 +258,6 @@ const List = props => {
                       onClick={() => {
                         props.history.push({
                           pathname: `${tableParams.formPath}/${item.id}`,
-                          oldPath: props.history.location.pathname,
                           state: {
                             item: item,
                             entities: entities
