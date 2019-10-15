@@ -114,10 +114,13 @@ const Form = props => {
       : data
       ? data[names[index]]
       : "";
+      console.log("valores iniciais data: ", data);
   }
   Object.keys(initialValues).map(key =>
     initialValues[key] ? null : (initialValues[key] = "")
   );
+
+  
   console.log("valores iniciais formulário: ", initialValues);
   // fim dos inputs
 
