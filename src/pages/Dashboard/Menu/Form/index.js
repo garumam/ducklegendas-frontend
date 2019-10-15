@@ -32,6 +32,7 @@ const Form = props => {
     names = [],
     validationSchema = [],
     initialValues = {},
+    listPath = [],
     dataPassed = props.location.state ? props.location.state.item : null;
 
   switch (props.form) {
@@ -40,6 +41,7 @@ const Form = props => {
       types.push("text", "email", "password", "select", "file");
       names.push("name", "email", "password", "user_type", "image");
       validationSchema.push(YupValidation.UserSchema);
+      listPath.push("/dashboard/users");
       break;
     case 2: //legendas
       labels.push(
@@ -61,16 +63,20 @@ const Form = props => {
         "disabled"
       );
       names.push("name", "category", "year", "url", "image", "status", "autor");
+
+      listPath.push("/dashboard/subtitles");
       break;
     case 3: //categorias
       labels.push("Nome");
       types.push("text");
       names.push("categoria");
+      listPath.push("/dashboard/categories");
       break;
     case 4: //legendas em andamento
       labels.push("Nome", "Porcentagem", "Status", "Autor");
       types.push("text", "number", "disabled", "disabled");
       names.push("name", "percent", "status", "autor");
+      listPath.push("/dashboard/progress");
       break;
     case 5: //galeria
       labels.push("Nome", "Descrição");
@@ -189,7 +195,7 @@ const Form = props => {
                 type="button"
                 onClick={() => {
                   props.history.replace({
-                    pathname: props.history.goBack(),
+                    pathname: listPath[0],
                     state: {
                       anyChange:
                         props.location.state && props.location.state.islogin
@@ -206,6 +212,7 @@ const Form = props => {
           </HeaderCard>
           <div className="card-border" />
           <CustomForm onSubmit={handleSubmit} className="formulario">
+
             {(Object.keys(errors).length !== 0 || entities.errorsReponse) && (
               <Error>
                 {entities.errorsReponse &&

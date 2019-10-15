@@ -94,6 +94,11 @@ export const Error = styled.div`
   border-radius:.25rem;
   margin-bottom:1rem;
   padding:1rem;
+
+  :empty {
+    display: none;
+  }
+
   span{
     color:#721c24;
     font-size:.9rem;
