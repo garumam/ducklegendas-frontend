@@ -115,9 +115,9 @@ const Form = props => {
       }
     }
     if ((props.match.params.id && dataPassed === null) 
-          ||  (props.history.location.pathname.indexOf('subtitle') !== -1 
-                   && data.categories.length === 0)) {
-      getItem();
+          || (props.history.location.pathname.indexOf('subtitle') !== -1 
+          && data.categories.length === 0)) {
+        getItem();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
