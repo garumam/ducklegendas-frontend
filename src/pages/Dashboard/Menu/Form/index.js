@@ -19,9 +19,8 @@ import { Inputs } from "utils/Inputs";
 
 const Form = props => {
 
-  let categories = props.location.state && props.location.state.entities 
-                                        && props.location.state.entities.categories;
-  categories = prepareCategories(categories);
+  const categories = props.location.state && props.location.state.entities 
+                            && prepareCategories(props.location.state.entities.categories);
 
   const [user, setUser] = useContext(AuthContext);
   const [data, setData] = useState({
