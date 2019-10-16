@@ -18,8 +18,8 @@ import { getBackendUriBase } from "utils/Utils";
 
 const Form = props => {
 
-  let categories = props.location.state ? props.location.state.entities.categories 
-                                        : null ;
+  let categories = props.location.state && props.location.state.entities 
+                                        && props.location.state.entities.categories;
   categories = categories && categories.map((category) => ({
      label : category.name , value : category.id
     })
