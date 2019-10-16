@@ -47,6 +47,7 @@ const Form = props => {
     dataPassed = props.location.state ? props.location.state.item : null;
 
   const baseUri = getBackendUriBase(props.history.location.pathname);
+  const checkUser = user.user_type === 'user' ? 'disabled' : false;
 
   switch (props.form) {
     case 1: //usuários
@@ -83,8 +84,8 @@ const Form = props => {
       break;
     case 4: //legendas em andamento
       labels.push("Nome", "Porcentagem", "Status", "Autor");
-      types.push("text", "number", "disabled", "disabled");
-      names.push("name", "percent", "status", "autor");
+      types.push("text", "number", "select", "disabled");
+      names.push("name", "percent", "status", "author");
       break;
     case 5: //galeria
       labels.push("Nome", "Descrição");
@@ -300,8 +301,6 @@ const Form = props => {
                   break;
                 case 2: //legendas
                   if (input.type === "select") {
-                    console.log('input values ',values[input.name].name)
-                    const checkUser = user.user_type === 'user' ? 'disabled' : false;
                     return (
                       <SelectCustom
                         disabled={checkUser}
@@ -356,18 +355,18 @@ const Form = props => {
                 case 3: //categorias
                   break;
                 case 4: //toplegendas
-                  if (input.type === "disabled") {
+                  if (input.type === "select") {
                     return (
-                      <InputText
-                        disabled
-                        key={index}
-                        value={input.name === "autor" ? user.name : "Pendente"}
-                        label={input.label}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        type="text"
-                        name={input.name}
-                      />
+                        <SelectCustom
+                          disabled={checkUser}
+                          options={['EM ANDAMENTO','CONCLUÍDA']}
+                          key={index}
+                          label={input.label}
+                          name={input.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values[input.name]}
+                        />
                     );
                   }
 
@@ -393,6 +392,7 @@ const Form = props => {
                       <InputText
                         disabled
                         key={index}
+                        value={input.name === "author" && user.name}
                         label={input.label}
                         onChange={handleChange}
                         onBlur={handleBlur}
