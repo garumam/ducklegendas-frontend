@@ -15,3 +15,34 @@ export const getBackendUriBase = (path) => {
   }
   return baseUri;
 }
+
+export const setInputsParams = (labels, types, names, dataPassed, data) => {
+  const inputParams = [],
+    initialValues = {};
+
+  for (let index = 0; index < labels.length; index++) {
+    inputParams.push({
+      label: labels[index],
+      type: types[index],
+      name: names[index]
+    });
+
+    initialValues[names[index]] = dataPassed
+      ? dataPassed[names[index]]
+      : data.values
+      ? data.values[names[index]]
+      : "";
+  }
+  Object.keys(initialValues).map(key =>
+    initialValues[key] ? null : (initialValues[key] = "")
+  );
+
+  return [inputParams, initialValues];
+}
+
+export const prepareCategories = (categories) => {
+  return categories && categories.map((category) => ({
+    label : category.name , value : category.id
+   })
+ );
+}

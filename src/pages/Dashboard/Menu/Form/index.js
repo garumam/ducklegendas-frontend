@@ -14,16 +14,14 @@ import { baseUrl, getRequest, postRequest } from "services/api";
 import image from "assets/img/man.png";
 import * as YupValidation from "services/YupValidation";
 import { AuthContext } from "utils/AuthContext";
-import { getBackendUriBase } from "utils/Utils";
+import { getBackendUriBase, setInputsParams, prepareCategories } from "utils/Utils";
+import { Inputs } from "utils/Inputs";
 
 const Form = props => {
 
   let categories = props.location.state && props.location.state.entities 
                                         && props.location.state.entities.categories;
-  categories = categories && categories.map((category) => ({
-     label : category.name , value : category.id
-    })
-  );
+  categories = prepareCategories(categories);
 
   const [user, setUser] = useContext(AuthContext);
   const [data, setData] = useState({
@@ -38,58 +36,29 @@ const Form = props => {
     }
   ); 
   
-  const inputParams = [],
-    labels = [],
-    types = [],
-    names = [],
-    validationSchema = [],
-    initialValues = {},
-    dataPassed = props.location.state ? props.location.state.item : null;
+  const validationSchema = [],
+    dataPassed = props.location.state ? props.location.state.item : null;  
+
+  let params = {};  
 
   const baseUri = getBackendUriBase(props.history.location.pathname);
   const checkUser = user.user_type === 'user' ? 'disabled' : false;
   switch (props.form) {
     case 1: //usuários
-      labels.push("Nome", "E-mail", "Senha", "Tipo", "Imagem");
-      types.push("text", "email", "password", "select", "file");
-      names.push("name", "email", "password", "user_type", "image");
+      params = Inputs.user;
       validationSchema.push(YupValidation.UserSchema);
       break;
     case 2: //legendas
-      labels.push(
-        "Nome",
-        "Categoria",
-        "Ano",
-        "Link de Download",
-        "Imagem",
-        "Status",
-        "Autor"
-      );
-      types.push(
-        "text",
-        "select",
-        "number",
-        "text",
-        "file",
-        "select",
-        "disabled"
-      );
-      names.push("name", "category", "year", "url", "image", "status", "author");
+      params = Inputs.subtitle;
       break;
     case 3: //categorias
-      labels.push("Nome");
-      types.push("text");
-      names.push("name");
+      params = Inputs.category;
       break;
     case 4: //legendas em andamento
-      labels.push("Nome", "Porcentagem", "Status", "Autor");
-      types.push("text", "number", "select", "disabled");
-      names.push("name", "percent", "status", "author");
+      params = Inputs.progress;
       break;
     case 5: //galeria
-      labels.push("Nome", "Descrição");
-      types.push("text", "text");
-      names.push("nome", "descricao");
+      params = Inputs.gallery;
       break;
     default:
   }
@@ -99,13 +68,9 @@ const Form = props => {
       const res = await getRequest(`/${baseUri}/${props.match.params.id}`);
       // console.log(res.success);
       if (res.success || res.categories) {
-        let categories = res.categories && res.categories.map((category) => ({
-          label : category.name , value : category.id
-         })
-        );
         setData({
           values: res.success,
-          categories: categories
+          categories: prepareCategories(res.categories)
         });
       } else {
         setEntities({
@@ -114,7 +79,7 @@ const Form = props => {
       }
     }
     if ((props.match.params.id && dataPassed === null) || 
-      (props.form === 2 && data.categories.length === 0 && props.form !== 4)) {
+      (baseUri === 'subtitles' && data.categories.length === 0)) {
         getItem();
     }
 
@@ -122,24 +87,14 @@ const Form = props => {
   }, []);
 
   //inicio dos inputs
-  for (let index = 0; index < labels.length; index++) {
-    inputParams.push({
-      label: labels[index],
-      type: types[index],
-      name: names[index]
-    });
-
-    initialValues[names[index]] = dataPassed
-      ? dataPassed[names[index]]
-      : data.values
-      ? data.values[names[index]]
-      : "";
-  }
-  Object.keys(initialValues).map(key =>
-    initialValues[key] ? null : (initialValues[key] = "")
+  const [inputParams, initialValues] = setInputsParams(
+    params.labels, 
+    params.types, 
+    params.names, 
+    dataPassed, 
+    data
   );
 
-  
   console.log("valores iniciais formulário: ", initialValues);
   // fim dos inputs
 
