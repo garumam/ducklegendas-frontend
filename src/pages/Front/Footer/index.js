@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useRef } from "react";
 import { Rodape, FooterLogo, FooterBottom, ReturnToTop } from "./styles";
 import CopyrightIMG from "../../../assets/img/copyright24x.png";
 import { Link } from "react-router-dom";
+import { ROUTES } from 'utils/RoutePaths';
 
 const Footer = props => {
   const returntop = useRef();
@@ -46,17 +47,17 @@ const Footer = props => {
                 <img src={props.logo} className="img-fluid" alt="footer logo" />
                 <ul>
                   <li>
-                    <Link to="/" alt="home">
+                    <Link to={ROUTES.HOME} alt="home">
                       Home
                     </Link>
                   </li>
                   <li>
-                    <Link to="/series" alt="series">
+                    <Link to={ROUTES.SERIES} alt="series">
                       Series
                     </Link>
                   </li>
                   <li>
-                    <Link to="/filmes" alt="filmes">
+                    <Link to={ROUTES.FILMES} alt="filmes">
                       Filmes
                     </Link>
                   </li>
@@ -66,12 +67,12 @@ const Footer = props => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/contato" alt="contato">
+                    <Link to={ROUTES.CONTATO} alt="contato">
                       Contato
                     </Link>
                   </li>
                   <li>
-                    <Link to="/painel" alt="painel">
+                    <Link to={ROUTES.LOGIN} alt="painel">
                       Painel
                     </Link>
                   </li>

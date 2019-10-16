@@ -1,5 +1,6 @@
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
+import { ROUTES } from 'utils/RoutePaths';
 
 const SECRETKEY = 'DUCKLEGENDAS';
 
@@ -57,7 +58,7 @@ api.interceptors.response.use((response) => {
     }else{
       if(error.response.status === 401){
         localStorage.clear();
-        window.location.replace(`${window.location.origin}/painel`);
+        window.location.replace(`${window.location.origin}${ROUTES.LOGIN}`);
       }
       errorResponse.error = error.response.data.error;
     }

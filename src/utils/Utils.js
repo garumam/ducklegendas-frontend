@@ -1,3 +1,4 @@
+import { ROUTES } from 'utils/RoutePaths';
 // 10  offset = 100 100%100 = 0
 export const Paginator = (items, page) => {
     page = page || 0;
@@ -9,7 +10,7 @@ export const Paginator = (items, page) => {
 
 export const getBackendUriBase = (path) => {
   let baseUri = path;
-  baseUri = baseUri.replace("/dashboard/", "");
+  baseUri = baseUri.replace(`${ROUTES.DASHBOARD.HOME}/`, "");
   if(baseUri.indexOf("/") !== -1){
     baseUri = baseUri.substring(0,baseUri.indexOf("/"));
   }

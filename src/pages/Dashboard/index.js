@@ -18,8 +18,7 @@ import userImg from "assets/img/man.png";
 import { AuthContext } from 'utils/AuthContext';
 import { Can } from 'services/Authorization';
 import "@rmwc/avatar/avatar.css";
-
-const dashboardPath = "/dashboard";
+import { ROUTES } from 'utils/RoutePaths';
 
 const Dashboard = props => {
   const {history} = props;
@@ -42,7 +41,7 @@ const Dashboard = props => {
     if(res.success){
       // console.log(res.success);
       localStorage.clear();
-      history.push('/painel');
+      history.push(ROUTES.LOGIN);
     }else if(res.error){
       console.log('Problema no logout: ',res.error);
       localStorage.clear();
@@ -66,7 +65,7 @@ const Dashboard = props => {
               <NavLink
                 activeClassName="is-active"
                 exact
-                to={dashboardPath}
+                to={ROUTES.DASHBOARD.HOME}
                 alt="Home"
               >
                 Home
@@ -75,7 +74,7 @@ const Dashboard = props => {
             <li>
               <NavLink
                 activeClassName="is-active"
-                to={`${dashboardPath}/rankings`}
+                to={ROUTES.DASHBOARD.RANKING}
                 alt="Ranking"
               >
                 Ranking
@@ -85,7 +84,7 @@ const Dashboard = props => {
             <li>
               <NavLink
                 activeClassName="is-active"
-                to={`${dashboardPath}/subtitles`}
+                to={ROUTES.DASHBOARD.SUBTITLE.LIST}
                 alt="Legendas"
               >
                 Legendas
@@ -94,7 +93,7 @@ const Dashboard = props => {
             <li>
               <NavLink
                 activeClassName="is-active"
-                to={`${dashboardPath}/progress`}
+                to={ROUTES.DASHBOARD.PROGRESS.LIST}
                 alt="Legendas em andamento"
               >
                 Em andamento
@@ -104,7 +103,7 @@ const Dashboard = props => {
             <li>
               <NavLink
                 activeClassName="is-active"
-                to={`${dashboardPath}/categories`}
+                to={ROUTES.DASHBOARD.CATEGORY.LIST}
                 alt="Categorias"
               >
                 Categorias
@@ -113,7 +112,7 @@ const Dashboard = props => {
             <li>
               <NavLink
                 activeClassName="is-active"
-                to={`${dashboardPath}/gallery`}
+                to={ROUTES.DASHBOARD.GALLERY.LIST}
                 alt="Galeria"
               >
                 Galeria
@@ -122,7 +121,7 @@ const Dashboard = props => {
             <li>
               <NavLink
                 activeClassName="is-active"
-                to={`${dashboardPath}/users`}
+                to={ROUTES.DASHBOARD.USER.LIST}
                 alt="Usuarios"
               >
                 Usuários
@@ -145,7 +144,7 @@ const Dashboard = props => {
           ]}
           endContent={
             <Ripple onClick={()=> props.history.push({
-                pathname: `/dashboard/users/user/${user.id}`,
+                pathname: `${ROUTES.DASHBOARD.USER.FORM}/${user.id}`,
                 state: { item: user , islogin : true }
               })}>
               <div

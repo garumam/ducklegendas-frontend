@@ -20,6 +20,7 @@ import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
 import { getRequest } from "services/api";
 import { Paginator, getBackendUriBase } from "utils/Utils";
+import { ROUTES } from 'utils/RoutePaths';
 
 const List = props => {
   const [openModal, setOpenModal] = useState({ open: false });
@@ -51,26 +52,26 @@ const List = props => {
       // headNames são os nomes dos index (key) dos dados
       // da dataPaginada que poderão ser inseridos na tabela
       tableParams.headNames.push("id", "name", "email");
-      tableParams.formPath = baseUri + "/user";
+      tableParams.formPath = ROUTES.DASHBOARD.USER.FORM;
       break;
     case 2: //legendas
       tableParams.headCells.push("ID", "Nome", "Ano", "Categoria", "Status");
       tableParams.headNames.push("id", "name", "year", "category", "status");
-      tableParams.formPath = baseUri + "/subtitle";
+      tableParams.formPath = ROUTES.DASHBOARD.SUBTITLE.FORM;
       break;
     case 3: //categorias
       tableParams.headCells.push("ID", "Nome");
       tableParams.headNames.push("id", "name");
-      tableParams.formPath = baseUri + "/category";
+      tableParams.formPath = ROUTES.DASHBOARD.CATEGORY.FORM;
       break;
     case 4: //legendas em andamento
       tableParams.headCells.push("ID", "Legenda", "%", "Status");
       tableParams.headNames.push('id','name','percent','status');
-      tableParams.formPath = baseUri + "/subtitle";
+      tableParams.formPath = ROUTES.DASHBOARD.PROGRESS.FORM;
       break;
     case 5: //galeria
       tableParams.headCells.push("ID", "Nome", "Descrição", "Descrição2");
-      tableParams.formPath = baseUri + "/image";
+      tableParams.formPath = ROUTES.DASHBOARD.GALLERY.FORM;
       break;
     case 6: //ranking
       tableParams.headCells.push(

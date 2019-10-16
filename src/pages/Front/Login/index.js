@@ -5,6 +5,7 @@ import { InputPersonalizado } from "../Contato";
 import { postRequest, encryptLogin} from "services/api";
 import { withRouter } from "react-router-dom";
 import { AuthContext } from 'utils/AuthContext';
+import { ROUTES } from 'utils/RoutePaths';
 
 const Login = (props) => {
   const [, setUser] = useContext(AuthContext);
@@ -29,7 +30,7 @@ const Login = (props) => {
       console.log("RESPOSTA LOGAR: ", res.success);
       encryptLogin(res.success);
       setUser(res.success.user);
-      history.push("/dashboard");
+      history.push(ROUTES.DASHBOARD.HOME);
     } else if (res.error) {
       setErrors(res.error);
     }

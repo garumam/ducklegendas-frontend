@@ -25,8 +25,7 @@ import TokenExpired from "services/TokenExpired";
 import { isAuthenticated } from "services/api";
 import { AuthProvider } from "utils/AuthContext";
 import Authorization,{Admin} from "services/Authorization";
-
-const dashboardPath = "/dashboard";
+import { ROUTES } from 'utils/RoutePaths';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
@@ -78,42 +77,42 @@ export default () => (
         <Switch>
           <AppRoute
             exact
-            path="/"
+            path={ROUTES.HOME}
             layout={App}
             component={() => <Legendas title="Ultimas" />}
           />
           <AppRoute
-            path="/series"
+            path={ROUTES.SERIES}
             layout={App}
             component={() => <Legendas title="Series" />}
           />
           <AppRoute
-            path="/filmes"
+            path={ROUTES.FILMES}
             layout={App}
             component={() => <Legendas title="Filmes" />}
           />
           <AppRoute
-            path="/ranking"
+            path={ROUTES.RANKING}
             layout={App}
             component={() => <Ranking title="Ranking" />}
           />
           <AppRoute
-            path="/indice"
+            path={ROUTES.INDICE}
             layout={App}
             component={() => <Indice title="Índice" />}
           />
           <AppRoute
-            path="/contato"
+            path={ROUTES.CONTATO}
             layout={App}
             component={() => <Contato title="Contato" />}
           />
           <AppRoute
-            path="/post"
+            path={ROUTES.POST}
             layout={App}
             component={() => <Post title="Single Post" />}
           />
           <PrivateRouteLogin
-            path="/painel"
+            path={ROUTES.LOGIN}
             layout={props => (
               <>
                 <Header title="Legendas" logo={Logo} />
@@ -122,7 +121,7 @@ export default () => (
             )}
           />
           <Route
-            path="/reset/:token?"
+            path={`${ROUTES.RESETPASSWORD}/:token?`}
             render={() => (
               <>
                 <Header title="Legendas" logo={Logo} />
@@ -133,53 +132,53 @@ export default () => (
           <PrivateRoute
             permissions={Admin}
             exact
-            path={dashboardPath}
+            path={ROUTES.DASHBOARD.HOME}
             layout={props => <Dashboard title="Dashboard" {...props} />}
             component={() => <h5 style={{color:'black'}}>Dashboard Home</h5>}
           />
           <PrivateRoute
             permissions={Admin}
             exact
-            path={`${dashboardPath}/users`}
+            path={ROUTES.DASHBOARD.USER.LIST}
             layout={props => <Dashboard title="Usuários" {...props} />}
             component={() => <List title="Usuários" table={1} />}
           />
           <PrivateRoute
             permissions={Admin}
-            path={`${dashboardPath}/users/user/:id?`}
+            path={`${ROUTES.DASHBOARD.USER.FORM}/:id?`}
             layout={props => <Dashboard title="Usuários" {...props} />}
             component={() => <Form title="Usuários" form={1} />}
           />
           <PrivateRoute
             permissions={Admin}
             exact
-            path={`${dashboardPath}/subtitles`}
+            path={ROUTES.DASHBOARD.SUBTITLE.LIST}
             layout={props => <Dashboard title="Legendas" {...props} />}
             component={() => <List title="Legendas" table={2} />}
           />
           <PrivateRoute
             permissions={Admin}
-            path={`${dashboardPath}/subtitles/subtitle/:id?`}
+            path={`${ROUTES.DASHBOARD.SUBTITLE.FORM}/:id?`}
             layout={props => <Dashboard title="Legendas" {...props} />}
             component={() => <Form title="Legendas" form={2} />}
           />
           <PrivateRoute
             permissions={Admin}
             exact
-            path={`${dashboardPath}/categories`}
+            path={ROUTES.DASHBOARD.CATEGORY.LIST}
             layout={props => <Dashboard title="Categorias" {...props} />}
             component={() => <List title="Categorias" table={3} />}
           />
           <PrivateRoute
             permissions={Admin}
-            path={`${dashboardPath}/categories/category/:id?`}
+            path={`${ROUTES.DASHBOARD.CATEGORY.FORM}/:id?`}
             layout={props => <Dashboard title="Categorias" {...props} />}
             component={() => <Form title="Categorias" form={3} />}
           />
           <PrivateRoute
             permissions={Admin}
             exact
-            path={`${dashboardPath}/progress`}
+            path={ROUTES.DASHBOARD.PROGRESS.LIST}
             layout={props => (
               <Dashboard title="Legendas em andamento" {...props} />
             )}
@@ -187,7 +186,7 @@ export default () => (
           />
           <PrivateRoute
             permissions={Admin}
-            path={`${dashboardPath}/progress/subtitle/:id?`}
+            path={`${ROUTES.DASHBOARD.PROGRESS.FORM}/:id?`}
             layout={props => (
               <Dashboard title="Legendas em andamento" {...props} />
             )}
@@ -196,20 +195,20 @@ export default () => (
           <PrivateRoute
             permissions={Admin}
             exact
-            path={`${dashboardPath}/gallery`}
+            path={ROUTES.DASHBOARD.GALLERY.LIST}
             layout={props => <Dashboard title="Galeria" {...props} />}
             component={() => <Gallery title="Galeria" />}
           />
           <PrivateRoute
             permissions={Admin}
-            path={`${dashboardPath}/gallery/image/:id?`}
+            path={`${ROUTES.DASHBOARD.GALLERY.FORM}/:id?`}
             layout={props => <Dashboard title="Galeria" {...props} />}
             component={() => <Form title="Galeria" form={5} />}
           />
           <PrivateRoute
             permissions={Admin}
             exact
-            path={`${dashboardPath}/rankings`}
+            path={ROUTES.DASHBOARD.RANKING}
             layout={props => <Dashboard title="Ranking" {...props} />}
             component={() => <List title="Ranking" table={6} />}
           />

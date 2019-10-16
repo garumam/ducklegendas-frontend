@@ -2,12 +2,13 @@ import React, { createRef,useContext } from "react";
 import {Header,Nav,Logo,Mobile,CHK,NavLinks,Dropdown,DropdownMenu,InputDropdownMenu} from "../Header/styles";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from 'utils/AuthContext';
+import { ROUTES } from 'utils/RoutePaths';
 
 export default (props) => {
   const [user] = useContext(AuthContext);
   let mobileInput = createRef();
   const name =  user.name !== undefined ? user.name : 'Painel';
-  const link = name === 'Painel' ? '/painel' : '/dashboard'
+  const link = name === 'Painel' ? ROUTES.LOGIN : ROUTES.DASHBOARD.HOME
   
   const navSlide = () => {
     const mobile = mobileInput.current;
@@ -19,7 +20,7 @@ export default (props) => {
         <Nav>
           <Logo>
             <img alt="img logo" src={props.logo} />
-            <Link to="/" alt="link logo">
+            <Link to={ROUTES.HOME} alt="link logo">
               {props.title}
             </Link>
           </Logo>
@@ -28,33 +29,33 @@ export default (props) => {
 
           <NavLinks>
             <li>
-              <NavLink activeClassName="is-active" exact to="/" alt="Home">
+              <NavLink activeClassName="is-active" exact to={ROUTES.HOME} alt="Home">
               {/* onClick={()=>  window.scrollTo(0,0)} */}
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to="/series" alt="Series">
+              <NavLink activeClassName="is-active" to={ROUTES.SERIES} alt="Series">
                 Series
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to="/filmes" alt="Filmes">
+              <NavLink activeClassName="is-active" to={ROUTES.FILMES} alt="Filmes">
                 Filmes
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to="/indice" alt="Índice">
+              <NavLink activeClassName="is-active" to={ROUTES.INDICE} alt="Índice">
                 Índice
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to="/ranking" alt="Ranking">
+              <NavLink activeClassName="is-active" to={ROUTES.RANKING} alt="Ranking">
                 Ranking
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to="/contato" alt="Contato">
+              <NavLink activeClassName="is-active" to={ROUTES.CONTATO} alt="Contato">
                 Contato
               </NavLink>
             </li>

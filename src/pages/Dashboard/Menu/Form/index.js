@@ -16,6 +16,7 @@ import * as YupValidation from "services/YupValidation";
 import { AuthContext } from "utils/AuthContext";
 import { getBackendUriBase, setInputsParams, prepareCategories } from "utils/Utils";
 import { Inputs } from "utils/Inputs";
+import { ROUTES } from 'utils/RoutePaths';
 
 const Form = props => {
 
@@ -169,7 +170,7 @@ const Form = props => {
                 type="button"
                 onClick={() => {
                   props.history.replace({
-                    pathname: `/dashboard/${baseUri}`,
+                    pathname: `${ROUTES.DASHBOARD.HOME}/${baseUri}`,
                     state: {
                       anyChange:
                         props.location.state && props.location.state.islogin
