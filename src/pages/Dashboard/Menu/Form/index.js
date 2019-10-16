@@ -17,8 +17,19 @@ import { AuthContext } from "utils/AuthContext";
 import { getBackendUriBase } from "utils/Utils";
 
 const Form = props => {
+
+  let categories = props.location.state ? props.location.state.entities.categories 
+                                        : null ;
+  categories = categories && categories.map((category) => ({
+     label : category.name , value : category.id
+    })
+  );
+
   const [user, setUser] = useContext(AuthContext);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({
+    values: [],
+    categories: categories || []
+  });
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -26,7 +37,7 @@ const Form = props => {
       anyChange: false
     }
   ); 
-
+  
   const inputParams = [],
     labels = [],
     types = [],
@@ -87,17 +98,26 @@ const Form = props => {
     async function getItem() {
       const res = await getRequest(`/${baseUri}/${props.match.params.id}`);
       console.log(res.success);
-      if (res.success) {
-        setData(res.success);
+      if (res.success || res.categories) {
+        let categories = res.categories && res.categories.map((category) => ({
+          label : category.name , value : category.id
+         })
+        );
+        setData({
+          values: res.success,
+          categories: categories
+        });
       } else {
         setEntities({
           errorsReponse: res.error
         });
       }
     }
-    if (props.match.params.id && dataPassed === null) {
+    if ((props.match.params.id && dataPassed === null) 
+          || props.history.location.pathname.indexOf('subtitle') !== -1) {
       getItem();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -111,8 +131,8 @@ const Form = props => {
 
     initialValues[names[index]] = dataPassed
       ? dataPassed[names[index]]
-      : data
-      ? data[names[index]]
+      : data.values
+      ? data.values[names[index]]
       : "";
   }
   Object.keys(initialValues).map(key =>
@@ -123,8 +143,6 @@ const Form = props => {
   console.log("valores iniciais formulário: ", initialValues);
   // fim dos inputs
 
-  const category = initialValues['category'];
-
   const store = async (values) => {
     console.log(values);
     let uri = `/${baseUri}/store`;
@@ -134,8 +152,8 @@ const Form = props => {
       return formData.append(key, values[key]);
     });
 
-    if (data || dataPassed) {
-      const itemId = data ? data.id : dataPassed.id;
+    if (data.values || dataPassed) {
+      const itemId = data.values ? data.values.id : dataPassed.id;
       uri = `/${baseUri}/${itemId}`;
       formData.append("_method", "PATCH");
       if(baseUri === 'users')
@@ -287,7 +305,7 @@ const Form = props => {
                     return (
                       <SelectCustom
                         disabled={checkUser}
-                        options={input.name === 'category' ? [{ label : category.name , value : category.id}] : ['PENDENTE','APROVADA']}
+                        options={input.name === 'category' ? data.categories : ['PENDENTE','APROVADA']}
                         key={index}
                         label={input.label}
                         name={input.name}

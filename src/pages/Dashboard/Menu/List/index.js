@@ -91,6 +91,7 @@ const List = props => {
       if (res.success) {
         console.log("Página selecionada: ", entities.pageSelected);
         setEntities({
+          categories: res.categories? res.categories : null,
           ...res.success,
           dataPaginada: Paginator(res.success.data, entities.pageSelected),
           total: Math.ceil(res.success.total / 10),
@@ -103,7 +104,7 @@ const List = props => {
           error: res.error || "Erro inesperado, por favor atualize a página!"
         });
       }
-      console.log(res);
+      console.log('DADOS QUE CHEGARAM: ',res);
     }
 
     if (props.location.state) {
