@@ -27,7 +27,7 @@ const Form = props => {
 
   const [user, setUser] = useContext(AuthContext);
   const [data, setData] = useState({
-    values: [],
+    values: null,
     categories: categories || []
   });
   const [entities, setEntities] = useReducer(
