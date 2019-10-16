@@ -115,7 +115,8 @@ const Form = props => {
       }
     }
     if ((props.match.params.id && dataPassed === null) 
-          || props.history.location.pathname.indexOf('subtitle') !== -1) {
+          ||  (props.history.location.pathname.indexOf('subtitle') !== -1 
+                   && data.categories.length === 0)) {
       getItem();
     }
 
