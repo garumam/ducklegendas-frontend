@@ -48,7 +48,6 @@ const Form = props => {
 
   const baseUri = getBackendUriBase(props.history.location.pathname);
   const checkUser = user.user_type === 'user' ? 'disabled' : false;
-
   switch (props.form) {
     case 1: //usuários
       labels.push("Nome", "E-mail", "Senha", "Tipo", "Imagem");
@@ -98,7 +97,7 @@ const Form = props => {
   useEffect(() => {
     async function getItem() {
       const res = await getRequest(`/${baseUri}/${props.match.params.id}`);
-      console.log(res.success);
+      // console.log(res.success);
       if (res.success || res.categories) {
         let categories = res.categories && res.categories.map((category) => ({
           label : category.name , value : category.id
@@ -114,9 +113,8 @@ const Form = props => {
         });
       }
     }
-    if ((props.match.params.id && dataPassed === null) 
-          || (props.history.location.pathname.indexOf('subtitle') !== -1 
-          && data.categories.length === 0)) {
+    if ((props.match.params.id && dataPassed === null) || 
+      (props.form === 2 && data.categories.length === 0 && props.form !== 4)) {
         getItem();
     }
 
@@ -146,7 +144,7 @@ const Form = props => {
   // fim dos inputs
 
   const store = async (values) => {
-    console.log(values);
+    // console.log(values);
     let uri = `/${baseUri}/store`;
     let updateContext = false;
     const formData = new FormData();
@@ -165,7 +163,7 @@ const Form = props => {
     const res = await postRequest(uri, formData, {
       headers: { "Content-Type": "multipart/form-data" }
     });
-    console.log("res", res);
+    // console.log("res", res);
     if (res.success) {
       setEntities({
         anyChange: true,

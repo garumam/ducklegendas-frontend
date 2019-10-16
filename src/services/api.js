@@ -7,7 +7,7 @@ export const isAuthenticated = () => {
 
   const decryptedData = decryptLogin();
   if(decryptedData){
-    console.log('ddasda',decryptedData.user.access_token)
+    // console.log('ddasda',decryptedData.user.access_token)
     const token = decryptedData.user.access_token;
     const date = decryptedData.user.token_expirate;
     const dateToken = new Date(date);

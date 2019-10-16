@@ -14,13 +14,13 @@ function AuthProvider (props) {
 
         const data = decryptLogin();
         if(user.update){
-            console.log("encryptLogin use effect",user)
+            // console.log("encryptLogin use effect",user)
             delete user.update;
             encryptLogin({ user: { ...data.user, ...user } });
         }
 
     },[user]);
-    console.log("user vindo do provider route",user)
+    // console.log("user vindo do provider route",user)
     return(
         <AuthContext.Provider value={[user, setUser]}>
             {props.children}

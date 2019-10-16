@@ -40,7 +40,7 @@ const Dashboard = props => {
     setUser(resetUser);
 
     if(res.success){
-      console.log(res.success);
+      // console.log(res.success);
       localStorage.clear();
       history.push('/painel');
     }else if(res.error){
