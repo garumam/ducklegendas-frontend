@@ -18,9 +18,9 @@ import "./styles.css";
 import { HeaderCard, InputSearch } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
-import { getRequest,postRequest,baseUrl } from "services/api";
+import { getRequest, postRequest, baseUrl } from "services/api";
 import { Paginator, getBackendUriBase } from "utils/Utils";
-import { ROUTES } from 'utils/RoutePaths';
+import { ROUTES } from "utils/RoutePaths";
 
 const List = props => {
   const [openModal, setOpenModal] = useState({ open: false });
@@ -33,7 +33,7 @@ const List = props => {
       data: [], // DADOS PÁGINADOS DO BACKEND DE 100 EM 100 ITEMS
       total: 0, // TOTAL DE ITEMS QUE EXISTE NA BASE DE DADOS
       trigSearch: false, // ACIONADOR DE PESQUISA
-      loading: true, 
+      loading: true,
       search: "", // PESQUISA
       checked: false // PESQUISA EM TEMPO REAL OU NÃO
     }
@@ -66,7 +66,7 @@ const List = props => {
       break;
     case 4: //legendas em andamento
       tableParams.headCells.push("ID", "Legenda", "%", "Status");
-      tableParams.headNames.push('id','name','percent','status');
+      tableParams.headNames.push("id", "name", "percent", "status");
       tableParams.formPath = ROUTES.DASHBOARD.PROGRESS.FORM;
       break;
     case 5: //galeria
@@ -92,7 +92,7 @@ const List = props => {
       if (res.success) {
         console.log("Página selecionada: ", entities.pageSelected);
         setEntities({
-          categories: res.categories? res.categories : null,
+          categories: res.categories ? res.categories : null,
           ...res.success,
           dataPaginada: Paginator(res.success.data, entities.pageSelected),
           pageSelected: entities.pageSelected,
@@ -104,7 +104,7 @@ const List = props => {
           error: res.error || "Erro inesperado, por favor atualize a página!"
         });
       }
-      console.log('DADOS QUE CHEGARAM: ',res);
+      console.log("DADOS QUE CHEGARAM: ", res);
     }
 
     if (props.location.state) {
@@ -121,16 +121,18 @@ const List = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entities.page, entities.trigSearch]);
 
-  const error = () => (
+  const ActiveModal = () => (
     <>
       <Modal
+        onConfirm={() => handleDelete(openModal.id)}
         onClose={() => setOpenModal({ open: false })}
         show={openModal.open}
-        title={"Error"}
-        content={openModal.error}
+        showConfirm={openModal.id}
+        title={openModal.id ? "Você quer realmente excluir ?" : "Error"}
+        content={openModal.id ? openModal.msg : openModal.error}
       />
 
-      {!openModal.open && (
+      {!openModal.open && openModal.id && (
         <CircularProgress size="xlarge" style={{ margin: "auto" }} />
       )}
     </>
@@ -151,39 +153,41 @@ const List = props => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async id => {
     const formData = new FormData();
     formData.append("_method", "DELETE");
     const res = await postRequest(`${baseUri}/${id}`, formData);
-    if(res.success){
-     let newpageSelected = entities.dataPaginada.length === 1
-                                    ? (entities.pageSelected - 1)
-                                    : entities.pageSelected;
-     let newData = entities.data.filter((element) => (element.id !== id));
-     let newDataPaginada = Paginator(newData, newpageSelected);
+    if (res.success) {
+      let newpageSelected =
+        entities.dataPaginada.length === 1
+          ? entities.pageSelected - 1
+          : entities.pageSelected;
+      let newData = entities.data.filter(element => element.id !== id);
+      let newDataPaginada = Paginator(newData, newpageSelected);
 
-     setEntities({
-       data: newData,
-       dataPaginada: newDataPaginada,
-       total : (entities.total - 1),
-       pageSelected: newpageSelected
+      setEntities({
+        data: newData,
+        dataPaginada: newDataPaginada,
+        total: entities.total - 1,
+        pageSelected: newpageSelected
       });
-    }else{
+    } else {
       setOpenModal({
         open: true,
         error: res.error || "Erro ao excluir por favor atualize a página!"
       });
     }
-  }
+  };
 
   const onSearch = e => {
     setEntities({ page: 1, pageSelected: 0, trigSearch: !entities.trigSearch });
   };
 
   return entities.loading ? (
-    error()
+    ActiveModal()
   ) : (
     <>
+      {ActiveModal()}
       <HeaderCard>
         <h2>{props.title}</h2>
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -267,7 +271,11 @@ const List = props => {
                   {tableParams.headNames.map(
                     (objectKey, i) =>
                       item[objectKey] && (
-                        <DataTableCell key={i}>{ typeof item[objectKey] === 'object' ? item[objectKey].name : item[objectKey]}</DataTableCell>
+                        <DataTableCell key={i}>
+                          {typeof item[objectKey] === "object"
+                            ? item[objectKey].name
+                            : item[objectKey]}
+                        </DataTableCell>
                       )
                   )}
 
@@ -295,7 +303,13 @@ const List = props => {
                       mini
                       icon="delete"
                       type="button"
-                      onClick={() => handleDelete(item.id)}
+                      onClick={() =>
+                        setOpenModal({
+                          open: true,
+                          id: item.id,
+                          msg: `Id: ${item.id}  Nome: ${item.name}`
+                        })
+                      }
                     />
                   </DataTableCell>
                 </DataTableRow>

@@ -11,6 +11,7 @@ const Modal = (props) => {
         <div className="content">{props.content}</div>
         <div className="actions">
           <button onClick={props.onClose}>Fechar</button>
+          { props.onConfirm && props.showConfirm && <button style={{marginLeft:'1rem'}} onClick={props.onConfirm}>Sim</button>}
         </div>
       </Container>
     </div>
