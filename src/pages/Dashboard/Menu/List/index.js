@@ -27,15 +27,15 @@ const List = props => {
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
-      pageSelected: 0,
-      page: 1,
-      dataPaginada: [],
-      data: [],
-      total: 0,
-      trigSearch: false,
-      loading: true,
-      search: "",
-      checked: false
+      pageSelected: 0, // PÁGINA SELECIONADA NO COMPONENTE DE PAGINAÇÃO DO FRONT
+      page: 1, // PÁGINA SELECIONADA NA PAGINAÇÃO DO BACKEND DE 100 EM 100 ITEMS
+      dataPaginada: [], // DADOS PÁGINADOS DE 10 EM 10 ITEMS
+      data: [], // DADOS PÁGINADOS DO BACKEND DE 100 EM 100 ITEMS
+      total: 0, // TOTAL DE ITEMS QUE EXISTE NA BASE DE DADOS
+      trigSearch: false, // ACIONADOR DE PESQUISA
+      loading: true, 
+      search: "", // PESQUISA
+      checked: false // PESQUISA EM TEMPO REAL OU NÃO
     }
   );
 
