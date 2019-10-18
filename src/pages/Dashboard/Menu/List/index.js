@@ -95,7 +95,6 @@ const List = props => {
           categories: res.categories? res.categories : null,
           ...res.success,
           dataPaginada: Paginator(res.success.data, entities.pageSelected),
-          total: Math.ceil(res.success.total / 10),
           pageSelected: entities.pageSelected,
           loading: false
         });
@@ -157,13 +156,17 @@ const List = props => {
     formData.append("_method", "DELETE");
     const res = await postRequest(`${baseUri}/${id}`, formData);
     if(res.success){
-     let newDataPaginada = entities.dataPaginada.filter((element) => (element.id !== id));
+     let newpageSelected = entities.dataPaginada.length === 1
+                                    ? (entities.pageSelected - 1)
+                                    : entities.pageSelected;
      let newData = entities.data.filter((element) => (element.id !== id));
+     let newDataPaginada = Paginator(newData, newpageSelected);
+
      setEntities({
        data: newData,
        dataPaginada: newDataPaginada,
-       total : entities.total--
-      
+       total : (entities.total - 1),
+       pageSelected: newpageSelected
       });
     }else{
       setOpenModal({
@@ -306,7 +309,7 @@ const List = props => {
         nextLabel={<i className="material-icons">keyboard_arrow_right</i>}
         breakLabel={"..."}
         breakClassName={"break"}
-        pageCount={entities.total}
+        pageCount={Math.ceil(entities.total / 10)}
         marginPagesDisplayed={2}
         pageRangeDisplayed={2}
         onPageChange={handlePageClick}
