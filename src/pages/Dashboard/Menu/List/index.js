@@ -120,7 +120,7 @@ const List = props => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entities.page, entities.trigSearch,entities.total]);
+  }, [entities.page, entities.trigSearch]);
 
   const error = () => (
     <>
@@ -157,8 +157,14 @@ const List = props => {
     formData.append("_method", "DELETE");
     const res = await postRequest(`${baseUri}/${id}`, formData);
     if(res.success){
-    //  let novoArray = entities.dataPaginada.filter((element) => (element.id !== id));
-     setEntities({total : --entities.total});
+     let newDataPaginada = entities.dataPaginada.filter((element) => (element.id !== id));
+     let newData = entities.data.filter((element) => (element.id !== id));
+     setEntities({
+       data: newData,
+       dataPaginada: newDataPaginada,
+       total : entities.total--
+      
+      });
     }else{
       setOpenModal({
         open: true,
