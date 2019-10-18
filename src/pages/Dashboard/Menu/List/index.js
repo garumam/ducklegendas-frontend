@@ -18,7 +18,7 @@ import "./styles.css";
 import { HeaderCard, InputSearch } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
-import { getRequest } from "services/api";
+import { getRequest,postRequest,baseUrl } from "services/api";
 import { Paginator, getBackendUriBase } from "utils/Utils";
 import { ROUTES } from 'utils/RoutePaths';
 
@@ -152,6 +152,21 @@ const List = props => {
     }
   };
 
+  const handleDelete = async (id) => {
+    const formData = new FormData();
+    formData.append("_method", "DELETE");
+    const res = await postRequest(`${baseUri}/${id}`, formData);
+    if(res.success){
+     let novoArray = entities.dataPaginada.filter((element) => (element.id !== id));
+     setEntities({dataPaginada : novoArray});
+    }else{
+      setOpenModal({
+        open: true,
+        error: res.error || "Erro ao excluir por favor atualize a página!"
+      });
+    }
+  }
+
   const onSearch = e => {
     setEntities({ page: 1, pageSelected: 0, trigSearch: !entities.trigSearch });
   };
@@ -271,9 +286,7 @@ const List = props => {
                       mini
                       icon="delete"
                       type="button"
-                      onClick={() => {
-                        console.log("DELETANDO");
-                      }}
+                      onClick={() => handleDelete(item.id)}
                     />
                   </DataTableCell>
                 </DataTableRow>
