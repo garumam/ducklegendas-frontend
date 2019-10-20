@@ -23,7 +23,7 @@ import { Paginator, getBackendUriBase } from "utils/Utils";
 import { ROUTES } from "utils/RoutePaths";
 
 const List = props => {
-  const [openModal, setOpenModal] = useState({ open: false,id: false });
+  const [openModal, setOpenModal] = useState({ open: false });
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
