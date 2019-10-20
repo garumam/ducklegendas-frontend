@@ -134,7 +134,7 @@ export default () => (
             exact
             path={ROUTES.DASHBOARD.HOME}
             layout={props => <Dashboard title="Dashboard" {...props} />}
-            component={() => <h5 style={{color:'black'}}>Dashboard Home</h5>}
+            component={() => <List title="Legendas Pendentes" table={7} />}
           />
           <PrivateRoute
             permissions={Admin}

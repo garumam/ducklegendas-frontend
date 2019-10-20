@@ -4,7 +4,8 @@ const dashboard = "/dashboard",
     categories = `${dashboard}/categories`,
     progress = `${dashboard}/progress`,
     gallery = `${dashboard}/gallery`,
-    rankings = `${dashboard}/rankings`;
+    rankings = `${dashboard}/rankings`,
+    pending = `${dashboard}/pending`;
 
 export const ROUTES = {
     HOME: '/',
@@ -38,6 +39,7 @@ export const ROUTES = {
             LIST: gallery,
             FORM: `${gallery}/image`
         },
-        RANKING: rankings
+        RANKING: rankings,
+        PENDING: pending
     }
 }

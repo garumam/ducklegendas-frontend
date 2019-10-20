@@ -44,7 +44,7 @@ const List = props => {
     headNames: [],
     formPath: ""
   };
-  const baseUri = getBackendUriBase(props.history.location.pathname);
+  let baseUri = getBackendUriBase(props.history.location.pathname);
 
   switch (props.table) {
     case 1: //usuários
@@ -77,6 +77,12 @@ const List = props => {
       tableParams.headCells.push("Posição", "Usuario", "Qtd de Legendas");
       tableParams.headNames.push("id", "name", "subtitles_count");
       tableParams.formPath = ROUTES.DASHBOARD.RANKING;
+      break;
+    case 7: //legendas pendentes
+      tableParams.headCells.push("id", "Nome", "Status");
+      tableParams.headNames.push("id", "name", "status");
+      tableParams.formPath = ROUTES.DASHBOARD.SUBTITLE.FORM;
+      baseUri = getBackendUriBase(`${props.history.location.pathname}/pending`);
       break;
     default:
   }
@@ -153,7 +159,7 @@ const List = props => {
   const handleDelete = async id => {
     const formData = new FormData();
     formData.append("_method", "DELETE");
-    const res = await postRequest(`${baseUri}/${id}`, formData);
+    const res = await postRequest(`${props.title === "Legendas Pendentes" ? "subtitles" : baseUri}/${id}`, formData);
     if (res.success) {
       let newpageSelected =
         entities.dataPaginada.length === 1
@@ -227,8 +233,7 @@ const List = props => {
               entities.checked && onSearch();
             }}
           />
-
-          {props.title !== "Ranking" && (
+          {props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
             <Fab
               style={{margin: "1rem"}}
               icon="add"
