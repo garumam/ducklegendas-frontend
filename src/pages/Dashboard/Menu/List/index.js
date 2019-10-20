@@ -185,7 +185,7 @@ const List = props => {
   ) : (
     <>
       {ActiveModal()}
-      <HeaderCard>
+      <HeaderCard ranking="0">
         <h2>{props.title}</h2>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Switch
@@ -201,6 +201,7 @@ const List = props => {
             label="Tempo real"
           />
           <InputSearch
+            ranking="0"
             icon={{
               icon: "search",
               tabIndex: 0,
@@ -229,6 +230,7 @@ const List = props => {
 
           {props.title !== "Ranking" && (
             <Fab
+              style={{margin: "1rem"}}
               icon="add"
               type="button"
               onClick={() => {

@@ -25,7 +25,6 @@ export const InputSearch = styled(TextField)`
     border-radius:0;
     height:60px;
     margin-left: 2rem;
-    margin-right: 1rem;
     input{
         border-bottom:0;
     }
@@ -71,6 +70,7 @@ export const HeaderCard = styled.div`
     align-items:center;
     min-height:60px;
     padding:0 1rem;
+    padding-right: ${props => props.ranking || "1rem"}
     h2{
         font-size: 1.4rem;
         font-weight: 700;
