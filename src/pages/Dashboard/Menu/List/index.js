@@ -82,7 +82,7 @@ const List = props => {
       tableParams.headCells.push("id", "Nome", "Status");
       tableParams.headNames.push("id", "name", "status");
       tableParams.formPath = ROUTES.DASHBOARD.SUBTITLE.FORM;
-      baseUri = getBackendUriBase(`${props.history.location.pathname}/pending`);
+      baseUri = getBackendUriBase(ROUTES.DASHBOARD.PENDING);
       break;
     default:
   }
