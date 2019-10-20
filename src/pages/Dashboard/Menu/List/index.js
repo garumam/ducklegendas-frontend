@@ -18,7 +18,7 @@ import "./styles.css";
 import { HeaderCard, InputSearch } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
-import { getRequest, postRequest, baseUrl } from "services/api";
+import { getRequest, postRequest } from "services/api";
 import { Paginator, getBackendUriBase } from "utils/Utils";
 import { ROUTES } from "utils/RoutePaths";
 
@@ -74,12 +74,9 @@ const List = props => {
       tableParams.formPath = ROUTES.DASHBOARD.GALLERY.FORM;
       break;
     case 6: //ranking
-      tableParams.headCells.push(
-        "Posição",
-        "Usuario",
-        "Qtd de Legendas",
-        "Descrição"
-      );
+      tableParams.headCells.push("Posição", "Usuario", "Qtd de Legendas");
+      tableParams.headNames.push("id", "name", "subtitles_count");
+      tableParams.formPath = ROUTES.DASHBOARD.RANKING;
       break;
     default:
   }
@@ -257,61 +254,61 @@ const List = props => {
                   {cell}
                 </DataTableHeadCell>
               ))}
-              <DataTableHeadCell
-                style={{ fontSize: "0.8rem", lineHeight: "1.8rem" }}
-              >
-                Ação
-              </DataTableHeadCell>
+              {props.title !== "Ranking" && (
+                <DataTableHeadCell
+                  style={{ fontSize: "0.8rem", lineHeight: "1.8rem" }}
+                >
+                  Ação
+                </DataTableHeadCell>
+              )}
             </DataTableRow>
           </DataTableHead>
           <DataTableBody>
             {entities.dataPaginada &&
               entities.dataPaginada.map((item, index) => (
                 <DataTableRow key={index}>
-                  {tableParams.headNames.map(
-                    (objectKey, i) =>
-                      item[objectKey] && (
-                        <DataTableCell key={i}>
-                          {typeof item[objectKey] === "object"
-                            ? item[objectKey].name
-                            : item[objectKey]}
-                        </DataTableCell>
-                      )
+                  {tableParams.headNames.map((objectKey, i) => (
+                    <DataTableCell key={i}>
+                      {typeof item[objectKey] === "object"
+                        ? item[objectKey].name
+                        : item[objectKey]}
+                    </DataTableCell>
+                  ))}
+                  {props.title !== "Ranking" && (
+                    <DataTableCell>
+                      <Fab
+                        style={{
+                          marginRight: "5px",
+                          backgroundColor: "var(--edit-button)"
+                        }}
+                        mini
+                        icon="create"
+                        type="button"
+                        onClick={() => {
+                          props.history.push({
+                            pathname: `${tableParams.formPath}/${item.id}`,
+                            state: {
+                              item: item,
+                              entities: entities
+                            }
+                          });
+                        }}
+                      />
+                      <Fab
+                        style={{ backgroundColor: "var(--delete-button)" }}
+                        mini
+                        icon="delete"
+                        type="button"
+                        onClick={() =>
+                          setOpenModal({
+                            open: true,
+                            id: item.id,
+                            msg: `Id: ${item.id}  Nome: ${item.name}`
+                          })
+                        }
+                      />
+                    </DataTableCell>
                   )}
-
-                  <DataTableCell>
-                    <Fab
-                      style={{
-                        marginRight: "5px",
-                        backgroundColor: "var(--edit-button)"
-                      }}
-                      mini
-                      icon="create"
-                      type="button"
-                      onClick={() => {
-                        props.history.push({
-                          pathname: `${tableParams.formPath}/${item.id}`,
-                          state: {
-                            item: item,
-                            entities: entities
-                          }
-                        });
-                      }}
-                    />
-                    <Fab
-                      style={{ backgroundColor: "var(--delete-button)" }}
-                      mini
-                      icon="delete"
-                      type="button"
-                      onClick={() =>
-                        setOpenModal({
-                          open: true,
-                          id: item.id,
-                          msg: `Id: ${item.id}  Nome: ${item.name}`
-                        })
-                      }
-                    />
-                  </DataTableCell>
                 </DataTableRow>
               ))}
           </DataTableBody>
