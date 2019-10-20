@@ -28,8 +28,8 @@ export const setInputsParams = (labels, types, names, dataPassed, data) => {
       name: names[index]
     });
 
-    initialValues[names[index]] = dataPassed
-      ? dataPassed[names[index]]
+    initialValues[names[index]] = dataPassed && dataPassed[names[index]]
+      ? dataPassed[names[index]].id || dataPassed[names[index]]
       : data.values
       ? data.values[names[index]]
       : "";

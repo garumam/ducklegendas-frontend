@@ -12,6 +12,7 @@ import {
 import { withRouter } from "react-router-dom";
 import { baseUrl, getRequest, postRequest } from "services/api";
 import image from "assets/img/man.png";
+import image_serie from "assets/img/sem_capa.jpg";
 import * as YupValidation from "services/YupValidation";
 import { AuthContext } from "utils/AuthContext";
 import { getBackendUriBase, setInputsParams, prepareCategories } from "utils/Utils";
@@ -99,7 +100,7 @@ const Form = props => {
   // fim dos inputs
 
   const store = async (values) => {
-    // console.log(values);
+    console.log('VALUES: ',values);
     let uri = `/${baseUri}/store`;
     let updateContext = false;
     const formData = new FormData();
@@ -274,9 +275,23 @@ const Form = props => {
                         key={index}
                         style={{ width: "100%", paddingBottom: "1rem" }}
                       >
-                        <label style={{ fontSize: ".9rem" }}>
+                        <label style={{ width: "100%" ,fontSize: ".9rem" }}>
                           Imagem da Legenda
                         </label>
+                        <img
+                          style={{
+                            width: "150px",
+                            padding: "1rem 1rem 1rem 0"
+                          }}
+                          src={
+                            values[input.name] instanceof File
+                              ? URL.createObjectURL(values[input.name])
+                              : values[input.name]
+                              ? baseUrl + values[input.name]
+                              : image_serie
+                          }
+                          alt=""
+                        />
                         <input
                           id="file"
                           name={input.name}
