@@ -23,7 +23,7 @@ import { Paginator, getBackendUriBase } from "utils/Utils";
 import { ROUTES } from "utils/RoutePaths";
 
 const List = props => {
-  const [openModal, setOpenModal] = useState({ open: false });
+  const [openModal, setOpenModal] = useState({ open: false,id: false });
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -118,7 +118,7 @@ const List = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entities.page, entities.trigSearch]);
 
-  const ActiveModal = () => (
+  const ActiveModal = (isList) => (
     <>
       <Modal
         onConfirm={() => handleDelete(openModal.id)}
@@ -129,7 +129,7 @@ const List = props => {
         content={openModal.id ? openModal.msg : openModal.error}
       />
 
-      {!openModal.open && openModal.id && (
+      {(!openModal.open && isList) && (
         <CircularProgress size="xlarge" style={{ margin: "auto" }} />
       )}
     </>
@@ -181,10 +181,10 @@ const List = props => {
   };
 
   return entities.loading ? (
-    ActiveModal()
+    ActiveModal(true)
   ) : (
     <>
-      {ActiveModal()}
+      {ActiveModal(false)}
       <HeaderCard ranking="0">
         <h2>{props.title}</h2>
         <div style={{ display: "flex", alignItems: "center" }}>
