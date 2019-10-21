@@ -69,10 +69,13 @@ const Form = props => {
       const res = await getRequest(`/${baseUri}/${props.match.params.id}`);
       // console.log(res.success);
       if (res.success || res.categories) {
+        const {id} = res.success.category;
+        res.success['category'] = id;
         setData({
           values: res.success,
           categories: prepareCategories(res.categories)
         });
+        
       } else {
         setEntities({
           errorsReponse: res.error
@@ -83,10 +86,10 @@ const Form = props => {
       (baseUri === 'subtitles' && data.categories.length === 0)) {
         getItem();
     }
-
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  console.log("categorias",categories)
   //inicio dos inputs
   const [inputParams, initialValues] = setInputsParams(
     params.labels, 
@@ -95,11 +98,12 @@ const Form = props => {
     dataPassed || data.values 
   );
 
-  console.log("valores iniciais formulário: ", initialValues);
+ 
   // fim dos inputs
 
   const store = async (values) => {
-    console.log('VALUES: ',values);
+    values['category'] = parseInt(values.category);
+    console.log("valores values: ",values);
     let uri = `/${baseUri}/store`;
     let updateContext = false;
     const formData = new FormData();
