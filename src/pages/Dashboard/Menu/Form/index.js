@@ -92,8 +92,7 @@ const Form = props => {
     params.labels, 
     params.types, 
     params.names, 
-    dataPassed, 
-    data
+    dataPassed || data.values 
   );
 
   console.log("valores iniciais formulário: ", initialValues);

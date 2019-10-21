@@ -17,7 +17,7 @@ export const getBackendUriBase = (path) => {
   return baseUri;
 }
 
-export const setInputsParams = (labels, types, names, dataPassed, data) => {
+export const setInputsParams = (labels, types, names, dataPassed) => {
   const inputParams = [],
     initialValues = {};
 
@@ -30,8 +30,6 @@ export const setInputsParams = (labels, types, names, dataPassed, data) => {
 
     initialValues[names[index]] = dataPassed && dataPassed[names[index]]
       ? dataPassed[names[index]].id || dataPassed[names[index]]
-      : data.values
-      ? data.values[names[index]]
       : "";
   }
   Object.keys(initialValues).map(key =>
