@@ -32,10 +32,7 @@ export const setInputsParams = (labels, types, names, dataPassed) => {
       ? dataPassed[names[index]].id || dataPassed[names[index]]
       : "";
   }
-  Object.keys(initialValues).map(key =>
-    initialValues[key] ? null : (initialValues[key] = "")
-  );
-
+  
   return [inputParams, initialValues];
 }
 
