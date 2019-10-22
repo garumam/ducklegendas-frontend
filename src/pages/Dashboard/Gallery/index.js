@@ -235,7 +235,7 @@ const Gallery = props => {
                           {objectKey !== 'image'? item[objectKey] : 
                             <img 
                                 style={{ maxHeight: '150px' }} 
-                                src={baseUrl + item[objectKey]} alt={image_serie} 
+                                src={`${baseUrl}${item[objectKey]}?${new Date().getTime()}`} alt={image_serie} 
                             />
                           }
                         </DataTableCell>
