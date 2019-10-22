@@ -136,12 +136,6 @@ const Dashboard = props => {
         <HeaderDashboard
           title={props.title}
           navigationIcon={{ onClick: () => handlerMenuLateral() }}
-          actionItems={[
-            {
-              icon: "notifications",
-              onClick: () => console.log("Do Something")
-            }
-          ]}
           endContent={
             <Ripple onClick={()=> props.history.push({
                 pathname: `${ROUTES.DASHBOARD.USER.FORM}/${user.id}`,
