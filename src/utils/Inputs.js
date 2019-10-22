@@ -20,8 +20,8 @@ export const Inputs = {
         names: ["name", "percent", "status", "author"]
     },
     gallery: {
-        labels: ["Nome", "Descrição"],
-        types: ["text", "text"],
-        names: ["nome", "descricao"]
+        labels: ["Nome", "Palavras chave", "Imagem"],
+        types: ["text", "text", "file"],
+        names: ["name", "tags", "image"]
     }
 }

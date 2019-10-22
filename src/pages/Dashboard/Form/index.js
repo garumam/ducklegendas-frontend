@@ -374,7 +374,42 @@ const Form = props => {
                     );
                   }
                   break;
-                case 5: //permissoes
+                case 5: //gallery
+                  if (input.type === "file") {
+                    return (
+                      <DivCustom
+                        key={index}
+                        style={{ width: "100%", paddingBottom: "1rem" }}
+                      >
+                        <img
+                          style={{
+                            width: "150px",
+                            padding: "1rem 1rem 1rem 0"
+                          }}
+                          src={
+                            values[input.name] instanceof File
+                              ? URL.createObjectURL(values[input.name])
+                              : values[input.name]
+                              ? baseUrl + values[input.name]
+                              : image_serie
+                          }
+                          alt=""
+                        />
+                        <input
+                          id="file"
+                          name={input.name}
+                          type={input.type}
+                          onChange={event => {
+                            setFieldValue(
+                              input.name,
+                              event.currentTarget.files[0]
+                            );
+                          }}
+                        />
+                      </DivCustom>
+                    );
+                  }
+
                   break;
                 case 6: //ranking
                   break;
