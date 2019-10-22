@@ -9,7 +9,6 @@ import ScrollToTop from "components/ScrollToTop";
 import App from "App";
 import Legendas from "pages/Front/Legendas";
 import Ranking from "pages/Front/Ranking";
-import Gallery from "pages/Dashboard/Gallery";
 import Contato from "pages/Front/Contato";
 import Post from "pages/Front/Post/";
 import Error404 from "pages/Front/Error404";
@@ -197,7 +196,7 @@ export default () => (
             exact
             path={ROUTES.DASHBOARD.GALLERY.LIST}
             layout={props => <Dashboard title="Galeria" {...props} />}
-            component={() => <Gallery title="Galeria" />}
+            component={() => <List title="Galeria" table={5} />}
           />
           <PrivateRoute
             permissions={Admin}

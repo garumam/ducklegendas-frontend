@@ -18,9 +18,10 @@ import "./styles.css";
 import { HeaderCard, InputSearch } from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
-import { getRequest, postRequest } from "services/api";
+import { baseUrl, getRequest, postRequest } from "services/api";
 import { Paginator, getBackendUriBase } from "utils/Utils";
 import { ROUTES } from "utils/RoutePaths";
+import image_serie from "assets/img/sem_capa.jpg";
 
 const List = props => {
   const [openModal, setOpenModal] = useState({ open: false });
@@ -70,7 +71,8 @@ const List = props => {
       tableParams.formPath = ROUTES.DASHBOARD.PROGRESS.FORM;
       break;
     case 5: //galeria
-      tableParams.headCells.push("ID", "Nome", "Descrição", "Descrição2");
+      tableParams.headCells.push('Imagem', 'Nome');
+      tableParams.headNames.push('image', 'name');
       tableParams.formPath = ROUTES.DASHBOARD.GALLERY.FORM;
       break;
     case 6: //ranking
@@ -276,9 +278,14 @@ const List = props => {
                 <DataTableRow key={index}>
                   {tableParams.headNames.map((objectKey, i) => (
                     <DataTableCell key={i}>
-                      {typeof item[objectKey] === "object"
+                      {objectKey !== 'image'? typeof item[objectKey] === "object"
                         ? item[objectKey].name
-                        : item[objectKey]}
+                        : item[objectKey]
+                        : <img 
+                            style={{ maxHeight: '150px' }} 
+                            src={`${baseUrl}${item[objectKey]}?${new Date().getTime()}`} alt={image_serie} 
+                          />
+                      }
                     </DataTableCell>
                   ))}
                   {props.title !== "Ranking" && (
