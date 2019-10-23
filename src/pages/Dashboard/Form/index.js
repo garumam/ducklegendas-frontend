@@ -59,15 +59,19 @@ const Form = props => {
       break;
     case 2: //legendas
       params = Inputs.subtitle;
+      validationSchema.push(YupValidation.SubtitleSchema);
       break;
     case 3: //categorias
       params = Inputs.category;
+      validationSchema.push(YupValidation.CategorySchema);
       break;
     case 4: //legendas em andamento
       params = Inputs.progress;
+      validationSchema.push(YupValidation.ProgressSchema);
       break;
     case 5: //galeria
       params = Inputs.gallery;
+      validationSchema.push(YupValidation.GallerySchema);
       break;
     default:
   }
@@ -433,10 +437,6 @@ const Form = props => {
                     );
                   }
 
-                  break;
-                case 6: //ranking
-                  break;
-                case 7: //ranking
                   break;
                 default:
               }
