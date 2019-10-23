@@ -5,7 +5,7 @@ import { Container } from "./styles";
 const Modal = (props) => {
 
   const show = () => (
-    <div id="overlay" onClick={props.onClose}>
+    <div id="overlay">
       <Container className="card card-shadow">
         <h5>{props.title}</h5>
         <div className="content">{props.content}</div>

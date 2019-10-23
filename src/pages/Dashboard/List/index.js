@@ -22,6 +22,7 @@ import { baseUrl, getRequest, postRequest } from "services/api";
 import { Paginator, getBackendUriBase } from "utils/Utils";
 import { ROUTES } from "utils/RoutePaths";
 import image_serie from "assets/img/sem_capa.jpg";
+import Gallery from 'components/Gallery';
 
 const List = props => {
   const [openModal, setOpenModal] = useState({ open: false });
@@ -87,8 +88,9 @@ const List = props => {
       baseUri = getBackendUriBase(ROUTES.DASHBOARD.PENDING);
       break;
     default:
+      baseUri = getBackendUriBase(ROUTES.DASHBOARD.GALLERY.LIST);
   }
-
+  
   useEffect(() => {
     async function getItens() {
       const res = await getRequest(
@@ -112,15 +114,19 @@ const List = props => {
       console.log("DADOS QUE CHEGARAM: ", res);
     }
 
-    if (props.location.state) {
-      if (props.location.state.anyChange || !props.location.state.entities) {
-        getItens();
-      } else {
-        setEntities({ ...props.location.state.entities });
-        props.location.state = undefined;
-      }
-    } else {
+    if(props.isGallery){
       getItens();
+    }else{
+      if (props.location.state) {
+        if (props.location.state.anyChange || !props.location.state.entities) {
+          getItens();
+        } else {
+          setEntities({ ...props.location.state.entities });
+          props.location.state = undefined;
+        }
+      } else {
+        getItens();
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -161,6 +167,7 @@ const List = props => {
   const handleDelete = async id => {
     const formData = new FormData();
     formData.append("_method", "DELETE");
+    setOpenModal({ open: false });
     const res = await postRequest(`${props.title === "Legendas Pendentes" ? "subtitles" : baseUri}/${id}`, formData);
     if (res.success) {
       let newpageSelected =
@@ -176,6 +183,7 @@ const List = props => {
         total: entities.total - 1,
         pageSelected: newpageSelected
       });
+
     } else {
       setOpenModal({
         open: true,
@@ -235,7 +243,7 @@ const List = props => {
               entities.checked && onSearch();
             }}
           />
-          {props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
+          {!props.isGallery && props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
             <Fab
               style={{margin: "1rem"}}
               icon="add"
@@ -251,7 +259,7 @@ const List = props => {
         </div>
       </HeaderCard>
       <div className="card-border" />
-      <DataTable style={{ height: "100%", border: "none" }}>
+      {props.table? <DataTable style={{ height: "100%", border: "none" }}>
         <DataTableContent style={{ width: "100%" }}>
           <DataTableHead>
             <DataTableRow>
@@ -328,6 +336,15 @@ const List = props => {
           </DataTableBody>
         </DataTableContent>
       </DataTable>
+      :
+
+      <Gallery 
+        data={entities.dataPaginada} 
+        setFieldValue={props.setFieldValue} 
+        inputName={props.inputName} 
+      />
+      
+      }
       <ReactPaginate
         forcePage={entities.pageSelected}
         previousLabel={<i className="material-icons">keyboard_arrow_left</i>}

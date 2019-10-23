@@ -7,7 +7,8 @@ import {
   HeaderCard,
   SelectCustom,
   DivCustom,
-  Error
+  Error,
+  GalleryContainer
 } from "./styles";
 import { withRouter } from "react-router-dom";
 import { baseUrl, getRequest, postRequest } from "services/api";
@@ -18,12 +19,19 @@ import { AuthContext } from "utils/AuthContext";
 import { getBackendUriBase, setInputsParams, prepareCategories } from "utils/Utils";
 import { Inputs } from "utils/Inputs";
 import { ROUTES } from 'utils/RoutePaths';
+import List from 'pages/Dashboard/List';
+import Modal from "components/Modal";
 
 const Form = props => {
-
+  
   const categories = props.location.state && props.location.state.entities 
                             && prepareCategories(props.location.state.entities.categories);
 
+  const [openModal, setOpenModal] = useState({ 
+    open: false, 
+    setFieldValue: () => {}, 
+    inputName: '' 
+  });
   const [user, setUser] = useContext(AuthContext);
   const [data, setData] = useState({
     values: null,
@@ -38,8 +46,8 @@ const Form = props => {
   ); 
   
   const validationSchema = [],
-    dataPassed = props.location.state ? props.location.state.item : null;  
-
+    dataPassed = props.location.state ? props.location.state.item : null;   
+  
   let params = {};  
 
   const baseUri = getBackendUriBase(props.history.location.pathname);
@@ -69,8 +77,6 @@ const Form = props => {
       const res = await getRequest(`/${baseUri}/${props.match.params.id}`);
       // console.log(res.success);
       if (res.success || res.categories) {
-        const {id} = res.success.category;
-        res.success['category'] = id;
         setData({
           values: res.success,
           categories: prepareCategories(res.categories)
@@ -102,7 +108,6 @@ const Form = props => {
   // fim dos inputs
 
   const store = async (values) => {
-    values['category'] = parseInt(values.category);
     console.log("valores values: ",values);
     let uri = `/${baseUri}/store`;
     let updateContext = false;
@@ -149,6 +154,14 @@ const Form = props => {
     }
   };
 
+  const galleryModal = (setFieldValue, inputName) => {
+    setOpenModal({ 
+      open: true,
+      setFieldValue: setFieldValue,
+      inputName: inputName 
+    })
+  } 
+
   return (
     <Formik
       initialValues={initialValues}
@@ -165,6 +178,18 @@ const Form = props => {
         setFieldValue
       }) => (
         <>
+          <Modal
+            onClose={() => setOpenModal({open: false})}
+            show={openModal.open}
+            title={"Selecione uma imagem"}
+            content={
+              <List 
+                isGallery 
+                setFieldValue={openModal.setFieldValue} 
+                inputName={openModal.inputName}
+              />
+            }
+          />
           <HeaderCard>
             <h2>{props.title}</h2>
             <div>
@@ -272,7 +297,7 @@ const Form = props => {
                       />
                     );
                   }
-                  if (input.type === "file") {
+                  if (input.name === "image") {
                     return (
                       <DivCustom
                         key={index}
@@ -281,30 +306,28 @@ const Form = props => {
                         <label style={{ width: "100%" ,fontSize: ".9rem" }}>
                           Imagem da Legenda
                         </label>
-                        <img
-                          style={{
-                            width: "150px",
-                            padding: "1rem 1rem 1rem 0"
-                          }}
-                          src={
-                            values[input.name] instanceof File
-                              ? URL.createObjectURL(values[input.name])
-                              : values[input.name]
-                              ? baseUrl + values[input.name]
-                              : image_serie
-                          }
-                          alt=""
-                        />
+                        <GalleryContainer>
+                          <img
+                            src={
+                              values[input.name]
+                                ? baseUrl + values[input.name]
+                                : image_serie
+                            }
+                            alt={image_serie}
+                          />
+                          <Fab 
+                            type="button" 
+                            icon="add" 
+                            onClick={() => galleryModal(setFieldValue, input.name)} 
+                          />
+                        </GalleryContainer>
                         <input
-                          id="file"
-                          name={input.name}
+                          disabled
+                          label={input.label}
+                          onChange={handleChange}
                           type={input.type}
-                          onChange={event => {
-                            setFieldValue(
-                              input.name,
-                              event.currentTarget.files[0]
-                            );
-                          }}
+                          name={input.name}
+                          value={values[input.name]}
                         />
                       </DivCustom>
                     );

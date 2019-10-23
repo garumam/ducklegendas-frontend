@@ -6,7 +6,7 @@ export const Inputs = {
     },
     subtitle: {
         labels: ["Nome","Categoria","Ano","Link de Download","Imagem","Status","Autor"],
-        types: ["text","select","number","text","file","select","disabled"],
+        types: ["text","select","number","text","hidden","select","disabled"],
         names: ["name", "category", "year", "url", "image", "status", "author"]
     },
     category: {

@@ -29,7 +29,7 @@ export const setInputsParams = (labels, types, names, dataPassed) => {
     });
 
     initialValues[names[index]] = dataPassed && dataPassed[names[index]]
-      ? dataPassed[names[index]]
+      ? dataPassed[names[index]].id || dataPassed[names[index]]
       : "";
   }
   

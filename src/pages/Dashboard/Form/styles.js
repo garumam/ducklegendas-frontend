@@ -109,3 +109,16 @@ export const Error = styled.div`
     font-size:.9rem;
   }
 `;
+
+export const GalleryContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  img {
+    width: 150px;
+    padding: 1rem 1rem 1rem 0;
+  }
+  button {
+      
+  }
+`;

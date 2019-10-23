@@ -176,6 +176,9 @@ input[type=submit]:hover {
 }
 
 #overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   width: 100%;
   height: 100%;

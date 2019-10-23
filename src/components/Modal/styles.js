@@ -7,10 +7,7 @@ export const Container = styled.div`
   color: black;
   position: fixed;
   z-index: 999;
-  left: 50%;
-  top: 50%;
-  margin-top: -100px; 
-  margin-left: -250px;
+  max-height: 100%;
 
   h5 {
     border-bottom: 1px solid #ccc;
