@@ -1,11 +1,23 @@
-import React from "react";
+import React,{useEffect,useRef} from "react";
 
 import { Container } from "./styles";
 
 const Modal = (props) => {
-
+  const overlayClick = useRef();
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
+  function handleClick(e){
+    if(overlayClick.current === e.target){
+      return props.onClose();
+    }
+    
+  }
   const show = () => (
-    <div id="overlay">
+    <div ref={overlayClick} id="overlay">
       <Container className="card card-shadow">
         <h5>{props.title}</h5>
         <div className="content">{props.content}</div>
