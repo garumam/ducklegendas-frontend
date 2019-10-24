@@ -9,13 +9,13 @@ import {
   DataTableBody,
   Fab,
   CircularProgress,
-  Switch
 } from "rmwc";
 import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
 import Modal from "components/Modal";
 import "./styles.css";
-import { HeaderCard, InputSearch } from "../Form/styles";
+import { FormHeader,SwitchCustom,InputSearch } from "./styles";
+import { HeaderCard} from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
 import { baseUrl, getRequest, postRequest } from "services/api";
@@ -203,15 +203,23 @@ const List = props => {
       {ActiveModal(false)}
       <HeaderCard ranking="0">
         <h2>{props.title}</h2>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Switch
-            style={{
-              height: "60px",
-              color: "rgba(0,0,0,.6)",
-              fontWeight: 600,
-              fontFamily: "Montserrat, sans-serif"
-            }}
-            id="realTime"
+        {!props.isGallery && props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
+            <Fab
+              style={{margin: "1rem"}}
+              icon="add"
+              type="button"
+              onClick={() => {
+                props.history.push({
+                  pathname: tableParams.formPath,
+                  state: { entities: entities }
+                });
+              }}
+            />
+          )}
+      </HeaderCard>
+      <div className="card-border" />
+      <FormHeader>
+          <SwitchCustom
             checked={entities.checked}
             onChange={e => setEntities({ checked: e.currentTarget.checked })}
             label="Tempo real"
@@ -243,22 +251,8 @@ const List = props => {
               entities.checked && onSearch();
             }}
           />
-          {!props.isGallery && props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
-            <Fab
-              style={{margin: "1rem"}}
-              icon="add"
-              type="button"
-              onClick={() => {
-                props.history.push({
-                  pathname: tableParams.formPath,
-                  state: { entities: entities }
-                });
-              }}
-            />
-          )}
-        </div>
-      </HeaderCard>
-      <div className="card-border" />
+          
+        </FormHeader>
       {props.table? <DataTable style={{ height: "100%", border: "none" }}>
         <DataTableContent style={{ width: "100%" }}>
           <DataTableHead>

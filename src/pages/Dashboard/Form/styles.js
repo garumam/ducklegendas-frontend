@@ -20,24 +20,6 @@ export const InputText = styled(TextField)`
     }
 `;
 
-export const InputSearch = styled(TextField)`
-    border:0;
-    border-radius:0;
-    height:60px;
-    margin-left: 2rem;
-    input{
-        border-bottom:0;
-    }
-    
-    label:not(:disabled){
-        font-family: 'Montserrat', sans-serif;
-        font-size:.9rem;
-        margin:0;
-        top:23px;
-        font-weight:600;
-    }
-`;
-
 export const SelectCustom = styled(Select)`
     width: 49%;
    
@@ -77,12 +59,15 @@ export const HeaderCard = styled.div`
         margin: 0;
         color: var(--textcolor);
     }
+
     button{
-        width:45px;
-        height:45px;
-        background: var(--mdc-theme-primary);
+            width:45px;
+            height:45px;
+            background: var(--mdc-theme-primary);
     }
+
 `;
+
 
 export const Error = styled.div`
   display:flex;
