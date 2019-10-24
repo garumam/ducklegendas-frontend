@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import {
   Header,
   HeaderDashboard,
@@ -23,11 +23,39 @@ import { ROUTES } from 'utils/RoutePaths';
 const Dashboard = props => {
   const {history} = props;
   const [user, setUser] = useContext(AuthContext);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(window.innerWidth > 1015);
   const refMenu = useRef(null);
 
   const can = Can(user.user_type)
   console.log('FUNCAO CAN ',can)
+  
+  const isClient = typeof window === 'object';
+  useEffect(() => {
+    if (!isClient) {
+      return false;
+    }
+    
+    function handleResize() {
+      const width = isClient ? window.innerWidth : undefined;
+      if(width <= 1015){
+        handlerMenuLateral(false);
+      }else{
+        handlerMenuLateral(true);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if(refMenu !== null && refMenu.current !== null){
+      if (open) refMenu.current.style = "margin-left: 0"
+      else refMenu.current.style = "margin-left: -220px";
+    }
+  }, [open]);
+  
   async function logout(e) {
     e.preventDefault();
     
@@ -48,11 +76,11 @@ const Dashboard = props => {
     }
   }
 
-  function handlerMenuLateral() {
-    setOpen(!open);
-    if (open) refMenu.current.style = "margin-left: -220px";
-    else refMenu.current.style = "margin-left: 0";
+  function handlerMenuLateral(forceOpen = undefined) {
+    if(forceOpen !== undefined)setOpen(forceOpen);
+    else setOpen(!open);
   }
+
   return (
     <Container>
       <Header ref={refMenu}>
@@ -159,7 +187,7 @@ const Dashboard = props => {
                 style={{height:'48px'}}
                   src={user.image? `${baseUrl}storage/${user.image}?${new Date().getTime()}`: false || userImg}
                   size="xlarge"
-                  name="Tony Stark"
+                  name={user.name}
                 />
               </div>
             </Ripple>

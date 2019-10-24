@@ -17,7 +17,10 @@ export const Header = styled.header`
         width:40px;
         height:40px;
     }
-    
+    @media (max-width: 1015px) {
+        position: absolute;
+        z-index: 1000;
+    }
 `;
 
 
@@ -41,6 +44,9 @@ export const HeaderDashboard = styled(SimpleTopAppBar)`
     }
     .mdc-top-app-bar__section--align-end :nth-child(1){
         order:2;
+    }
+    @media (max-width: 1015px) {
+        z-index: 1000;
     }
 `;
 

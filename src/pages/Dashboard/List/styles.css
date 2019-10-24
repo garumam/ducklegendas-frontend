@@ -48,3 +48,44 @@
 #realTimelabel {
     margin: auto;
 }
+
+#containerButtons {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#containerButtons h2 {
+    flex-grow: 1;
+}
+
+@media (max-width: 690px) {
+    #containerButtons {
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    #containerButtons h2:nth-of-type(1) { /* Título */
+        flex-basis: 45%;
+        order: 1; 
+    }
+    #containerButtons div:nth-of-type(1) { /* Radio button real time */
+        flex-grow: 1;
+        order: 3; 
+    }
+    #containerButtons div:nth-of-type(2) { /* Input search */
+        flex-grow: 1;
+        order: 4; 
+    }
+    #containerButtons div:nth-of-type(3) { /* Botão */ 
+        margin: 1rem 0;
+        flex-basis: 45%;
+        order: 2; 
+    }
+
+    #realTimelabel {
+        margin-right: 10px;
+    }
+ 
+}

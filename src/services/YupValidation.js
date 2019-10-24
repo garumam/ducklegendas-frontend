@@ -75,8 +75,7 @@ export const SubtitleSchema = Yup.object().shape({
     url: Yup.string()
         .url('Url inválida!')
         .required('Url é obrigatória!'),
-    image: Yup.string()
-        .url('Imagem inválida!'),
+    image: Yup.string(),
     status: Yup.mixed()
         .oneOf(['APROVADA', 'PENDENTE'],'O status deve ser: APROVADA ou PENDENTE'),
     author: Yup.number()

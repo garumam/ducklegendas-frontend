@@ -16,7 +16,8 @@ const Gallery = props => {
                     } : {}}
                     key={index} 
                     src={baseUrl+"storage/"+item.image} 
-                    alt={image_serie} 
+                    onError={(e) => e.target.src = image_serie}
+                    alt="" 
                     onClick={
                         () => {
                             props.setFieldValue(

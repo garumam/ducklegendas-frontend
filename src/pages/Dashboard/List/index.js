@@ -202,21 +202,24 @@ const List = props => {
     <>
       {ActiveModal(false)}
       <HeaderCard ranking="0">
-        <h2>{props.title}</h2>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Switch
-            style={{
-              height: "60px",
-              color: "rgba(0,0,0,.6)",
-              fontWeight: 600,
-              fontFamily: "Montserrat, sans-serif"
-            }}
-            id="realTime"
-            checked={entities.checked}
-            onChange={e => setEntities({ checked: e.currentTarget.checked })}
-            label="Tempo real"
-          />
+        <div id="containerButtons">
+          <h2>{props.title}</h2>
+          <div>
+            <Switch
+              style={{
+                height: "60px",
+                color: "rgba(0,0,0,.6)",
+                fontWeight: 600,
+                fontFamily: "Montserrat, sans-serif"
+              }}
+              id="realTime"
+              checked={entities.checked}
+              onChange={e => setEntities({ checked: e.currentTarget.checked })}
+              label="Tempo real"
+            />
+          </div>
           <InputSearch
+            id="inputSearch"
             ranking="0"
             icon={{
               icon: "search",
@@ -244,17 +247,19 @@ const List = props => {
             }}
           />
           {!props.isGallery && props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
-            <Fab
-              style={{margin: "1rem"}}
-              icon="add"
-              type="button"
-              onClick={() => {
-                props.history.push({
-                  pathname: tableParams.formPath,
-                  state: { entities: entities }
-                });
-              }}
-            />
+            <div>
+              <Fab
+                style={{margin: "0 1rem"}}
+                icon="add"
+                type="button"
+                onClick={() => {
+                  props.history.push({
+                    pathname: tableParams.formPath,
+                    state: { entities: entities }
+                  });
+                }}
+              />
+            </div>
           )}
         </div>
       </HeaderCard>
@@ -291,7 +296,9 @@ const List = props => {
                         : item[objectKey]
                         : <img 
                             style={{ maxHeight: '150px' }} 
-                            src={`${baseUrl}storage/${item[objectKey]}?${item['updated_at']}`} alt={image_serie} 
+                            src={`${baseUrl}storage/${item[objectKey]}?${item['updated_at']}`} 
+                            onError={(e) => e.target.src = image_serie}
+                            alt=""
                           />
                       }
                     </DataTableCell>

@@ -269,6 +269,7 @@ const Form = props => {
                               ? baseUrl+"storage/"+values[input.name]
                               : image
                           }
+                          onError={(e) => e.target.src = image}
                           alt=""
                         />
                         <input
@@ -317,7 +318,8 @@ const Form = props => {
                                 ? baseUrl+"storage/"+ values[input.name]
                                 : image_serie
                             }
-                            alt={image_serie}
+                            onError={(e) => e.target.src = image_serie}
+                            alt=""
                           />
                           <Fab 
                             type="button" 
@@ -420,6 +422,7 @@ const Form = props => {
                               ? baseUrl+"storage/"+ values[input.name]
                               : image_serie
                           }
+                          onError={(e) => e.target.src = image_serie}
                           alt=""
                         />
                         <input
