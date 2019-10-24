@@ -203,7 +203,7 @@ const List = props => {
       {ActiveModal(false)}
       <HeaderCard ranking="0">
         <h2>{props.title}</h2>
-        <div id="containerButtons" style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <Switch
             style={{
               height: "60px",
