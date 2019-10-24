@@ -291,7 +291,7 @@ const List = props => {
                         : item[objectKey]
                         : <img 
                             style={{ maxHeight: '150px' }} 
-                            src={`${baseUrl}${item[objectKey]}?${new Date().getTime()}`} alt={image_serie} 
+                            src={`${baseUrl}storage/${item[objectKey]}?${item['updated_at']}`} alt={image_serie} 
                           />
                       }
                     </DataTableCell>
@@ -307,7 +307,7 @@ const List = props => {
                         icon="create"
                         type="button"
                         onClick={() => {
-                          props.history.push({
+                          props.history.replace({
                             pathname: `${tableParams.formPath}/${item.id}`,
                             state: {
                               item: item,

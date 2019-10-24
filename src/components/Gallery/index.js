@@ -15,7 +15,7 @@ const Gallery = props => {
                         boxShadow: '0px 0px 2px 3px #6759FF'
                     } : {}}
                     key={index} 
-                    src={baseUrl+item.image} 
+                    src={baseUrl+"storage/"+item.image} 
                     alt={image_serie} 
                     onClick={
                         () => {

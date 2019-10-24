@@ -266,7 +266,7 @@ const Form = props => {
                             values[input.name] instanceof File
                               ? URL.createObjectURL(values[input.name])
                               : values[input.name]
-                              ? baseUrl + values[input.name]
+                              ? baseUrl+"storage/"+values[input.name]
                               : image
                           }
                           alt=""
@@ -314,7 +314,7 @@ const Form = props => {
                           <img
                             src={
                               values[input.name]
-                                ? baseUrl + values[input.name]
+                                ? baseUrl+"storage/"+ values[input.name]
                                 : image_serie
                             }
                             alt={image_serie}
@@ -417,7 +417,7 @@ const Form = props => {
                             values[input.name] instanceof File
                               ? URL.createObjectURL(values[input.name])
                               : values[input.name]
-                              ? baseUrl + values[input.name]
+                              ? baseUrl+"storage/"+ values[input.name]
                               : image_serie
                           }
                           alt=""
