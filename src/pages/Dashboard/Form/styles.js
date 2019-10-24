@@ -68,6 +68,7 @@ export const HeaderCard = styled.div`
     width:100%;
     justify-content:space-between;
     align-items:center;
+    min-height:60px;
     padding:0 1rem;
     padding-right: ${props => props.ranking || "1rem"}
     h2{
