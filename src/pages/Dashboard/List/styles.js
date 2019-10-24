@@ -23,9 +23,11 @@ export const FormHeader = styled.div`
         display:flex;
         align-items:center;
         flex-wrap:wrap;
-
-    @media (max-width: 968px) {
         justify-content:space-between;
+
+
+    @media (min-width: 968px) {
+        
     }
 `;
 
