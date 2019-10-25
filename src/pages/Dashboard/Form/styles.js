@@ -66,18 +66,26 @@ export const HeaderCard = styled.div`
     padding:0 1rem;
     padding-right: 1rem;
     h2{
-        font-size: 1.4rem;
-        font-weight: 700;
-        margin: 0;
-        color: var(--textcolor);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--textcolor);
     }
 
     button{
+      width:45px;
+      height:45px;
+      margin:1rem 0 1rem 1rem;
+      background: var(--mdc-theme-primary);
+    }
 
-            width:45px;
-            height:45px;
-            margin:1rem 0 1rem 1rem;
-            background: var(--mdc-theme-primary);
+    @media (max-width: 410px) {
+      h2 {
+        font-size: 1rem;
+      }
+      button {
+        margin:0;
+      }
     }
 
 `;

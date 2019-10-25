@@ -196,7 +196,7 @@ const Form = props => {
             }
           />
           <HeaderCard>
-            <h2>{props.title}</h2>
+            <h2>{props.title === "Legendas em andamento"? "Em andamento": props.title}</h2>
             <div>
               <Fab
                 icon="keyboard_arrow_left"
