@@ -189,7 +189,7 @@ const Form = props => {
             title={"Selecione uma imagem"}
             content={
               <List 
-                isGallery 
+                isgallery="true"
                 setFieldValue={openModal.setFieldValue} 
                 inputName={openModal.inputName}
               />

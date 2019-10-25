@@ -114,7 +114,7 @@ const List = props => {
       console.log("DADOS QUE CHEGARAM: ", res);
     }
 
-    if(props.isGallery){
+    if(props.isgallery){
       getItens();
     }else{
       if (props.location.state) {
@@ -201,7 +201,7 @@ const List = props => {
   ) : (
     <>
       {ActiveModal(false)}
-      {!props.isGallery && (
+      {!props.isgallery && (
       <>
       <HeaderCard>
         <h2>{props.title === "Legendas em andamento"? "Em andamento": props.title}</h2>
@@ -222,11 +222,11 @@ const List = props => {
       </>
       )}
       <FormHeader 
-        isGallery={props.isGallery} 
+        isgallery={props.isgallery} 
         hasButton={props.title !== "Ranking" && props.title !== "Legendas Pendentes"}
       >
           <SwitchCustom
-            isGallery={props.isGallery} 
+            isgallery={props.isgallery} 
             checked={entities.checked}
             onChange={e => setEntities({ checked: e.currentTarget.checked })}
             label="Tempo real"

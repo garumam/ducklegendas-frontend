@@ -18,7 +18,7 @@ export const SwitchCustom = styled(Switch)`
         @media (min-width: 968px) {
             justify-content:flex-end;
             margin-right:1rem;
-            ${props => props.isGallery && 'width:30%'};
+            ${props => props.isgallery && 'width:30%'};
         }
 `;
 
@@ -29,10 +29,10 @@ export const FormHeader = styled.div`
     align-items:center;
     flex-wrap:wrap;
     justify-content:space-between;
-    ${props => props.isGallery && 'margin-bottom:1rem;'}
+    ${props => props.isgallery && 'margin-bottom:1rem;'}
     @media (min-width: 968px) {
         flex-wrap:nowrap;
-        ${props => !props.isGallery && (
+        ${props => !props.isgallery && (
         `position: absolute;
         top:0;
         ${props.hasButton && "right:80px;"}
