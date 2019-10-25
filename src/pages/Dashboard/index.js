@@ -23,7 +23,7 @@ import { ROUTES } from 'utils/RoutePaths';
 const Dashboard = props => {
   const {history} = props;
   const [user, setUser] = useContext(AuthContext);
-  const [open, setOpen] = useState(window.innerWidth > 1015);
+  const [open, setOpen] = useState(window.innerWidth > 1150);
   const refMenu = useRef(null);
 
   const can = Can(user.user_type)
@@ -37,7 +37,7 @@ const Dashboard = props => {
     
     function handleResize() {
       const width = isClient ? window.innerWidth : undefined;
-      if(width <= 1015){
+      if(width <= 1150){
         handlerMenuLateral(false);
       }else{
         handlerMenuLateral(true);

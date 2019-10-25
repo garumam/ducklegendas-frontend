@@ -15,6 +15,10 @@ export const SwitchCustom = styled(Switch)`
             margin: 0;
             padding:auto;
         }
+        @media (min-width: 968px) {
+            justify-content:flex-end;
+            margin-right:10px;
+        }
 `;
 
 
@@ -27,7 +31,10 @@ export const FormHeader = styled.div`
 
 
     @media (min-width: 968px) {
-        
+        position: absolute;
+        top:0;
+        flex-wrap:nowrap;
+        right:80px;
     }
 `;
 
@@ -47,6 +54,10 @@ export const InputSearch = styled(TextField)`
         margin:0;
         top:23px;
         font-weight:600;
+    }
+
+    @media (min-width: 968px) {
+        width:70%;
     }
 `;
 
