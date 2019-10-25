@@ -23,6 +23,7 @@ import ResetarSenha from "pages/Front/ResetarSenha";
 import TokenExpired from "services/TokenExpired";
 import { isAuthenticated } from "services/api";
 import { AuthProvider } from "utils/AuthContext";
+import { SizeProvider } from "utils/SizeContext";
 import Authorization,{Admin} from "services/Authorization";
 import { ROUTES } from 'utils/RoutePaths';
 
@@ -72,6 +73,7 @@ const PrivateRouteLogin = ({ layout: Layout, ...rest }) => (
 export default () => (
   <Router>
     <ScrollToTop>
+      <SizeProvider>
       <AuthProvider>
         <Switch>
           <AppRoute
@@ -214,6 +216,7 @@ export default () => (
           <AppRoute path="*" layout={App} component={Error404} />
         </Switch>
       </AuthProvider>
+      </SizeProvider>
     </ScrollToTop>
   </Router>
 );

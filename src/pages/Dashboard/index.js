@@ -16,6 +16,7 @@ import { baseUrl, getRequest } from 'services/api';
 import logo from "assets/img/duck-128.png";
 import userImg from "assets/img/man.png";
 import { AuthContext } from 'utils/AuthContext';
+import { SizeContext } from 'utils/SizeContext';
 import { Can } from 'services/Authorization';
 import "@rmwc/avatar/avatar.css";
 import { ROUTES } from 'utils/RoutePaths';
@@ -23,31 +24,21 @@ import { ROUTES } from 'utils/RoutePaths';
 const Dashboard = props => {
   const {history} = props;
   const [user, setUser] = useContext(AuthContext);
+  const [windowWidth] = useContext(SizeContext);
   const [open, setOpen] = useState(window.innerWidth > 1150);
   const refMenu = useRef(null);
 
   const can = Can(user.user_type)
   console.log('FUNCAO CAN ',can)
   
-  const isClient = typeof window === 'object';
   useEffect(() => {
-    if (!isClient) {
-      return false;
+    if(windowWidth <= 1150){
+      handlerMenuLateral(false);
+    }else{
+      handlerMenuLateral(true);
     }
-    
-    function handleResize() {
-      const width = isClient ? window.innerWidth : undefined;
-      if(width <= 1150){
-        handlerMenuLateral(false);
-      }else{
-        handlerMenuLateral(true);
-      }
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [windowWidth]);
 
   useEffect(() => {
     if(refMenu !== null && refMenu.current !== null){

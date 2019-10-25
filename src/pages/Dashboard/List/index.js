@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState, useReducer, useContext } from "react";
 import {
   DataTable,
   DataTableContent,
@@ -22,9 +22,12 @@ import { baseUrl, getRequest, postRequest } from "services/api";
 import { Paginator, getBackendUriBase } from "utils/Utils";
 import { ROUTES } from "utils/RoutePaths";
 import image_serie from "assets/img/sem_capa.jpg";
+import { SizeContext } from 'utils/SizeContext';
+import ListMobile from 'components/ListMobile';
 import Gallery from 'components/Gallery';
 
 const List = props => {
+  const [windowWidth] = useContext(SizeContext);
   const [openModal, setOpenModal] = useState({ open: false });
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -260,7 +263,8 @@ const List = props => {
           />
           
         </FormHeader>
-      {props.table? <DataTable style={{ height: "100%", border: "none" }}>
+      {props.table? windowWidth > 800?
+        (<DataTable style={{ height: "100%", border: "none" }}>
         <DataTableContent style={{ width: "100%" }}>
           <DataTableHead>
             <DataTableRow>
@@ -338,9 +342,16 @@ const List = props => {
               ))}
           </DataTableBody>
         </DataTableContent>
-      </DataTable>
+      </DataTable>)
       :
-
+      <ListMobile 
+        entities={entities} 
+        tableParams={tableParams} 
+        {...props} 
+        setOpenModal={setOpenModal}
+      />
+      :
+      
       <Gallery 
         data={entities.dataPaginada} 
         setFieldValue={props.setFieldValue} 
