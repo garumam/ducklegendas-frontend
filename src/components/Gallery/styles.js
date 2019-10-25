@@ -5,8 +5,7 @@ export const Container = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     overflow-y: scroll;
-    max-height: 60vh;
-
+    flex-grow: 1;
     img {
         height: 150px;
         margin: 5px;

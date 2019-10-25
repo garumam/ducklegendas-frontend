@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 500px;
+  width: 320px;
   background: white;
   border-radius: 5px;
   color: black;
   position: fixed;
-  z-index: 999;
-  max-height: 100%;
+  max-height: 100vh;
 
   h5 {
     border-bottom: 1px solid #ccc;
@@ -16,10 +15,14 @@ export const Container = styled.div`
     font-weight: 700;
   }
   .content {
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
     font-size: 0.9rem;
     padding: 1rem;
   }
   .actions {
+    height: 20%;
     border-top: 1px solid #ccc;
     background: #eee;
     padding: 0.5rem 1rem;
@@ -33,5 +36,9 @@ export const Container = styled.div`
     font-weight: 500;
     line-height: 1;
     color: white;
+  }
+
+  @media (min-width: 500px) {
+    width: 500px;
   }
 `;

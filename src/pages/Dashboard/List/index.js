@@ -201,9 +201,11 @@ const List = props => {
   ) : (
     <>
       {ActiveModal(false)}
+      {!props.isGallery && (
+      <>
       <HeaderCard>
         <h2>{props.title === "Legendas em andamento"? "Em andamento": props.title}</h2>
-        {!props.isGallery && props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
+        {props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
             <Fab
               icon="add"
               type="button"
@@ -217,8 +219,14 @@ const List = props => {
           )}
       </HeaderCard>
       <div className="card-border" />
-      <FormHeader hasButton={props.title !== "Ranking" && props.title !== "Legendas Pendentes"}>
+      </>
+      )}
+      <FormHeader 
+        isGallery={props.isGallery} 
+        hasButton={props.title !== "Ranking" && props.title !== "Legendas Pendentes"}
+      >
           <SwitchCustom
+            isGallery={props.isGallery} 
             checked={entities.checked}
             onChange={e => setEntities({ checked: e.currentTarget.checked })}
             label="Tempo real"

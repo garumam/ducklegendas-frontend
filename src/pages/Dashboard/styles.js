@@ -19,7 +19,7 @@ export const Header = styled.header`
     }
     @media (max-width: 1150px) {
         position: absolute;
-        z-index: 1000;
+        z-index: 997;
     }
 `;
 
@@ -46,7 +46,7 @@ export const HeaderDashboard = styled(SimpleTopAppBar)`
         order:2;
     }
     @media (max-width: 1150px) {
-        z-index: 1000;
+        z-index: 998;
     }
 `;
 
