@@ -202,7 +202,7 @@ const List = props => {
     <>
       {ActiveModal(false)}
       <HeaderCard ranking="0">
-        <h2>{props.title}</h2>
+        <h2>{props.title === "Legendas em andamento"? "Em andamento": props.title}</h2>
         {!props.isGallery && props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
             <Fab
               style={{margin: "1rem"}}
@@ -218,7 +218,7 @@ const List = props => {
           )}
       </HeaderCard>
       <div className="card-border" />
-      <FormHeader>
+      <FormHeader hasButton={props.title !== "Ranking" && props.title !== "Legendas Pendentes"}>
           <SwitchCustom
             checked={entities.checked}
             onChange={e => setEntities({ checked: e.currentTarget.checked })}

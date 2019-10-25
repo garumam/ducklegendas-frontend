@@ -17,24 +17,23 @@ export const SwitchCustom = styled(Switch)`
         }
         @media (min-width: 968px) {
             justify-content:flex-end;
-            margin-right:10px;
+            margin-right:1rem;
         }
 `;
 
 
 export const FormHeader = styled.div`
-        width:100%;
-        display:flex;
-        align-items:center;
-        flex-wrap:wrap;
-        justify-content:space-between;
-
-
+    width:100%;
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    justify-content:space-between;
+        
     @media (min-width: 968px) {
         position: absolute;
         top:0;
         flex-wrap:nowrap;
-        right:80px;
+        ${props => props.hasButton && "right:80px;"}
     }
 `;
 
