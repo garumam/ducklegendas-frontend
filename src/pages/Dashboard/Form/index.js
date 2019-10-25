@@ -148,7 +148,8 @@ const Form = props => {
               user.id +
               filename.substring(filename.lastIndexOf("."), filename.length)
             : user.image,
-          update: true
+          update: true,
+          updated_at: new Date().getTime().toString()
         });
       }
     } else {
@@ -266,7 +267,7 @@ const Form = props => {
                             values[input.name] instanceof File
                               ? URL.createObjectURL(values[input.name])
                               : values[input.name]
-                              ? baseUrl+"storage/"+values[input.name]
+                              ? baseUrl+"storage/"+values[input.name]+`?${new Date().getTime()}`
                               : image
                           }
                           onError={(e) => e.target.src = image}
