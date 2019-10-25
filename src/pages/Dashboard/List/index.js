@@ -201,7 +201,7 @@ const List = props => {
   ) : (
     <>
       {ActiveModal(false)}
-      <HeaderCard ranking="0">
+      <HeaderCard>
         <h2>{props.title === "Legendas em andamento"? "Em andamento": props.title}</h2>
         {!props.isGallery && props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
             <Fab

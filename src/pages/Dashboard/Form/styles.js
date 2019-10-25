@@ -52,7 +52,7 @@ export const HeaderCard = styled.div`
     align-items:center;
     min-height:60px;
     padding:0 1rem;
-    padding-right: ${props => props.ranking || "1rem"}
+    padding-right: 1rem;
     h2{
         font-size: 1.4rem;
         font-weight: 700;
