@@ -257,7 +257,7 @@ const Form = props => {
 
                   if (input.type === "file") {
                     return (
-                      <DivCustom key={index} style={{ width: "49%" }}>
+                      <DivCustom key={index}>
                         <img
                           style={{
                             width: "150px",

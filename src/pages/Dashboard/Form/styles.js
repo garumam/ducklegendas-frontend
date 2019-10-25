@@ -4,6 +4,8 @@ import {TextField, Select} from 'rmwc';
 
 export const CustomForm = styled(Form)`
     justify-content: space-between;
+    flex-wrap: wrap;
+
     input {
         margin: 0 !important;
         padding: 20px 16px 6px !important;
@@ -17,6 +19,9 @@ export const InputText = styled(TextField)`
     label:not(:disabled){
         font-family: 'Montserrat', sans-serif;
         font-size:.8rem;
+    }
+    @media (max-width: 600px) {
+      width: 100%;
     }
 `;
 
@@ -35,14 +40,21 @@ export const SelectCustom = styled(Select)`
     .mdc-select__native-control{
         font-weight:600 !important;
     }
+    @media (max-width: 600px) {
+      width: 100%;
+    }
 `;
 
 export const DivCustom = styled.div`
+    width: 49%;
     input{
         padding: 1rem !important;
         font-size:.8rem;
         height:56px;
     } 
+    @media (max-width: 600px) {
+      width: 100%;
+    }
 `;
 
 export const HeaderCard = styled.div`
@@ -104,8 +116,5 @@ export const GalleryContainer = styled.div`
   img {
     width: 150px;
     padding: 1rem 1rem 1rem 0;
-  }
-  button {
-      
   }
 `;
