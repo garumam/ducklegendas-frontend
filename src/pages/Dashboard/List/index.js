@@ -205,7 +205,6 @@ const List = props => {
         <h2>{props.title === "Legendas em andamento"? "Em andamento": props.title}</h2>
         {!props.isGallery && props.title !== "Ranking" && props.title !== "Legendas Pendentes"  && (
             <Fab
-              style={{margin: "1rem"}}
               icon="add"
               type="button"
               onClick={() => {

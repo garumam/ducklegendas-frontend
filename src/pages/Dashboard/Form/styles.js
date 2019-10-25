@@ -61,8 +61,10 @@ export const HeaderCard = styled.div`
     }
 
     button{
+
             width:45px;
             height:45px;
+            margin:1rem 0 1rem 1rem;
             background: var(--mdc-theme-primary);
     }
 
