@@ -22,11 +22,12 @@ export const Container = styled.div`
     padding: 1rem;
   }
   .actions {
-    height: 20%;
     border-top: 1px solid #ccc;
     background: #eee;
     padding: 0.5rem 1rem;
     text-align: right;
+    position:relative;
+    bottom:-1rem;
   }
   .actions button {
     background: var(--mdc-theme-primary);
