@@ -26,7 +26,7 @@ function ListMobile (props) {
               metaIcon="chevron_right"
             >
             {props.title !== "Ranking" && (
-             <>
+             <div style={{ display: 'inline-flex', marginLeft: '0.5rem' }}>
              <Fab
                 style={{
                   marginRight: "5px",
@@ -62,7 +62,7 @@ function ListMobile (props) {
                   })
                 }
               />
-              </>
+              </div>
             )}
             </SimpleListItem>
           }
