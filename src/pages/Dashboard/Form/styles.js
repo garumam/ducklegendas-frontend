@@ -62,9 +62,10 @@ export const HeaderCard = styled.div`
     width:100%;
     justify-content:space-between;
     align-items:center;
-    min-height:60px;
+    height:20.76%;
+    max-height:60px;
     padding:0 1rem;
-    padding-right: 1rem;
+    
     h2{
       font-size: 1.4rem;
       font-weight: 700;
@@ -75,7 +76,6 @@ export const HeaderCard = styled.div`
     button{
       width:45px;
       height:45px;
-      margin:1rem 0 1rem 1rem;
       background: var(--mdc-theme-primary);
     }
 
