@@ -171,7 +171,7 @@ export const Post = styled.div`
   }
 `;
 
-export const Legendas = styled.section`
+export const LegendasContainer = styled.section`
   width: 100%;
   height: 1177px;
   margin-bottom: var(--marginbottom);

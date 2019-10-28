@@ -8,7 +8,8 @@ import {
   SelectCustom,
   DivCustom,
   Error,
-  GalleryContainer
+  GalleryContainer,
+  InputCheckbox
 } from "./styles";
 import { withRouter } from "react-router-dom";
 import { baseUrl, getRequest, postRequest } from "services/api";
@@ -37,6 +38,7 @@ const Form = props => {
     values: null,
     categories: categories || []
   });
+  
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -46,8 +48,14 @@ const Form = props => {
   ); 
   
   const validationSchema = [],
-    dataPassed = props.location.state ? props.location.state.item : null;   
+    dataPassed = props.location.state ? props.location.state.item : null;
   
+  const [checked, setChecked] = React.useState(dataPassed? 
+                                                  (dataPassed.type === 'SERIE'
+                                                  ? true
+                                                  : false)
+                                                  : false
+  );
   let params = {};  
 
   const baseUri = getBackendUriBase(props.history.location.pathname);
@@ -81,6 +89,10 @@ const Form = props => {
       const res = await getRequest(`/${baseUri}/${props.match.params.id}`);
       // console.log(res.success);
       if (res.success || res.categories) {
+        
+        if(res.success && res.success.type === 'SERIE')
+          setChecked(true);
+
         setData({
           values: res.success,
           categories: prepareCategories(res.categories)
@@ -107,8 +119,7 @@ const Form = props => {
     params.names, 
     dataPassed || data.values 
   );
-
- 
+  
   // fim dos inputs
 
   const store = async (values) => {
@@ -338,6 +349,39 @@ const Form = props => {
                         />
                       </DivCustom>
                     );
+                  }
+                  if (input.type === "checkbox") {
+                    return (
+                      <InputCheckbox
+                        key={index}
+                        label="Marque se for uma série."
+                        checked={checked}
+                        name={input.name}
+                        onChange={(e) => {
+                          let newChecked = !checked;
+                          setFieldValue(input.name,newChecked?'SERIE':'');
+                          setChecked(newChecked)
+                        }}
+                      />
+                    );
+                  }
+                  if (input.name === "episode") {
+                    if(checked){
+                      return (
+                        <InputText
+                          key={index}
+                          label={input.label}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          type={input.type}
+                          name={input.name}
+                          value={values[input.name]}
+                        />
+                      );
+                    }else{
+                      values[input.name] = '';
+                      return null;
+                    }
                   }
                   if (input.type === "disabled") {
                     return (

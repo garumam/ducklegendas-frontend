@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Form } from 'formik';
-import {TextField, Select} from 'rmwc';
+import {TextField, Select, Checkbox} from 'rmwc';
 
 export const CustomForm = styled(Form)`
     justify-content: space-between;
@@ -42,6 +42,17 @@ export const SelectCustom = styled(Select)`
     }
     @media (max-width: 600px) {
       width: 100%;
+    }
+`;
+
+export const InputCheckbox = styled(Checkbox)`
+    width: 100%;
+    margin-bottom: 1rem;
+    
+    label:not(:disabled){
+        font-family: 'Montserrat', sans-serif;
+        font-size:.8rem;
+        margin-bottom:0;
     }
 `;
 
