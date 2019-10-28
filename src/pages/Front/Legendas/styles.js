@@ -93,11 +93,11 @@ export const SelectBusca = styled.div`
 export const Box = styled.div`
   width: 100%;
   display: flex;
-  min-height: 0;
+  min-height: 1080px;
   max-height: 1080px;
   padding-left: 1rem;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   flex-wrap: wrap;
   margin-top: 1rem;
 `;
@@ -106,8 +106,9 @@ export const Post = styled.div`
   width: 22.6%;
   margin-right: 1rem;
   margin-bottom: 1.2rem;
-  padding-bottom: 1rem;
   min-height: 0;
+  max-height: 390px;
+  padding-bottom: .8rem !important;
 
   & > a {
     text-decoration: none;
@@ -131,12 +132,11 @@ export const Post = styled.div`
   }
 
   .info-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     text-align: center;
-    height: 40px;
+    height:40px;
+    position: absolute;
+    bottom: 0;
   }
 
   .info-card span {
@@ -203,7 +203,7 @@ export const LegendasContainer = styled.section`
   }
 
   @media (min-width: 769px) {
-    ${Post}:nth-child (4n+0) {
+    ${Post}:nth-child(4n+0) {
       margin-right: 0;
     }
 

@@ -56,28 +56,9 @@ const Legendas = (props) => {
                     <label id="ordernar">Ordernar:</label>
                     <select>
                       <option defaultValue>Selecione</option>
-                      <option value="volvo">
-                        Volvodasdsadsadasdasdasdsadasdsadassdvfdsfdgfdgdf
-                      </option>
-                      <option value="saab">Saab</option>
-                      <option value="mercedes">Mercedes</option>
-                      <option value="audi">Audi</option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="mercedes">Mercedes</option>
-                      <option value="audi">Audi</option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="mercedes">Mercedes</option>
-                      <option value="audi">Audi</option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="mercedes">Mercedes</option>
-                      <option value="audi">Audi</option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="mercedes">Mercedes</option>
-                      <option value="audi">Audi</option>
+                      <option value="series">Series</option>
+                      <option value="filmes">Filmes</option>
+                     
                     </select>
                   </Ordenar>
 
@@ -94,6 +75,9 @@ const Legendas = (props) => {
             <Box>
               {entities.loading?
                 <div style={{ color: 'black' }}>LOADING...</div>
+                :
+                entities.dataPaginada.length === 0 ? 
+                <div style={{ color: 'black' }}>Legenda não encontrada !!!</div> 
                 :
                 entities.dataPaginada.map((item, key) => {
                   let data = new Date(item.created_at)
