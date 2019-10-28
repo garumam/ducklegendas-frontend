@@ -9,7 +9,6 @@ const Legendas = (props) => {
     {
       page: 1, // PÁGINA SELECIONADA NO COMPONENTE DE PAGINAÇÃO DO FRONT
       dataPaginada: [], // DADOS VINDOS DO BACK PAGINADOS DE 12 EM 12
-      trigSearch: false, // ACIONADOR DE PESQUISA
       loading: true,
       search: "", // PESQUISA
     }
@@ -42,7 +41,7 @@ const Legendas = (props) => {
     }
     getItens();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[entities.page, entities.trigSearch]);
+  },[entities.page, entities.search]);
 
   return(
     <>
@@ -82,7 +81,12 @@ const Legendas = (props) => {
                     </select>
                   </Ordenar>
 
-                  <input type="text" placeholder="Buscar.." />
+                  <input 
+                    type="text" 
+                    placeholder="Buscar.." 
+                    value={entities.search}
+                    onChange={(e) => setEntities({search:e.target.value})}
+                  />
                 </SelectBusca>
               </div>
             </div>
