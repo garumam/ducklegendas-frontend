@@ -301,6 +301,7 @@ const Form = props => {
                   break;
                 case 2: //legendas
                   if (input.type === "select") {
+                    console.log('VALUE: ',values[input.name]);
                     return (
                       <SelectCustom
                         disabled={checkUser}
@@ -310,7 +311,7 @@ const Form = props => {
                         name={input.name}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values[input.name].name === undefined ? input.name !== 'category'?values[input.name] || "PENDENTE":values[input.name] : values[input.name].id}
+                        value={input.name !== 'category'? values[input.name] || "PENDENTE" : values[input.name]}
                       />
                     );
                   }
