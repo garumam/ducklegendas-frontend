@@ -310,7 +310,7 @@ const Form = props => {
                         name={input.name}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values[input.name].name === undefined ? (input.name !== 'category' ? "PENDENTE" : values[input.name]) : values[input.name].id}
+                        value={values[input.name].name === undefined ? input.name !== 'category'?values[input.name] || "PENDENTE":values[input.name] : values[input.name].id}
                       />
                     );
                   }
