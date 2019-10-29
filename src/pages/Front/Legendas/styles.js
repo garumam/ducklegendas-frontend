@@ -107,11 +107,12 @@ export const Post = styled.div`
   margin-right: 1rem;
   margin-bottom: 1.2rem;
   min-height: 0;
-  max-height: 390px;
+  max-height: 370px;
   padding-bottom: .8rem !important;
 
   & > a {
     text-decoration: none;
+    margin-bottom: 30px;
   }
 
   .topo-card {
@@ -133,13 +134,15 @@ export const Post = styled.div`
 
   .info-card {
     width: 100%;
-    text-align: center;
+    padding: 0 0.5rem;
     height:40px;
     position: absolute;
     bottom: 0;
   }
 
   .info-card span {
+    display: block;
+    line-height: 1.2rem;
     text-decoration: none;
     font-size: 0.72rem;
     color: #898a8f;
@@ -160,13 +163,19 @@ export const Post = styled.div`
 
   .card-media img {
     width: 100%;
-    height: 240px;
+    height: 100%;
+    object-fit: cover;
   }
-
+  .title-card {
+    display: -webkit-box;
+    -webkit-line-clamp: ${props => props.lineclamp};
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  }
   .title-card,
   .subtitle-card {
     text-align: left;
-    padding-left: 1rem;
+    padding: 0 0.5rem;
     color: var(--textcolor);
   }
 `;

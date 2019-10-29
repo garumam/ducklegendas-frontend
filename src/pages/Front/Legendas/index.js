@@ -11,6 +11,7 @@ const Legendas = (props) => {
       dataPaginada: [], // DADOS VINDOS DO BACK PAGINADOS DE 12 EM 12
       loading: true,
       search: "", // PESQUISA
+      lastPage: 1 // ÚLTIMA PÁGINA PARA BLOQUEAR BOTÃO PRÓXIMO
     }
   );
   let type = window.location.pathname.replace('/','');
@@ -35,6 +36,7 @@ const Legendas = (props) => {
       if(res.success){
         setEntities({
           dataPaginada: res.success.data,
+          lastPage: Math.ceil(res.success.total/12),
           loading: false
         });
       }
@@ -91,7 +93,11 @@ const Legendas = (props) => {
                     +'/'+data.getFullYear();
 
                   return(
-                    <Post key={key} className="card card-shadow">
+                    <Post 
+                      key={key} 
+                      lineclamp={item.type === 'SERIE'?1:2} 
+                      className="card card-shadow"
+                    >
                       <div className="topo-card">
                         <span>{item.type === 'FILME'? item.year
                             :
@@ -166,7 +172,11 @@ const Legendas = (props) => {
           </div>
         </div>
       </LegendasContainer>
-      <Paginacao handle={handlePageClick} page={entities.page} />
+      <Paginacao 
+        handle={handlePageClick} 
+        page={entities.page} 
+        lastPage={entities.lastPage} 
+      />
     </>
   )
 }
