@@ -11,6 +11,7 @@ const Legendas = (props) => {
       dataPaginada: [], // DADOS VINDOS DO BACK PAGINADOS DE 12 EM 12
       loading: true,
       search: "", // PESQUISA
+      order: "hoje", // ORDENAR
       lastPage: 1 // ÚLTIMA PÁGINA PARA BLOQUEAR BOTÃO PRÓXIMO
     }
   );
@@ -29,8 +30,9 @@ const Legendas = (props) => {
 
   useEffect(() => {
     async function getItens() {
+      console.log('ORDER: ', entities.order);
       const res = await getRequest(
-        `/subtitles/list?page=${entities.page}&search=${entities.search}&type=${type}`
+        `/subtitles/list?page=${entities.page}&search=${entities.search}&order=${entities.order}&type=${type}`
       );
       console.log('RES FRONT: ', res);
       if(res.success){
@@ -43,7 +45,8 @@ const Legendas = (props) => {
     }
     getItens();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[entities.page, entities.search]);
+  },[entities.page, entities.search, entities.order]);
+
   const handlePageClick = data => {
     console.log("data selected", data)
       setEntities({
@@ -61,11 +64,14 @@ const Legendas = (props) => {
                 <SelectBusca>
                   <Ordenar>
                     <label id="ordernar">Ordernar:</label>
-                    <select>
-                      <option defaultValue>Selecione</option>
-                      <option value="series">Series</option>
-                      <option value="filmes">Filmes</option>
-                     
+                    <select onChange={(e) => setEntities({order: e.target.value, page: 1})}>
+                      <option defaultValue value="hoje">Hoje</option>
+                      <option value="semana">Semana</option>
+                      <option value="mes">Mês</option>
+                      <option value="semestre">Semestre</option>
+                      <option value="ano">Ano</option>
+                      <option value="todas">Todas</option>
+                      <option value="populares">Populares</option>
                     </select>
                   </Ordenar>
 

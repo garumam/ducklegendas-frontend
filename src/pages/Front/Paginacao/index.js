@@ -36,7 +36,7 @@ export const Paginacao = (props) => {
                 <div className="borda-meio" />
                 <a 
                   href="#null" 
-                  style={props.lastPage === props.page?disabled:null}
+                  style={props.lastPage === props.page || props.lastPage === 0?disabled:null}
                   onClick={(e) => {
                   e.preventDefault();
                   props.handle(props.page + 1);
