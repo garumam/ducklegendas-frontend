@@ -1,20 +1,20 @@
 import React from "react";
-import {Paginacao,MenuPaginacao,Arrow} from "./styles";
+import {PaginacaoContainer,MenuPaginacao,Arrow} from "./styles";
 
-export default () => (
-    <Paginacao className="card card-shadow">
+export const Paginacao = (props) => (
+    <PaginacaoContainer className="card card-shadow">
       <div className="container">
         <div className="row">
           <div className="col-12">
               <MenuPaginacao>
-                <a href="{null}">
+              <a href={`#/page/${props.page}`} onClick={() => props.handle(props.page - 1)}>
                   <Arrow>
                    <i className="material-icons">keyboard_arrow_left</i>
                   </Arrow>
                   Anterior
                 </a>
                 <div className="borda-meio" />
-                <a href="{null}">
+                <a href={`#/page/${props.page}`} onClick={() => props.handle(props.page + 1)}>
                 Proximo
                 <Arrow>
                    <i className="material-icons">keyboard_arrow_right</i>
@@ -26,5 +26,5 @@ export default () => (
           <div className="card-border" />
         </div>
       </div>
-    </Paginacao>
+    </PaginacaoContainer>
   )

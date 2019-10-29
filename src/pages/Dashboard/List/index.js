@@ -153,6 +153,7 @@ const List = props => {
   );
 
   const handlePageClick = data => {
+    console.log("data selected", data.selected)
     let selected = data.selected;
     let newlevelpage = Math.floor(selected / 10 + 1);
     if (entities.page !== newlevelpage) {

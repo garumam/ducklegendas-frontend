@@ -1,7 +1,8 @@
 import React, {useEffect, useReducer} from "react";
 import { getRequest, baseUrl } from "services/api";
+import { Paginator } from "utils/Utils";
 import {LegendasContainer,Ordenar,SelectBusca,Box,Post} from "./styles";
-import Paginacao from "../Paginacao";
+import {Paginacao} from "../Paginacao";
 
 const Legendas = (props) => {
   const [entities, setEntities] = useReducer(
@@ -42,7 +43,12 @@ const Legendas = (props) => {
     getItens();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[entities.page, entities.search]);
-
+  const handlePageClick = data => {
+    console.log("data selected", data)
+      setEntities({
+        page: data
+      });
+  };
   return(
     <>
       <LegendasContainer className="card card-shadow">
@@ -123,7 +129,7 @@ const Legendas = (props) => {
                 })
               }
               
-              {/* <Post className="card card-shadow">
+               {/* <Post className="card card-shadow">
                   <div className="topo-card">
                     <span>2 TEMPORADA</span>
                   </div>
@@ -147,275 +153,21 @@ const Legendas = (props) => {
                     </div>
                   </a>
               </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post>
-              <Post className="card card-shadow">
-                  <div className="topo-card">
-                    <span>2 TEMPORADA</span>
-                  </div>
-                  <a href="{null}" title="Fazer Download">
-                    <div className="card-media">
-                      <img
-                        src="http://via.placeholder.com/160x240"
-                        className="img-fluid"
-                        height="240"
-                        alt=""
-                      />
-                    </div>
-                    <div className="title-card">
-                      <span>Supernatural</span>
-                    </div>
-                    <div className="subtitle-card">
-                      <span>S10E21</span>
-                    </div>
-                    <div className="info-card">
-                      <span>by Admin 6 april, 2019</span>
-                    </div>
-                  </a>
-              </Post> */}
+               */}
+            
+            
+             
+              
+             
+             
+             
+              
+      
             </Box>
           </div>
         </div>
       </LegendasContainer>
-      <Paginacao />
+      <Paginacao handle={handlePageClick} page={entities.page} />
     </>
   )
 }
