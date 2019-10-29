@@ -411,7 +411,7 @@ const Form = props => {
                           name={input.name}
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          value={values[input.name]}
+                          value={values[input.name] || "EM ANDAMENTO"}
                         />
                     );
                   }
