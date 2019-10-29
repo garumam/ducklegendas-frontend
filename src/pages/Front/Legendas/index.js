@@ -1,6 +1,5 @@
 import React, {useEffect, useReducer} from "react";
 import { getRequest, baseUrl } from "services/api";
-import { Paginator } from "utils/Utils";
 import {LegendasContainer,Ordenar,SelectBusca,Box,Post} from "./styles";
 import {Paginacao} from "../Paginacao";
 
