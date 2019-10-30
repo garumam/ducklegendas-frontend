@@ -2,6 +2,7 @@ import React, {useEffect, useReducer} from "react";
 import { getRequest, baseUrl } from "services/api";
 import {LegendasContainer,Ordenar,SelectBusca,Box,Post} from "./styles";
 import {Paginacao} from "../Paginacao";
+import { formatDate } from "utils/Utils";
 
 const Legendas = (props) => {
   const [entities, setEntities] = useReducer(
@@ -11,7 +12,7 @@ const Legendas = (props) => {
       dataPaginada: [], // DADOS VINDOS DO BACK PAGINADOS DE 12 EM 12
       loading: true,
       search: "", // PESQUISA
-      order: "hoje", // ORDENAR
+      order: "todas", // ORDENAR
       lastPage: 1 // ÚLTIMA PÁGINA PARA BLOQUEAR BOTÃO PRÓXIMO
     }
   );
@@ -65,12 +66,12 @@ const Legendas = (props) => {
                   <Ordenar>
                     <label id="ordernar">Ordernar:</label>
                     <select onChange={(e) => setEntities({order: e.target.value, page: 1})}>
-                      <option defaultValue value="hoje">Hoje</option>
+                      <option defaultValue value="todas">Todas</option>
+                      <option value="hoje">Hoje</option>
                       <option value="semana">Semana</option>
                       <option value="mes">Mês</option>
                       <option value="semestre">Semestre</option>
                       <option value="ano">Ano</option>
-                      <option value="todas">Todas</option>
                       <option value="populares">Populares</option>
                     </select>
                   </Ordenar>
@@ -93,10 +94,8 @@ const Legendas = (props) => {
                 <div style={{ color: 'black' }}>Legenda não encontrada !!!</div> 
                 :
                 entities.dataPaginada.map((item, key) => {
-                  let data = new Date(item.created_at)
-                  data = data.getDate().toString().padStart(2, '0')
-                    +'/'+(data.getMonth()+1).toString().padStart(2, '0')
-                    +'/'+data.getFullYear();
+                  
+                  let data = formatDate(item.created_at);
 
                   return(
                     <Post 

@@ -15,9 +15,9 @@ export const Inputs = {
         names: ["name"]
     },
     progress: {
-        labels: ["Nome", "Porcentagem", "Status", "Autor"],
-        types: ["text", "number", "select", "disabled"],
-        names: ["name", "percent", "status", "author"]
+        labels: ["Nome", "Porcentagem", "Autor"],
+        types: ["text", "number", "disabled"],
+        names: ["name", "percent", "author"]
     },
     gallery: {
         labels: ["Nome", "Palavras chave", "Imagem"],

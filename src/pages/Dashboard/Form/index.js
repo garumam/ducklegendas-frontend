@@ -163,6 +163,7 @@ const Form = props => {
           updated_at: new Date().getTime().toString()
         });
       }
+
     } else {
       setEntities({
         errorsReponse: res.error
@@ -401,22 +402,7 @@ const Form = props => {
                   break;
                 case 3: //categorias
                   break;
-                case 4: //toplegendas
-                  if (input.type === "select") {
-                    return (
-                        <SelectCustom
-                          disabled={checkUser}
-                          options={['EM ANDAMENTO','CONCLUÍDA']}
-                          key={index}
-                          label={input.label}
-                          name={input.name}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values[input.name] || "EM ANDAMENTO"}
-                        />
-                    );
-                  }
-
+                case 4: //legendas em andamento
                   if (input.type === "file") {
                     return (
                       <DivCustom key={index} style={{ width: "49%" }}>

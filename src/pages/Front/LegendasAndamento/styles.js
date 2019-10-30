@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const TopLegendas = styled.section`
   width: 100%;
   height: 753px;
+  margin-bottom: var(--marginbottom);
   color: var(--textcolor);
 `;
 
@@ -36,11 +37,6 @@ export const Top = styled.div`
   span:last-child {
     margin-bottom: 0;
   }
-  img {
-    width: 47px;
-    height: 47px;
-    background: #dedede;
-  }
 
   @media (min-width: 992px) and (max-width: 1199px) {
     .top {
@@ -50,7 +46,7 @@ export const Top = styled.div`
 `;
 
 export const GrupoLegendas = styled.div`
-  width: 70%;
+  width: 100%;
 
   .descricao-legendas {
     display: flex;
@@ -118,4 +114,11 @@ export const GrupoLegendas = styled.div`
       background-position: 0 0;
     }
   }
+`;
+
+export const LegendasContainer = styled.div`
+  width: 100%;
+  padding: 0 1.5rem;
+  overflow-y:scroll; 
+  height: 690px;
 `;

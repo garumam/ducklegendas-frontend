@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
-import {TopLegendas,Eclipse,Top,GrupoLegendas} from "./styles";
+import {TopLegendas,Eclipse,Top,GrupoLegendas,LegendasContainer} from "./styles";
 import { getRequest } from "services/api";
+import { formatDate } from "utils/Utils";
 
 const style = (porcentagem) => {
   return {width: porcentagem+"%"}
@@ -28,24 +29,24 @@ export const LegendasAndamento = (props) => {
             </div>
           </div>
           <div className="card-border" />
-
-          {entities.map((item,value) => {
-            return (
-              <Top key={value}>
-                <img alt="" src="#" />
-                <GrupoLegendas>
-                  <p>{item.name}</p>
-                  <div className="descricao-legendas">
-                    <span>{item.updated_at}</span>
-                    <span>{item.percent} %</span>
-                  </div>
-                  <div className="progressbar">
-                    <span style={style(item.percent)} />
-                  </div>
-                </GrupoLegendas>
-              </Top>
-            );
-          })}
+          <LegendasContainer>
+            {entities.map((item,value) => {
+              return (
+                <Top key={value}>
+                  <GrupoLegendas>
+                    <p>{item.name}</p>
+                    <div className="descricao-legendas">
+                      <span>{"Atualizado em: "+formatDate(item.updated_at)}</span>
+                      <span>{item.percent} %</span>
+                    </div>
+                    <div className="progressbar">
+                      <span style={style(item.percent)} />
+                    </div>
+                  </GrupoLegendas>
+                </Top>
+              );
+            })}
+          </LegendasContainer>
         </div>
       </div>
     </TopLegendas>

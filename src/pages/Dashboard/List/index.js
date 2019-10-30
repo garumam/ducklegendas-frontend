@@ -70,8 +70,8 @@ const List = props => {
       tableParams.formPath = ROUTES.DASHBOARD.CATEGORY.FORM;
       break;
     case 4: //legendas em andamento
-      tableParams.headCells.push("ID", "Legenda", "%", "Status");
-      tableParams.headNames.push("id", "name", "percent", "status");
+      tableParams.headCells.push("ID", "Legenda", "%");
+      tableParams.headNames.push("id", "name", "percent");
       tableParams.formPath = ROUTES.DASHBOARD.PROGRESS.FORM;
       break;
     case 5: //galeria
@@ -142,7 +142,10 @@ const List = props => {
         onClose={() => setOpenModal({ open: false })}
         show={openModal.open}
         showConfirm={openModal.id}
-        title={openModal.id ? "Você quer realmente excluir ?" : "Error"}
+        title={openModal.id ? "Você quer realmente "
+                            +(baseUri === 'progress'?"finalizar":"excluir")
+                            +"?" : "Error"
+        }
         content={openModal.id ? openModal.msg : openModal.error}
       />
 
@@ -187,6 +190,10 @@ const List = props => {
         total: entities.total - 1,
         pageSelected: newpageSelected
       });
+
+      if(baseUri === 'progress'){
+        props.history.push(ROUTES.DASHBOARD.SUBTITLE.FORM);
+      }
 
     } else {
       setOpenModal({
@@ -327,7 +334,7 @@ const List = props => {
                       <Fab
                         style={{ backgroundColor: "var(--delete-button)" }}
                         mini
-                        icon="delete"
+                        icon={baseUri === 'progress'?"assignment_turned_in":"delete"}
                         type="button"
                         onClick={() =>
                           setOpenModal({
