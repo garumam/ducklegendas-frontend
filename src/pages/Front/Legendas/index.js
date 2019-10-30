@@ -31,11 +31,9 @@ const Legendas = (props) => {
 
   useEffect(() => {
     async function getItens() {
-      console.log('ORDER: ', entities.order);
       const res = await getRequest(
         `/subtitles/list?page=${entities.page}&search=${entities.search}&order=${entities.order}&type=${type}`
       );
-      console.log('RES FRONT: ', res);
       if(res.success){
         setEntities({
           dataPaginada: res.success.data,
@@ -54,6 +52,22 @@ const Legendas = (props) => {
         page: data
       });
   };
+
+  const addDownload = async (id) => {
+    const res = await getRequest(
+      `/subtitles/downloaded?id=${id}`
+    );
+    if(res.success){
+      const updatedData = entities.dataPaginada.map((item) => {
+        item.downloaded += 1;
+        return item;
+      });
+      setEntities({
+        dataPaginada: updatedData
+      });
+    }
+  }
+
   return(
     <>
       <LegendasContainer className="card card-shadow">
@@ -113,7 +127,13 @@ const Legendas = (props) => {
                         }
                         </span>
                       </div>
-                      <a href={item.url} rel="noopener noreferrer" target="_blank" title="Fazer Download">
+                      <a 
+                        href={item.url} 
+                        rel="noopener noreferrer" 
+                        target="_blank" 
+                        title="Fazer Download"
+                        onClick={() => addDownload(item.id)}
+                      >
                         <div className="card-media">
                           <img
                             src={item.image?`${baseUrl}storage/${item.image}`: "http://via.placeholder.com/160x240"}
