@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import Doacao from "./Doacao";
-import TopLegendas from "./LegendasAndamento";
+import {LegendasAndamento} from "./LegendasAndamento";
 import Parceiros from "./Parceiros";
 
 export default props => (
@@ -17,7 +17,7 @@ export default props => (
         </div>
         <div className="col-sm-12 col-md-12 col-lg-4">
           <Doacao title="Doação" />
-          <TopLegendas title="Próximas Legendas" />
+          <LegendasAndamento title="Próximas Legendas" />
         </div>
       </div>
     </div>
