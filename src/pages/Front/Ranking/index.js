@@ -50,9 +50,9 @@ export default (props) => {
               return (
                 <Top key={value}>
                   <GrupoLegendas>
-                    <p>{item.empatados? `Empate entre ${item.empatados} usuários`:item.name}</p>
                     <div className="descricao-legendas">
                       <span>{item.position+"°"}</span>
+                      <p>{item.empatados? `Empate entre ${item.empatados} usuários`:item.name}</p>
                       <span>{"N° de legendas: "+item.subtitles_count}</span>
                     </div>
                   </GrupoLegendas>
