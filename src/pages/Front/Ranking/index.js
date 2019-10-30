@@ -9,9 +9,9 @@ export default (props) => {
   useEffect(() => {
     async function getItens(){
       const res = await getRequest('rankings/list');
-      console.log(res);
+
       if(res.success){
-        res.success.filter((item, index) => {
+        res.success.forEach((item, index) => {
           let count = 1;
           let nextIndex = index+count;
           if(nextIndex < res.success.length){
@@ -28,6 +28,7 @@ export default (props) => {
         res.success = res.success.filter((item) => {
           return item.position < 11;
         });
+        
         setEntities(res.success);
       }
     }
