@@ -38,11 +38,12 @@ const Legendas = (props) => {
   }
 
   useEffect(() => {
+    let isSubscribed = true;
     async function getItens() {
       const res = await getRequest(
         `/subtitles/list?page=${entities.page}&search=${entities.search}&order=${entities.order}&type=${type}${hasCategory?'&category='+location.category.id:''}`
       );
-      if(res.success){
+      if(res.success && isSubscribed){
         setEntities({
           dataPaginada: res.success.data,
           lastPage: Math.ceil(res.success.total/12),
@@ -56,6 +57,7 @@ const Legendas = (props) => {
       getItens();
     }
     
+    return () => isSubscribed = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[entities.page, entities.search, entities.order]);
 
