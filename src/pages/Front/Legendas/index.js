@@ -1,11 +1,17 @@
 import React, {useEffect, useReducer} from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Redirect } from "react-router-dom";
 import { getRequest, baseUrl } from "services/api";
+import { ROUTES } from "utils/RoutePaths";
 import {LegendasContainer,Ordenar,SelectBusca,Box,Post} from "./styles";
 import {Paginacao} from "../Paginacao";
 import { formatDate } from "utils/Utils";
 
 const Legendas = (props) => {
+
+  const location = useLocation();
+  const isSubCategories = ROUTES.LEGENDASINDICE === location.pathname;
+  const hasCategory = location.category;
+
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -17,7 +23,8 @@ const Legendas = (props) => {
       lastPage: 1 // ÚLTIMA PÁGINA PARA BLOQUEAR BOTÃO PRÓXIMO
     }
   );
-  let type = useLocation().pathname.replace('/','');
+
+  let type = location.pathname.replace('/','');
 
   switch(type){
     case 'series':
@@ -33,7 +40,7 @@ const Legendas = (props) => {
   useEffect(() => {
     async function getItens() {
       const res = await getRequest(
-        `/subtitles/list?page=${entities.page}&search=${entities.search}&order=${entities.order}&type=${type}`
+        `/subtitles/list?page=${entities.page}&search=${entities.search}&order=${entities.order}&type=${type}${hasCategory?'&category='+location.category.id:''}`
       );
       if(res.success){
         setEntities({
@@ -43,7 +50,12 @@ const Legendas = (props) => {
         });
       }
     }
-    getItens();
+    if(isSubCategories){
+      if(hasCategory) getItens();
+    }else{
+      getItens();
+    }
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[entities.page, entities.search, entities.order]);
 
@@ -70,13 +82,16 @@ const Legendas = (props) => {
   }
 
   return(
-    <>
+    isSubCategories && !hasCategory?
+    <Redirect to={ROUTES.INDICE} />
+    :
+    <> 
       <LegendasContainer className="card card-shadow">
         <div className="container">
           <div className="row">
             <div className="col-12">
               <div className="header-card">
-                <h2>{props.title}</h2>
+                <h2>{props.title || location.category.name}</h2>
                 <SelectBusca>
                   <Ordenar>
                     <label id="ordernar">Ordernar:</label>
@@ -110,7 +125,7 @@ const Legendas = (props) => {
                 :
                 entities.dataPaginada.map((item, key) => {
                   
-                  let data = formatDate(item.created_at);
+                  let data = formatDate(item.created_at).substring(0,10);
 
                   return(
                     <Post 

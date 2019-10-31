@@ -11,6 +11,7 @@ export const ROUTES = {
     HOME: '/',
     SERIES: '/series',
     FILMES: '/filmes',
+    LEGENDASINDICE: '/legendas/categoria',
     RANKING: '/ranking',
     INDICE: '/indice',
     CONTATO: '/contato',

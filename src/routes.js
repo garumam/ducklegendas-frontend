@@ -93,6 +93,11 @@ export default () => (
             component={() => <Legendas title="Filmes" />}
           />
           <AppRoute
+            path={ROUTES.LEGENDASINDICE}
+            layout={App}
+            component={() => <Legendas />}
+          />
+          <AppRoute
             path={ROUTES.RANKING}
             layout={App}
             component={() => <Ranking title="Ranking" />}
