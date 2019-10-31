@@ -59,7 +59,7 @@ export default (props) => {
                 </div>
               </GrupoLegendas>
           </Top>
-          <UsersContainer style={location === 'ranking'?{ overflowY: 'scroll' }:null}>
+          <UsersContainer style={location === 'ranking'?{ overflowY: 'auto' }:null}>
             {entities.map((item,value) => {
               return (
                 <Top key={value}>
