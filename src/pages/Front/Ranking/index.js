@@ -45,6 +45,15 @@ export default (props) => {
             </div>
           </div>
           <div className="card-border" />
+          <Top style={{padding: '0 1.5rem', height: '42px'}}>
+              <GrupoLegendas>
+                <div className="descricao-legendas">
+                  <span>Posição</span>
+                  <p>Usuário</p>
+                  <span>N° legendas</span>
+                </div>
+              </GrupoLegendas>
+          </Top>
           <UsersContainer>
             {entities.map((item,value) => {
               return (
@@ -53,7 +62,7 @@ export default (props) => {
                     <div className="descricao-legendas">
                       <span>{item.position+"°"}</span>
                       <p>{item.empatados? `Empate entre ${item.empatados} usuários`:item.name}</p>
-                      <span>{"N° de legendas: "+item.subtitles_count}</span>
+                      <span>{item.subtitles_count}</span>
                     </div>
                   </GrupoLegendas>
                 </Top>

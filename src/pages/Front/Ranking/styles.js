@@ -46,6 +46,7 @@ export const Top = styled.div`
 export const GrupoLegendas = styled.div`
   width: 100%;
 
+  
   .descricao-legendas {
     display: flex;
     justify-content: space-between;
