@@ -50,11 +50,6 @@ export default (props) => {
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="is-active" to={ROUTES.RANKING} alt="Ranking">
-                Ranking
-              </NavLink>
-            </li>
-            <li>
               <NavLink activeClassName="is-active" to={ROUTES.CONTATO} alt="Contato">
                 Contato
               </NavLink>
@@ -64,7 +59,7 @@ export default (props) => {
                 {name}
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <Dropdown>
                 <InputDropdownMenu id="check01" type="checkbox" name="menu"/>
                 <label htmlFor="check01"><span>Painel</span></label>
@@ -86,7 +81,7 @@ export default (props) => {
                   </a>
                 </DropdownMenu>
               </Dropdown>
-            </li>
+            </li> */}
           </NavLinks>
 
           <Mobile ref={mobileInput} onClick={navSlide} htmlFor="chk">
