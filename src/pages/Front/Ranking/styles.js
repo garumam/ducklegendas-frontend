@@ -1,11 +1,25 @@
 import styled from "styled-components";
 
 export const Ranking = styled.section`
-    min-height: 700px;
+    height: 700px;
     margin-bottom: var(--marginbottom);
 `;
 
+export const More = styled.div`
+    width: 100%;
+    text-align: right;
+    padding: 1rem 1.5rem;
+
+    a {
+        color: #9fa9ba;
+    }
+    a:hover {
+        color: var(--textcolor);
+    }
+`;
+
 export const UsersContainer = styled.div`
+    max-height: 590px;
     width: 100%;
     padding: 0 1.5rem;
 `;
@@ -46,10 +60,22 @@ export const Top = styled.div`
 export const GrupoLegendas = styled.div`
   width: 100%;
 
-  
+
   .descricao-legendas {
     display: flex;
     justify-content: space-between;
     margin-top: 0.3rem;
   }
+`;
+
+export const Eclipse = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  background: var(--bgazul);
+  box-shadow: 0px 3px 8px 0px rgba(23, 24, 32, 0.1);
+  color: white;
 `;

@@ -1,4 +1,5 @@
 import React, {useEffect, useReducer} from "react";
+import { useLocation } from "react-router-dom";
 import { getRequest, baseUrl } from "services/api";
 import {LegendasContainer,Ordenar,SelectBusca,Box,Post} from "./styles";
 import {Paginacao} from "../Paginacao";
@@ -16,7 +17,7 @@ const Legendas = (props) => {
       lastPage: 1 // ÚLTIMA PÁGINA PARA BLOQUEAR BOTÃO PRÓXIMO
     }
   );
-  let type = window.location.pathname.replace('/','');
+  let type = useLocation().pathname.replace('/','');
 
   switch(type){
     case 'series':
