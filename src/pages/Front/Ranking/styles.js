@@ -8,10 +8,14 @@ export const Ranking = styled.section`
 export const More = styled.div`
     width: 100%;
     text-align: right;
-    padding: 1rem 1.5rem;
+    padding: .7rem;
+    position: absolute;
+    bottom:0;
+    border-top: 1px solid var(--corborda);
 
     a {
         color: #9fa9ba;
+        font-size:.9rem;
     }
     a:hover {
         color: var(--textcolor);
