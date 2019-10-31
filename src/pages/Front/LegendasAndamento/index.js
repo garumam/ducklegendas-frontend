@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react";
-import {TopLegendas,Eclipse,Top,GrupoLegendas,LegendasContainer} from "./styles";
+import {TopLegendas,Top,GrupoLegendas,LegendasContainer} from "./styles";
+import { Eclipse } from "components/eclipse";
 import { getRequest } from "services/api";
 import { formatDate } from "utils/Utils";
 

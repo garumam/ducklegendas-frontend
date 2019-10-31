@@ -1,7 +1,8 @@
 import React,{ useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getRequest } from "services/api";
-import { Ranking, UsersContainer, Top, GrupoLegendas, Eclipse, More } from "./styles";
+import { Eclipse } from "components/eclipse";
+import { Ranking, UsersContainer, Top, GrupoLegendas, More } from "./styles";
 
 
 export default (props) => {
