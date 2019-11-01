@@ -1,11 +1,13 @@
 import React, {useEffect, useReducer} from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Redirect } from "react-router-dom";
 import { getRequest } from "services/api";
+import { ROUTES } from "utils/RoutePaths";
 import LegendasBody from "components/LegendasBody";
 
-const Legendas = (props) => {
+const LegendasIndice = () => {
 
   const location = useLocation();
+  const hasCategory = location.category || false;
 
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -18,25 +20,11 @@ const Legendas = (props) => {
       lastPage: 1 // ÚLTIMA PÁGINA PARA BLOQUEAR BOTÃO PRÓXIMO
     }
   );
-
-  let type = location.pathname.replace('/','');
-
-  switch(type){
-    case 'series':
-      type = 'SERIE';
-      break;
-    case 'filmes':
-      type = 'FILME';
-      break;
-    default:
-      type = "";
-  }
-
   useEffect(() => {
     let isSubscribed = true;
     async function getItens() {
       const res = await getRequest(
-        `/subtitles/list?page=${entities.page}&search=${entities.search}&order=${entities.order}&type=${type}`
+        `/subtitles/list?page=${entities.page}&search=${entities.search}&order=${entities.order}&category=${hasCategory.id}`
       );
       if(res.success && isSubscribed){
         setEntities({
@@ -47,19 +35,22 @@ const Legendas = (props) => {
       }
     }
 
-    getItens();
+    if(hasCategory) getItens();
     
     return () => isSubscribed = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[entities.page, entities.search, entities.order]);
 
   return(
+    !hasCategory ?
+    <Redirect to={ROUTES.INDICE} />
+    :
     <LegendasBody 
-      title={props.title}
+      title={hasCategory.name}
       entities={entities} 
-      setEntities={setEntities} 
+      setEntities={setEntities}
     />
   )
 }
 
-export default Legendas;
+export default LegendasIndice;

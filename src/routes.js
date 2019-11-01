@@ -8,6 +8,7 @@ import {
 import ScrollToTop from "components/ScrollToTop";
 import App from "App";
 import Legendas from "pages/Front/Legendas";
+import LegendasIndice from "pages/Front/Indice/LegendasIndice";
 import Ranking from "pages/Front/Ranking";
 import Contato from "pages/Front/Contato";
 import Post from "pages/Front/Post/";
@@ -96,7 +97,7 @@ export default () => (
             exact
             path={ROUTES.LEGENDASINDICE}
             layout={App}
-            component={() => <Legendas />}
+            component={() => <LegendasIndice />}
           />
           <AppRoute
             path={ROUTES.RANKING}
