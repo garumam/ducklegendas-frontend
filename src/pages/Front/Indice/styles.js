@@ -14,6 +14,7 @@ export const CategoryContainer = styled.div`
 
     a {
         min-width:33.33%;
+        flex-grow:1;
         text-align: center;
         color: #9fa9ba;
         margin:0;
