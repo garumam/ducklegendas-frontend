@@ -10,14 +10,15 @@ export const CategoryContainer = styled.div`
     flex-wrap: wrap;
     overflow-y: auto;
     width: 100%;
-    max-height: 890px;
-    padding-bottom: 2rem;
+    height:auto;
 
     a {
-        width: 50%;
+        min-width:33.33%;
         text-align: center;
         color: #9fa9ba;
-        margin-top: 2rem;
+        margin:0;
+        padding:.7rem;
+        border-bottom: 1px solid var(--corborda);
     }
     a:hover {
         color: var(--textcolor);
