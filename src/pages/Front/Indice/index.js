@@ -36,10 +36,10 @@ export default props => {
           <div className="card-border" />
           <CategoryContainer>
             {entities.map((item, index) => (
-              <a key={index} href={`/categoria/${item.name}`} onClick={(e) => {
+              <span key={index} onClick={(e) => {
                 e.preventDefault();
                 handleClick(item);
-              }}>• {item.name}</a>
+              }}>• {item.name}</span>
             ))}
           </CategoryContainer>
         </div>

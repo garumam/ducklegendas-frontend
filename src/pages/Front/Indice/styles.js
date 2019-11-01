@@ -12,7 +12,7 @@ export const CategoryContainer = styled.div`
     width: 100%;
     max-height: 890px;
 
-    a {
+    span {
         min-width:33.33%;
         flex-grow:1;
         text-align: center;
@@ -20,8 +20,9 @@ export const CategoryContainer = styled.div`
         margin:0;
         padding:.7rem;
         border-bottom: 1px solid var(--corborda);
+        cursor: pointer;
     }
-    a:hover {
+    span:hover {
         color: var(--textcolor);
     }
 `;

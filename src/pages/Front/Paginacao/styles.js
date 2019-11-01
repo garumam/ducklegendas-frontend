@@ -40,7 +40,7 @@ export const MenuPaginacao = styled.div`
     background-color: rgba(82, 109, 249, 0.102);
   }
 
-  & > a {
+  & > span {
     width: 99.9%;
     color: var(--textcolor) !important;
     cursor: pointer;
@@ -53,16 +53,16 @@ export const MenuPaginacao = styled.div`
     height: 100%;
     text-align: center;
   }
-  & > a:hover {
+  & > span:hover {
     color: white !important;
     background: var(--bgazul);
   }
 
-  & > a:hover > ${Arrow} > i {
+  & > span:hover > ${Arrow} > i {
     color: #009cff !important;
     background: white;
   }
-  & > a:hover > ${Arrow} {
+  & > span:hover > ${Arrow} {
     background: white;
     color: #009cff !important;
   }

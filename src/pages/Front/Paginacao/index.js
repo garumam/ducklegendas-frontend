@@ -10,8 +10,7 @@ export const Paginacao = (props) => {
         <div className="row">
           <div className="col-12">
               <MenuPaginacao>
-              <a 
-                href="#null" 
+              <span
                 style={props.page && props.page <= 1?disabled:null} 
                 onClick={(e) => {
                 e.preventDefault();
@@ -21,7 +20,7 @@ export const Paginacao = (props) => {
                    <i className="material-icons">keyboard_arrow_left</i>
                   </Arrow>
                   Anterior
-                </a>
+                </span>
                 <div className="borda-meio" />
                 <div 
                   style={{
@@ -34,8 +33,7 @@ export const Paginacao = (props) => {
                 {props.page}
                 </div>
                 <div className="borda-meio" />
-                <a 
-                  href="#null" 
+                <span
                   style={props.lastPage === props.page || props.lastPage === 0?disabled:null}
                   onClick={(e) => {
                   e.preventDefault();
@@ -46,7 +44,7 @@ export const Paginacao = (props) => {
                    <i className="material-icons">keyboard_arrow_right</i>
                 </Arrow>
                  
-                </a>
+                </span>
               </MenuPaginacao>
           </div>
           <div className="card-border" />
