@@ -10,7 +10,7 @@ export const CategoryContainer = styled.div`
     flex-wrap: wrap;
     overflow-y: auto;
     width: 100%;
-    height:auto;
+    max-height: 890px;
 
     a {
         min-width:33.33%;
