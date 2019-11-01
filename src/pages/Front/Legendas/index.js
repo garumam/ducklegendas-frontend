@@ -10,7 +10,7 @@ const Legendas = (props) => {
 
   const location = useLocation();
   const isSubCategories = ROUTES.LEGENDASINDICE === location.pathname;
-  const hasCategory = location.category;
+  const hasCategory = location.category || false;
 
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -25,6 +25,7 @@ const Legendas = (props) => {
   );
 
   let type = location.pathname.replace('/','');
+  console.log("dasdasdsa",isSubCategories)
 
   switch(type){
     case 'series':
@@ -84,7 +85,7 @@ const Legendas = (props) => {
   }
 
   return(
-    isSubCategories && !hasCategory?
+    isSubCategories && !hasCategory ?
     <Redirect to={ROUTES.INDICE} />
     :
     <> 
@@ -93,7 +94,7 @@ const Legendas = (props) => {
           <div className="row">
             <div className="col-12">
               <div className="header-card">
-                <h2>{props.title || location.category.name}</h2>
+                <h2>{props.title || hasCategory.name}</h2>
                 <SelectBusca>
                   <Ordenar>
                     <label id="ordernar">Ordernar:</label>

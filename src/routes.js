@@ -93,6 +93,7 @@ export default () => (
             component={() => <Legendas title="Filmes" />}
           />
           <AppRoute
+            exact
             path={ROUTES.LEGENDASINDICE}
             layout={App}
             component={() => <Legendas />}
