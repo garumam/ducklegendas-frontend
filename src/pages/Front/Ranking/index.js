@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation,Link} from "react-router-dom";
 import { getRequest } from "services/api";
 import { Eclipse } from "components/eclipse";
 import { Ranking, UsersContainer, Top, GrupoLegendas, More } from "./styles";
@@ -76,7 +76,7 @@ export default (props) => {
             })}
           </UsersContainer>
         {location !== 'ranking' && <More>
-            <a href="/ranking">Veja mais...</a>
+            <Link to="/ranking">Veja mais...</Link>
         </More>}
         </div>
       </div>

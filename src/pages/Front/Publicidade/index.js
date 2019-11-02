@@ -1,8 +1,8 @@
 import React from "react";
-import {Parceiros} from "./styles";
+import {Publicidade} from "./styles";
 
 export default (props) => (
-      <Parceiros className="card card-shadow">
+      <Publicidade className="card card-shadow">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -13,6 +13,6 @@ export default (props) => (
             <div className="card-border"></div>
           </div>
         </div>
-      </Parceiros>
+      </Publicidade>
 )
 

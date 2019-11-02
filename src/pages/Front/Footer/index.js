@@ -62,8 +62,8 @@ const Footer = props => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/chat" alt="chat">
-                      Chat
+                    <Link to={ROUTES.INDICE} alt="chat">
+                      Indice
                     </Link>
                   </li>
                   <li>

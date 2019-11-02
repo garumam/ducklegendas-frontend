@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import Doacao from "./Doacao";
 import {LegendasAndamento} from "./LegendasAndamento";
 import Ranking from "./Ranking";
-import Parceiros from "./Parceiros";
+import Publicidade from "./Publicidade";
 
 export default props => {
   const location = useLocation().pathname.replace('/','');
@@ -17,7 +17,7 @@ export default props => {
       <div className="row">
         <div className="col-sm-12 col-md-12 col-lg-8">
           {props.children}
-          <Parceiros title="Parceiros" />
+          <Publicidade title="Publicidade" />
         </div>
         <div className="col-sm-12 col-md-12 col-lg-4">
           <Doacao title="Doação" />
