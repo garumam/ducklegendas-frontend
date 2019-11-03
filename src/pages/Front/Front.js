@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import Doacao from "./Doacao";
 import {LegendasAndamento} from "./LegendasAndamento";
@@ -8,7 +8,7 @@ import Publicidade from "./Publicidade";
 export default props => {
   const location = useLocation().pathname.replace('/','');
   return(
-  <Fragment>
+  <>
     <div  className="container paddingTop">
       <div className="alert alert-success">
         Quer ajudar a postar legendas no site ? entre em contato e peça seu
@@ -26,6 +26,6 @@ export default props => {
         </div>
       </div>
     </div>
-  </Fragment>
+  </>
   )
 };
