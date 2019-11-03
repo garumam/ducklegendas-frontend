@@ -156,7 +156,6 @@ const Dashboard = props => {
             <Fab
               ripple
               style={{ boxShadow: 'unset' }}
-              mini
               icon="menu"
               type="button"
               onClick={() => setOpen(!open)}
