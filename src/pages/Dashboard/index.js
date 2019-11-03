@@ -11,6 +11,8 @@ import {
 } from "./styles";
 import { Avatar } from "@rmwc/avatar";
 import { Ripple } from "@rmwc/ripple";
+import { TopAppBarTitle } from "@rmwc/top-app-bar";
+import { Fab } from "@rmwc/fab";
 import { NavLink, withRouter } from "react-router-dom";
 import { baseUrl, getRequest } from 'services/api';
 import logo from "assets/img/duck-128.png";
@@ -19,6 +21,7 @@ import { AuthContext } from 'utils/AuthContext';
 import { SizeContext } from 'utils/SizeContext';
 import { Can } from 'services/Authorization';
 import "@rmwc/avatar/avatar.css";
+import '@material/fab/dist/mdc.fab.css';
 import { ROUTES } from 'utils/RoutePaths';
 
 const Dashboard = props => {
@@ -147,11 +150,20 @@ const Dashboard = props => {
       </Header>
 
       <Container style={{ height: "100%", flexWrap: "wrap" }}>
-        <>
-        <div style={{width: "100%"}} onClick={ ()=> setOpen(!open)}>menu hamburger</div>
         <HeaderDashboard
-          title={props.title}
-          navigationIcon={false}
+          startContent={
+          <>
+            <Fab
+              ripple
+              style={{ boxShadow: 'unset' }}
+              mini
+              icon="menu"
+              type="button"
+              onClick={() => setOpen(!open)}
+            />
+            <TopAppBarTitle>{props.title}</TopAppBarTitle>
+          </>
+          }
           endContent={
             <Ripple onClick={()=> props.history.push({
                 pathname: `${ROUTES.DASHBOARD.USER.FORM}/${user.id}`,
@@ -181,7 +193,6 @@ const Dashboard = props => {
             </Ripple>
           }
         />
-      </>
         <ContainerDashboard>
           <div className="card card-shadow">{props.children}</div>
         </ContainerDashboard>
