@@ -9,6 +9,7 @@ import {
   Nav,
   MenuLogout
 } from "./styles";
+import { Fab } from "@rmwc/fab";
 import { Avatar } from "@rmwc/avatar";
 import { Ripple } from "@rmwc/ripple";
 import { TopAppBarTitle } from "@rmwc/top-app-bar";
@@ -152,20 +153,13 @@ const Dashboard = props => {
         <HeaderDashboard
           startContent={
           <>
-            <Ripple unbounded onClick={()=> setOpen(!open)}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                cursor: "pointer",
-                padding: "0 0.3rem"
-              }}
-            >
-            <i style={{fontSize: '38px'}} className="material-icons">
-            menu
-            </i>
-            </div>
-            </Ripple>
+            <Fab
+              ripple
+              style={{ boxShadow: 'unset' }}
+              icon="menu"
+              type="button"
+              onClick={() => setOpen(!open)}
+            />
             <TopAppBarTitle>{props.title}</TopAppBarTitle>
           </>
           }
