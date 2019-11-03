@@ -75,6 +75,7 @@ export const HeaderCard = styled.div`
     align-items:center;
     height:20.76%;
     max-height:60px;
+    min-height:60px;
     padding:0 1rem;
     
     h2{
