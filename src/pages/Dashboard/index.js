@@ -33,9 +33,9 @@ const Dashboard = props => {
   
   useEffect(() => {
     if(windowWidth <= 1150){
-      handlerMenuLateral(false);
+      setOpen(false);
     }else{
-      handlerMenuLateral(true);
+      setOpen(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [windowWidth]);
@@ -65,11 +65,6 @@ const Dashboard = props => {
       console.log('Problema no logout: ',res.error);
       localStorage.clear();
     }
-  }
-
-  function handlerMenuLateral(forceOpen = undefined) {
-    if(forceOpen !== undefined)setOpen(forceOpen);
-    else setOpen(!open);
   }
 
   return (
@@ -152,9 +147,11 @@ const Dashboard = props => {
       </Header>
 
       <Container style={{ height: "100%", flexWrap: "wrap" }}>
+        <>
+        <div style={{width: "100%"}} onClick={ ()=> setOpen(!open)}>menu hamburger</div>
         <HeaderDashboard
           title={props.title}
-          navigationIcon={{ onClick: () => handlerMenuLateral() }}
+          navigationIcon={false}
           endContent={
             <Ripple onClick={()=> props.history.push({
                 pathname: `${ROUTES.DASHBOARD.USER.FORM}/${user.id}`,
@@ -184,7 +181,7 @@ const Dashboard = props => {
             </Ripple>
           }
         />
-
+      </>
         <ContainerDashboard>
           <div className="card card-shadow">{props.children}</div>
         </ContainerDashboard>
