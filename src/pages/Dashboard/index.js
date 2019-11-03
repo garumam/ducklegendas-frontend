@@ -12,7 +12,6 @@ import {
 import { Avatar } from "@rmwc/avatar";
 import { Ripple } from "@rmwc/ripple";
 import { TopAppBarTitle } from "@rmwc/top-app-bar";
-import { Fab } from "@rmwc/fab";
 import { NavLink, withRouter } from "react-router-dom";
 import { baseUrl, getRequest } from 'services/api';
 import logo from "assets/img/duck-128.png";
@@ -153,13 +152,20 @@ const Dashboard = props => {
         <HeaderDashboard
           startContent={
           <>
-            <Fab
-              ripple
-              style={{ boxShadow: 'unset' }}
-              icon="menu"
-              type="button"
-              onClick={() => setOpen(!open)}
-            />
+            <Ripple unbounded onClick={()=> setOpen(!open)}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                cursor: "pointer",
+                padding: "0 0.3rem"
+              }}
+            >
+            <i style={{fontSize: '38px'}} className="material-icons">
+            menu
+            </i>
+            </div>
+            </Ripple>
             <TopAppBarTitle>{props.title}</TopAppBarTitle>
           </>
           }
