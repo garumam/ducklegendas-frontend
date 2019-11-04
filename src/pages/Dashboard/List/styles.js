@@ -55,7 +55,6 @@ export const InputSearch = styled(TextField)`
         font-family: 'Montserrat', sans-serif;
         font-size:.9rem;
         margin:0;
-        top:23px;
         font-weight:600;
     }
 
