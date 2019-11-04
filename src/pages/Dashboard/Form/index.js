@@ -482,10 +482,10 @@ const Form = props => {
                   break;
                 case 6: //mensagens
                   if (input.type === "select") {
-                    values[input.name] = values[input.name] || (input.name === 'status'?'OFF':'AVISO');
+                    values[input.name] = values[input.name] || (input.name === 'status' ? 'OFF' : 'warning');
                     return (
                       <SelectCustom
-                        options={input.name === 'status'?["ON", "OFF"]:["ALERTA", "AVISO"]}
+                        options={input.name === 'status' ? ["ON", "OFF"] : ['primary','success', 'danger','warning']}
                         key={index}
                         label={input.label}
                         name={input.name}

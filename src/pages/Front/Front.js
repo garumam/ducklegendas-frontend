@@ -26,7 +26,7 @@ export default props => {
   <>
     <div  className="container paddingTop">
       {messages.map((item, index) => (
-        <div key={index} className={`alert alert-${item.type === 'ALERTA'?'danger':'success'}`}>
+        <div key={index} className={`alert alert-${item.type}`}>
           {item.message}
         </div>
       ))}

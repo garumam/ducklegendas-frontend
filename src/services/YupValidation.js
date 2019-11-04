@@ -122,7 +122,7 @@ export const MessageSchema = Yup.object().shape({
         .max(200, 'Mensagem com no máximo 200 caracteres!!')
         .required('Mensagem é obrigatória!'),
     type: Yup.mixed()
-        .oneOf(['ALERTA', 'AVISO'],'O tipo deve ser: ALERTA ou AVISO'),
+        .oneOf(['primary','success', 'danger','warning'],'O tipo deve ser primary,success,danger,warning'),
     status: Yup.mixed()
         .oneOf(['ON', 'OFF'],'O status deve ser: ON ou OFF')
 });
