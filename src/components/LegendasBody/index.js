@@ -125,7 +125,7 @@ const LegendasBody = (props) => {
         </div>
       </LegendasContainer>
       <Paginacao 
-        handle={handlePageClick} 
+        onClick={handlePageClick} 
         page={entities.page} 
         lastPage={entities.lastPage} 
       />

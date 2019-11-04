@@ -1,7 +1,7 @@
 import React from "react";
 import {PaginacaoContainer,MenuPaginacao,Arrow} from "./styles";
 
-export const Paginacao = (props) => {
+export const Paginacao = ({onClick,page,lastPage}) => {
   const disabled = {background:"#dedede",pointerEvents: "none"};
 
   return (
@@ -11,10 +11,10 @@ export const Paginacao = (props) => {
           <div className="col-12">
               <MenuPaginacao>
               <span
-                style={props.page && props.page <= 1?disabled:null} 
+                style={page && page <= 1 ? disabled : null} 
                 onClick={(e) => {
                 e.preventDefault();
-                props.handle(props.page - 1);
+                onClick(page - 1);
               }}>
                   <Arrow>
                    <i className="material-icons">keyboard_arrow_left</i>
@@ -30,14 +30,14 @@ export const Paginacao = (props) => {
                     textAlign: 'center'
                   }}
                 >
-                {props.page}
+                {page}
                 </div>
                 <div className="borda-meio" />
                 <span
-                  style={props.lastPage === props.page || props.lastPage === 0?disabled:null}
+                  style={lastPage === page || lastPage === 0 ? disabled : null}
                   onClick={(e) => {
                   e.preventDefault();
-                  props.handle(props.page + 1);
+                  onClick(page + 1);
                 }}>
                 Proximo
                 <Arrow>
