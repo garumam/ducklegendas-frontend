@@ -83,6 +83,7 @@ const Form = props => {
       break;
     case 6: //mensagens
       params = Inputs.message;
+      validationSchema.push(YupValidation.MessageSchema);
       break;
     default:
   }
@@ -481,6 +482,7 @@ const Form = props => {
                   break;
                 case 6: //mensagens
                   if (input.type === "select") {
+                    values[input.name] = values[input.name] || (input.name === 'status'?'OFF':'AVISO');
                     return (
                       <SelectCustom
                         options={input.name === 'status'?["ON", "OFF"]:["ALERTA", "AVISO"]}

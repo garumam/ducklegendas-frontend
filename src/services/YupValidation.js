@@ -115,3 +115,14 @@ export const GallerySchema = Yup.object().shape({
         .max(191, 'Palavras chave com no máximo 191 caracteres!!'),
     image: imageValidation(650, 700),
 });
+
+export const MessageSchema = Yup.object().shape({
+    message: Yup.string()
+        .min(1, 'Mensagem com no mínimo 1 caracter!')
+        .max(200, 'Mensagem com no máximo 200 caracteres!!')
+        .required('Mensagem é obrigatória!'),
+    type: Yup.mixed()
+        .oneOf(['ALERTA', 'AVISO'],'O tipo deve ser: ALERTA ou AVISO'),
+    status: Yup.mixed()
+        .oneOf(['ON', 'OFF'],'O status deve ser: ON ou OFF')
+});
