@@ -207,8 +207,26 @@ const List = props => {
     setEntities({ page: 1, pageSelected: 0, trigSearch: !entities.trigSearch });
   };
 
-  const handleConfirmSubtitle = async (id) => {
-    console.log(id)
+  const handleConfirmSubtitle = async (data) => {
+    let uri = `subtitles/${data.id}`;
+    const formData = new FormData();
+    Object.keys(data).map(key => {
+      if(key === "status"){
+        return formData.append(key, "APROVADA");
+      }
+        return formData.append(key, data[key]);
+    });
+    formData.append("_method", "PATCH");
+    const res = await postRequest(uri, formData)
+    if(res.success){
+      setEntities({trigSearch: !entities.trigSearch})
+    }else{
+      setOpenModal({
+        open: true,
+        error: res.error || "Erro inesperado, por favor atualize a página!"
+      });
+    }
+
   }
 
   return entities.loading ? (
@@ -344,7 +362,7 @@ const List = props => {
                         mini
                         icon="save"
                         type="button"
-                        onClick={() => handleConfirmSubtitle(item.id)}
+                        onClick={() => handleConfirmSubtitle(item)}
                         />
                       }
                       <Fab
