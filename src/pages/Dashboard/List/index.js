@@ -207,6 +207,10 @@ const List = props => {
     setEntities({ page: 1, pageSelected: 0, trigSearch: !entities.trigSearch });
   };
 
+  const handleConfirmSubtitle = async (id) => {
+    console.log(id)
+  }
+
   return entities.loading ? (
     ActiveModal(true)
   ) : (
@@ -331,6 +335,18 @@ const List = props => {
                           });
                         }}
                       />
+                      {props.title === "Legendas Pendentes" && 
+                      <Fab
+                        style={{
+                          marginRight: "5px",
+                          backgroundColor: "#4CAF50"
+                        }}
+                        mini
+                        icon="save"
+                        type="button"
+                        onClick={() => handleConfirmSubtitle(item.id)}
+                        />
+                      }
                       <Fab
                         style={{ backgroundColor: "var(--delete-button)" }}
                         mini
