@@ -85,7 +85,7 @@ const List = props => {
       tableParams.formPath = ROUTES.DASHBOARD.RANKING;
       break;
     case 7: //legendas pendentes
-      tableParams.headCells.push("id", "Nome", "Status");
+      tableParams.headCells.push("ID", "Nome", "Status");
       tableParams.headNames.push("id", "name", "status");
       tableParams.formPath = ROUTES.DASHBOARD.SUBTITLE.FORM;
       baseUri = getBackendUriBase(ROUTES.DASHBOARD.PENDING);
