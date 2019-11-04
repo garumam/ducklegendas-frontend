@@ -138,12 +138,16 @@ const List = props => {
   const ActiveModal = (isList) => (
     <>
       <Modal
-        onConfirm={() => handleDelete(openModal.id)}
+        onConfirm={() => openModal.action === 'excluir'?
+                        handleDelete(openModal.id)
+                        :handleConfirmSubtitle(openModal.item)
+        }
         onClose={() => setOpenModal({ open: false })}
         show={openModal.open}
         showConfirm={openModal.id}
         title={openModal.id ? "Você quer realmente "
-                            +(baseUri === 'progress'?"finalizar":"excluir")
+                            +(baseUri === 'progress'?"finalizar"
+                            : openModal.action)
                             +"?" : "Error"
         }
         content={openModal.id ? openModal.msg : openModal.error}
@@ -214,9 +218,10 @@ const List = props => {
       if(key === "status"){
         return formData.append(key, "APROVADA");
       }
-        return formData.append(key, data[key]);
+        return formData.append(key, data[key] === null?'':data[key]);
     });
     formData.append("_method", "PATCH");
+    setOpenModal({ open: false });
     const res = await postRequest(uri, formData)
     if(res.success){
       setEntities({trigSearch: !entities.trigSearch})
@@ -362,7 +367,15 @@ const List = props => {
                         mini
                         icon="save"
                         type="button"
-                        onClick={() => handleConfirmSubtitle(item)}
+                        onClick={() => 
+                          setOpenModal({
+                            open: true,
+                            id: item.id,
+                            msg: `Id: ${item.id}  Nome: ${item.name}`,
+                            item: item,
+                            action: 'aprovar'
+                          })
+                        }
                         />
                       }
                       <Fab
@@ -374,7 +387,8 @@ const List = props => {
                           setOpenModal({
                             open: true,
                             id: item.id,
-                            msg: `Id: ${item.id}  Nome: ${item.name}`
+                            msg: `Id: ${item.id}  Nome: ${item.name}`,
+                            action: 'excluir'
                           })
                         }
                       />
@@ -391,6 +405,7 @@ const List = props => {
         tableParams={tableParams} 
         {...props} 
         setOpenModal={setOpenModal}
+        baseUri={baseUri}
       />
       :
       

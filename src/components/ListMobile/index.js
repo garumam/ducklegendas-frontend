@@ -12,7 +12,7 @@ import '@material/list/dist/mdc.list.css';
 import '@rmwc/list/collapsible-list.css';
 
 function ListMobile (props) {
-    const { entities, tableParams, setOpenModal } = props;
+    const { entities, tableParams, setOpenModal, baseUri } = props;
     return(
         <List style={{ height: "100%", overflow: "scroll" }}>
         {entities.dataPaginada &&
@@ -46,19 +46,41 @@ function ListMobile (props) {
                   });
                 }}
               />
+              {props.title === "Legendas Pendentes" && 
+                <Fab
+                  style={{
+                    marginRight: "5px",
+                    backgroundColor: "#4CAF50",
+                    boxShadow: "1px 3px 1px #9E9E9E"
+                  }}
+                  mini
+                  icon="save"
+                  type="button"
+                  onClick={() => 
+                    setOpenModal({
+                      open: true,
+                      id: item.id,
+                      msg: `Id: ${item.id}  Nome: ${item.name}`,
+                      item: item,
+                      action: 'aprovar'
+                    })
+                  }
+                />
+              }
               <Fab
                 style={{ 
                   backgroundColor: "var(--delete-button)",
                   boxShadow: "1px 3px 1px #9E9E9E" 
                 }}
                 mini
-                icon="delete"
+                icon={baseUri === 'progress'?"assignment_turned_in":"delete"}
                 type="button"
                 onClick={() =>
                   setOpenModal({
                     open: true,
                     id: item.id,
-                    msg: `Id: ${item.id}  Nome: ${item.name}`
+                    msg: `Id: ${item.id}  Nome: ${item.name}`,
+                    action: 'excluir'
                   })
                 }
               />
