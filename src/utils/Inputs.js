@@ -23,5 +23,10 @@ export const Inputs = {
         labels: ["Nome", "Palavras chave", "Imagem"],
         types: ["text", "text", "file"],
         names: ["name", "tags", "image"]
+    },
+    message: {
+        labels: ["Tipo", "Status", "Mensagem"],
+        types: ["select", "select", "textarea"],
+        names: ["type", "status", "message"]
     }
 }

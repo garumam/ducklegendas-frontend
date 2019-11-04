@@ -144,6 +144,15 @@ const Dashboard = props => {
                 Usuários
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                activeClassName="is-active"
+                to={ROUTES.DASHBOARD.MESSAGE.LIST}
+                alt="Mensagens"
+              >
+                Mensagens
+              </NavLink>
+            </li>
           </NavLinks>
           <MenuLogout onClick={e => logout(e)}>Sair</MenuLogout>
         </Nav>

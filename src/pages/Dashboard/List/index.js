@@ -90,31 +90,39 @@ const List = props => {
       tableParams.formPath = ROUTES.DASHBOARD.SUBTITLE.FORM;
       baseUri = getBackendUriBase(ROUTES.DASHBOARD.PENDING);
       break;
+    case 8: //Mensagens
+      tableParams.headCells.push("ID", "Mensagem", "Tipo", "Status");
+      tableParams.headNames.push("id", "message", "type", "status");
+      tableParams.formPath = ROUTES.DASHBOARD.MESSAGE.FORM;
+      break;
     default:
       baseUri = getBackendUriBase(ROUTES.DASHBOARD.GALLERY.LIST);
   }
   
   useEffect(() => {
+    let isMount = true;
     async function getItens() {
       const res = await getRequest(
         `/${baseUri}?page=${entities.page}&search=${entities.search}`
       );
-      if (res.success) {
-        console.log("Página selecionada: ", entities.pageSelected);
-        setEntities({
-          categories: res.categories ? res.categories : null,
-          ...res.success,
-          dataPaginada: Paginator(res.success.data, entities.pageSelected),
-          pageSelected: entities.pageSelected,
-          loading: false
-        });
-      } else {
-        setOpenModal({
-          open: true,
-          error: res.error || "Erro inesperado, por favor atualize a página!"
-        });
+      if(isMount){
+        if (res.success) {
+          console.log("Página selecionada: ", entities.pageSelected);
+          setEntities({
+            categories: res.categories ? res.categories : null,
+            ...res.success,
+            dataPaginada: Paginator(res.success.data, entities.pageSelected),
+            pageSelected: entities.pageSelected,
+            loading: false
+          });
+        } else {
+          setOpenModal({
+            open: true,
+            error: res.error || "Erro inesperado, por favor atualize a página!"
+          });
+        }
+        console.log("DADOS QUE CHEGARAM: ", res);
       }
-      console.log("DADOS QUE CHEGARAM: ", res);
     }
 
     if(props.isgallery){
@@ -131,7 +139,7 @@ const List = props => {
         getItens();
       }
     }
-
+    return () => isMount = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entities.page, entities.trigSearch]);
 
@@ -325,7 +333,15 @@ const List = props => {
               entities.dataPaginada.map((item, index) => (
                 <DataTableRow key={index}>
                   {tableParams.headNames.map((objectKey, i) => (
-                    <DataTableCell key={i}>
+                    <DataTableCell 
+                      style={{
+                        maxWidth: '60ch', 
+                        overflow: 'hidden',
+                        whiteSpace: 'nowrap',
+                        textOverflow: 'ellipsis'
+                      }} 
+                      key={i}
+                    >
                       {objectKey !== 'image'? typeof item[objectKey] === "object"
                         ? item[objectKey].name
                         : item[objectKey]

@@ -22,7 +22,7 @@ function ListMobile (props) {
           key={index}
           handle={
             <SimpleListItem
-              text={<MainText>{item.name}</MainText>}
+              text={<MainText>{item.name || item.message}</MainText>}
               metaIcon="chevron_right"
             >
             {props.title !== "Ranking" && (

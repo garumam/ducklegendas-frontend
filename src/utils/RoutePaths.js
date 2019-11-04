@@ -4,6 +4,7 @@ const dashboard = "/dashboard",
     categories = `${dashboard}/categories`,
     progress = `${dashboard}/progress`,
     gallery = `${dashboard}/gallery`,
+    messages = `${dashboard}/messages`,
     rankings = `${dashboard}/rankings`,
     pending = `${dashboard}/pending`;
 
@@ -39,6 +40,10 @@ export const ROUTES = {
         GALLERY: {
             LIST: gallery,
             FORM: `${gallery}/image`
+        },
+        MESSAGE: {
+            LIST: messages,
+            FORM: `${messages}/message`
         },
         RANKING: rankings,
         PENDING: pending

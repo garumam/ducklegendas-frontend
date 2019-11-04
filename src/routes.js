@@ -216,6 +216,19 @@ export default () => (
           <PrivateRoute
             permissions={Admin}
             exact
+            path={ROUTES.DASHBOARD.MESSAGE.LIST}
+            layout={props => <Dashboard title="Mensagens" {...props} />}
+            component={() => <List title="Mensagens" table={8} />}
+          />
+          <PrivateRoute
+            permissions={Admin}
+            path={`${ROUTES.DASHBOARD.MESSAGE.FORM}/:id?`}
+            layout={props => <Dashboard title="Mensagens" {...props} />}
+            component={() => <Form title="Mensagens" form={6} />}
+          />
+          <PrivateRoute
+            permissions={Admin}
+            exact
             path={ROUTES.DASHBOARD.RANKING}
             layout={props => <Dashboard title="Ranking" {...props} />}
             component={() => <List title="Ranking" table={6} />}

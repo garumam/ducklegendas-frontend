@@ -81,34 +81,40 @@ const Form = props => {
       params = Inputs.gallery;
       validationSchema.push(YupValidation.GallerySchema);
       break;
+    case 6: //mensagens
+      params = Inputs.message;
+      break;
     default:
   }
 
   useEffect(() => {
+    let isMount = true;
     async function getItem() {
       const res = await getRequest(`/${baseUri}/${props.match.params.id}`);
       // console.log(res.success);
-      if (res.success || res.categories) {
-        
-        if(res.success && res.success.type === 'SERIE')
-          setChecked(true);
-
-        setData({
-          values: res.success,
-          categories: prepareCategories(res.categories)
-        });
-        
-      } else {
-        setEntities({
-          errorsReponse: res.error
-        });
+      if(isMount){
+        if (res.success || res.categories) {
+          
+          if(res.success && res.success.type === 'SERIE')
+            setChecked(true);
+  
+          setData({
+            values: res.success,
+            categories: prepareCategories(res.categories)
+          });
+          
+        } else {
+          setEntities({
+            errorsReponse: res.error
+          });
+        }
       }
     }
     if ((props.match.params.id && dataPassed === null) || 
       (baseUri === 'subtitles' && data.categories.length === 0)) {
         getItem();
     }
-    
+    return () => isMount = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log("categorias",categories)
@@ -472,6 +478,38 @@ const Form = props => {
                     );
                   }
 
+                  break;
+                case 6: //mensagens
+                  if (input.type === "select") {
+                    return (
+                      <SelectCustom
+                        options={input.name === 'status'?["ON", "OFF"]:["ALERTA", "AVISO"]}
+                        key={index}
+                        label={input.label}
+                        name={input.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values[input.name]}
+                      />
+                    );
+                  }
+                  if (input.type === "textarea") {
+                    return (
+                      <InputText
+                        textarea
+                        outlined
+                        characterCount
+                        key={index}
+                        label={input.label}
+                        rows={6}
+                        maxLength={200}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        name={input.name}
+                        value={values[input.name]}
+                      />
+                    );
+                  }
                   break;
                 default:
               }
