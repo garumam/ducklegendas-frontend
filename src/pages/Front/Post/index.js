@@ -66,7 +66,7 @@ export default props => {
               alt=""
             />
             <p>
-              Episódio : {post.episode.toUpperCase()} Ano : {post.year}<br />
+              {post.episode && `Episódio : ${post.episode.toUpperCase()}`} Ano : {post.year}<br />
               Downloads: {post.downloaded} <br />
               {/* Supernatural.S13E09.720p.HDTV.x264-AVS
               <br />
