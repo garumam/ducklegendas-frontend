@@ -115,7 +115,7 @@ export default () => (
             component={() => <Contato title="Contato" />}
           />
           <AppRoute
-            path={ROUTES.POST}
+            path={`${ROUTES.POST}/:id`}
             layout={App}
             component={() => <Post title="Single Post" />}
           />
