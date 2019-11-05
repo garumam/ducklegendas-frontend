@@ -7,13 +7,14 @@ import Ranking from "./Ranking";
 import Publicidade from "./Publicidade";
 
 export default props => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(JSON.parse(localStorage.getItem("messages")) || []);
 
   useEffect(() => {
     let isMount = true;
     async function getItens(){
       const res = await getRequest('messages/list');
       if(res.success && isMount){
+        localStorage.setItem("messages", JSON.stringify(res.success));
         setMessages(res.success);
       }
     }

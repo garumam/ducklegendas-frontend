@@ -12,13 +12,12 @@ export default props => {
   let { state } = useLocation();
   state = (state && state.item) || [];
   const [post,setPost] = useState(state);
-  console.log("state",state)
+
   useEffect(() => {
     let isMount = true;
     async function getItens(){
       const res = await getRequest(`subtitles/${id}`);
       if(res.success && isMount){
-        console.log(res.success)
         setPost(res.success)
       }else{
         setPost({error : "Legenda não encontrada"})
@@ -29,6 +28,18 @@ export default props => {
         getItens();
     return () => isMount = false
   },[id,state.length]);
+
+  const addDownload = async () => {
+    const res = await getRequest(
+      `/subtitles/downloaded?id=${post.id}`
+    );
+    if(res.success){
+      setPost({
+        ...post,
+        downloaded: post.downloaded + 1
+      });
+    }
+  }
 
   return(
   <SinglePost className="card card-shadow">
@@ -65,7 +76,7 @@ export default props => {
               <br /> */}
               
             </p>
-            <a href={post.url}><InputPersonalizado type="submit" value="Download" /></a>
+            <a href={post.url} target="_blank" rel="noopener noreferrer" onClick={addDownload}><InputPersonalizado type="submit" value="Download" /></a>
           </article>
         </SinglePostInfo>
         }

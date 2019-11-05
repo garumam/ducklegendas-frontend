@@ -9,10 +9,8 @@ const Footer = props => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, true);
-    console.log("adicionado");
     return () => {
       window.removeEventListener("scroll", handleScroll, true);
-      console.log("removido");
     };
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

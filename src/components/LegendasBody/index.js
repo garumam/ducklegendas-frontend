@@ -3,33 +3,16 @@ import {useHistory} from "react-router-dom";
 import { baseUrl } from "services/api";
 import {LegendasContainer,Ordenar,SelectBusca,Box,Post} from "./styles";
 import {Paginacao} from "pages/Front/Paginacao";
-import { getRequest } from "services/api";
 import { formatDate } from "utils/Utils";
 
 const LegendasBody = (props) => {
   const { entities, setEntities } = props;
   let history = useHistory();
   const handlePageClick = page => {
-    console.log("page selected", page)
       setEntities({
         page: page
       });
   };
-
-  const addDownload = async (id) => {
-    const res = await getRequest(
-      `/subtitles/downloaded?id=${id}`
-    );
-    if(res.success){
-      const updatedData = entities.dataPaginada.map((item) => {
-        item.downloaded += 1;
-        return item;
-      });
-      setEntities({
-        dataPaginada: updatedData
-      });
-    }
-  }
 
   return(
     <> 
@@ -91,12 +74,12 @@ const LegendasBody = (props) => {
                         </span>
                       </div>
                       <a 
-                      href={`post/${item.id}`}
+                      href={`/post/${item.id}`}
                       title="Fazer Download"
                         onClick={(e) => { 
                           e.preventDefault();
                           history.push({
-                          pathname: `post/${item.id}`,
+                          pathname: `/post/${item.id}`,
                           state:{item}
                         })} }
                       >
