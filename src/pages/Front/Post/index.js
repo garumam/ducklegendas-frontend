@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {useParams,useLocation} from "react-router-dom";
+import {useParams,useLocation,useHistory} from "react-router-dom";
 import {SinglePost,SinglePostInfo} from "./styles";
 import {InputPersonalizado} from "../Contato";
 import {getRequest} from "services/api";
@@ -9,6 +9,7 @@ import { baseUrl } from "services/api";
 export default props => {
   
   let { id } = useParams();
+  let history = useHistory();
   let { state } = useLocation();
   state = (state && state.item) || [];
   const [post,setPost] = useState(state);
@@ -38,6 +39,7 @@ export default props => {
         ...post,
         downloaded: post.downloaded + 1
       });
+      history.replace({ state: post})
     }
   }
 
