@@ -48,16 +48,16 @@ export default props => {
               alt=""
             />
             <p>
-              Episódio 13×09 – The Bad Place” <br />
-              Legendas: <br />
-              Supernatural.S13E09.720p.HDTV.x264-AVS
+              Episódio : {post.episode.toUpperCase()} Ano : {post.year}<br />
+              Downloads: {post.downloaded} <br />
+              {/* Supernatural.S13E09.720p.HDTV.x264-AVS
               <br />
               Supernatural.S13E09.1080p.HDTV.x264-CRAVERS
               <br />
               Supernatural.S13E09.HDTV.x264-SVA
               <br />
               Supernatural.S13E09.iNTERNAL.720p.WEB.x264-BAMBOOZLE
-              <br />
+              <br /> */}
               
             </p>
             <a href={post.url}><InputPersonalizado type="submit" value="Download" /></a>
