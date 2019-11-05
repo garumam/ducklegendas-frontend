@@ -1,9 +1,11 @@
 import React,{useContext} from "react";
 import { AuthContext } from 'utils/AuthContext';
 
-export const User = ["user"];
-export const Moderador = ["moderador"];
-export const Admin = ["admin", "moderador"];
+export const LEGENDER = "legender";
+export const AUTOR = "autor";
+export const MODERADOR = "moderador";
+export const ADMIN = "admin";
+export const ALL = [LEGENDER,AUTOR,MODERADOR,ADMIN];
 let roles = [];
 
 export const Can = (user_role) => (roles.includes(user_role) ? true : false)

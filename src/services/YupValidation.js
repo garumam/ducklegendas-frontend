@@ -77,9 +77,7 @@ export const SubtitleSchema = Yup.object().shape({
         .required('Url é obrigatória!'),
     image: Yup.string(),
     status: Yup.mixed()
-        .oneOf(['APROVADA', 'PENDENTE'],'O status deve ser: APROVADA ou PENDENTE'),
-    author: Yup.number()
-        .integer('O autor não é válido, atualize a página!'),
+        .oneOf(['APROVADA', 'PENDENTE'],'O status deve ser: APROVADA ou PENDENTE')
 });
 
 export const ProgressSchema = Yup.object().shape({

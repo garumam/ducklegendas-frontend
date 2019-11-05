@@ -397,7 +397,7 @@ const Form = props => {
                       <InputText
                         disabled
                         key={index}
-                        value={input.name === "author" && user.name}
+                        value={input.name === "author" && values[input.name]}
                         label={input.label}
                         onChange={handleChange}
                         onBlur={handleBlur}
