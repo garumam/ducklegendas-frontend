@@ -9,7 +9,6 @@ import { baseUrl } from "services/api";
 export default props => {
   const [post,setPost] = useState([]);
   let { id } = useParams();
-  let data = [];
   useEffect(() =>{
     let isMount = true;
     async function getItens(){
