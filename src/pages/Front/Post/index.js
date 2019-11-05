@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {useParams} from "react-router-dom";
+import {useParams,useLocation} from "react-router-dom";
 import {SinglePost,SinglePostInfo} from "./styles";
 import {InputPersonalizado} from "../Contato";
 import {getRequest} from "services/api";
@@ -7,9 +7,13 @@ import { formatDate } from "utils/Utils";
 import { baseUrl } from "services/api";
 
 export default props => {
-  const [post,setPost] = useState([]);
+  
   let { id } = useParams();
-  useEffect(() =>{
+  let { state } = useLocation();
+  state = (state && state.item) || [];
+  const [post,setPost] = useState(state);
+  console.log("state",state)
+  useEffect(() => {
     let isMount = true;
     async function getItens(){
       const res = await getRequest(`subtitles/${id}`);
@@ -20,9 +24,11 @@ export default props => {
         setPost({error : "Legenda não encontrada"})
       }
     }
-    getItens();
+    
+    if(state.length === 0)
+        getItens();
     return () => isMount = false
-  },[id]);
+  },[id,state.length]);
 
   return(
   <SinglePost className="card card-shadow">
@@ -35,9 +41,9 @@ export default props => {
         </div>
         <div className="card-border" />
 
-        { post && post.name  &&
+        {  post && post.name  &&
         <SinglePostInfo>
-          <p>by { post.author }, Adicionado {formatDate(post.created_at)}</p>
+          <p>by { post.author && post.author.name ?  post.author.name : post.author }, Adicionado {formatDate(post.created_at)}</p>
           <article>
             <img
               src={post.image?`${baseUrl}storage/${post.image}`: "http://via.placeholder.com/160x240"}
