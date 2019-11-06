@@ -17,7 +17,7 @@ export default props => {
   useEffect(() => {
     let isMount = true;
     async function getItens(){
-      const res = await getRequest(`subtitles/${id}`);
+      const res = await getRequest(`subtitles/front/${id}`);
       if(res.success && isMount){
         setPost(res.success)
       }else{
