@@ -17,6 +17,7 @@ const ResetarSenha = props => {
   const { token } = props.match.params;
 
   async function resetPassword(e) {
+    setErrors(['Aguarde um momento...']);
     e.preventDefault();
     const values = { email: input.email };
     if (token) {
