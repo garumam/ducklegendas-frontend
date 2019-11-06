@@ -27,6 +27,7 @@ import { AuthProvider } from "utils/AuthContext";
 import { SizeProvider } from "utils/SizeContext";
 import Authorization,{ALL} from "services/Authorization";
 import { ROUTES } from 'utils/RoutePaths';
+import Analytics from 'react-router-ga';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
@@ -73,6 +74,7 @@ const PrivateRouteLogin = ({ layout: Layout, ...rest }) => (
 
 export default () => (
   <Router>
+    <Analytics id="UA-151424625-1">
     <ScrollToTop>
       <SizeProvider>
       <AuthProvider>
@@ -238,5 +240,6 @@ export default () => (
       </AuthProvider>
       </SizeProvider>
     </ScrollToTop>
+    </Analytics>
   </Router>
 );
