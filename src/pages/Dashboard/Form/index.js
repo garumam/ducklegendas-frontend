@@ -286,7 +286,7 @@ const Form = props => {
                             values[input.name] instanceof File
                               ? URL.createObjectURL(values[input.name])
                               : values[input.name]
-                              ? baseUrl+"storage/"+values[input.name]+`?${new Date().getTime()}`
+                              ? baseUrl+values[input.name]+`?${new Date().getTime()}`
                               : image
                           }
                           onError={(e) => e.target.src = image}
@@ -336,7 +336,7 @@ const Form = props => {
                           <img
                             src={
                               values[input.name]
-                                ? baseUrl+"storage/"+ values[input.name]
+                                ? baseUrl+ values[input.name]
                                 : image_serie
                             }
                             onError={(e) => e.target.src = image_serie}
@@ -458,7 +458,7 @@ const Form = props => {
                             values[input.name] instanceof File
                               ? URL.createObjectURL(values[input.name])
                               : values[input.name]
-                              ? baseUrl+"storage/"+ values[input.name]
+                              ? baseUrl+ values[input.name]
                               : image_serie
                           }
                           onError={(e) => e.target.src = image_serie}

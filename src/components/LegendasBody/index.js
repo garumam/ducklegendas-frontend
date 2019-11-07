@@ -85,7 +85,7 @@ const LegendasBody = (props) => {
                       >
                         <div className="card-media">
                           <img
-                            src={item.image?`${baseUrl}storage/${item.image}`: "http://via.placeholder.com/160x240"}
+                            src={item.image?`${baseUrl}${item.image}`: "http://via.placeholder.com/160x240"}
                             className="img-fluid"
                             height="240"
                             alt=""

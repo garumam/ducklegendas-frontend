@@ -96,7 +96,7 @@ function ListMobile (props) {
             : <img
                 key={i} 
                 style={{ maxHeight: '150px', paddingLeft: '2rem', paddingTop: '1rem' }} 
-                src={`${baseUrl}storage/${item[objectKey]}?${item['updated_at']}`} 
+                src={`${baseUrl}${item[objectKey]}?${item['updated_at']}`} 
                 onError={(e) => e.target.src = image_serie}
                 alt=""
               />

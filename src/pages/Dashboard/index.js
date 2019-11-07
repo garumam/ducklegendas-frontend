@@ -193,7 +193,7 @@ const Dashboard = props => {
                 <span style={{ fontSize: ".9rem",paddingLeft:'.5rem' }}>{user.name}</span>
                 <Avatar
                 style={{height:'48px'}}
-                  src={user.image? `${baseUrl}storage/${user.image}?${user.updated_at.replace(/\D/g,'').trim()}`: false || userImg}
+                  src={user.image? `${baseUrl}${user.image}?${user.updated_at.replace(/\D/g,'').trim()}`: false || userImg}
                   size="xlarge"
                   name={user.name}
                 />

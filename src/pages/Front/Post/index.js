@@ -59,7 +59,7 @@ export default props => {
           <p>by { post.author && post.author.name ?  post.author.name : post.author }, Adicionado {formatDate(post.created_at)}</p>
           <article>
             <img
-              src={post.image?`${baseUrl}storage/${post.image}`: "http://via.placeholder.com/160x240"}
+              src={post.image?`${baseUrl}${post.image}`: "http://via.placeholder.com/160x240"}
               className="img-fluid"
               width="160"
               height="240"

@@ -347,7 +347,7 @@ const List = props => {
                         : item[objectKey]
                         : <img 
                             style={{ maxHeight: '150px' }} 
-                            src={`${baseUrl}storage/${item[objectKey]}?${item['updated_at']}`} 
+                            src={`${baseUrl}${item[objectKey]}?${item['updated_at']}`} 
                             onError={(e) => e.target.src = image_serie}
                             alt=""
                           />
