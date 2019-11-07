@@ -39,7 +39,7 @@ export const getRequest = (uri) => api.get(uri);
 
 export const refreshAuthorization = () => {api.defaults.headers.Authorization = isAuthenticated();}
 
-export const baseUrl = 'http://ducklegendas.com/api/public/';
+export const baseUrl = 'https://ducklegendas.com/api/public/';
 //export const baseUrl = 'http://127.0.0.1:8000/';
 
 const api = axios.create({
