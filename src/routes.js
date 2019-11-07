@@ -25,7 +25,9 @@ import TokenExpired from "services/TokenExpired";
 import { isAuthenticated } from "services/api";
 import { AuthProvider } from "utils/AuthContext";
 import { SizeProvider } from "utils/SizeContext";
-import Authorization,{ALL} from "services/Authorization";
+import Authorization,{
+  ALL, ADMIN, AUTOR, MODERADOR
+} from "services/Authorization";
 import { ROUTES } from 'utils/RoutePaths';
 import Analytics from 'react-router-ga';
 
@@ -140,14 +142,14 @@ export default () => (
             )}
           />
           <PrivateRoute
-            permissions={ALL}
+            permissions={[ADMIN, MODERADOR, AUTOR]}
             exact
             path={ROUTES.DASHBOARD.HOME}
             layout={props => <Dashboard title="Dashboard" {...props} />}
             component={() => <List title="Legendas Pendentes" table={7} />}
           />
           <PrivateRoute
-            permissions={ALL}
+            permissions={[ADMIN, MODERADOR]}
             exact
             path={ROUTES.DASHBOARD.USER.LIST}
             layout={props => <Dashboard title="Usuários" {...props} />}
@@ -173,20 +175,20 @@ export default () => (
             component={() => <Form title="Legendas" form={2} />}
           />
           <PrivateRoute
-            permissions={ALL}
+            permissions={[ADMIN, MODERADOR]}
             exact
             path={ROUTES.DASHBOARD.CATEGORY.LIST}
             layout={props => <Dashboard title="Categorias" {...props} />}
             component={() => <List title="Categorias" table={3} />}
           />
           <PrivateRoute
-            permissions={ALL}
+            permissions={[ADMIN, MODERADOR]}
             path={`${ROUTES.DASHBOARD.CATEGORY.FORM}/:id?`}
             layout={props => <Dashboard title="Categorias" {...props} />}
             component={() => <Form title="Categorias" form={3} />}
           />
           <PrivateRoute
-            permissions={ALL}
+            permissions={[ADMIN, MODERADOR, AUTOR]}
             exact
             path={ROUTES.DASHBOARD.PROGRESS.LIST}
             layout={props => (
@@ -195,7 +197,7 @@ export default () => (
             component={() => <List title="Legendas em andamento" table={4} />}
           />
           <PrivateRoute
-            permissions={ALL}
+            permissions={[ADMIN, MODERADOR, AUTOR]}
             path={`${ROUTES.DASHBOARD.PROGRESS.FORM}/:id?`}
             layout={props => (
               <Dashboard title="Legendas em andamento" {...props} />
@@ -203,27 +205,27 @@ export default () => (
             component={() => <Form title="Legendas em andamento" form={4} />}
           />
           <PrivateRoute
-            permissions={ALL}
+            permissions={[ADMIN, MODERADOR]}
             exact
             path={ROUTES.DASHBOARD.GALLERY.LIST}
             layout={props => <Dashboard title="Galeria" {...props} />}
             component={() => <List title="Galeria" table={5} />}
           />
           <PrivateRoute
-            permissions={ALL}
+            permissions={[ADMIN, MODERADOR]}
             path={`${ROUTES.DASHBOARD.GALLERY.FORM}/:id?`}
             layout={props => <Dashboard title="Galeria" {...props} />}
             component={() => <Form title="Galeria" form={5} />}
           />
           <PrivateRoute
-            permissions={ALL}
+            permissions={[ADMIN, MODERADOR]}
             exact
             path={ROUTES.DASHBOARD.MESSAGE.LIST}
             layout={props => <Dashboard title="Mensagens" {...props} />}
             component={() => <List title="Mensagens" table={8} />}
           />
           <PrivateRoute
-            permissions={ALL}
+            permissions={[ADMIN, MODERADOR]}
             path={`${ROUTES.DASHBOARD.MESSAGE.FORM}/:id?`}
             layout={props => <Dashboard title="Mensagens" {...props} />}
             component={() => <Form title="Mensagens" form={6} />}
