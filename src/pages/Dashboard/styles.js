@@ -55,6 +55,11 @@ export const HeaderDashboard = styled(SimpleTopAppBar)`
     @media (max-width: 1150px) {
         z-index: 998;
     }
+    @media (max-width: 550px) {
+        .mdc-top-app-bar__title{
+            display: none;
+        }
+    }
 `;
 
 export const Container = styled.div`
@@ -66,6 +71,7 @@ export const ContainerDashboard = styled.div`
     display:flex;
     width:100%;
     height:calc(100vh - 70px);
+    min-height:500px;
     padding:24px;
 `;
 

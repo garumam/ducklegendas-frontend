@@ -403,7 +403,7 @@ const List = props => {
                           setOpenModal({
                             open: true,
                             id: item.id,
-                            msg: `Id: ${item.id}  Nome: ${item.name}`,
+                            msg: `Id: ${item.id}  ${item.name?'Nome: '+item.name:'Mensagem: '+item.message}`,
                             action: 'excluir'
                           })
                         }
