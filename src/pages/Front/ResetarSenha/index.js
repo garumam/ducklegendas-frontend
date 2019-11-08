@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from "react";
-import { Login, Error } from "./styles";
+import { Login, Error, Container } from "./styles";
 import { withRouter } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import {postRequest} from "services/api";
@@ -40,59 +40,56 @@ const ResetarSenha = props => {
   }
 
   return (
-    <div className="container flex-center">
+    <Container>
       <Login className="card card-shadow">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="header-card">
-                <h2>{props.title}</h2>
-              </div>
-            </div>
-            <div className="card-border" />
-            <form className="formulario">
-              <InputPersonalizado
-                title="E-mail"
-                name="email"
-                type="email"
-                value={input.email}
-                onChange={handleInputChange}
-              />
-              {token && (
-                <>
-                  <InputPersonalizado
-                    title="Senha"
-                    name="password"
-                    type="password"
-                    value={input.password}
-                    onChange={handleInputChange}
-                  />
-                  <InputPersonalizado
-                    title="Confirmação de senha"
-                    name="password_confirmation"
-                    type="password"
-                    value={input.password_confirmation}
-                    onChange={handleInputChange}
-                  />
-                </>
-              )}
-
-              <InputPersonalizado
-                type="submit"
-                value="Resetar"
-                onClick={e => resetPassword(e)}
-              />
-              <Error>
-                {errors &&
-                  Object.keys(errors).map(key => (
-                    <span key={key}>{errors[key]}</span>
-                  ))}
-              </Error>
-            </form>
+        
+        <div className="col-12">
+          <div className="header-card">
+            <h2>{props.title}</h2>
           </div>
         </div>
+        <div className="card-border" />
+        <form className="formulario">
+          <InputPersonalizado
+            title="E-mail"
+            name="email"
+            type="email"
+            value={input.email}
+            onChange={handleInputChange}
+          />
+          {token && (
+            <>
+              <InputPersonalizado
+                title="Senha"
+                name="password"
+                type="password"
+                value={input.password}
+                onChange={handleInputChange}
+              />
+              <InputPersonalizado
+                title="Confirmação de senha"
+                name="password_confirmation"
+                type="password"
+                value={input.password_confirmation}
+                onChange={handleInputChange}
+              />
+            </>
+          )}
+
+          <InputPersonalizado
+            type="submit"
+            value="Resetar"
+            onClick={e => resetPassword(e)}
+          />
+          <Error>
+            {errors &&
+              Object.keys(errors).map(key => (
+                <span key={key}>{errors[key]}</span>
+              ))}
+          </Error>
+        </form>
       </Login>
-    </div>
+    </Container>
   );
 };
 

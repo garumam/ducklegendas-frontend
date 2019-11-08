@@ -1,5 +1,5 @@
 import React, { useState, useReducer, useContext } from "react";
-import { LoginSection, Error } from "./styles";
+import { LoginSection, Error, Container } from "./styles";
 import { Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import { postRequest, encryptLogin} from "services/api";
@@ -41,48 +41,44 @@ const Login = (props) => {
     console.log(input);
   }
   return (
-    <div className="container flex-center paddingTop">
+    <Container>
       <LoginSection className="card card-shadow">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="header-card">
-                <h2>{title}</h2>
-              </div>
-            </div>
-            <div className="card-border" />
-            <form className="formulario">
-              <InputPersonalizado
-                title="E-mail"
-                name="email"
-                type="email"
-                value={input.email}
-                onChange={handleInputChange}
-              />
-              <InputPersonalizado
-                title="Senha"
-                name="password"
-                type="password"
-                value={input.password}
-                onChange={handleInputChange}
-              />
-              <InputPersonalizado
-                type="submit"
-                value="Logar"
-                onClick={e => logar(e)}
-              />
-              <Error>
-                {errors &&
-                  Object.keys(errors).map(key => (
-                    <span key={key}>{errors[key]}</span>
-                  ))}
-                <Link to="/reset">Esqueceu a senha ?</Link>
-              </Error>
-            </form>
+        <div className="col-12">
+          <div className="header-card">
+            <h2>{title}</h2>
           </div>
         </div>
+        <div className="card-border" />
+        <form className="formulario">
+          <InputPersonalizado
+            title="E-mail"
+            name="email"
+            type="email"
+            value={input.email}
+            onChange={handleInputChange}
+          />
+          <InputPersonalizado
+            title="Senha"
+            name="password"
+            type="password"
+            value={input.password}
+            onChange={handleInputChange}
+          />
+          <InputPersonalizado
+            type="submit"
+            value="Logar"
+            onClick={e => logar(e)}
+          />
+          <Error>
+            {errors &&
+              Object.keys(errors).map(key => (
+                <span key={key}>{errors[key]}</span>
+              ))}
+            <Link to="/reset">Esqueceu a senha ?</Link>
+          </Error>
+        </form>
       </LoginSection>
-    </div>
+    </Container>
   );
 };
 
