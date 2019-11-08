@@ -72,7 +72,7 @@ const Dashboard = props => {
 
   return (
     <Container>
-      <Header ref={refMenu}>
+      <Header ref={refMenu} open={open}>
         <Nav>
           <NavLinks>
             <Logo>

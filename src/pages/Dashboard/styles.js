@@ -13,6 +13,8 @@ export const Header = styled.header`
     text-align:center;
     transition: margin .7s;
     border-right:1px solid rgba(255,255,255,0.1);
+    margin-left: ${props => props.open?'0':'-220px'};
+
     img {
         width:40px;
         height:40px;
