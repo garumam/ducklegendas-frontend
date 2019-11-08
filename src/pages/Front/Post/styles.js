@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SinglePost = styled.section`
+export const SinglePost = styled.article`
   min-height: 400px;
   margin-bottom: var(--marginbottom);
 `;

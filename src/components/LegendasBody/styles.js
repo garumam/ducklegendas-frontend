@@ -96,7 +96,7 @@ export const Box = styled.div`
   margin-top: 1rem;
 `;
 
-export const Post = styled.div`
+export const Post = styled.article`
   width: 22.6%;
   margin-right: 1rem;
   margin-bottom: 1.2rem;
