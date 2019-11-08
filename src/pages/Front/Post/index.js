@@ -78,7 +78,7 @@ export default props => {
               <br /> */}
               
             </p>
-            <a href={post.url} target="_blank" rel="noopener noreferrer" onClick={addDownload}><InputPersonalizado type="submit" value="Download" /></a>
+            <a style={{width:'100%'}} href={post.url} target="_blank" rel="noopener noreferrer" onClick={addDownload}><InputPersonalizado type="submit" value="Download" /></a>
           </article>
         </SinglePostInfo>
         }
