@@ -1,6 +1,9 @@
 import axios from 'axios';
+//import https from 'https';
 import CryptoJS from 'crypto-js';
 import { ROUTES } from 'utils/RoutePaths';
+// import cert from 'assets/cert.pem';
+// import privateKey from 'assets/private_key.pem';
 
 const SECRETKEY = 'DUCKLEGENDAS';
 
@@ -43,12 +46,19 @@ export const refreshAuthorization = () => {api.defaults.headers.Authorization = 
 export const baseUrl = 'https://api.ducklegendas.com/';
 //export const baseUrl = 'http://127.0.0.1:8000/';
 
+// const httpsAgent = new https.Agent({
+//   ca: [cert],
+//   cert: cert,
+//   key: privateKey
+// });
+
 const api = axios.create({
     baseURL: `${baseUrl}api`,
     headers:{
         Authorization: isAuthenticated(),
         Accept: '*/*'
-    }
+    },
+    //httpsAgent: httpsAgent
 });
 
 api.interceptors.response.use((response) => {
