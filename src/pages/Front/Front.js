@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { getRequest } from "services/api";
 import Doacao from "./Doacao";
 import {LegendasAndamento} from "./LegendasAndamento";
-import {Container,Row} from "./styles";
+import {Container,Row,Column} from "components/Grid";
 import Ranking from "./Ranking";
 import Publicidade from "./Publicidade";
 
@@ -26,22 +26,22 @@ export default props => {
   const location = useLocation().pathname.replace('/','');
   return(
   
-    <Container>
+    <Container style={{paddingTop: '6.5rem'}}>
       {messages.map((item, index) => (
         <div key={index} className={`alert alert-${item.type}`}>
           {item.message}
         </div>
       ))}
       <Row>
-        <div className="col-sm-12 col-md-12 col-lg-8"> 
+        <Column mobile='12' tablet='12' desktop='8'> 
             {props.children}
             <Publicidade title="Publicidade" />
-        </div> 
-          <div className="col-sm-12 col-md-12 col-lg-4"> 
+        </Column> 
+        <Column mobile='12' tablet='12'desktop='4'> 
             <Doacao title="Doação" />
             <LegendasAndamento title="Próximas Legendas" />
             {location !== 'ranking' && <Ranking title="Ranking" />}
-        </div> 
+        </Column> 
        </Row> 
     </Container>
   )

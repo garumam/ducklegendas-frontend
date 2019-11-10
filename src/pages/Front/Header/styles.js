@@ -25,6 +25,8 @@ export const Header = styled.header `
     position: fixed;
 `;
 export const Logo = styled.div `
+    display:flex;
+    align-items:center;
     a {
         text-decoration: none;
         letter-spacing: 1px;

@@ -7,12 +7,10 @@ export const Ranking = styled.section`
 
 export const More = styled.div`
     width: 100%;
+    height:55px;
     text-align: right;
-    padding: .7rem;
-    position: absolute;
-    bottom:0;
     border-top: 1px solid var(--corborda);
-
+    padding:.8rem;
     a {
         color: #9fa9ba;
         font-size:.9rem;
@@ -23,7 +21,7 @@ export const More = styled.div`
 `;
 
 export const UsersContainer = styled.div`
-    max-height: 590px;
+    height: calc(86% - 55px);
     width: 100%;
     padding: 0 1.5rem;
 `;

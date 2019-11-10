@@ -1,5 +1,6 @@
 import React, { createRef,useContext } from "react";
 import {Header,Nav,Logo,Mobile,CHK,NavLinks} from "../Header/styles";
+import {Container} from "components/Grid";
 //Dropdown,DropdownMenu,InputDropdownMenu
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from 'utils/AuthContext';
@@ -17,7 +18,7 @@ export default (props) => {
   }
   return (
     <Header>
-      <div className="container">
+      <Container>
         <Nav>
           <Logo>
             <img alt="img logo" src={props.logo} />
@@ -91,7 +92,7 @@ export default (props) => {
             <label htmlFor="chk" className="line3" />
           </Mobile>
         </Nav>
-      </div>
+      </Container>
     </Header>
   );
 };

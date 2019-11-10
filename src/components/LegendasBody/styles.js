@@ -88,7 +88,6 @@ export const Box = styled.div`
   width: 100%;
   display: flex;
   min-height: 1080px;
-  max-height: 1080px;
   padding-left: 1rem;
   overflow-x: hidden;
   overflow-y: auto;
@@ -176,12 +175,14 @@ export const Post = styled.article`
 
 export const LegendasContainer = styled.section`
   width: 100%;
-  height: 1177px;
+  min-height: 1177px;
   margin-bottom: var(--marginbottom);
 
   @media (max-width: 768px) {
+    height: 1280px;
+
     ${SelectBusca} {
-      width: 100%;
+      width: calc(100% - 2rem);
       padding-right: 1.9rem;
       position: absolute;
       top: 80px;
