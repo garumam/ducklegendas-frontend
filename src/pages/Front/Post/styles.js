@@ -35,20 +35,5 @@ export const SinglePostInfo = styled.section`
     margin-top:.6rem;
     margin-bottom: 1rem;
   }
-  article input {
-    width: 71%;
-    position: absolute;
-    bottom: 52px;
-    right: 0;
-    margin-right: 1rem;
-    margin-bottom: 0;
-  }
-  @media (max-width: 1199px) {
-    article input {
-      width: 100%;
-      position: relative !important;
-      bottom: 0;
-      margin: 0;
-    }
-  }
+ 
 `;

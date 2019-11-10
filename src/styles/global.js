@@ -162,6 +162,8 @@ article input {
   color: var(--textcolor);
   min-height: 45px;
   border-radius: 4px;
+  height:45px;
+  cursor: pointer;
 }
 
 input[type=submit] {
