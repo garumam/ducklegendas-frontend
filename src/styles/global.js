@@ -233,7 +233,6 @@ p {
   background: #fff;
   border-radius: 4px;
   border: 0 !important;
-  padding-bottom: 1rem;
   overflow: hidden;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
@@ -247,7 +246,8 @@ p {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  min-height: 60px;
+  height: 60px;
+  padding:1rem;
 }
 
 .header-card h2 {

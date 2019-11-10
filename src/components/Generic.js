@@ -1,4 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top:100px;
+  height: 100vh;
+`;
 
 export const Eclipse = styled.div`
   display: flex;

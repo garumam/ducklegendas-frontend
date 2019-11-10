@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top:100px;
-  min-height: 90%;
-`;
-
 export const LoginSection = styled.section`
   width: 40vw;
   @media (max-width: 1000px) {

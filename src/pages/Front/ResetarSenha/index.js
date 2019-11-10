@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from "react";
-import { Login, Error, Container } from "./styles";
+import { Login, Error } from "./styles";
+import { Container } from "components/Generic";
 import { withRouter } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import {postRequest} from "services/api";
@@ -42,11 +43,8 @@ const ResetarSenha = props => {
   return (
     <Container>
       <Login className="card card-shadow">
-        
-        <div className="col-12">
-          <div className="header-card">
+        <div className="header-card">
             <h2>{props.title}</h2>
-          </div>
         </div>
         <div className="card-border" />
         <form className="formulario">
