@@ -143,6 +143,7 @@ body {
 
 .formulario label {
   padding-right: 1rem;
+  padding-bottom:.6rem;
 }
 
 .formulario>input:last-child {
