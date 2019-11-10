@@ -164,7 +164,6 @@ article input {
   min-height: 45px;
   border-radius: 4px;
   height:45px;
-  cursor: pointer;
 }
 
 input[type=submit] {
@@ -172,6 +171,7 @@ input[type=submit] {
   background-size: 200%;
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 input[type=submit]:hover {
