@@ -13,7 +13,6 @@ import {
 } from "rmwc";
 import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
-//import Modal from "components/Modal";
 import "./styles.css";
 import { FormHeader, SwitchCustom, InputSearch, LoadingContainer } from "./styles";
 import { HeaderCard} from "../Form/styles";
@@ -147,21 +146,6 @@ const List = props => {
 
   const ActiveModal = (isList) => (
     <>
-      {/* <Modal
-        onConfirm={() => openModal.action === 'excluir'?
-                        handleDelete(openModal.id)
-                        :handleConfirmSubtitle(openModal.item)
-        }
-        onClose={() => setOpenModal({ open: false })}
-        show={openModal.open}
-        showConfirm={openModal.id}
-        title={openModal.id ? "Você quer realmente "
-                            +(baseUri === 'progress'?"finalizar"
-                            : openModal.action)
-                            +"?" : "Error"
-        }
-        content={openModal.id ? openModal.msg : openModal.error}
-      /> */}
       <SimpleDialog
         style={{ zIndex: '999' }}
         title={openModal.id ? "Você quer realmente "
@@ -331,7 +315,7 @@ const List = props => {
             }}
           />
           
-        </FormHeader>
+      </FormHeader>
       {props.table? windowWidth > 968?
         (<DataTable style={{ width: '100%',height:'calc(100% - 130px)', overflow:'auto',border: "none" }}>
         <DataTableContent style={{ width: "100%" }}>

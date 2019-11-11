@@ -178,21 +178,6 @@ input[type=submit]:hover {
   background: var(--bgazulreverse);
 }
 
-#overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
-
 img {
   max-width: 100%;
   border-style: none;

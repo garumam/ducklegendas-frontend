@@ -71,6 +71,10 @@ export const ContainerDashboard = styled.div`
     height:calc(100vh - 70px);
     min-height:500px;
     padding:24px;
+
+    div:first-child {
+        position: relative;
+    }
 `;
 
 export const Nav = styled.nav `

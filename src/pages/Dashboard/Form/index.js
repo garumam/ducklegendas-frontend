@@ -21,7 +21,6 @@ import { getBackendUriBase, setInputsParams, prepareCategories } from "utils/Uti
 import { Inputs } from "utils/Inputs";
 import { ROUTES } from 'utils/RoutePaths';
 import List from 'pages/Dashboard/List';
-//import Modal from "components/Modal";
 
 const Form = props => {
   
@@ -218,18 +217,7 @@ const Form = props => {
               inputName={openModal.inputName}
             />
           </SimpleDialog>
-          {/* <Modal
-            onClose={() => setOpenModal({open: false})}
-            show={openModal.open}
-            title={"Selecione uma imagem"}
-            content={
-              <List 
-                isgallery="true"
-                setFieldValue={openModal.setFieldValue} 
-                inputName={openModal.inputName}
-              />
-            }
-          /> */}
+
           <HeaderCard>
             <h2>{props.title === "Legendas em andamento"? "Em andamento": props.title}</h2>
             <div>
