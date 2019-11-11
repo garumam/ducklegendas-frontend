@@ -178,6 +178,12 @@ input[type=submit]:hover {
   background: var(--bgazulreverse);
 }
 
+
+.mdc-dialog__surface  span ,.mdc-dialog__title,.mdc-dialog__content {
+  font-weight:600;
+  font-family: 'Montserrat', sans-serif;
+}
+
 img {
   max-width: 100%;
   border-style: none;
