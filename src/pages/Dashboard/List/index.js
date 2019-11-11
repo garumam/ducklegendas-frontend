@@ -14,7 +14,7 @@ import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
 import Modal from "components/Modal";
 import "./styles.css";
-import { FormHeader,SwitchCustom,InputSearch } from "./styles";
+import { FormHeader, SwitchCustom, InputSearch, LoadingContainer } from "./styles";
 import { HeaderCard} from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
@@ -162,7 +162,9 @@ const List = props => {
       />
 
       {(!openModal.open && isList) && (
-        <CircularProgress size="xlarge" style={{ margin: "auto" }} />
+        <LoadingContainer>
+          <CircularProgress size="xlarge" />
+        </LoadingContainer>
       )}
     </>
   );

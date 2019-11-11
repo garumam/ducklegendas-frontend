@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import {Switch,TextField} from 'rmwc';
 
-
+export const LoadingContainer = styled.div`
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+`;
 
 export const SwitchCustom = styled(Switch)`
         height: 60px;
