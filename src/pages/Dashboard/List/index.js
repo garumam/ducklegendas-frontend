@@ -307,7 +307,7 @@ const List = props => {
           
         </FormHeader>
       {props.table? windowWidth > 800?
-        (<DataTable style={{ width: '100%',height:'100%', overflow:'auto',border: "none" }}>
+        (<DataTable style={{ width: '100%',height:'calc(100% - 130px)', overflow:'auto',border: "none" }}>
         <DataTableContent style={{ width: "100%" }}>
           <DataTableHead>
             <DataTableRow>
