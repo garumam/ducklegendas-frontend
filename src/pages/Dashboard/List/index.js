@@ -147,7 +147,7 @@ const List = props => {
   const ActiveModal = (isList) => (
     <>
       <SimpleDialog
-        style={{ zIndex: '999' }}
+        style={{ zIndex: '999',position:'fixed' }}
         title={openModal.id ? "Você quer realmente "
                             +(baseUri === 'progress'?"finalizar"
                             : openModal.action)

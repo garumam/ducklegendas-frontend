@@ -202,7 +202,7 @@ const Form = props => {
       }) => (
         <>
           <SimpleDialog
-            style={{ zIndex: '999' }}
+            style={{ zIndex: '999',position:'fixed' }}
             title="Selecione uma imagem"
             acceptLabel={null}
             cancelLabel="fechar"
