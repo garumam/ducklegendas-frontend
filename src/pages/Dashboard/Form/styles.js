@@ -8,6 +8,7 @@ export const CustomForm = styled(Form)`
     flex-wrap: wrap;
     
     input {
+        width:100%;
         margin: 0 !important;
         font-weight: 700;
         border: 1px solid var(--corborda);
