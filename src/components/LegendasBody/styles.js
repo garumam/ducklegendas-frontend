@@ -127,10 +127,8 @@ export const Post = styled.article`
 
   .info-card {
     width: 100%;
-    padding: 0 0.5rem;
+    padding: .5rem 0.5rem;
     height:40px;
-    position: absolute;
-    bottom: 0;
   }
 
   .info-card span {
