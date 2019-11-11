@@ -173,7 +173,7 @@ export const Post = styled.article`
 
 export const LegendasContainer = styled.section`
   width: 100%;
-  min-height: 1177px;
+  min-height: 1244.56px;
   margin-bottom: var(--marginbottom);
 
   @media (max-width: 768px) {
