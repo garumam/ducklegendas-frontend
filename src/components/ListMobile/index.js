@@ -14,7 +14,7 @@ import '@rmwc/list/collapsible-list.css';
 function ListMobile (props) {
     const { entities, tableParams, setOpenModal, baseUri } = props;
     return(
-        <List style={{height: "100%", overflow: 'scroll' }}>
+        <List style={{height: "calc(100% - 250px)", overflowY: 'scroll' }}>
         {entities.dataPaginada &&
               entities.dataPaginada.map((item, index) => (
         <CollapsibleList

@@ -22,10 +22,6 @@ export const Header = styled.header`
     @media (max-width: 1150px) {
         position: absolute;
         z-index: 997;
-        
-        @media (max-height: 470px) {
-            overflow-y: scroll;
-        }
     }
     @media (max-height: 470px) {
         height:100%;
