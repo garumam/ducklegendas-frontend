@@ -9,10 +9,11 @@ import {
   DataTableBody,
   Fab,
   CircularProgress,
+  SimpleDialog
 } from "rmwc";
 import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
-import Modal from "components/Modal";
+//import Modal from "components/Modal";
 import "./styles.css";
 import { FormHeader, SwitchCustom, InputSearch, LoadingContainer } from "./styles";
 import { HeaderCard} from "../Form/styles";
@@ -25,6 +26,7 @@ import image_serie from "assets/img/sem_capa.jpg";
 import { SizeContext } from 'utils/SizeContext';
 import ListMobile from 'components/ListMobile';
 import Gallery from 'components/Gallery';
+import '@material/button/dist/mdc.button.css';
 
 const List = props => {
   const [windowWidth] = useContext(SizeContext);
@@ -145,7 +147,7 @@ const List = props => {
 
   const ActiveModal = (isList) => (
     <>
-      <Modal
+      {/* <Modal
         onConfirm={() => openModal.action === 'excluir'?
                         handleDelete(openModal.id)
                         :handleConfirmSubtitle(openModal.item)
@@ -159,6 +161,28 @@ const List = props => {
                             +"?" : "Error"
         }
         content={openModal.id ? openModal.msg : openModal.error}
+      /> */}
+      <SimpleDialog
+        style={{ zIndex: '999' }}
+        title={openModal.id ? "Você quer realmente "
+                            +(baseUri === 'progress'?"finalizar"
+                            : openModal.action)
+                            +"?" : "Error"
+        }
+        acceptLabel={openModal.action?"sim":null}
+        cancelLabel={openModal.action?"não":"fechar"}
+        body={openModal.id ? openModal.msg : openModal.error}
+        open={openModal.open}
+        onClose={evt => {
+          console.log(evt.detail.action);
+          if(evt.detail.action === 'accept'){
+            openModal.action === 'excluir'?
+                        handleDelete(openModal.id)
+                        :handleConfirmSubtitle(openModal.item)
+          }else{
+            setOpenModal({ ...openModal, open: false });
+          }
+        }}
       />
 
       {(!openModal.open && isList) && (

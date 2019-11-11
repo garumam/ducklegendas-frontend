@@ -1,6 +1,6 @@
 import React, { useReducer, useState, useEffect, useContext } from "react";
 import { Formik } from "formik";
-import { Fab } from "@rmwc/fab";
+import { Fab, SimpleDialog } from "rmwc";
 import {
   CustomForm,
   InputText,
@@ -21,7 +21,7 @@ import { getBackendUriBase, setInputsParams, prepareCategories } from "utils/Uti
 import { Inputs } from "utils/Inputs";
 import { ROUTES } from 'utils/RoutePaths';
 import List from 'pages/Dashboard/List';
-import Modal from "components/Modal";
+//import Modal from "components/Modal";
 
 const Form = props => {
   
@@ -202,7 +202,23 @@ const Form = props => {
         setFieldValue
       }) => (
         <>
-          <Modal
+          <SimpleDialog
+            style={{ zIndex: '999' }}
+            title="Selecione uma imagem"
+            acceptLabel={null}
+            cancelLabel="fechar"
+            open={openModal.open}
+            onClose={evt => {
+                setOpenModal({ open: false });
+            }}
+          >
+            <List 
+              isgallery="true"
+              setFieldValue={openModal.setFieldValue} 
+              inputName={openModal.inputName}
+            />
+          </SimpleDialog>
+          {/* <Modal
             onClose={() => setOpenModal({open: false})}
             show={openModal.open}
             title={"Selecione uma imagem"}
@@ -213,7 +229,7 @@ const Form = props => {
                 inputName={openModal.inputName}
               />
             }
-          />
+          /> */}
           <HeaderCard>
             <h2>{props.title === "Legendas em andamento"? "Em andamento": props.title}</h2>
             <div>
