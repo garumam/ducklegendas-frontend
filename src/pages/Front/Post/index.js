@@ -59,7 +59,7 @@ export default props => {
               src={
                 post.image
                   ? `${baseUrl}${post.image}`
-                  : "http://via.placeholder.com/160x240"
+                  : "https://via.placeholder.com/160x240"
               }
               className="img-fluid"
               width="160"

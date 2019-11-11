@@ -89,7 +89,7 @@ const LegendasBody = props => {
                         src={
                           item.image
                             ? `${baseUrl}${item.image}`
-                            : "http://via.placeholder.com/160x240"
+                            : "https://via.placeholder.com/160x240"
                         }
                         className="img-fluid"
                         height="240"
