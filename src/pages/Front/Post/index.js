@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useHistory } from "react-router-dom";
-import { SinglePost, SinglePostInfo } from "./styles";
+import { SinglePost, SinglePostInfo, CommentContainer } from "./styles";
 import { InputPersonalizado } from "../Contato";
 import { getRequest } from "services/api";
 import { formatDate } from "utils/Utils";
 import { baseUrl } from "services/api";
+import Disqus from 'disqus-react';
 
 export default props => {
   let { id } = useParams();
@@ -39,7 +40,19 @@ export default props => {
     }
   };
 
+  const disqusShortname = 'ducklegendas';
+  const disqusConfig = {
+    url: '',
+    identifier: post.id,
+    title: post.name,
+  };
+
+  if (typeof window !== 'undefined') {
+    disqusConfig.url = window.location.href;
+  }
+  
   return (
+    <>
     <SinglePost className="card card-shadow">
       <div className="header-card">
         <h2>{post && post.name ? post.name : post.error}</h2>
@@ -92,6 +105,15 @@ export default props => {
           </article>
         </SinglePostInfo>
       )}
+      <CommentContainer>
+        <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
+        Comentários
+        </Disqus.CommentCount>               
+        <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+      </CommentContainer>
+      
     </SinglePost>
+    
+    </>
   );
 };

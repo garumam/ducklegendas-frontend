@@ -5,6 +5,13 @@ export const SinglePost = styled.article`
   margin-bottom: var(--marginbottom);
 `;
 
+export const CommentContainer = styled.article`
+  padding: 1rem;
+  a {
+    color: #2a2e2e!important;
+  }
+`;
+
 export const SinglePostInfo = styled.section`
   width: 100%;
   padding: 1rem;
