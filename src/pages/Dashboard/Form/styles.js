@@ -3,11 +3,15 @@ import { Form } from 'formik';
 import {TextField, Select, Checkbox} from 'rmwc';
 
 export const CustomForm = styled(Form)`
+    max-height: calc(100vh - 180px);
     justify-content: space-between;
     flex-wrap: wrap;
-
+    
     input {
         margin: 0 !important;
+        font-weight: 700;
+        border: 1px solid var(--corborda);
+        border-radius: 4px;
         padding: 20px 16px 6px !important;
     }
 `;
@@ -17,8 +21,9 @@ export const InputText = styled(TextField)`
     margin-bottom: 1rem;
     
     label:not(:disabled){
-        font-family: 'Montserrat', sans-serif;
-        font-size:.8rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size:.8rem;
+      font-weight:600;
     }
     @media (max-width: 600px) {
       width: 100%;
@@ -33,6 +38,7 @@ export const SelectCustom = styled(Select)`
         color:rgba(0,0,0,.6) !important;
         font-family: 'Montserrat', sans-serif;
         font-size:.8rem;
+        font-weight:600;
     }
     option{
         font-weight:600;
@@ -53,6 +59,7 @@ export const InputCheckbox = styled(Checkbox)`
         font-family: 'Montserrat', sans-serif;
         font-size:.8rem;
         margin-bottom:0;
+        font-weight:600;
     }
 `;
 

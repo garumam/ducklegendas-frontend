@@ -139,19 +139,18 @@ body {
   flex-wrap: wrap;
   color: var(--textcolor);
   overflow-y: auto;
-  height: 475px;
 }
 
-.formulario label {
+.formulario > label {
   padding-right: 1rem;
   padding-bottom:.6rem;
 }
 
-.formulario>input:last-child {
+.formulario > input:last-child {
   margin: 0;
 }
 
-.formulario input,
+.formulario > input,
 textarea,
 article input {
   width: 100%;
