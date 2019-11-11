@@ -158,7 +158,7 @@ const Dashboard = props => {
         </Nav>
       </Header>
 
-      <Container style={{ height: "100%", flexWrap: "wrap" }}>
+      <Container style={{ height: "100vh", flexWrap: "wrap" }}>
         <HeaderDashboard
           startContent={
           <>

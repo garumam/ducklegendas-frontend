@@ -139,6 +139,7 @@ body {
   flex-wrap: wrap;
   color: var(--textcolor);
   overflow-y: auto;
+  height: 475px;
 }
 
 .formulario label {
