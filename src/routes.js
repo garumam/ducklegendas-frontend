@@ -85,12 +85,12 @@ export default () => (
             exact
             path={ROUTES.HOME}
             layout={App}
-            component={() => <Legendas title="Ultimas" />}
+            component={() => <Legendas title="Últimas" />}
           />
           <AppRoute
             path={ROUTES.SERIES}
             layout={App}
-            component={() => <Legendas title="Series" />}
+            component={() => <Legendas title="Séries" />}
           />
           <AppRoute
             path={ROUTES.FILMES}

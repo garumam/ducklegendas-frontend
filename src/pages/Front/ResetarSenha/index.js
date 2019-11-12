@@ -4,6 +4,8 @@ import { Container } from "components/Generic";
 import { withRouter } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import {postRequest} from "services/api";
+import { ROUTES } from "utils/RoutePaths";
+import HeadHelmet from "services/HeadHelmet";
 
 const ResetarSenha = props => {
   const [errors, setErrors] = useState(null);
@@ -42,6 +44,11 @@ const ResetarSenha = props => {
 
   return (
     <Container>
+      <HeadHelmet 
+        title={props.title}
+        uri={ROUTES.RESETPASSWORD}
+        description={`${props.title} - painel`}
+      />
       <Login className="card card-shadow">
         <div className="header-card">
             <h2>{props.title}</h2>

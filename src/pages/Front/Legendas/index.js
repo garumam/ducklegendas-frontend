@@ -2,6 +2,7 @@ import React, {useEffect, useReducer} from "react";
 import { useLocation } from "react-router-dom";
 import { getRequest } from "services/api";
 import LegendasBody from "components/LegendasBody";
+import HeadHelmet from "services/HeadHelmet";
 
 const Legendas = (props) => {
 
@@ -54,11 +55,18 @@ const Legendas = (props) => {
   },[entities.page, entities.search, entities.order]);
 
   return(
+    <>
+    <HeadHelmet 
+      title={props.title}
+      uri={location.pathname}
+      description={`${props.title} - legendas`}
+    />
     <LegendasBody 
       title={props.title}
       entities={entities} 
       setEntities={setEntities} 
     />
+    </>
   )
 }
 

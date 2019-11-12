@@ -3,10 +3,12 @@ import { useHistory } from "react-router-dom";
 import { getRequest } from "services/api";
 import { ROUTES } from "utils/RoutePaths";
 import { Indice, CategoryContainer } from "./styles";
+import HeadHelmet from "services/HeadHelmet";
 
 export default props => {
   const [entities, setEntities] = useState([]);
   const history = useHistory();
+
   useEffect(() => {
     async function getItens() {
       const res = await getRequest("categories/list");
@@ -26,6 +28,11 @@ export default props => {
 
   return (
     <Indice className="card card-shadow">
+      <HeadHelmet 
+        title={props.title}
+        uri={ROUTES.INDICE}
+        description={`${props.title} - legendas`}
+      />
       <div className="header-card">
         <h2>{props.title}</h2>
       </div>

@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { postRequest } from "services/api";
 import { Contato } from "./styles.js";
+import HeadHelmet from "services/HeadHelmet";
+import { ROUTES } from "utils/RoutePaths";
 
 export const InputPersonalizado = props => (
   <>
@@ -41,12 +43,18 @@ export default props => {
       } else {
         setMessage(res.error);
       }
+      recaptchaRef.current.reset();
     } else {
       setMessage("Confirmação do recaptcha obrigatória!");
     }
   };
   return (
     <Contato className="card card-shadow">
+      <HeadHelmet 
+        title={props.title}
+        uri={ROUTES.CONTATO}
+        description={`ducklegendas - ${props.title}`}
+      />
       <div className="header-card">
         <h2>{props.title}</h2>
       </div>

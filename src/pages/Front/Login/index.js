@@ -7,6 +7,7 @@ import { postRequest, encryptLogin } from "services/api";
 import { withRouter } from "react-router-dom";
 import { AuthContext } from "utils/AuthContext";
 import { ROUTES } from "utils/RoutePaths";
+import HeadHelmet from "services/HeadHelmet";
 
 const Login = props => {
   const [, setUser] = useContext(AuthContext);
@@ -43,6 +44,11 @@ const Login = props => {
   }
   return (
     <Container>
+      <HeadHelmet 
+        title={title}
+        uri={ROUTES.LOGIN}
+        description={`${title} - painel`}
+      />
       <LoginSection className="card card-shadow">
         <div className="header-card">
           <h2>{title}</h2>

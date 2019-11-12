@@ -3,6 +3,7 @@ import { useLocation, Redirect } from "react-router-dom";
 import { getRequest } from "services/api";
 import { ROUTES } from "utils/RoutePaths";
 import LegendasBody from "components/LegendasBody";
+import HeadHelmet from "services/HeadHelmet";
 
 const LegendasIndice = () => {
 
@@ -45,11 +46,18 @@ const LegendasIndice = () => {
     !hasCategory ?
     <Redirect to={ROUTES.INDICE} />
     :
+    <>
+    <HeadHelmet 
+      title={hasCategory.name}
+      uri={ROUTES.INDICE}
+      description={`${hasCategory.name} - legendas`}
+    />
     <LegendasBody 
       title={hasCategory.name}
       entities={entities} 
       setEntities={setEntities}
     />
+    </>
   )
 }
 

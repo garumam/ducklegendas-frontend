@@ -6,11 +6,12 @@ import { getRequest } from "services/api";
 import { formatDate } from "utils/Utils";
 import { baseUrl } from "services/api";
 import Disqus from 'disqus-react';
+import HeadHelmet from "services/HeadHelmet";
 
 export default props => {
   let { id } = useParams();
   let history = useHistory();
-  let { state } = useLocation();
+  let { state, pathname } = useLocation();
   state = (state && state.item) || [];
   const [post, setPost] = useState(state);
 
@@ -61,6 +62,11 @@ export default props => {
 
       {post && post.name && (
         <SinglePostInfo>
+          <HeadHelmet 
+            title={post.name}
+            uri={pathname}
+            description={`Legenda - ${post.name} ${post.episode?post.episode:post.year}`}
+          />
           <p>
             by{" "}
             {post.author && post.author.name ? post.author.name : post.author},
