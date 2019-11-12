@@ -59,7 +59,7 @@ const Legendas = (props) => {
     <HeadHelmet 
       title={props.title}
       uri={location.pathname}
-      description={`${props.title} - legendas`}
+      description={type?`${props.title} - legendas`:null}
     />
     <LegendasBody 
       title={props.title}

@@ -30,6 +30,8 @@ import Authorization,{
 } from "services/Authorization";
 import { ROUTES } from 'utils/RoutePaths';
 import Analytics from 'react-router-ga';
+import { HelmetProvider } from 'react-helmet-async';
+import HeadHelmet from "services/HeadHelmet";
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
@@ -78,169 +80,172 @@ export default () => (
   <Router>
     <Analytics id="UA-151424625-1">
     <ScrollToTop>
-      <SizeProvider>
-      <AuthProvider>
-        <Switch>
-          <AppRoute
-            exact
-            path={ROUTES.HOME}
-            layout={App}
-            component={() => <Legendas title="Últimas" />}
-          />
-          <AppRoute
-            path={ROUTES.SERIES}
-            layout={App}
-            component={() => <Legendas title="Séries" />}
-          />
-          <AppRoute
-            path={ROUTES.FILMES}
-            layout={App}
-            component={() => <Legendas title="Filmes" />}
-          />
-          <AppRoute
-            exact
-            path={ROUTES.LEGENDASINDICE}
-            layout={App}
-            component={() => <LegendasIndice />}
-          />
-          <AppRoute
-            path={ROUTES.RANKING}
-            layout={App}
-            component={() => <Ranking title="Ranking" />}
-          />
-          <AppRoute
-            path={ROUTES.INDICE}
-            layout={App}
-            component={() => <Indice title="Índice" />}
-          />
-          <AppRoute
-            path={ROUTES.CONTATO}
-            layout={App}
-            component={() => <Contato title="Contato" />}
-          />
-          <AppRoute
-            path={`${ROUTES.POST}/:id`}
-            layout={App}
-            component={() => <Post title="Single Post" />}
-          />
-          <PrivateRouteLogin
-            path={ROUTES.LOGIN}
-            layout={props => (
-              <>
-                <Header title="Legendas" logo={Logo} />
-                <Login title="Login" />
-              </>
-            )}
-          />
-          <Route
-            path={`${ROUTES.RESETPASSWORD}/:token?`}
-            render={() => (
-              <>
-                <Header title="Legendas" logo={Logo} />
-                <ResetarSenha title="Resetar senha" />
-              </>
-            )}
-          />
-          <PrivateRoute
-            permissions={[ADMIN, MODERADOR, AUTOR]}
-            exact
-            path={ROUTES.DASHBOARD.HOME}
-            layout={props => <Dashboard title="Dashboard" {...props} />}
-            component={() => <List title="Legendas Pendentes" table={7} />}
-          />
-          <PrivateRoute
-            permissions={[ADMIN, MODERADOR]}
-            exact
-            path={ROUTES.DASHBOARD.USER.LIST}
-            layout={props => <Dashboard title="Usuários" {...props} />}
-            component={() => <List title="Usuários" table={1} />}
-          />
-          <PrivateRoute
-            permissions={ALL}
-            path={`${ROUTES.DASHBOARD.USER.FORM}/:id?`}
-            layout={props => <Dashboard title="Usuários" {...props} />}
-            component={() => <Form title="Usuários" form={1} />}
-          />
-          <PrivateRoute
-            permissions={ALL}
-            exact
-            path={ROUTES.DASHBOARD.SUBTITLE.LIST}
-            layout={props => <Dashboard title="Legendas" {...props} />}
-            component={() => <List title="Legendas" table={2} />}
-          />
-          <PrivateRoute
-            permissions={ALL}
-            path={`${ROUTES.DASHBOARD.SUBTITLE.FORM}/:id?`}
-            layout={props => <Dashboard title="Legendas" {...props} />}
-            component={() => <Form title="Legendas" form={2} />}
-          />
-          <PrivateRoute
-            permissions={[ADMIN, MODERADOR]}
-            exact
-            path={ROUTES.DASHBOARD.CATEGORY.LIST}
-            layout={props => <Dashboard title="Categorias" {...props} />}
-            component={() => <List title="Categorias" table={3} />}
-          />
-          <PrivateRoute
-            permissions={[ADMIN, MODERADOR]}
-            path={`${ROUTES.DASHBOARD.CATEGORY.FORM}/:id?`}
-            layout={props => <Dashboard title="Categorias" {...props} />}
-            component={() => <Form title="Categorias" form={3} />}
-          />
-          <PrivateRoute
-            permissions={[ADMIN, MODERADOR, AUTOR]}
-            exact
-            path={ROUTES.DASHBOARD.PROGRESS.LIST}
-            layout={props => (
-              <Dashboard title="Legendas em andamento" {...props} />
-            )}
-            component={() => <List title="Legendas em andamento" table={4} />}
-          />
-          <PrivateRoute
-            permissions={[ADMIN, MODERADOR, AUTOR]}
-            path={`${ROUTES.DASHBOARD.PROGRESS.FORM}/:id?`}
-            layout={props => (
-              <Dashboard title="Legendas em andamento" {...props} />
-            )}
-            component={() => <Form title="Legendas em andamento" form={4} />}
-          />
-          <PrivateRoute
-            permissions={[ADMIN, MODERADOR]}
-            exact
-            path={ROUTES.DASHBOARD.GALLERY.LIST}
-            layout={props => <Dashboard title="Galeria" {...props} />}
-            component={() => <List title="Galeria" table={5} />}
-          />
-          <PrivateRoute
-            permissions={[ADMIN, MODERADOR]}
-            path={`${ROUTES.DASHBOARD.GALLERY.FORM}/:id?`}
-            layout={props => <Dashboard title="Galeria" {...props} />}
-            component={() => <Form title="Galeria" form={5} />}
-          />
-          <PrivateRoute
-            permissions={[ADMIN, MODERADOR]}
-            exact
-            path={ROUTES.DASHBOARD.MESSAGE.LIST}
-            layout={props => <Dashboard title="Mensagens" {...props} />}
-            component={() => <List title="Mensagens" table={8} />}
-          />
-          <PrivateRoute
-            permissions={[ADMIN, MODERADOR]}
-            path={`${ROUTES.DASHBOARD.MESSAGE.FORM}/:id?`}
-            layout={props => <Dashboard title="Mensagens" {...props} />}
-            component={() => <Form title="Mensagens" form={6} />}
-          />
-          <PrivateRoute
-            permissions={ALL}
-            exact
-            path={ROUTES.DASHBOARD.RANKING}
-            layout={props => <Dashboard title="Ranking" {...props} />}
-            component={() => <List title="Ranking" table={6} />}
-          />
-          <AppRoute path="*" layout={App} component={Error404} />
-        </Switch>
-      </AuthProvider>
-      </SizeProvider>
+      <HelmetProvider>
+        <HeadHelmet useDefault />
+        <SizeProvider>
+        <AuthProvider>
+          <Switch>
+            <AppRoute
+              exact
+              path={ROUTES.HOME}
+              layout={App}
+              component={() => <Legendas title="Últimas" />}
+            />
+            <AppRoute
+              path={ROUTES.SERIES}
+              layout={App}
+              component={() => <Legendas title="Séries" />}
+            />
+            <AppRoute
+              path={ROUTES.FILMES}
+              layout={App}
+              component={() => <Legendas title="Filmes" />}
+            />
+            <AppRoute
+              exact
+              path={ROUTES.LEGENDASINDICE}
+              layout={App}
+              component={() => <LegendasIndice />}
+            />
+            <AppRoute
+              path={ROUTES.RANKING}
+              layout={App}
+              component={() => <Ranking title="Ranking" />}
+            />
+            <AppRoute
+              path={ROUTES.INDICE}
+              layout={App}
+              component={() => <Indice title="Índice" />}
+            />
+            <AppRoute
+              path={ROUTES.CONTATO}
+              layout={App}
+              component={() => <Contato title="Contato" />}
+            />
+            <AppRoute
+              path={`${ROUTES.POST}/:id`}
+              layout={App}
+              component={() => <Post title="Single Post" />}
+            />
+            <PrivateRouteLogin
+              path={ROUTES.LOGIN}
+              layout={props => (
+                <>
+                  <Header title="Legendas" logo={Logo} />
+                  <Login title="Login" />
+                </>
+              )}
+            />
+            <Route
+              path={`${ROUTES.RESETPASSWORD}/:token?`}
+              render={() => (
+                <>
+                  <Header title="Legendas" logo={Logo} />
+                  <ResetarSenha title="Resetar senha" />
+                </>
+              )}
+            />
+            <PrivateRoute
+              permissions={[ADMIN, MODERADOR, AUTOR]}
+              exact
+              path={ROUTES.DASHBOARD.HOME}
+              layout={props => <Dashboard title="Dashboard" {...props} />}
+              component={() => <List title="Legendas Pendentes" table={7} />}
+            />
+            <PrivateRoute
+              permissions={[ADMIN, MODERADOR]}
+              exact
+              path={ROUTES.DASHBOARD.USER.LIST}
+              layout={props => <Dashboard title="Usuários" {...props} />}
+              component={() => <List title="Usuários" table={1} />}
+            />
+            <PrivateRoute
+              permissions={ALL}
+              path={`${ROUTES.DASHBOARD.USER.FORM}/:id?`}
+              layout={props => <Dashboard title="Usuários" {...props} />}
+              component={() => <Form title="Usuários" form={1} />}
+            />
+            <PrivateRoute
+              permissions={ALL}
+              exact
+              path={ROUTES.DASHBOARD.SUBTITLE.LIST}
+              layout={props => <Dashboard title="Legendas" {...props} />}
+              component={() => <List title="Legendas" table={2} />}
+            />
+            <PrivateRoute
+              permissions={ALL}
+              path={`${ROUTES.DASHBOARD.SUBTITLE.FORM}/:id?`}
+              layout={props => <Dashboard title="Legendas" {...props} />}
+              component={() => <Form title="Legendas" form={2} />}
+            />
+            <PrivateRoute
+              permissions={[ADMIN, MODERADOR]}
+              exact
+              path={ROUTES.DASHBOARD.CATEGORY.LIST}
+              layout={props => <Dashboard title="Categorias" {...props} />}
+              component={() => <List title="Categorias" table={3} />}
+            />
+            <PrivateRoute
+              permissions={[ADMIN, MODERADOR]}
+              path={`${ROUTES.DASHBOARD.CATEGORY.FORM}/:id?`}
+              layout={props => <Dashboard title="Categorias" {...props} />}
+              component={() => <Form title="Categorias" form={3} />}
+            />
+            <PrivateRoute
+              permissions={[ADMIN, MODERADOR, AUTOR]}
+              exact
+              path={ROUTES.DASHBOARD.PROGRESS.LIST}
+              layout={props => (
+                <Dashboard title="Legendas em andamento" {...props} />
+              )}
+              component={() => <List title="Legendas em andamento" table={4} />}
+            />
+            <PrivateRoute
+              permissions={[ADMIN, MODERADOR, AUTOR]}
+              path={`${ROUTES.DASHBOARD.PROGRESS.FORM}/:id?`}
+              layout={props => (
+                <Dashboard title="Legendas em andamento" {...props} />
+              )}
+              component={() => <Form title="Legendas em andamento" form={4} />}
+            />
+            <PrivateRoute
+              permissions={[ADMIN, MODERADOR]}
+              exact
+              path={ROUTES.DASHBOARD.GALLERY.LIST}
+              layout={props => <Dashboard title="Galeria" {...props} />}
+              component={() => <List title="Galeria" table={5} />}
+            />
+            <PrivateRoute
+              permissions={[ADMIN, MODERADOR]}
+              path={`${ROUTES.DASHBOARD.GALLERY.FORM}/:id?`}
+              layout={props => <Dashboard title="Galeria" {...props} />}
+              component={() => <Form title="Galeria" form={5} />}
+            />
+            <PrivateRoute
+              permissions={[ADMIN, MODERADOR]}
+              exact
+              path={ROUTES.DASHBOARD.MESSAGE.LIST}
+              layout={props => <Dashboard title="Mensagens" {...props} />}
+              component={() => <List title="Mensagens" table={8} />}
+            />
+            <PrivateRoute
+              permissions={[ADMIN, MODERADOR]}
+              path={`${ROUTES.DASHBOARD.MESSAGE.FORM}/:id?`}
+              layout={props => <Dashboard title="Mensagens" {...props} />}
+              component={() => <Form title="Mensagens" form={6} />}
+            />
+            <PrivateRoute
+              permissions={ALL}
+              exact
+              path={ROUTES.DASHBOARD.RANKING}
+              layout={props => <Dashboard title="Ranking" {...props} />}
+              component={() => <List title="Ranking" table={6} />}
+            />
+            <AppRoute path="*" layout={App} component={Error404} />
+          </Switch>
+        </AuthProvider>
+        </SizeProvider>
+      </HelmetProvider>
     </ScrollToTop>
     </Analytics>
   </Router>
