@@ -52,7 +52,6 @@ export default props => {
   }
   
   return (
-    <>
     <SinglePost className="card card-shadow">
       <div className="header-card">
         <h2>{post && post.name ? post.name : post.error}</h2>
@@ -113,7 +112,5 @@ export default props => {
       </CommentContainer>
       
     </SinglePost>
-    
-    </>
   );
 };
