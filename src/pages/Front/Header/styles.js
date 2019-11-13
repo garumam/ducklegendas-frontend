@@ -217,6 +217,9 @@ export const CHK = styled.input`
             top: 0;
             transform: rotate(90deg);
         }
+        &:checked:hover + ${Mobile} > div {
+            transform: rotate(225deg);
+        }
      }
      
 `;
