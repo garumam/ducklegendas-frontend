@@ -202,7 +202,7 @@ const Dashboard = props => {
           }
         />
         <ContainerDashboard>
-          <div className="card card-shadow">{props.children}</div>
+          <div id="dashchildren" className="card card-shadow">{props.children}</div>
         </ContainerDashboard>
       </Container>
     </Container>

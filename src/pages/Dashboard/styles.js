@@ -72,7 +72,7 @@ export const ContainerDashboard = styled.div`
     min-height:500px;
     padding:24px;
 
-    div:first-child {
+    #dashchildren {
         position: relative;
     }
 `;
