@@ -505,6 +505,7 @@ const Form = props => {
                         textarea
                         outlined
                         characterCount
+                        fullwidth
                         key={index}
                         label={input.label}
                         rows={6}
