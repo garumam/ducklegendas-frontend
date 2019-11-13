@@ -44,8 +44,7 @@ export const UserSchema = Yup.object().shape({
         .required('Nome é obrigatório!'),
     password: Yup.string()
         .min(6, 'Senha com no mínimo 6 caracteres!')
-        .max(20, 'Senha com no máximo 20 caracteres!!')
-        .required('Senha é obrigatório!'),
+        .max(20, 'Senha com no máximo 20 caracteres!!'),
     email: Yup.string()
         .email('E-mail inválido!')
         .required('E-mail é obrigatório!'),
