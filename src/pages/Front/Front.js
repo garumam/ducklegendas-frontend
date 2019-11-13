@@ -6,6 +6,7 @@ import {LegendasAndamento} from "./LegendasAndamento";
 import {Container,Row,Column} from "components/Grid";
 import Ranking from "./Ranking";
 import Publicidade from "./Publicidade";
+import { Alert } from "components/Generic";
 
 export default props => {
   const [messages, setMessages] = useState(JSON.parse(localStorage.getItem("messages")) || []);
@@ -28,9 +29,9 @@ export default props => {
   
     <Container style={{paddingTop: '6.5rem'}}>
       {messages.map((item, index) => (
-        <div key={index} className={`alert alert-${item.type}`}>
+        <Alert key={index} type={item.type}>
           {item.message}
-        </div>
+        </Alert>
       ))}
       <Row>
         <Column mobile='12' tablet='12' desktop='8'> 
