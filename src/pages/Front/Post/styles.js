@@ -12,6 +12,25 @@ export const CommentContainer = styled.article`
   }
 `;
 
+export const NoteContainer = styled.div`
+  width: 100%;
+  margin-top: 1rem;
+  h3 {
+    text-align: center;
+    color: #9fa9ba;
+    font-size: 1.2rem;
+    word-wrap: break-word;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    text-decoration: underline;
+  }
+  p {
+    white-space: pre-line; 
+    height: unset!important;
+  }
+`;
+
 export const SinglePostInfo = styled.section`
   width: 100%;
   padding: 1rem;

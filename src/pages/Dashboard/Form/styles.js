@@ -23,7 +23,7 @@ export const InputText = styled(TextField)`
     
     label:not(:disabled){
       font-family: 'Montserrat', sans-serif;
-      font-size:.8rem;
+      ${props => !props.textarea && 'font-size:.8rem;'}
       font-weight:600;
     }
     @media (max-width: 600px) {

@@ -5,9 +5,9 @@ export const Inputs = {
         names: ["name", "email", "password", "user_type", "image"]
     },
     subtitle: {
-        labels: ["Nome","Categoria","Ano","Link de Download","Tipo","Temporada/Episódio(s01e02)","Imagem","Status","Autor"],
-        types: ["text","select","number","text","checkbox","text","hidden","select","disabled"],
-        names: ["name", "category", "year","url","type","episode", "image", "status", "author"]
+        labels: ["Nome","Categoria","Ano","Link de Download","Tipo","Temporada/Episódio(s01e02)","Imagem","Status","Autor","Observações"],
+        types: ["text","select","number","text","checkbox","text","hidden","select","disabled","textarea"],
+        names: ["name", "category", "year","url","type","episode", "image", "status", "author","note"]
     },
     category: {
         labels: ["Nome"],

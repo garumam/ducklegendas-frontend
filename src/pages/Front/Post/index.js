@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useHistory } from "react-router-dom";
-import { SinglePost, SinglePostInfo, CommentContainer } from "./styles";
+import { SinglePost, SinglePostInfo, CommentContainer, NoteContainer } from "./styles";
 import { InputPersonalizado } from "../Contato";
 import { getRequest } from "services/api";
 import { formatDate } from "utils/Utils";
@@ -107,6 +107,12 @@ export default props => {
             >
               <InputPersonalizado type="submit" value="Download" />
             </a>
+            {post.note &&
+              <NoteContainer>
+                <h3>Observações</h3>
+                <p>{post.note}</p>
+              </NoteContainer>
+            }
           </article>
         </SinglePostInfo>
       )}

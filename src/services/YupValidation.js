@@ -77,7 +77,9 @@ export const SubtitleSchema = Yup.object().shape({
         .required('Url é obrigatória!'),
     image: Yup.string(),
     status: Yup.mixed()
-        .oneOf(['APROVADA', 'PENDENTE'],'O status deve ser: APROVADA ou PENDENTE')
+        .oneOf(['APROVADA', 'PENDENTE'],'O status deve ser: APROVADA ou PENDENTE'),
+    note: Yup.string()
+        .max(1500, 'Observações com no máximo 1500 caracteres!!'),
 });
 
 export const ProgressSchema = Yup.object().shape({

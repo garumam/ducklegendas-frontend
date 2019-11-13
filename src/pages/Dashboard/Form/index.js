@@ -410,6 +410,25 @@ const Form = props => {
                       />
                     );
                   }
+                  if (input.type === "textarea") {
+                    return (
+                      <InputText
+                        style={{width: '100%'}}
+                        textarea
+                        outlined
+                        characterCount
+                        fullwidth
+                        key={index}
+                        label={input.label}
+                        rows={10}
+                        maxLength={1500}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        name={input.name}
+                        value={values[input.name]}
+                      />
+                    );
+                  }
                   break;
                 case 3: //categorias
                   break;
