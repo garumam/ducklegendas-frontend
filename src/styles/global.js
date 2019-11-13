@@ -37,10 +37,6 @@ table {
   border-spacing: 0;
 }
 
-.paddingTop {
-  padding-top: 6.38rem;
-}
-
 .flex-center {
   width: 100%;
   height: calc(100% - 80px);
@@ -62,18 +58,6 @@ table {
   pointer-events: none;
 }
 
-/* efeito abrindo e fechando do menu hamburger */
-.toggle .line1 {
-  transform: rotate(-45deg) translate(-5px, 5px);
-}
-
-.toggle .line2 {
-  opacity: 0;
-}
-
-.toggle .line3 {
-  transform: rotate(45deg) translate(-5px, -5px);
-}
 
 :root {
   --mdc-theme-primary: #6759FF;
@@ -129,7 +113,6 @@ body {
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.01);
   user-select: none;
 }
-
 
 .formulario {
   width: 100%;
@@ -211,16 +194,11 @@ p {
   border-radius: 5px;
 }
 
-.between {
-  justify-content: space-between;
-}
-
 .shadow {
   -webkit-box-shadow: 20px 20px 50px -37px rgba(0, 0, 0, 0.8);
   -moz-box-shadow: 20px 20px 50px -37px rgba(0, 0, 0, 0.8);
   box-shadow: 20px 20px 50px -37px rgba(0, 0, 0, 0.8);
 }
-
 
 .card {
   width: 100%;
@@ -264,10 +242,6 @@ p {
 
 .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input:hover {
   border-bottom-color: var(--corborda);
-}
-
-.nopadding {
-  padding: 0 !important;
 }
 
 `;
