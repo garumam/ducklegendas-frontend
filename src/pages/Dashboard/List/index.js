@@ -61,8 +61,8 @@ const List = props => {
       tableParams.formPath = ROUTES.DASHBOARD.USER.FORM;
       break;
     case 2: //legendas
-      tableParams.headCells.push("ID", "Nome", "Ano", "Categoria", "Status");
-      tableParams.headNames.push("id", "name", "year", "category", "status");
+      tableParams.headCells.push("ID", "Nome", "Categoria", "Status", "Autor");
+      tableParams.headNames.push("id", "name", "category", "status", "author");
       tableParams.formPath = ROUTES.DASHBOARD.SUBTITLE.FORM;
       break;
     case 3: //categorias
@@ -71,8 +71,8 @@ const List = props => {
       tableParams.formPath = ROUTES.DASHBOARD.CATEGORY.FORM;
       break;
     case 4: //legendas em andamento
-      tableParams.headCells.push("ID", "Legenda", "%");
-      tableParams.headNames.push("id", "name", "percent");
+      tableParams.headCells.push("ID", "Legenda", "%", "Autor");
+      tableParams.headNames.push("id", "name", "percent", "author");
       tableParams.formPath = ROUTES.DASHBOARD.PROGRESS.FORM;
       break;
     case 5: //galeria
@@ -86,8 +86,8 @@ const List = props => {
       tableParams.formPath = ROUTES.DASHBOARD.RANKING;
       break;
     case 7: //legendas pendentes
-      tableParams.headCells.push("ID", "Nome", "Status");
-      tableParams.headNames.push("id", "name", "status");
+      tableParams.headCells.push("ID", "Nome", "Categoria", "Status", "Autor");
+      tableParams.headNames.push("id", "name", "category", "status", "author");
       tableParams.formPath = ROUTES.DASHBOARD.SUBTITLE.FORM;
       baseUri = getBackendUriBase(ROUTES.DASHBOARD.PENDING);
       break;

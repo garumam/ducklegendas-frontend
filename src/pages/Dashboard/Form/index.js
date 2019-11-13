@@ -396,20 +396,7 @@ const Form = props => {
                       return null;
                     }
                   }
-                  if (input.type === "disabled") {
-                    return (
-                      <InputText
-                        disabled
-                        key={index}
-                        value={input.name === "author" && values[input.name]}
-                        label={input.label}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        type="text"
-                        name={input.name}
-                      />
-                    );
-                  }
+
                   if (input.type === "textarea") {
                     return (
                       <InputText
@@ -448,20 +435,6 @@ const Form = props => {
                           }}
                         />
                       </DivCustom>
-                    );
-                  }
-                  if (input.type === "disabled") {
-                    return (
-                      <InputText
-                        disabled
-                        key={index}
-                        value={input.name === "author" && values[input.name]}
-                        label={input.label}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        type="text"
-                        name={input.name}
-                      />
                     );
                   }
                   break;
