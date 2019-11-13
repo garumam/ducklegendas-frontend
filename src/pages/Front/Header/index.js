@@ -1,4 +1,4 @@
-import React, { createRef,useContext } from "react";
+import React, { useContext } from "react";
 import {Header,Nav,Logo,Mobile,CHK,NavLinks} from "../Header/styles";
 import {Container} from "components/Grid";
 //Dropdown,DropdownMenu,InputDropdownMenu
@@ -8,14 +8,8 @@ import { ROUTES } from 'utils/RoutePaths';
 
 export default (props) => {
   const [user] = useContext(AuthContext);
-  let mobileInput = createRef();
   const name =  user.name !== undefined ? user.name : 'Painel';
   const link = name === 'Painel' ? ROUTES.LOGIN : ROUTES.DASHBOARD.HOME
-  
-  const navSlide = () => {
-    const mobile = mobileInput.current;
-    mobile.classList.toggle("toggle");
-  }
   return (
     <Header>
       <Container>
@@ -26,9 +20,10 @@ export default (props) => {
               {props.title}
             </Link>
           </Logo>
-
           <CHK type="checkbox" id="chk" />
-
+          <Mobile htmlFor="chk">
+            <div />
+          </Mobile>
           <NavLinks>
             <li>
               <NavLink activeClassName="is-active" exact to={ROUTES.HOME} alt="Home">
@@ -85,12 +80,7 @@ export default (props) => {
               </Dropdown>
             </li> */}
           </NavLinks>
-
-          <Mobile ref={mobileInput} onClick={navSlide} htmlFor="chk">
-            <label htmlFor="chk" className="line1" />
-            <label htmlFor="chk" className="line2" />
-            <label htmlFor="chk" className="line3" />
-          </Mobile>
+         
         </Nav>
       </Container>
     </Header>

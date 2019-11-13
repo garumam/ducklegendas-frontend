@@ -58,7 +58,6 @@ export const NavLinks = styled.ul `
     display: flex;
     justify-content: space-around;
     margin: 0;
-    z-index: 999;
     a{
         ${sharedStyleA}
     }
@@ -159,42 +158,65 @@ export const InputDropdownMenu = styled.input`
     }
 `;
 
-export const Mobile = styled.label `
-    width: 40px;
-    height: 40px;
+export const Mobile = styled.div`
+    position: absolute;
     display: none;
     cursor: pointer;
-    margin-bottom: 0;
-    label {
-        width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    z-index:1;
+    width: 40px;
+    height: 40px;
+    right: 40px;
+
+    div {
+        position: relative;
+        width: 100%;
         height: 2px;
-        margin: 3px;
         background-color: white;
-        transition: 0.4s;
         cursor: pointer;
         display: none;
+        transition: all 0.4s ease;
     }
-     @media screen and (max-width:992px) {
-         display: flex;
-         flex-direction: column;
-         justify-content: center;
-         position: absolute;
-         right: 40px;
-         z-index: 999999;
-         label {
+    div:before , div:after{
+        content: '';
+        position: absolute;
+        z-index:1;
+        top: -10px;
+        width:100%;
+        height:2px;
+        background:inherit;
+    }
+    div:after{
+        top: 10px; 
+    }
+    @media screen and (max-width:992px) {
+        div {
            display: block;
         }
-     }
+    }
      
 `;
 
-export const CHK = styled.input `
+export const CHK = styled.input`
     position: absolute;
-    visibility: hidden;
-    z-index: -1111;
+    opacity:0;
+    height:40px;
+    width:40px;
+    right:40px;
+    z-index: 2;
     @media screen and (max-width:992px) {
         &:checked~${NavLinks} {
-             right: 0;
+            right: 0;
+        }
+        &:checked + ${Mobile} > div{
+            transform: rotate(135deg);
+        }
+        &:checked + ${Mobile} > div:before , &:checked + ${Mobile} > div:after{
+            top: 0;
+            transform: rotate(90deg);
         }
      }
+     
 `;
