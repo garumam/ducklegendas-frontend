@@ -91,6 +91,13 @@ export default props => {
               {post.year}
               <br />
               Downloads: {post.downloaded} <br />
+              </p>
+              {post.note &&
+              <NoteContainer>
+                <p>Observações:</p>
+                <p>{post.note}</p>
+              </NoteContainer>
+            }
               {/* Supernatural.S13E09.720p.HDTV.x264-AVS
               <br />
               Supernatural.S13E09.1080p.HDTV.x264-CRAVERS
@@ -99,7 +106,7 @@ export default props => {
               <br />
               Supernatural.S13E09.iNTERNAL.720p.WEB.x264-BAMBOOZLE
               <br /> */}
-            </p>
+           
             <a
               style={{ width: "100%" }}
               href={post.url}
@@ -109,12 +116,7 @@ export default props => {
             >
               <InputPersonalizado type="submit" value="Download" />
             </a>
-            {post.note &&
-              <NoteContainer>
-                <h3>Observações</h3>
-                <p>{post.note}</p>
-              </NoteContainer>
-            }
+            
           </article>
         </SinglePostInfo>
         <CommentContainer>
