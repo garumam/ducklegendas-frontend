@@ -432,7 +432,8 @@ const List = props => {
       <ListMobile 
         entities={entities} 
         tableParams={tableParams} 
-        {...props} 
+        {...props}
+        history={history} 
         setOpenModal={setOpenModal}
         baseUri={baseUri}
       />

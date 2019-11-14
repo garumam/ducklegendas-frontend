@@ -12,7 +12,7 @@ import '@material/list/dist/mdc.list.css';
 import '@rmwc/list/collapsible-list.css';
 
 function ListMobile (props) {
-    const { entities, tableParams, setOpenModal, baseUri } = props;
+    const { entities, tableParams, setOpenModal, baseUri, history } = props;
     return(
         <List style={{height: "calc(100% - 250px)", overflowY: 'scroll' }}>
         {entities.dataPaginada &&
@@ -37,7 +37,7 @@ function ListMobile (props) {
                 icon="create"
                 type="button"
                 onClick={() => {
-                  props.history.replace({
+                  history.replace({
                     pathname: `${tableParams.formPath}/${item.id}`,
                     state: {
                       item: item,
