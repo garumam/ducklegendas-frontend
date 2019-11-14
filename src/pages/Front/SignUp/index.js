@@ -1,9 +1,10 @@
 import React, { useState, useReducer } from "react";
+import { Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import { Container, Error, FormContainer } from "components/Generic";
 import { ROUTES } from "utils/RoutePaths";
 import HeadHelmet from "services/HeadHelmet";
-import {postRequest} from "services/api"
+import {postRequest} from "services/api";
 
 const SignUp = props => {
   const [errors, setErrors] = useState(null);
@@ -18,20 +19,16 @@ const SignUp = props => {
 
   async function signUp(e) {
     e.preventDefault();
-    const res = await postRequest("/register", {
+    const res = await postRequest("user/register", {
       name: input.name,
       email: input.email,
       password: input.password
     });
 
-    if (res.success) {
-      console.log("RESPOSTA LOGAR: ", res.success);
-      // encryptLogin(res.success);
-      // setUser(res.success.user);
-      // history.push(ROUTES.DASHBOARD.HOME);
-    } else if (res.error) {
+    if (res.success) 
+      setErrors(res.success);
+     else if (res.error) 
       setErrors(res.error);
-    }
   }
 
   function handleInputChange(e) {
@@ -86,6 +83,7 @@ const SignUp = props => {
               Object.keys(errors).map(key => (
                 <span key={key}>{errors[key]}</span>
               ))}
+            <Link to="/painel">Acessar Painel</Link>
           </Error>
         </form>
       </FormContainer>
