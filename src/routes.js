@@ -31,7 +31,6 @@ import Authorization,{
 import { ROUTES } from 'utils/RoutePaths';
 import Analytics from 'react-router-ga';
 import { HelmetProvider } from 'react-helmet-async';
-import HeadHelmet from "services/HeadHelmet";
 import SignUp from "pages/Front/SignUp";
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
@@ -82,7 +81,6 @@ export default () => (
     <Analytics id="UA-151424625-1">
     <ScrollToTop>
       <HelmetProvider>
-        <HeadHelmet useDefault />
         <SizeProvider>
         <AuthProvider>
           <Switch>
