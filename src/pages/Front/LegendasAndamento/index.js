@@ -32,7 +32,10 @@ export const LegendasAndamento = props => {
           return (
             <Top key={value}>
               <GrupoLegendas>
-                <p>{item.name}</p>
+                <div style={{display:'flex',justifyContent:'space-between'}}>
+                  <p>{item.name}</p> <span style={{color:'#9fa9ba'}}>Autor: {item.author.name}</span>
+                </div>
+                
                 <div className="descricao-legendas">
                   <span>{"Atualizado em: " + formatDate(item.updated_at)}</span>
                   <span>{item.percent} %</span>
