@@ -13,7 +13,7 @@ import { Fab } from "@rmwc/fab";
 import { Avatar } from "@rmwc/avatar";
 import { Ripple } from "@rmwc/ripple";
 import { TopAppBarTitle } from "@rmwc/top-app-bar";
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { baseUrl, getRequest } from 'services/api';
 import logo from "assets/img/duck-128.png";
 import userImg from "assets/img/man.png";
@@ -25,7 +25,7 @@ import '@material/fab/dist/mdc.fab.css';
 import { ROUTES } from 'utils/RoutePaths';
 
 const Dashboard = props => {
-  const {history} = props;
+  const history = useHistory();
   const [user, setUser] = useContext(AuthContext);
   const [windowWidth] = useContext(SizeContext);
   const [open, setOpen] = useState(window.innerWidth > 1150);
@@ -173,7 +173,7 @@ const Dashboard = props => {
           </>
           }
           endContent={
-            <Ripple onClick={()=> props.history.push({
+            <Ripple onClick={()=> history.push({
                 pathname: `${ROUTES.DASHBOARD.USER.FORM}/${user.id}`,
                 state: { item: user , islogin : true }
               })}>
@@ -209,4 +209,4 @@ const Dashboard = props => {
   );
 };
 
-export default withRouter(Dashboard);
+export default Dashboard;

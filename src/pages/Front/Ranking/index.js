@@ -7,7 +7,7 @@ import { Ranking, UsersContainer, Top, GrupoLegendas, More } from "./styles";
 export default props => {
   const [entities, setEntities] = useState([]);
   const location = useLocation().pathname.replace("/", "");
-  let history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     async function getItens() {

@@ -12,7 +12,7 @@ import {
   SimpleDialog
 } from "rmwc";
 import ReactPaginate from "react-paginate";
-import { withRouter } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import "./styles.css";
 import { FormHeader, SwitchCustom, InputSearch, LoadingContainer } from "./styles";
 import { HeaderCard} from "../Form/styles";
@@ -28,6 +28,9 @@ import Gallery from 'components/Gallery';
 import '@material/button/dist/mdc.button.css';
 
 const List = props => {
+  const history = useHistory();
+  const location = useLocation();
+
   const [windowWidth] = useContext(SizeContext);
   const [openModal, setOpenModal] = useState({ open: false });
   const [entities, setEntities] = useReducer(
@@ -50,7 +53,7 @@ const List = props => {
     headNames: [],
     formPath: ""
   };
-  let baseUri = getBackendUriBase(props.history.location.pathname);
+  let baseUri = getBackendUriBase(history.location.pathname);
 
   switch (props.table) {
     case 1: //usuários
@@ -129,12 +132,12 @@ const List = props => {
     if(props.isgallery){
       getItens();
     }else{
-      if (props.location.state) {
-        if (props.location.state.anyChange || !props.location.state.entities) {
+      if (location.state) {
+        if (location.state.anyChange || !location.state.entities) {
           getItens();
         } else {
-          setEntities({ ...props.location.state.entities });
-          props.location.state = undefined;
+          setEntities({ ...location.state.entities });
+          location.state = undefined;
         }
       } else {
         getItens();
@@ -214,7 +217,7 @@ const List = props => {
       });
 
       if(baseUri === 'progress'){
-        props.history.push(ROUTES.DASHBOARD.SUBTITLE.FORM);
+        history.push(ROUTES.DASHBOARD.SUBTITLE.FORM);
       }
 
     } else {
@@ -266,7 +269,7 @@ const List = props => {
               icon="add"
               type="button"
               onClick={() => {
-                props.history.push({
+                history.push({
                   pathname: tableParams.formPath,
                   state: { entities: entities }
                 });
@@ -375,7 +378,7 @@ const List = props => {
                         icon="create"
                         type="button"
                         onClick={() => {
-                          props.history.replace({
+                          history.replace({
                             pathname: `${tableParams.formPath}/${item.id}`,
                             state: {
                               item: item,
@@ -459,4 +462,4 @@ const List = props => {
   );
 };
 
-export default withRouter(List);
+export default List;

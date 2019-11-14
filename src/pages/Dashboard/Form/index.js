@@ -11,7 +11,7 @@ import {
   GalleryContainer,
   InputCheckbox
 } from "./styles";
-import { withRouter } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { baseUrl, getRequest, postRequest } from "services/api";
 import image from "assets/img/man.png";
 import image_serie from "assets/img/sem_capa.jpg";
@@ -23,9 +23,11 @@ import { ROUTES } from 'utils/RoutePaths';
 import List from 'pages/Dashboard/List';
 
 const Form = props => {
-  
-  const categories = props.location.state && props.location.state.entities 
-                            && prepareCategories(props.location.state.entities.categories);
+  const history = useHistory();
+  const location = useLocation();
+  const routeParams = useParams();
+  const categories = location.state && location.state.entities 
+                            && prepareCategories(location.state.entities.categories);
 
   const [openModal, setOpenModal] = useState({ 
     open: false, 
@@ -47,7 +49,7 @@ const Form = props => {
   ); 
   
   const validationSchema = [],
-    dataPassed = props.location.state ? props.location.state.item : null;
+    dataPassed = location.state ? location.state.item : null;
   
   const [checked, setChecked] = React.useState(dataPassed? 
                                                   (dataPassed.type === 'SERIE'
@@ -57,7 +59,7 @@ const Form = props => {
   );
   let params = {};  
 
-  const baseUri = getBackendUriBase(props.history.location.pathname);
+  const baseUri = getBackendUriBase(history.location.pathname);
   const checkUser = user.user_type === 'user' ? 'disabled' : false;
   switch (props.form) {
     case 1: //usuários
@@ -90,7 +92,7 @@ const Form = props => {
   useEffect(() => {
     let isMount = true;
     async function getItem() {
-      const res = await getRequest(`/${baseUri}/${props.match.params.id}`);
+      const res = await getRequest(`/${baseUri}/${routeParams.id}`);
       // console.log(res.success);
       if(isMount){
         if (res.success || res.categories) {
@@ -110,7 +112,7 @@ const Form = props => {
         }
       }
     }
-    if ((props.match.params.id && dataPassed === null) || 
+    if ((routeParams.id && dataPassed === null) || 
       (baseUri === 'subtitles' && data.categories.length === 0)) {
         getItem();
     }
@@ -226,15 +228,15 @@ const Form = props => {
                 style={{ marginRight: "12px" }}
                 type="button"
                 onClick={() => {
-                  props.history.replace({
+                  history.replace({
                     pathname: `${ROUTES.DASHBOARD.HOME}/${baseUri}`,
                     state: {
                       anyChange:
-                        props.location.state && props.location.state.islogin
+                        location.state && location.state.islogin
                           ? true
                           : entities.anyChange,
                       entities:
-                        props.location.state && props.location.state.entities
+                        location.state && location.state.entities
                     }
                   });
                 }}
@@ -532,4 +534,4 @@ const Form = props => {
   );
 };
 
-export default withRouter(Form);
+export default Form;

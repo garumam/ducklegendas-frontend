@@ -3,14 +3,15 @@ import { Container,Error,FormContainer } from "components/Generic";
 import { Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import { postRequest, encryptLogin } from "services/api";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { AuthContext } from "utils/AuthContext";
 import { ROUTES } from "utils/RoutePaths";
 import HeadHelmet from "services/HeadHelmet";
 
 const Login = props => {
   const [, setUser] = useContext(AuthContext);
-  const { title, history } = props;
+  const { title } = props;
+  const history = useHistory();
   const [errors, setErrors] = useState(null);
   const [input, setInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -87,4 +88,4 @@ const Login = props => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

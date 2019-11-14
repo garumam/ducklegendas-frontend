@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from "react";
 import { Container,Error,FormContainer } from "components/Generic";
-import { withRouter, Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import {postRequest} from "services/api";
 import { ROUTES } from "utils/RoutePaths";
@@ -16,7 +16,7 @@ const ResetPassword = props => {
       password_confirmation: ""
     }
   );
-  const { token } = props.match.params;
+  const { token } = useParams();
 
   async function resetPassword(e) {
     setErrors(['Aguarde um momento...']);
@@ -98,4 +98,4 @@ const ResetPassword = props => {
   );
 };
 
-export default withRouter(ResetPassword);
+export default ResetPassword;
