@@ -3,6 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { getRequest } from "services/api";
 import { Eclipse } from "components/Generic";
 import { Ranking, UsersContainer, Top, GrupoLegendas, More } from "./styles";
+import HeadHelmet from "services/HeadHelmet";
 
 export default props => {
   const [entities, setEntities] = useState([]);
@@ -45,6 +46,13 @@ export default props => {
 
   return (
     <Ranking className="card card-shadow">
+      {location === "ranking" && 
+        <HeadHelmet 
+          title={props.title}
+          uri={'/ranking'}
+          description={"Ranking top 10 de usuários que contribuíram com suas legendas!"}
+        />
+      }
       <div className="header-card">
         <h2>{props.title}</h2>
         <Eclipse>{entities.length}</Eclipse>
