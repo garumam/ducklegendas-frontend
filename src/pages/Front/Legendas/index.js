@@ -57,7 +57,7 @@ const Legendas = (props) => {
   return(
     <>
     <HeadHelmet 
-      title={type?props.title:'Legendas de Series e Filmes'}
+      title={type?props.title:'Legendas de Séries e Filmes'}
       uri={location.pathname}
       description={type?`${props.title} - legendas`:null}
     />

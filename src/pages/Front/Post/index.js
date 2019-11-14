@@ -61,11 +61,13 @@ export default props => {
       <div className="card-border" />
 
       {post && post.name && (
+        <>
         <SinglePostInfo>
           <HeadHelmet 
             title={post.name}
             uri={pathname}
             description={`Legenda - ${post.name} ${post.episode?post.episode:post.year}`}
+            image={post.image}
           />
           <p>
             by{" "}
@@ -115,13 +117,14 @@ export default props => {
             }
           </article>
         </SinglePostInfo>
+        <CommentContainer>
+          <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
+          Comentários
+          </Disqus.CommentCount>               
+          <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+        </CommentContainer>
+        </>
       )}
-      <CommentContainer>
-        <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
-        Comentários
-        </Disqus.CommentCount>               
-        <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
-      </CommentContainer>
       
     </SinglePost>
   );

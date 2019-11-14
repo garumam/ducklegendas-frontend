@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from "react";
 import { Container,Error,FormContainer } from "components/Generic";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import {postRequest} from "services/api";
 import { ROUTES } from "utils/RoutePaths";
@@ -90,6 +90,7 @@ const ResetPassword = props => {
               Object.keys(errors).map(key => (
                 <span key={key}>{errors[key]}</span>
               ))}
+            <Link to="/painel">Acessar Painel</Link>
           </Error>
         </form>
       </FormContainer>
