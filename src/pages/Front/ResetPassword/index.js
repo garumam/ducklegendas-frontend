@@ -1,13 +1,12 @@
 import React, { useState, useReducer } from "react";
-import { Login, Error } from "./styles";
-import { Container } from "components/Generic";
+import { Container,Error,FormContainer } from "components/Generic";
 import { withRouter } from "react-router-dom";
 import { InputPersonalizado } from "../Contato";
 import {postRequest} from "services/api";
 import { ROUTES } from "utils/RoutePaths";
 import HeadHelmet from "services/HeadHelmet";
 
-const ResetarSenha = props => {
+const ResetPassword = props => {
   const [errors, setErrors] = useState(null);
   const [input, setInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -49,7 +48,7 @@ const ResetarSenha = props => {
         uri={ROUTES.RESETPASSWORD}
         description={`${props.title} - painel`}
       />
-      <Login className="card card-shadow">
+      <FormContainer className="card card-shadow">
         <div className="header-card">
             <h2>{props.title}</h2>
         </div>
@@ -93,9 +92,9 @@ const ResetarSenha = props => {
               ))}
           </Error>
         </form>
-      </Login>
+      </FormContainer>
     </Container>
   );
 };
 
-export default withRouter(ResetarSenha);
+export default withRouter(ResetPassword);

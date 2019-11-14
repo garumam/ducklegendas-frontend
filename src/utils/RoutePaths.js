@@ -19,6 +19,7 @@ export const ROUTES = {
     POST: '/post',
     LOGIN: '/painel',
     RESETPASSWORD: '/reset',
+    SIGNUP: '/register',
     DASHBOARD: {
         HOME: dashboard,
         USER: {

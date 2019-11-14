@@ -20,7 +20,7 @@ import Indice from "pages/Front/Indice";
 import Form from "pages/Dashboard/Form";
 import List from "pages/Dashboard/List";
 import Logo from "assets/img/duck-128.png";
-import ResetarSenha from "pages/Front/ResetarSenha";
+import ResetPassword from "pages/Front/ResetPassword";
 import TokenExpired from "services/TokenExpired";
 import { isAuthenticated } from "services/api";
 import { AuthProvider } from "utils/AuthContext";
@@ -32,6 +32,7 @@ import { ROUTES } from 'utils/RoutePaths';
 import Analytics from 'react-router-ga';
 import { HelmetProvider } from 'react-helmet-async';
 import HeadHelmet from "services/HeadHelmet";
+import SignUp from "pages/Front/SignUp";
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
@@ -127,6 +128,15 @@ export default () => (
               layout={App}
               component={() => <Post title="Single Post" />}
             />
+            <Route
+              path={ROUTES.SIGNUP}
+              render={() => (
+                <>
+                  <Header title="Legendas" logo={Logo} />
+                  <SignUp title="Criar conta" />
+                </>
+              )}
+            />
             <PrivateRouteLogin
               path={ROUTES.LOGIN}
               layout={props => (
@@ -141,7 +151,7 @@ export default () => (
               render={() => (
                 <>
                   <Header title="Legendas" logo={Logo} />
-                  <ResetarSenha title="Resetar senha" />
+                  <ResetPassword title="Resetar senha" />
                 </>
               )}
             />
