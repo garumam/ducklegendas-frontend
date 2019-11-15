@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { baseUrl } from "services/api";
-import { LoadingContainer } from "components/Generic";
+import { LoadingContainer,Alert} from "components/Generic";
 import { LegendasContainer, Ordenar, SelectBusca, Box, Post } from "./styles";
 import { Paginacao } from "pages/Front/Paginacao";
 import { formatDate } from "utils/Utils";
@@ -70,7 +70,9 @@ const LegendasBody = props => {
               <CircularProgress style={{ color: "#00B6FF" }} size="xlarge" />
             </LoadingContainer>
           ) : entities.dataPaginada.length === 0 ? (
-            <div style={{ color: "black" }}>Legenda não encontrada !!!</div>
+           <Alert type={"danger"} style={{width:'calc(100% - .9rem)',height:'45px'}}>
+            <p style={{ textAlign: "center" }}>Legenda não encontrada !!!</p>
+           </Alert>
           ) : (
             entities.dataPaginada.map((item, key) => {
               let data = formatDate(item.created_at).substring(0, 10);
