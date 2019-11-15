@@ -5,7 +5,6 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import ScrollToTop from "components/ScrollToTop";
 import App from "App";
 import Legendas from "pages/Front/Legendas";
 import LegendasIndice from "pages/Front/Indice/LegendasIndice";
@@ -80,7 +79,6 @@ const PrivateRouteLogin = ({ layout: Layout, ...rest }) => (
 export default () => (
   <Router>
     <Analytics id="UA-151424625-1">
-    <ScrollToTop>
       <HelmetProvider>
         <HeadHelmet useDefault />
         <SizeProvider>
@@ -256,7 +254,6 @@ export default () => (
         </AuthProvider>
         </SizeProvider>
       </HelmetProvider>
-    </ScrollToTop>
     </Analytics>
   </Router>
 );

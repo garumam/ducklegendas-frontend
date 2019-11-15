@@ -16,7 +16,6 @@
     "react-router-dom": "^5.1.2",
     "react-router-ga": "^1.2.2",
     "react-scripts": "^3.2.0",
-    "reflexbox": "^4.0.6",
     "rmwc": "^5.7.1",
     "styled-components": "^4.4.0",
     "yup": "^0.27.0"
