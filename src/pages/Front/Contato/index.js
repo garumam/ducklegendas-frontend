@@ -4,6 +4,7 @@ import { postRequest } from "services/api";
 import { Contato } from "./styles.js";
 import HeadHelmet from "services/HeadHelmet";
 import { ROUTES } from "utils/RoutePaths";
+import { Alert } from "components/Generic";
 
 export const InputPersonalizado = props => (
   <>
@@ -50,7 +51,7 @@ export default props => {
   };
   return (
     <Contato className="card card-shadow">
-      <HeadHelmet 
+      <HeadHelmet
         title={props.title}
         uri={ROUTES.CONTATO}
         description={`ducklegendas - ${props.title}`}
@@ -60,14 +61,13 @@ export default props => {
       </div>
 
       <div className="card-border" />
-      {message && (
-        <div className="col-12">
-          <div style={{ textAlign: "center", padding: "1rem 0" }}>
-            <p style={{ color: "red" }}>{message}</p>
-          </div>
-        </div>
-      )}
+
       <form onSubmit={submit} className="formulario">
+        {message && (
+          <Alert type={"danger"}>
+            <p style={{ textAlign: "center" }}>{message}</p>
+          </Alert>
+        )}
         <InputPersonalizado
           refs={inputNome}
           title="Nome"
