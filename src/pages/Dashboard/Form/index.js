@@ -456,7 +456,7 @@ const Form = props => {
                             values[input.name] instanceof File
                               ? URL.createObjectURL(values[input.name])
                               : values[input.name]
-                              ? baseUrl+ values[input.name]
+                              ? `${baseUrl}${values[input.name]}?${dataPassed && dataPassed.updated_at}`
                               : image_serie
                           }
                           onError={(e) => e.target.src = image_serie}
