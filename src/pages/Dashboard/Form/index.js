@@ -17,50 +17,53 @@ import image from "assets/img/man.png";
 import image_serie from "assets/img/sem_capa.jpg";
 import * as YupValidation from "services/YupValidation";
 import { AuthContext } from "utils/AuthContext";
-import { getBackendUriBase, setInputsParams, prepareCategories } from "utils/Utils";
+import {
+  getBackendUriBase,
+  setInputsParams,
+  prepareCategories
+} from "utils/Utils";
 import { Inputs } from "utils/Inputs";
-import { ROUTES } from 'utils/RoutePaths';
-import List from 'pages/Dashboard/List';
+import { ROUTES } from "utils/RoutePaths";
+import List from "pages/Dashboard/List";
 
 const Form = props => {
   const history = useHistory();
   const location = useLocation();
   const routeParams = useParams();
-  const categories = location.state && location.state.entities 
-                            && prepareCategories(location.state.entities.categories);
+  const categories =
+    location.state &&
+    location.state.entities &&
+    prepareCategories(location.state.entities.categories);
 
-  const [openModal, setOpenModal] = useState({ 
-    open: false, 
-    setFieldValue: () => {}, 
-    inputName: '' 
+  const [openModal, setOpenModal] = useState({
+    open: false,
+    setFieldValue: () => {},
+    inputName: ""
   });
   const [user, setUser] = useContext(AuthContext);
   const [data, setData] = useState({
     values: null,
     categories: categories || []
   });
-  
+
   const [entities, setEntities] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       errorsReponse: null,
       anyChange: false
     }
-  ); 
-  
+  );
+
   const validationSchema = [],
     dataPassed = location.state ? location.state.item : null;
-  
-  const [checked, setChecked] = React.useState(dataPassed? 
-                                                  (dataPassed.type === 'SERIE'
-                                                  ? true
-                                                  : false)
-                                                  : false
+
+  const [checked, setChecked] = React.useState(
+    dataPassed ? (dataPassed.type === "SERIE" ? true : false) : false
   );
-  let params = {};  
+  let params = {};
 
   const baseUri = getBackendUriBase(history.location.pathname);
-  const checkUser = user.user_type === 'user' ? 'disabled' : false;
+  const checkUser = user.user_type === "user" ? "disabled" : false;
   switch (props.form) {
     case 1: //usuários
       params = Inputs.user;
@@ -93,18 +96,15 @@ const Form = props => {
     let isMount = true;
     async function getItem() {
       const res = await getRequest(`/${baseUri}/${routeParams.id}`);
-       console.log(res.success);
-      if(isMount){
+      console.log(res.success);
+      if (isMount) {
         if (res.success || res.categories) {
-          
-          if(res.success && res.success.type === 'SERIE')
-            setChecked(true);
-  
+          if (res.success && res.success.type === "SERIE") setChecked(true);
+
           setData({
             values: res.success,
             categories: prepareCategories(res.categories)
           });
-          
         } else {
           setEntities({
             errorsReponse: res.error
@@ -112,57 +112,58 @@ const Form = props => {
         }
       }
     }
-    if ((routeParams.id && dataPassed === null) || 
-      (baseUri === 'subtitles' && data.categories.length === 0)) {
-        getItem();
+    if (
+      (routeParams.id && dataPassed === null) ||
+      (baseUri === "subtitles" && data.categories.length === 0)
+    ) {
+      getItem();
     }
-    return () => isMount = false
+    return () => (isMount = false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log("categorias",categories)
+  console.log("categorias", categories);
   //inicio dos inputs
   const [inputParams, initialValues] = setInputsParams(
-    params.labels, 
-    params.types, 
-    params.names, 
-    dataPassed || data.values 
+    params.labels,
+    params.types,
+    params.names,
+    dataPassed || data.values
   );
-  
+
   // fim dos inputs
 
-  const store = async (values) => {
-    console.log("valores values: ",values);
+  const store = async values => {
+    console.log("valores values: ", values);
 
     let uri = `/${baseUri}/store`;
     let updateContext = false;
     const formData = new FormData();
     Object.keys(values).map(key => {
-      if(baseUri === 'gallery' && key === 'image' && checked){
-        for(let i = 0; i < values[key].length; i++){
+      if (baseUri === "gallery" && key === "image" && checked) {
+        for (let i = 0; i < values[key].length; i++) {
           formData.append(`image[${i}]`, values[key][i]);
         }
-      }else{
+      } else {
         formData.append(key, values[key]);
       }
-      return '';
+      return "";
     });
 
-    if(baseUri === 'gallery'){
-      formData.append('multiplefiles', checked?true:'');
+    if (baseUri === "gallery") {
+      formData.append("multiplefiles", checked ? true : "");
     }
 
     if (data.values || dataPassed) {
       const itemId = data.values ? data.values.id : dataPassed.id;
       uri = `/${baseUri}/${itemId}`;
       formData.append("_method", "PATCH");
-      if(baseUri === 'users')
-        updateContext = itemId === user.id;
+      if (baseUri === "users") updateContext = itemId === user.id;
     }
 
     const res = await postRequest(uri, formData, {
       headers: { "Content-Type": "multipart/form-data" }
     });
-    
+
     if (res.success) {
       setEntities({
         anyChange: true,
@@ -183,7 +184,6 @@ const Form = props => {
           updated_at: new Date().getTime().toString()
         });
       }
-
     } else {
       setEntities({
         errorsReponse: res.error
@@ -192,12 +192,12 @@ const Form = props => {
   };
 
   const galleryModal = (setFieldValue, inputName) => {
-    setOpenModal({ 
+    setOpenModal({
       open: true,
       setFieldValue: setFieldValue,
-      inputName: inputName 
-    })
-  } 
+      inputName: inputName
+    });
+  };
 
   return (
     <Formik
@@ -216,24 +216,28 @@ const Form = props => {
       }) => (
         <>
           <SimpleDialog
-            style={{ zIndex: '999',position:'fixed' }}
+            style={{ zIndex: "999", position: "fixed" }}
             title="Selecione uma imagem"
             acceptLabel={null}
             cancelLabel="fechar"
             open={openModal.open}
             onClose={evt => {
-                setOpenModal({ open: false });
+              setOpenModal({ open: false });
             }}
           >
-            <List 
+            <List
               isgallery="true"
-              setFieldValue={openModal.setFieldValue} 
+              setFieldValue={openModal.setFieldValue}
               inputName={openModal.inputName}
             />
           </SimpleDialog>
 
           <HeaderCard>
-            <h2>{props.title === "Legendas em andamento"? "Em andamento": props.title}</h2>
+            <h2>
+              {props.title === "Legendas em andamento"
+                ? "Em andamento"
+                : props.title}
+            </h2>
             <div>
               <Fab
                 icon="keyboard_arrow_left"
@@ -247,8 +251,7 @@ const Form = props => {
                         location.state && location.state.islogin
                           ? true
                           : entities.anyChange,
-                      entities:
-                        location.state && location.state.entities
+                      entities: location.state && location.state.entities
                     }
                   });
                 }}
@@ -258,7 +261,6 @@ const Form = props => {
           </HeaderCard>
           <div className="card-border" />
           <CustomForm onSubmit={handleSubmit} className="formulario">
-
             {(Object.keys(errors).length !== 0 || entities.errorsReponse) && (
               <Error>
                 {entities.errorsReponse &&
@@ -304,10 +306,12 @@ const Form = props => {
                             values[input.name] instanceof File
                               ? URL.createObjectURL(values[input.name])
                               : values[input.name]
-                              ? baseUrl+values[input.name]+`?${new Date().getTime()}`
+                              ? baseUrl +
+                                values[input.name] +
+                                `?${new Date().getTime()}`
                               : image
                           }
-                          onError={(e) => e.target.src = image}
+                          onError={e => (e.target.src = image)}
                           alt=""
                         />
                         <input
@@ -330,13 +334,20 @@ const Form = props => {
                     return (
                       <SelectCustom
                         disabled={checkUser}
-                        options={input.name === 'category' ? data.categories : ['PENDENTE','APROVADA']}
+                        options={
+                          input.name === "category"
+                            ? data.categories
+                            : ["PENDENTE", "APROVADA"]
+                        }
                         key={index}
                         label={input.label}
                         name={input.name}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values[input.name] || (input.name !== 'category' ? "PENDENTE" : "")}
+                        value={
+                          values[input.name] ||
+                          (input.name !== "category" ? "PENDENTE" : "")
+                        }
                       />
                     );
                   }
@@ -346,23 +357,25 @@ const Form = props => {
                         key={index}
                         style={{ width: "100%", paddingBottom: "1rem" }}
                       >
-                        <label style={{ width: "100%" ,fontSize: ".9rem" }}>
+                        <label style={{ width: "100%", fontSize: ".9rem" }}>
                           Imagem da Legenda
                         </label>
                         <GalleryContainer>
                           <img
                             src={
                               values[input.name]
-                                ? baseUrl+ values[input.name]
+                                ? baseUrl + values[input.name]
                                 : image_serie
                             }
-                            onError={(e) => e.target.src = image_serie}
+                            onError={e => (e.target.src = image_serie)}
                             alt=""
                           />
-                          <Fab 
-                            type="button" 
-                            icon="add" 
-                            onClick={() => galleryModal(setFieldValue, input.name)} 
+                          <Fab
+                            type="button"
+                            icon="add"
+                            onClick={() =>
+                              galleryModal(setFieldValue, input.name)
+                            }
                           />
                         </GalleryContainer>
                         <input
@@ -383,36 +396,32 @@ const Form = props => {
                         label="Marque se for uma série."
                         checked={checked}
                         name={input.name}
-                        onChange={(e) => {
+                        onChange={e => {
                           let newChecked = !checked;
-                          setFieldValue(input.name,newChecked?'SERIE':'');
-                          setChecked(newChecked)
+                          setFieldValue(input.name, newChecked ? "SERIE" : "");
+                          setChecked(newChecked);
                         }}
                       />
                     );
                   }
                   if (input.name === "episode") {
-                    if(checked){
-                      return (
-                        <InputText
-                          key={index}
-                          label={input.label}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          type={input.type}
-                          name={input.name}
-                          value={values[input.name]}
-                        />
-                      );
-                    }else{
-                      return null;
-                    }
+                    return checked ? (
+                      <InputText
+                        key={index}
+                        label={input.label}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        type={input.type}
+                        name={input.name}
+                        value={values[input.name]}
+                      />
+                    ) : null;
                   }
 
                   if (input.type === "textarea") {
                     return (
                       <InputText
-                        style={{width: '100%'}}
+                        style={{ width: "100%" }}
                         textarea
                         outlined
                         characterCount
@@ -440,33 +449,36 @@ const Form = props => {
                         key={index}
                         style={{ width: "100%", paddingBottom: "1rem" }}
                       >
-                      {routeParams.id === undefined && user.user_type === 'admin' &&
-                        <InputCheckbox
-                          label="Marque para enviar várias imagens!"
-                          checked={checked}
-                          onChange={(e) => {
-                            let newChecked = !checked;
-                            setChecked(newChecked)
-                          }}
-                        />
-                      }
-                        {!checked && 
-                        <img
-                          style={{
-                            width: "150px",
-                            padding: "1rem 1rem 1rem 0"
-                          }}
-                          src={
-                            values[input.name] instanceof File
-                              ? URL.createObjectURL(values[input.name])
-                              : values[input.name]
-                              ? `${baseUrl}${values[input.name]}?${dataPassed && dataPassed.updated_at}`
-                              : image_serie
-                          }
-                          onError={(e) => e.target.src = image_serie}
-                          alt=""
-                        />
-                        }
+                        {routeParams.id === undefined &&
+                          user.user_type === "admin" && (
+                            <InputCheckbox
+                              label="Marque para enviar várias imagens!"
+                              checked={checked}
+                              onChange={e => {
+                                let newChecked = !checked;
+                                setChecked(newChecked);
+                              }}
+                            />
+                          )}
+                        {!checked && (
+                          <img
+                            style={{
+                              width: "150px",
+                              padding: "1rem 1rem 1rem 0"
+                            }}
+                            src={
+                              values[input.name] instanceof File
+                                ? URL.createObjectURL(values[input.name])
+                                : values[input.name]
+                                ? `${baseUrl}${
+                                    values[input.name]
+                                  }?${dataPassed && dataPassed.updated_at}`
+                                : image_serie
+                            }
+                            onError={e => (e.target.src = image_serie)}
+                            alt=""
+                          />
+                        )}
                         <input
                           id="file"
                           multiple={checked}
@@ -475,19 +487,20 @@ const Form = props => {
                           onChange={event => {
                             setFieldValue(
                               input.name,
-                              checked? event.currentTarget.files 
-                                     : event.currentTarget.files[0]
+                              checked
+                                ? event.currentTarget.files
+                                : event.currentTarget.files[0]
                             );
                           }}
                         />
                       </DivCustom>
                     );
                   }
-                  
-                  if(input.type === "text"){
+
+                  if (input.type === "text") {
                     return (
                       <InputText
-                        style={checked?{display: 'none'}:null}
+                        style={checked ? { display: "none" } : null}
                         key={index}
                         label={input.label}
                         onChange={handleChange}
@@ -503,13 +516,20 @@ const Form = props => {
                   if (input.type === "select") {
                     return (
                       <SelectCustom
-                        options={input.name === 'status' ? ["ON", "OFF"] : ['primary','success', 'danger','warning']}
+                        options={
+                          input.name === "status"
+                            ? ["ON", "OFF"]
+                            : ["primary", "success", "danger", "warning"]
+                        }
                         key={index}
                         label={input.label}
                         name={input.name}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values[input.name] || (input.name === 'status' ? 'OFF' : 'warning')}
+                        value={
+                          values[input.name] ||
+                          (input.name === "status" ? "OFF" : "warning")
+                        }
                       />
                     );
                   }
