@@ -13,6 +13,7 @@ const LegendasBody = props => {
       page: page
     });
   };
+  const currentDate = formatDate(new Date());
 
   return (
     <>
@@ -88,7 +89,7 @@ const LegendasBody = props => {
                       <img
                         src={
                           item.image
-                            ? `${baseUrl}${item.image}?${item.updated_at}`
+                            ? `${baseUrl}${item.image}?${currentDate}`
                             : "https://via.placeholder.com/160x240"
                         }
                         className="img-fluid"

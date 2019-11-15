@@ -51,7 +51,9 @@ export default props => {
   if (typeof window !== 'undefined') {
     disqusConfig.url = window.location.href;
   }
-  
+
+  const currentDate = formatDate(new Date());
+
   return (
     <SinglePost className="card card-shadow">
       <div className="header-card">
@@ -78,7 +80,7 @@ export default props => {
             <img
               src={
                 post.image
-                  ? `${baseUrl}${post.image}?${post.updated_at}`
+                  ? `${baseUrl}${post.image}?${currentDate}`
                   : "https://via.placeholder.com/160x240"
               }
               className="img-fluid"
