@@ -327,7 +327,6 @@ const Form = props => {
                   break;
                 case 2: //legendas
                   if (input.type === "select") {
-                    console.log('VALUE: ',values[input.name]);
                     return (
                       <SelectCustom
                         disabled={checkUser}
@@ -337,7 +336,7 @@ const Form = props => {
                         name={input.name}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={input.name !== 'category'? values[input.name] || "PENDENTE" : values[input.name]}
+                        value={values[input.name] || (input.name !== 'category' ? "PENDENTE" : "")}
                       />
                     );
                   }
@@ -406,7 +405,6 @@ const Form = props => {
                         />
                       );
                     }else{
-                      values[input.name] = '';
                       return null;
                     }
                   }
@@ -434,23 +432,6 @@ const Form = props => {
                 case 3: //categorias
                   break;
                 case 4: //legendas em andamento
-                  if (input.type === "file") {
-                    return (
-                      <DivCustom key={index} style={{ width: "49%" }}>
-                        <input
-                          id="file"
-                          name={input.name}
-                          type={input.type}
-                          onChange={event => {
-                            setFieldValue(
-                              input.name,
-                              event.currentTarget.files[0]
-                            );
-                          }}
-                        />
-                      </DivCustom>
-                    );
-                  }
                   break;
                 case 5: //gallery
                   if (input.type === "file") {
@@ -520,7 +501,6 @@ const Form = props => {
                   break;
                 case 6: //mensagens
                   if (input.type === "select") {
-                    values[input.name] = values[input.name] || (input.name === 'status' ? 'OFF' : 'warning');
                     return (
                       <SelectCustom
                         options={input.name === 'status' ? ["ON", "OFF"] : ['primary','success', 'danger','warning']}
@@ -529,7 +509,7 @@ const Form = props => {
                         name={input.name}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values[input.name]}
+                        value={values[input.name] || (input.name === 'status' ? 'OFF' : 'warning')}
                       />
                     );
                   }
