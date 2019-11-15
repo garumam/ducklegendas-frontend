@@ -52,7 +52,11 @@ export default props => {
     disqusConfig.url = window.location.href;
   }
 
-  const currentDate = formatDate(new Date());
+  const seconds = new Date();
+  const currentDate = formatDate(seconds)+':'
+                                         +seconds.getSeconds()
+                                         .toString()
+                                         .padStart(2, '0');
 
   return (
     <SinglePost className="card card-shadow">
