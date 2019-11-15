@@ -3,8 +3,18 @@ import * as Yup from 'yup';
 const imageValidation = (w, h) => {
     return Yup.mixed() //value.size em bytes 1000000 bytes = 1000 kb
     .test('fileType', "Formato de imagem não suportado", value => {
-        if(value instanceof File){
-            return ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type);
+        if(value instanceof FileList){
+            let can = true;
+            for (let i = 0; i < value.length; i++) {
+                can = ['image/jpg', 'image/jpeg', 'image/png'].includes(value[i].type);
+                if(!can)
+                    break;
+            }
+            return can;
+        }else{
+            if(value instanceof File){
+                return ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type);
+            }
         }
         return true;
     })
@@ -107,8 +117,7 @@ export const CategorySchema = Yup.object().shape({
 export const GallerySchema = Yup.object().shape({
     name: Yup.string()
         .min(1, 'Nome com no mínimo 1 caracteres!')
-        .max(50, 'Nome com no máximo 50 caracteres!!')
-        .required('Nome é obrigatório!'),
+        .max(50, 'Nome com no máximo 50 caracteres!!'),
     tags: Yup.string()
         .min(1, 'Palavras chave com no mínimo 1 caracteres!')
         .max(191, 'Palavras chave com no máximo 191 caracteres!!'),

@@ -93,7 +93,7 @@ const Form = props => {
     let isMount = true;
     async function getItem() {
       const res = await getRequest(`/${baseUri}/${routeParams.id}`);
-      // console.log(res.success);
+       console.log(res.success);
       if(isMount){
         if (res.success || res.categories) {
           
@@ -132,12 +132,24 @@ const Form = props => {
 
   const store = async (values) => {
     console.log("valores values: ",values);
+
     let uri = `/${baseUri}/store`;
     let updateContext = false;
     const formData = new FormData();
     Object.keys(values).map(key => {
-      return formData.append(key, values[key]);
+      if(baseUri === 'gallery' && key === 'image' && checked){
+        for(let i = 0; i < values[key].length; i++){
+          formData.append(`image[${i}]`, values[key][i]);
+        }
+      }else{
+        formData.append(key, values[key]);
+      }
+      return '';
     });
+
+    if(baseUri === 'gallery'){
+      formData.append('multiplefiles', checked?true:'');
+    }
 
     if (data.values || dataPassed) {
       const itemId = data.values ? data.values.id : dataPassed.id;
@@ -150,7 +162,7 @@ const Form = props => {
     const res = await postRequest(uri, formData, {
       headers: { "Content-Type": "multipart/form-data" }
     });
-    // console.log("res", res);
+    
     if (res.success) {
       setEntities({
         anyChange: true,
@@ -447,6 +459,17 @@ const Form = props => {
                         key={index}
                         style={{ width: "100%", paddingBottom: "1rem" }}
                       >
+                      {routeParams.id === undefined && user.user_type === 'admin' &&
+                        <InputCheckbox
+                          label="Marque para enviar várias imagens!"
+                          checked={checked}
+                          onChange={(e) => {
+                            let newChecked = !checked;
+                            setChecked(newChecked)
+                          }}
+                        />
+                      }
+                        {!checked && 
                         <img
                           style={{
                             width: "150px",
@@ -462,21 +485,38 @@ const Form = props => {
                           onError={(e) => e.target.src = image_serie}
                           alt=""
                         />
+                        }
                         <input
                           id="file"
+                          multiple={checked}
                           name={input.name}
                           type={input.type}
                           onChange={event => {
                             setFieldValue(
                               input.name,
-                              event.currentTarget.files[0]
+                              checked? event.currentTarget.files 
+                                     : event.currentTarget.files[0]
                             );
                           }}
                         />
                       </DivCustom>
                     );
                   }
-
+                  
+                  if(input.type === "text"){
+                    return (
+                      <InputText
+                        style={checked?{display: 'none'}:null}
+                        key={index}
+                        label={input.label}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        type={input.type}
+                        name={input.name}
+                        value={values[input.name]}
+                      />
+                    );
+                  }
                   break;
                 case 6: //mensagens
                   if (input.type === "select") {
