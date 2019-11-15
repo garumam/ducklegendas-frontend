@@ -32,6 +32,13 @@ export const Error = styled.div`
   }
 `;
 
+export const LoadingContainer = styled.div`
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const Eclipse = styled.div`
   display: flex;
   justify-content: center;
@@ -45,6 +52,7 @@ export const Eclipse = styled.div`
 `;
 
 export const Alert = styled.div`
+  width:100%;
   position: relative;
   padding: .75rem 1.25rem;
   margin-bottom: 1rem;

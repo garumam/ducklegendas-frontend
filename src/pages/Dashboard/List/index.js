@@ -14,7 +14,8 @@ import {
 import ReactPaginate from "react-paginate";
 import { useHistory, useLocation } from "react-router-dom";
 import "./styles.css";
-import { FormHeader, SwitchCustom, InputSearch, LoadingContainer } from "./styles";
+import { FormHeader, SwitchCustom, InputSearch } from "./styles";
+import {LoadingContainer} from "components/Generic"
 import { HeaderCard} from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";

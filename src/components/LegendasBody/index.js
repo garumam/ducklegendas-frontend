@@ -1,9 +1,11 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { baseUrl } from "services/api";
+import { LoadingContainer } from "components/Generic";
 import { LegendasContainer, Ordenar, SelectBusca, Box, Post } from "./styles";
 import { Paginacao } from "pages/Front/Paginacao";
 import { formatDate } from "utils/Utils";
+import { CircularProgress } from "@rmwc/circular-progress";
 
 const LegendasBody = props => {
   const { entities, setEntities } = props;
@@ -14,11 +16,14 @@ const LegendasBody = props => {
     });
   };
   const seconds = new Date();
-  const currentDate = formatDate(seconds)+':'
-                                         +seconds.getSeconds()
-                                         .toString()
-                                         .padStart(2, '0');
-  
+  const currentDate =
+    formatDate(seconds) +
+    ":" +
+    seconds
+      .getSeconds()
+      .toString()
+      .padStart(2, "0");
+
   return (
     <>
       <LegendasContainer className="card card-shadow">
@@ -54,7 +59,16 @@ const LegendasBody = props => {
         <div className="card-border" />
         <Box>
           {entities.loading ? (
-            <div style={{ color: "black" }}>LOADING...</div>
+            <LoadingContainer
+              style={{
+                width: "100%",
+                margin: "1rem",
+                display: "flex",
+                justifyContent: "center"
+              }}
+            >
+              <CircularProgress style={{ color: "#00B6FF" }} size="xlarge" />
+            </LoadingContainer>
           ) : entities.dataPaginada.length === 0 ? (
             <div style={{ color: "black" }}>Legenda não encontrada !!!</div>
           ) : (
