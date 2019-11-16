@@ -18,7 +18,8 @@ const LegendasIndice = () => {
       loading: true,
       search: "", // PESQUISA
       order: "todas", // ORDENAR
-      lastPage: 1 // ÚLTIMA PÁGINA PARA BLOQUEAR BOTÃO PRÓXIMO
+      lastPage: 1, // ÚLTIMA PÁGINA PARA BLOQUEAR BOTÃO PRÓXIMO
+      trigSearch: false // ACIONADOR DE PESQUISA
     }
   );
   useEffect(() => {
@@ -40,7 +41,7 @@ const LegendasIndice = () => {
     
     return () => isSubscribed = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[entities.page, entities.search, entities.order]);
+  },[entities.page, entities.trigSearch, entities.order]);
 
   return(
     !hasCategory ?

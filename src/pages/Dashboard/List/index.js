@@ -20,6 +20,7 @@ import { HeaderCard} from "../Form/styles";
 import "@rmwc/data-table/data-table.css";
 import "@rmwc/circular-progress/circular-progress.css";
 import { baseUrl, getRequest, postRequest } from "services/api";
+import { searchTimeout } from "services/searchTimeout";
 import { Paginator, getBackendUriBase } from "utils/Utils";
 import { ROUTES } from "utils/RoutePaths";
 import image_serie from "assets/img/sem_capa.jpg";
@@ -48,6 +49,9 @@ const List = props => {
       checked: false // PESQUISA EM TEMPO REAL OU NÃO
     }
   );
+
+  var typingTimer; //timer identifier
+  var doneTypingInterval = 1000; //time in ms, 1 second for example
 
   const tableParams = {
     headCells: [],
@@ -307,15 +311,20 @@ const List = props => {
               }
             }}
             onKeyUp={e => {
-              if (e.keyCode === 13)
+              if (e.keyCode === 13){
                 //ENTER
                 onSearch();
+              }else{
+                if(entities.checked){
+                  searchTimeout(onSearch, typingTimer, doneTypingInterval);
+                }
+              }
             }}
             value={entities.search}
             label="Pesquisar..."
             onChange={e => {
               setEntities({ search: e.target.value });
-              entities.checked && onSearch();
+              //entities.checked && onSearch();
             }}
           />
           
@@ -417,7 +426,8 @@ const List = props => {
                           setOpenModal({
                             open: true,
                             id: item.id,
-                            msg: `Id: ${item.id}  ${item.name?'Nome: '+item.name:'Mensagem: '+item.message}`,
+                            msg: `Id: ${item.id}  ${item.name?'Nome: '+item.name:'Mensagem: '+item.message}
+                                       ${item.subtitles_count?` | Legendas tbm serão apagadas, total: ${item.subtitles_count}`:''}`,
                             action: 'excluir'
                           })
                         }

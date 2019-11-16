@@ -6,6 +6,7 @@ import { LegendasContainer, Ordenar, SelectBusca, Box, Post } from "./styles";
 import { Paginacao } from "pages/Front/Paginacao";
 import { formatDate } from "utils/Utils";
 import { CircularProgress } from "@rmwc/circular-progress";
+import { searchTimeout } from "services/searchTimeout";
 
 const LegendasBody = props => {
   const { entities, setEntities } = props;
@@ -16,7 +17,14 @@ const LegendasBody = props => {
     });
   };
 
+  var typingTimer; //timer identifier
+  var doneTypingInterval = 1000; //time in ms, 1 second for example
+
   const currentDate = formatDate(Date());
+
+  const onSearch = e => {
+    setEntities({ page: 1, trigSearch: !entities.trigSearch });
+  };
 
   return (
     <>
@@ -45,6 +53,14 @@ const LegendasBody = props => {
               type="text"
               placeholder="Buscar.."
               value={entities.search}
+              onKeyUp={e => {
+                if (e.keyCode === 13){
+                  //ENTER
+                  onSearch();
+                }else{
+                  searchTimeout(onSearch, typingTimer, doneTypingInterval);
+                }
+              }}
               onChange={e => setEntities({ search: e.target.value })}
             />
           </SelectBusca>

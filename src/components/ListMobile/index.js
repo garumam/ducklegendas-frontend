@@ -79,7 +79,8 @@ function ListMobile (props) {
                   setOpenModal({
                     open: true,
                     id: item.id,
-                    msg: `Id: ${item.id}  ${item.name?'Nome: '+item.name:'Mensagem: '+item.message}`,
+                    msg: `Id: ${item.id}  ${item.name?'Nome: '+item.name:'Mensagem: '+item.message}
+                    ${item.subtitles_count?` | Legendas tbm serão apagadas, total: ${item.subtitles_count}`:''}`,
                     action: 'excluir'
                   })
                 }

@@ -19,7 +19,7 @@ import logo from "assets/img/duck-128.png";
 import userImg from "assets/img/man.png";
 import { AuthContext } from 'utils/AuthContext';
 import { SizeContext } from 'utils/SizeContext';
-import { Can } from 'services/Authorization';
+//import { Can } from 'services/Authorization';
 import "@rmwc/avatar/avatar.css";
 import '@material/fab/dist/mdc.fab.css';
 import { ROUTES } from 'utils/RoutePaths';
@@ -31,7 +31,7 @@ const Dashboard = props => {
   const [open, setOpen] = useState(window.innerWidth > 1150);
   const refMenu = useRef(null);
 
-  const can = Can(user.user_type)
+  //const can = Can(user.user_type)
   //console.log('FUNCAO CAN ',can)
   
   useEffect(() => {
