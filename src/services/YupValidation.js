@@ -2,6 +2,12 @@ import * as Yup from 'yup';
 
 const imageValidation = (w, h) => {
     return Yup.mixed() //value.size em bytes 1000000 bytes = 1000 kb
+    .test('filelimit', "O limite são 1000 arquivos!", value => {
+        if(value instanceof FileList){
+            return value.length <= 1000;
+        }
+        return true;
+    })
     .test('fileType', "Formato de imagem não suportado", value => {
         if(value instanceof FileList){
             let can = true;

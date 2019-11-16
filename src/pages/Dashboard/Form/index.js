@@ -1,6 +1,6 @@
 import React, { useReducer, useState, useEffect, useContext } from "react";
 import { Formik } from "formik";
-import { Fab, SimpleDialog } from "rmwc";
+import { Fab, SimpleDialog, CircularProgress } from "rmwc";
 import {
   CustomForm,
   InputText,
@@ -25,6 +25,7 @@ import {
 import { Inputs } from "utils/Inputs";
 import { ROUTES } from "utils/RoutePaths";
 import List from "pages/Dashboard/List";
+import {LoadingContainer} from "components/Generic"
 
 const Form = props => {
   const history = useHistory();
@@ -50,7 +51,8 @@ const Form = props => {
     (state, newState) => ({ ...state, ...newState }),
     {
       errorsReponse: null,
-      anyChange: false
+      anyChange: false,
+      loading: false
     }
   );
 
@@ -159,7 +161,7 @@ const Form = props => {
       formData.append("_method", "PATCH");
       if (baseUri === "users") updateContext = itemId === user.id;
     }
-
+    setEntities({ loading: true, errorsReponse: null });
     const res = await postRequest(uri, formData, {
       headers: { "Content-Type": "multipart/form-data" }
     });
@@ -167,7 +169,8 @@ const Form = props => {
     if (res.success) {
       setEntities({
         anyChange: true,
-        errorsReponse: res.success
+        errorsReponse: res.success,
+        loading: false
       });
       if (updateContext) {
         const filename = values.image ? values.image.name : null;
@@ -186,7 +189,8 @@ const Form = props => {
       }
     } else {
       setEntities({
-        errorsReponse: res.error
+        errorsReponse: res.error,
+        loading: false
       });
     }
   };
@@ -238,7 +242,13 @@ const Form = props => {
                 ? "Em andamento"
                 : props.title}
             </h2>
-            <div>
+            
+              {entities.loading?
+              <LoadingContainer>
+                <CircularProgress size="xlarge" />
+              </LoadingContainer>
+              :
+              <div>
               <Fab
                 icon="keyboard_arrow_left"
                 style={{ marginRight: "12px" }}
@@ -257,7 +267,8 @@ const Form = props => {
                 }}
               />
               <Fab icon="save" type="button" onClick={handleSubmit} />
-            </div>
+              </div>
+              }
           </HeaderCard>
           <div className="card-border" />
           <CustomForm onSubmit={handleSubmit} className="formulario">
