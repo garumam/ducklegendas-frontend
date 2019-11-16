@@ -49,7 +49,7 @@ const ResetPassword = props => {
   function handleInputChange(e) {
     const { name, value } = e.target;
     setInput({ [name]: value });
-    console.log(input);
+    //console.log(input);
   }
 
   return (

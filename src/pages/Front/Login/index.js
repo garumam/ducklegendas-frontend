@@ -38,7 +38,7 @@ const Login = props => {
     });
 
     if (res.success) {
-      console.log("RESPOSTA LOGAR: ", res.success);
+      //console.log("RESPOSTA LOGAR: ", res.success);
       encryptLogin(res.success);
       setUser(res.success.user);
       history.push(ROUTES.DASHBOARD.HOME);
@@ -50,7 +50,7 @@ const Login = props => {
   function handleInputChange(e) {
     const { name, value } = e.target;
     setInput({ [name]: value });
-    console.log(input);
+    //console.log(input);
   }
 
   return (

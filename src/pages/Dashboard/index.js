@@ -32,7 +32,7 @@ const Dashboard = props => {
   const refMenu = useRef(null);
 
   const can = Can(user.user_type)
-  console.log('FUNCAO CAN ',can)
+  //console.log('FUNCAO CAN ',can)
   
   useEffect(() => {
     if(windowWidth <= 1150){
@@ -65,7 +65,7 @@ const Dashboard = props => {
       localStorage.clear();
       history.push(ROUTES.LOGIN);
     }else if(res.error){
-      console.log('Problema no logout: ',res.error);
+      //console.log('Problema no logout: ',res.error);
       localStorage.clear();
     }
   }

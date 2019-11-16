@@ -14,11 +14,11 @@ const Authorization = allowedRoles => Component => {
   roles = allowedRoles;
   const WithAuthorization = () => {
     const [user] = useContext(AuthContext);
-    console.log("role user", user.user_type);
+    //console.log("role user", user.user_type);
     if (allowedRoles.includes(user.user_type)) {
       return <Component />;
     } else {
-      console.log("Sem permissão!");
+      //console.log("Sem permissão!");
       return <h4 style={{ fontWeight:600, padding:'2rem',color: "red" }}>Sem permissão!</h4>;
     }
   };

@@ -98,7 +98,7 @@ const Form = props => {
     let isMount = true;
     async function getItem() {
       const res = await getRequest(`/${baseUri}/${routeParams.id}`);
-      console.log(res.success);
+      //console.log(res.success);
       if (isMount) {
         if (res.success || res.categories) {
           if (res.success && res.success.type === "SERIE") setChecked(true);
@@ -123,7 +123,7 @@ const Form = props => {
     return () => (isMount = false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log("categorias", categories);
+  //console.log("categorias", categories);
   //inicio dos inputs
   const [inputParams, initialValues] = setInputsParams(
     params.labels,
@@ -135,7 +135,7 @@ const Form = props => {
   // fim dos inputs
 
   const store = async values => {
-    console.log("valores values: ", values);
+    //console.log("valores values: ", values);
 
     let uri = `/${baseUri}/store`;
     let updateContext = false;

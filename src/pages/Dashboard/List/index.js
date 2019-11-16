@@ -112,7 +112,7 @@ const List = props => {
       );
       if(isMount){
         if (res.success) {
-          console.log("Página selecionada: ", entities.pageSelected);
+          //console.log("Página selecionada: ", entities.pageSelected);
           setEntities({
             categories: res.categories ? res.categories : null,
             ...res.success,
@@ -126,7 +126,7 @@ const List = props => {
             error: res.error || "Erro inesperado, por favor atualize a página!"
           });
         }
-        console.log("DADOS QUE CHEGARAM: ", res);
+        //console.log("DADOS QUE CHEGARAM: ", res);
       }
     }
 
@@ -162,7 +162,7 @@ const List = props => {
         body={openModal.id ? openModal.msg : openModal.error}
         open={openModal.open}
         onClose={evt => {
-          console.log(evt.detail.action);
+          //console.log(evt.detail.action);
           if(evt.detail.action === 'accept'){
             openModal.action === 'excluir'?
                         handleDelete(openModal.id)
@@ -182,7 +182,7 @@ const List = props => {
   );
 
   const handlePageClick = data => {
-    console.log("data selected", data.selected)
+    //console.log("data selected", data.selected)
     let selected = data.selected;
     let newlevelpage = Math.floor(selected / 10 + 1);
     if (entities.page !== newlevelpage) {
@@ -192,7 +192,7 @@ const List = props => {
       });
     } else {
       let dados = Paginator(entities.data, selected);
-      console.log(dados);
+      //console.log(dados);
       setEntities({ dataPaginada: dados, pageSelected: selected });
     }
   };
