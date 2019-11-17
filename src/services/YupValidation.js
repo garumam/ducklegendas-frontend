@@ -67,7 +67,7 @@ export const UserSchema = Yup.object().shape({
     user_type: Yup.string()
                   .test('exist', "Tipo de usuário não válido!", (value) => {
                       if(value){
-                        return ["admin", "moderador", "autor", "legender"].includes(value);
+                        return ["admin", "moderador", "autor", "legender", "desativado"].includes(value);
                       }
                       return true;
                   }),    

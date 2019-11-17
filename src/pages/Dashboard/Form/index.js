@@ -294,7 +294,7 @@ const Form = props => {
                   if (input.type === "select") {
                     return (
                       <SelectCustom
-                        options={["admin", "moderador", "autor", "legender"]}
+                        options={["admin", "moderador", "autor", "legender","desativado"]}
                         key={index}
                         label={input.label}
                         name={input.name}
