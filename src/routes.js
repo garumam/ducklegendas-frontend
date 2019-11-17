@@ -50,7 +50,7 @@ const PrivateRoute = ({
   permissions,
   ...rest
 }) => {
-  const NewComponent = Authorization(permissions)(() => <Component />);
+  const NewComponent = Authorization(permissions, ()=> <Component />);
   return (
     <Route
       {...rest}

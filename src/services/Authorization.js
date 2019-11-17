@@ -7,21 +7,14 @@ export const MODERADOR = "moderador";
 export const ADMIN = "admin";
 export const ALL = [LEGENDER,AUTOR,MODERADOR,ADMIN];
 let roles = [];
-
 export const Can = (user_role) => (roles.includes(user_role) ? true : false)
-  
-const Authorization = allowedRoles => Component => {
+
+const Authorization = (allowedRoles,Component) => {
+  const [user] = useContext(AuthContext);
   roles = allowedRoles;
-  const WithAuthorization = () => {
-    const [user] = useContext(AuthContext);
-    //console.log("role user", user.user_type);
-    if (allowedRoles.includes(user.user_type)) {
-      return <Component />;
-    } else {
-      //console.log("Sem permissão!");
-      return <h4 style={{ fontWeight:600, padding:'2rem',color: "red" }}>Sem permissão!</h4>;
-    }
-  };
-  return WithAuthorization;
+  if (allowedRoles.includes(user.user_type)) 
+    return () => <Component />;
+  else 
+    return () => <h4 style={{ fontWeight:600, padding:'2rem',color: "red" }}>Sem permissão!</h4>;
 }
 export default Authorization;
