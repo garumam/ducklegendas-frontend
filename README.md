@@ -1,3 +1,7 @@
+## DUCKLEGENDAS FRONTEND REACT
+
+Site de legendas desenvolvido em react, consumindo api restful feita com o laravel. Veja em funcionamento: https://ducklegendas.com/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
