@@ -4,7 +4,7 @@ Site de legendas desenvolvido em react, consumindo api restful feita com o larav
 
 **Imagem da Página Inicial**
 
-![Visão Geral do Site](https://github.com/garumam/ducklegendas-frontend/blob/master/imagens-sistema/pagina-incial.png)
+![Visão Geral do Site](https://github.com/garumam/ducklegendas-frontend/blob/master/imagens-sistema/pagina-inicial.png)
 
 **Imagem da Página do Post**
 
