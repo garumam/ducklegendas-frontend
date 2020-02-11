@@ -4,11 +4,15 @@ Site de legendas desenvolvido em react, consumindo api restful feita com o larav
 
 **Imagem da Página Inicial**
 
-![Visão Geral do Site](https://github.com/garumam/ducklegendas-frontend/blob/master/imagens-sistema/pagina-inicial.png)
+![Página Inicial](https://github.com/garumam/ducklegendas-frontend/blob/master/imagens-sistema/pagina-inicial.png)
 
 **Imagem da Página do Post**
 
-![Visão Geral do Site](https://github.com/garumam/ducklegendas-frontend/blob/master/imagens-sistema/pagina-post.png)
+![Página do Post](https://github.com/garumam/ducklegendas-frontend/blob/master/imagens-sistema/pagina-post.png)
+
+**Imagem do Dashboard**
+
+![Dashboard](https://github.com/garumam/ducklegendas-frontend/blob/master/imagens-sistema/dashboard.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
