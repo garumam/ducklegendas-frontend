@@ -1,6 +1,8 @@
 ## DUCKLEGENDAS FRONTEND EM REACT
 
-Site de legendas desenvolvido em react, consumindo api restful feita com o laravel que pode ser encontrada <a href="https://github.com/freirejandre/ducklegendas-backend">clicando aqui</a>. Veja em funcionamento: https://ducklegendas.com/
+Site de legendas desenvolvido em react, consumindo api restful feita com o laravel que pode ser encontrada <a href="https://github.com/freirejandre/ducklegendas-backend">clicando aqui</a>. 
+
+Veja em funcionamento: https://ducklegendas.com/
 
 ## Criadores
 > **<a href="https://github.com/freirejandre" target="_blank">Lucas Freire</a>**
